@@ -9,6 +9,7 @@ public class PlayerControl : MonoBehaviour
     public float speed = 10f;
     public int HP = 100;
     public int gauge = 0;
+    private int timer = 0;//計測用
 
     public enum PlayerState
     {
@@ -29,11 +30,18 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        timer++;
         //デバッグ用*******************************
-        gauge++;
-        if (gauge > 100) gauge = 100;//Debug.Log(gauge);
+        if(Input.GetKeyDown(KeyCode.U))
+        {
+            gauge += 10;
+        }
+        gauge = 100;
+
+        //Debug.Log(HP);
         //デバッグ用*******************************
-        if( HP <= 0 )
+        if (gauge >= 100) gauge = 100;
+        if ( HP <= 0 )
         {
             playerState = PlayerState.Dead;
         }
@@ -53,10 +61,13 @@ public class PlayerControl : MonoBehaviour
             vel.z = 0;
             bullets.GetComponent<BulletControl>().SetTransform(vel, this.transform.position);
         }
-        if(Input.GetKeyDown(KeyCode.E))
+        if(Input.GetKeyDown(KeyCode.E) && gauge>=40)
         {
             Debug.Log("敵をひっくり返す技");
-            gauge -= 40;
+            gauge = gauge - 40;
+            GameObject bullets = Instantiate(bullet) as GameObject;
+            bullets.GetComponent<BulletControl>().SetPosition(this.transform.position);
+            bullets.GetComponent<BulletControl>().SetGaugeFlag(true);
         }
         
     }
@@ -80,5 +91,22 @@ public class PlayerControl : MonoBehaviour
         }
         velocity.Normalize();
         velocity *= speed;
+    }
+
+  
+    private void OnTriggerEnter(Collider other)
+    {
+        if (playerState != PlayerState.Alive) return;
+
+        if (other.gameObject.tag == "Enemy")
+        {
+            HP -= 10;
+            //Debug.Log("エネミーと当たった");
+        }
+        if (other.gameObject.tag == "EnemyBullet")
+        {
+            HP -= 10;
+            //Debug.Log("エネミーの弾と当たった");
+        }
     }
 }
