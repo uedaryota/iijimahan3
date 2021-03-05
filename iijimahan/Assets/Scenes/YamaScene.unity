@@ -139,7 +139,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &208896806
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -232,7 +232,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!65 &375885856
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -494,6 +494,8 @@ GameObject:
   - component: {fileID: 1396721326}
   - component: {fileID: 1396721325}
   - component: {fileID: 1396721324}
+  - component: {fileID: 1396721328}
+  - component: {fileID: 1396721329}
   m_Layer: 0
   m_Name: 8620
   m_TagString: Untagged
@@ -575,3 +577,42 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1396721328
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396721323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c69c0255276c0d40a9738e450f43513, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MinX: 0
+  MaxX: 0
+  MinY: 0
+  MaxY: 10
+  Move: 0.02
+  Speed: 1
+  action: 0
+  Xswitch: 0
+  Yswitch: 0
+  BattleSwitch1: 0
+  BattleSwitch2: 0
+--- !u!114 &1396721329
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1396721323}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd530f8171773b4cacce6acf19fd3e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHp: 10
+  Superarmor: 0
+  status: 0
+  Hp: 0
