@@ -108,4 +108,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 1922788138837067288, guid: 3e5ccf0119e346244a493eff2880f1b0, type: 3}
   speed: 10
-  HP: 0
+  HP: 100
+  gauge: 0
