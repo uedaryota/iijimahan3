@@ -10,6 +10,9 @@ public class PlayerControl : MonoBehaviour
     public int HP = 100;
     public int gauge = 0;
     private int timer = 0;//計測用
+    //デバッグ用***コメントアウトする
+    //public GameObject energy;
+    //デバッグ用
 
     public enum PlayerState
     {
@@ -32,11 +35,14 @@ public class PlayerControl : MonoBehaviour
     {
         timer++;
         //デバッグ用*******************************
-        if(Input.GetKeyDown(KeyCode.U))
-        {
-            gauge += 10;
-        }
-        gauge = 100;
+
+        //Debug.Log(Screen.width);
+        //Debug.Log(Screen.height);
+
+        //if (Input.GetKeyDown(KeyCode.G))
+        //{         
+        //    GameObject bullets = Instantiate(energy) as GameObject;
+        //}
 
         //Debug.Log(HP);
         //デバッグ用*******************************
@@ -69,7 +75,13 @@ public class PlayerControl : MonoBehaviour
             bullets.GetComponent<BulletControl>().SetPosition(this.transform.position);
             bullets.GetComponent<BulletControl>().SetGaugeFlag(true);
         }
-        
+        if (Input.GetKeyDown(KeyCode.Q) && gauge >= 40)
+        {
+            Debug.Log("味方を強化する技");
+            gauge = gauge - 40;
+            
+        }
+
     }
     public void Move()
     {
@@ -108,5 +120,9 @@ public class PlayerControl : MonoBehaviour
             HP -= 10;
             //Debug.Log("エネミーの弾と当たった");
         }
+        if (other.gameObject.tag == "GaugeEnergy")
+        {
+            gauge += 20;
+        }  
     }
 }

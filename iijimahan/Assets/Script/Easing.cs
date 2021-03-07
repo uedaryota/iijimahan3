@@ -15,7 +15,7 @@ public class Easing : MonoBehaviour
     {
         
     }
-    public static Vector2 SineInOut(float t, float totaltime, Vector2 min, Vector2 max)
+    public static float SineInOut(float t, float totaltime, float min, float max)
     {
         max -= min;
         return -max / 2 * (float)(Mathf.Cos(t * Mathf.PI / totaltime) - 1) + min;
