@@ -18,7 +18,6 @@ public class GaugeEnergyControl : MonoBehaviour
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        this.transform.position = new Vector3(14, 8, 0);
     }
 
     // Update is called once per frame
@@ -53,8 +52,7 @@ public class GaugeEnergyControl : MonoBehaviour
         {
             Debug.Log("playerに当たった");
             Destroy(this.gameObject);
-        }
-        
+        }       
     }
 
    

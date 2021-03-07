@@ -101,11 +101,16 @@ public class EnemyManager : MonoBehaviour
     {
         if (bosschack == true)
         {
-            bosschack = false;
             //ボスの座標指定
             transform.position = new Vector3(x_bosspos, y_bosspos, 0);
             //ボスの生成
             Instantiate(bossboxes[wave / 2 - 1], transform.position, Quaternion.identity);
+            Debug.Log("ボス召喚");
+            bosschack = false;
+        }
+        else
+        {
+            EnemyCheck("Boss");
         }
     }
 

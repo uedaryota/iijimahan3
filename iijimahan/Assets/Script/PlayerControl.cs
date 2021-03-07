@@ -4,14 +4,20 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    public GameObject bullet;
-    private Vector3 velocity;
-    public float speed = 10f;
+    [SerializeField, Header("プレイヤーの初期HP")]
     public int HP = 100;
-    public int gauge = 0;
+    [SerializeField, Header("プレイヤーの移動速度")]
+    public float speed = 10f;
+    [SerializeField, Header("プレイヤーのが撃つ弾")]
+    public GameObject bullet;
+
+    private Vector3 velocity;  
+    private int gauge = 0;
+
     private int timer = 0;//計測用
+
     //デバッグ用***コメントアウトする
-    //public GameObject energy;
+    
     //デバッグ用
 
     public enum PlayerState
@@ -38,12 +44,6 @@ public class PlayerControl : MonoBehaviour
 
         //Debug.Log(Screen.width);
         //Debug.Log(Screen.height);
-
-        //if (Input.GetKeyDown(KeyCode.G))
-        //{         
-        //    GameObject bullets = Instantiate(energy) as GameObject;
-        //}
-
         //Debug.Log(HP);
         //デバッグ用*******************************
         if (gauge >= 100) gauge = 100;
