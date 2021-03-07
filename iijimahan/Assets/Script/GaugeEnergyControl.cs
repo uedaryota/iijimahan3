@@ -42,6 +42,10 @@ public class GaugeEnergyControl : MonoBehaviour
 
         return v;
     }
+    public void SetPosition(Vector3 pos)
+    {
+        this.transform.position = pos;
+    }
 
     private void OnTriggerEnter(Collider other)
     {
