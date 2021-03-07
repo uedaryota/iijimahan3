@@ -2,8 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Easing : MonoBehaviour
+public class BossBulletManager : MonoBehaviour
 {
+    public class BulletFactory
+    {
+        public GameObject Bullet;
+        public float Radius;
+        public string[] SpriteName;
+        public Sprite[] BulletSprite;
+
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -15,10 +23,4 @@ public class Easing : MonoBehaviour
     {
         
     }
-    public static float SineInOut(float t, float totaltime, float min, float max)
-    {
-        max -= min;
-        return -max / 2 * (float)(Mathf.Cos(t * Mathf.PI / totaltime) - 1) + min;
-    }
-
 }
