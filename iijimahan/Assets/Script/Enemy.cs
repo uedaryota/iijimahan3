@@ -12,6 +12,7 @@ public class Enemy : MonoBehaviour
     private int currentCharge;
     private Vector3 velocity;
     private bool deadFlag = false;
+    public GameObject energy;
     enum State
     {
         Flont,Back
@@ -62,8 +63,14 @@ public class Enemy : MonoBehaviour
     {
         if(deadFlag)
         {
+            GaugeEnergyDrop(); 
             Destroy(this.gameObject);
         }
+    }
+    public void GaugeEnergyDrop()
+    {
+        GameObject energys = Instantiate(energy) as GameObject;
+        energys.GetComponent <GaugeEnergyControl>().SetPosition(this.transform.position);
     }
     private void OnTriggerEnter(Collider other)
     {
