@@ -13,9 +13,10 @@ GameObject:
   - component: {fileID: 9016055639502388353}
   - component: {fileID: 6805784702438220562}
   - component: {fileID: 5814515223414400553}
+  - component: {fileID: -4319998532783379420}
   m_Layer: 0
   m_Name: ShootEnemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -107,6 +108,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   hp: 0
-  bullet: {fileID: 0}
-  targetDistance: 0
-  shotIntervalStart: 0
+  energy: {fileID: 956122239005918985, guid: 290abd1f2d9b09b40baa65fbdb4e09a3, type: 3}
+  targetDistance: 7
+  shotIntervalStart: 180
+--- !u!54 &-4319998532783379420
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9176157743581955875}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 0
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
