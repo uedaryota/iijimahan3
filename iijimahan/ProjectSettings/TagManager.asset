@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - EnemyBullet
   - GaugeEnergy
+  - Friend
   layers:
   - Default
   - TransparentFX

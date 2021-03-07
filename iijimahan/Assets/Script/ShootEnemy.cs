@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,11 +9,7 @@ public class ShootEnemy : MonoBehaviour
     private GameObject target;
     private Vector3 velocity;
     private bool deadFlag = false;
-    enum State
-    {
-        Flont, Back
-    }
-    private State state;
+    public GameObject energy;
     public float targetDistance;
     private float shotInterval;
     public int shotIntervalStart;
@@ -20,7 +17,7 @@ public class ShootEnemy : MonoBehaviour
     void Start()
     {
         deadFlag = false;
-        state = State.Flont;
+        CheckTarget();
         shotInterval = shotIntervalStart;
     }
     private void Move()
@@ -51,16 +48,66 @@ public class ShootEnemy : MonoBehaviour
         {
             deadFlag = true;
         }
+        if(deadFlag)
+        {
+            GaugeEnergyDrop();
+            Destroy(this.gameObject);
+        }
     }
     // Update is called once per frame
     void Update()
     {
-        if(state==State.Flont)
-        {
-            target = GameObject.FindGameObjectWithTag("Player");
-        }
         Move();
         Attack();
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        if (this.gameObject.tag == "Enemy")
+        {
+            if (other.gameObject.tag == "Player")
+            {
+                deadFlag = true;
+            }
 
+            if (other.gameObject.tag == "PlayerBullet")
+            {
+                this.gameObject.tag = "Friend";
+                CheckTarget();
+            }
+            return;
+        }
+        if (this.gameObject.tag == "Friend")
+        {
+            if (other.gameObject.tag == "Enemy")
+            {
+                deadFlag = true;
+            }
+
+            if (other.gameObject.tag == "EnemyBullet")
+            {
+                hp--;
+            }
+            return;
+        }
+    
+    }
+
+    private void CheckTarget()
+    {
+        if (this.gameObject.tag == "Enemy")
+        {
+            target = GameObject.FindGameObjectWithTag("Player");
+        }
+        if (this.gameObject.tag == "Friend")
+        {
+            target = GameObject.FindGameObjectWithTag("Enemy");
+        }
+
+    }
+
+    public void GaugeEnergyDrop()
+    {
+        GameObject energys = Instantiate(energy) as GameObject;
+        energys.GetComponent<GaugeEnergyControl>().SetPosition(this.transform.position);
+    }
 }

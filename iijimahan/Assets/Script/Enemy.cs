@@ -13,18 +13,13 @@ public class Enemy : MonoBehaviour
     private Vector3 velocity;
     private bool deadFlag = false;
     public GameObject energy;
-    enum State
-    {
-        Flont,Back
-    }
-    private State state;
+ 
     // Start is called before the first frame update
     void Start()
     {
         deadFlag = false;
         currentCharge = 0;
         currentMove = 0;
-        state = State.Flont;
         target = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -32,7 +27,6 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         CheckDead();
-        CheckTarget();
         Move();
     }
     void Move()
@@ -57,7 +51,15 @@ public class Enemy : MonoBehaviour
     }
     void CheckTarget()
     {
-        target = GameObject.FindGameObjectWithTag("Player"); 
+        if (this.gameObject.tag == "Enemy")
+        {
+            target = GameObject.FindGameObjectWithTag("Player");
+        }
+        if (this.gameObject.tag == "Friend")
+        {
+            target = GameObject.FindGameObjectWithTag("Enemy");
+        }
+     
     }
     void CheckDead()
     {
@@ -74,9 +76,31 @@ public class Enemy : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+
+        if (this.gameObject.tag == "Enemy")
         {
-            deadFlag = true;
+            if (other.gameObject.tag == "Player")
+            {
+                deadFlag = true;
+            }
+
+            if (other.gameObject.tag == "PlayerBullet")
+            {
+                this.gameObject.tag = "Friend";
+                CheckTarget();
+            }
+        }
+        if (this.gameObject.tag == "Friend")
+        {
+            if (other.gameObject.tag == "Enemy")
+            {
+                deadFlag = true;
+            }
+
+            if (other.gameObject.tag == "EnemyBullet")
+            {
+                hp--;
+            }
         }
     }
     public void testmove()
