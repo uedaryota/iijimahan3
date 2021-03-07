@@ -72,5 +72,8 @@ public class Enemy : MonoBehaviour
             deadFlag = true;
         }
     }
+    public void testmove()
+    {
 
+    }
 }
