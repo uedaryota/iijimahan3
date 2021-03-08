@@ -10,7 +10,7 @@ public class BossMove : MonoBehaviour
     [Header("移動スピード")] public float Speed;
     public enum MoveAction
     {
-        Normal,Action1,
+        Normal,Action1,End,
     }
     #endregion
 

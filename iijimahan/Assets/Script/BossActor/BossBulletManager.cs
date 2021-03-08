@@ -10,17 +10,95 @@ public class BossBulletManager : MonoBehaviour
         public float Radius;
         public string[] SpriteName;
         public Sprite[] BulletSprite;
-
+        public bool ColliderType;
+        float SizeX, SizeY;
+        public BulletFactory(string[] sprite_name, bool collider_type, float radius = 0.5f, float size_x = 0.5f, float size_y = 0.5f)
+        {
+            Radius = radius;
+            SpriteName = sprite_name;
+            BulletSprite = new Sprite[SpriteName.Length];
+            ColliderType = collider_type;
+            SizeX = size_x;
+            SizeY = size_y;
+        }
+        public void Load()
+        {
+            for (int i = 0; i < SpriteName.Length - 1; ++i)
+            {
+                BulletSprite[i] = GetSprite(SpriteName[0], SpriteName[i + 1]);
+            }
+        }
+        //第一因数にはリソースフォルダからのスプライトファイルまでのパスをお願いします
+        public static Sprite GetSprite(string fileName, string spriteName)
+        {
+            Sprite[] sprites = Resources.LoadAll<Sprite>(fileName);
+            return System.Array.Find<Sprite>(sprites, (sprite) => sprite.name.Equals(spriteName));
+        }
+        //自動追尾弾
+        public void CreateBullet(Vector3 pos, int color)
+        {
+            GameObject newParent = new GameObject("Empty");
+            Bullet = Instantiate(newParent, pos, Quaternion.identity);
+            Bullet.tag = "EnemyBullet";
+            SpriteRenderer sr = Bullet.AddComponent<SpriteRenderer>();
+            sr.sprite = BulletSprite[color];
+            sr.sortingLayerName = "BossBullet";
+            Bullet.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+            Bullet.AddComponent<BossBullet>();
+            Rigidbody rg = Bullet.AddComponent<Rigidbody>();
+            rg.useGravity = false;
+            if (ColliderType)
+            {
+                CircleCollider2D cc = Bullet.AddComponent<CircleCollider2D>();//.radius = SizeX;
+                cc.radius = Radius;
+                cc.isTrigger = true;
+            }
+            else
+            {
+                BoxCollider2D bc = Bullet.AddComponent<BoxCollider2D>();//.size = new Vector2(SizeX, SizeY);
+                bc.size = new Vector2(SizeX, SizeY);
+                bc.isTrigger = true;
+            }
+            Destroy(newParent);
+        }
+        //ランダム攻撃弾
+        public void CreateBullet2(Vector3 pos, int color)
+        {
+            GameObject newParent = new GameObject("Empty");
+            Bullet = Instantiate(newParent, pos, Quaternion.identity);
+            Bullet.tag = "EnemyBullet";
+            SpriteRenderer sr = Bullet.AddComponent<SpriteRenderer>();
+            sr.sprite = BulletSprite[color];
+            sr.sortingLayerName = "BossBullet";
+            Bullet.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+            Bullet.AddComponent<BossBullet2>();
+            Rigidbody rg = Bullet.AddComponent<Rigidbody>();
+            rg.useGravity = false;
+            if (ColliderType)
+            {
+                CapsuleCollider cc = Bullet.AddComponent<CapsuleCollider>();//.radius = SizeX;
+                cc.radius = Radius;
+                cc.isTrigger = true;
+            }
+            else
+            {
+                BoxCollider bc = Bullet.AddComponent<BoxCollider>();//.size = new Vector2(SizeX, SizeY);
+                bc.size = new Vector2(SizeX, SizeY);
+                bc.isTrigger = true;
+            }
+            Destroy(newParent);
+        }
     }
+    public BulletFactory[] FBulletFactory = new BulletFactory[]
+    {
+            new BulletFactory(new string[]{ "img/bullet/b0","b0_0","b0_1","b0_2","b0_3","b0_4" }, true),
+    };
     // Start is called before the first frame update
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        for (int i = 0; i < FBulletFactory.Length; ++i)
+        {
+            FBulletFactory[i].Load();
+        }
     }
 }
