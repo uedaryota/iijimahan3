@@ -149,8 +149,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6370cbba1826a0f49bee85ed1e4c9fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ComOnX: -5
-  ComOnY: 10
+  ComOnX: 10
+  ComOnY: 1
   Move: 1
   Speed: 6
   action: 0
