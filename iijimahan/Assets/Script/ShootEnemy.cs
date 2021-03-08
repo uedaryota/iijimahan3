@@ -22,27 +22,46 @@ public class ShootEnemy : MonoBehaviour
     }
     private void Move()
     {
-        velocity = Vector3.Normalize(target.transform.position - transform.position);
-        if (Vector3.Distance(target.transform.position, transform.position) <= targetDistance)
+        if(target!=null)
         {
-            velocity = Vector3.zero;
+            velocity = Vector3.Normalize(target.transform.position - transform.position);
+            if (Vector3.Distance(target.transform.position, transform.position) <= targetDistance)
+            {
+                velocity = Vector3.zero;
+            }
+            transform.position += velocity * Time.deltaTime;
         }
-        transform.position += velocity * Time.deltaTime;
+     
     }
         
     void Attack()
     {
-        shotInterval--;
-        if (shotInterval <= 0)
+        if (this.gameObject.tag == "Friend")
         {
-            GameObject bullet = Instantiate(Resources.Load<GameObject>("EnemyBullet"));
-            shotInterval = shotIntervalStart;
-            bullet.GetComponent<EnemyBullet>().SetVelocity(Vector3.Normalize(target.transform.position - transform.position));
-            bullet.transform.position = transform.position;
-          
+            shotInterval--;
+            if (shotInterval <= 0)
+            {
+                GameObject bullet = Instantiate(Resources.Load<GameObject>("FriendBullet"));
+                shotInterval = shotIntervalStart;
+                bullet.GetComponent<FriendBullet>().SetVelocity(Vector3.Normalize(target.transform.position - transform.position));
+                bullet.transform.position = transform.position;
+                bullet.transform.parent = this.gameObject.transform;
+            }
+        }
+        else if (this.gameObject.tag == "Enemy") 
+        {
+            shotInterval--;
+            if (shotInterval <= 0)
+            {
+                GameObject bullet = Instantiate(Resources.Load<GameObject>("EnemyBullet"));
+                shotInterval = shotIntervalStart;
+                bullet.GetComponent<EnemyBullet>().SetVelocity(Vector3.Normalize(target.transform.position - transform.position));
+                bullet.transform.position = transform.position;
+                bullet.transform.parent = this.gameObject.transform;
+            }
         }
     }
-    void DeadCheak()
+    void CheakDead()
     {
         if (hp <= 0)
         {
@@ -57,8 +76,10 @@ public class ShootEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
-        Attack();
+       CheckTarget();
+       Move();
+       Attack();
+       CheakDead();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -72,8 +93,23 @@ public class ShootEnemy : MonoBehaviour
             if (other.gameObject.tag == "PlayerBullet")
             {
                 this.gameObject.tag = "Friend";
-                CheckTarget();
             }
+            if (other.gameObject.tag == "FriendBullet")
+            {
+                BulletDamage(other.gameObject);
+            }
+            if (other.gameObject.tag == "Friend")
+            {
+                if (other.GetComponent<ShootEnemy>() != null)
+                {
+                    Damage(other.GetComponent<ShootEnemy>().hp);
+                }
+                else if (other.GetComponent<Enemy>() != null) 
+                {
+                    Damage(other.GetComponent<Enemy>().hp);
+                }
+            }
+
             return;
         }
         if (this.gameObject.tag == "Friend")
@@ -85,7 +121,7 @@ public class ShootEnemy : MonoBehaviour
 
             if (other.gameObject.tag == "EnemyBullet")
             {
-                hp--;
+                BulletDamage(other.gameObject);
             }
             return;
         }
@@ -96,18 +132,52 @@ public class ShootEnemy : MonoBehaviour
     {
         if (this.gameObject.tag == "Enemy")
         {
-            target = GameObject.FindGameObjectWithTag("Player");
+            if (target == null)
+            {
+                // if (target.tag != "Player")
+                {
+                    target = GameObject.FindGameObjectWithTag("Player");
+                }
+            }
+            else if (target.tag != "Player" && target.tag != "Friend") 
+            {
+                target = GameObject.FindGameObjectWithTag("Player");
+            }
         }
         if (this.gameObject.tag == "Friend")
         {
-            target = GameObject.FindGameObjectWithTag("Enemy");
+            if (target == null)
+            {
+             //   if (target.tag != "Enemy")
+                {
+                    target = GameObject.FindGameObjectWithTag("Player");
+                }
+            }
+            else if (target.tag != "Enemy") 
+            {
+                target = GameObject.FindGameObjectWithTag("Enemy");
+                if (target == null)
+                {
+                    Destroy(this.gameObject);
+                }
+            }
         }
 
     }
-
+    void BulletDamage(GameObject other)
+    {
+        hp--;
+        //弾の親のオブジェクトがターゲット
+        target = other.transform.parent.gameObject;
+    }
+    void Damage(int damage)
+    {
+        this.hp -= damage;
+    }
     public void GaugeEnergyDrop()
     {
         GameObject energys = Instantiate(energy) as GameObject;
         energys.GetComponent<GaugeEnergyControl>().SetPosition(this.transform.position);
     }
+
 }

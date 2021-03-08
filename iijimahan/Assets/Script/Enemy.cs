@@ -53,16 +53,43 @@ public class Enemy : MonoBehaviour
     {
         if (this.gameObject.tag == "Enemy")
         {
-            target = GameObject.FindGameObjectWithTag("Player");
+            if (target == null)
+            {
+                // if (target.tag != "Player")
+                {
+                    target = GameObject.FindGameObjectWithTag("Player");
+                }
+            }
+            else if (target.tag != "Player" && target.tag != "Friend")
+            {
+                target = GameObject.FindGameObjectWithTag("Player");
+            }
         }
         if (this.gameObject.tag == "Friend")
         {
-            target = GameObject.FindGameObjectWithTag("Enemy");
+            if (target == null)
+            {
+                //   if (target.tag != "Enemy")
+                {
+                    target = GameObject.FindGameObjectWithTag("Player");
+                }
+            }
+            else if (target.tag != "Enemy")
+            {
+                target = GameObject.FindGameObjectWithTag("Enemy");
+                if (target == null)
+                {
+                    Destroy(this.gameObject);
+                }
+            }
         }
-     
     }
     void CheckDead()
     {
+        if (hp <= 0)
+        {
+            deadFlag = true;
+        }
         if(deadFlag)
         {
             GaugeEnergyDrop(); 
@@ -102,6 +129,10 @@ public class Enemy : MonoBehaviour
                 hp--;
             }
         }
+    }
+    void Damage(int damage)
+    {
+        hp -= damage;
     }
     public void testmove()
     {

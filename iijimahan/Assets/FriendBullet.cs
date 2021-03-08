@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBullet : MonoBehaviour
+public class FriendBullet : MonoBehaviour
 {
+
     private Vector3 velocity;
     private int life;
     public int speed;
@@ -26,23 +27,20 @@ public class EnemyBullet : MonoBehaviour
     void Update()
     {
         Move();
-        if(deadFlag)
+        if (deadFlag)
         {
             Destroy(this.gameObject);
         }
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Enemy")
         {
             deadFlag = true;
         }
-        if (other.gameObject.tag == "Friend")
-        {
-            deadFlag = true;
-        }
+
     }
-    
+
     void Move()
     {
         transform.position += speed * velocity * Time.deltaTime;
@@ -68,4 +66,3 @@ public class EnemyBullet : MonoBehaviour
         this.velocity = velocity;
     }
 }
-
