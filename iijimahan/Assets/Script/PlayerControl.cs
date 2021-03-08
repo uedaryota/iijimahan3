@@ -11,6 +11,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField, Header("プレイヤーのが撃つ弾")]
     public GameObject bullet;
 
+    private PlayerHpGauge playerHpGauge;
+
     private Vector3 velocity;  
     private int gauge = 0;
 
@@ -35,6 +37,7 @@ public class PlayerControl : MonoBehaviour
     void Start()
     {
         playerState = PlayerState.Alive;
+        playerHpGauge = GameObject.FindObjectOfType<PlayerHpGauge>();
     }
     // Update is called once per frame
     void Update()
@@ -122,14 +125,23 @@ public class PlayerControl : MonoBehaviour
     {
         if (playerState != PlayerState.Alive) return;
 
+        float damage = 5f;
         if (other.gameObject.tag == "Enemy")
         {
-            HP -= 10;
+            HP -= (int)damage;
+            playerHpGauge.Damage(damage);
             //Debug.Log("エネミーと当たった");
         }
         if (other.gameObject.tag == "EnemyBullet")
         {
-            HP -= 10;
+            HP -= (int)damage;
+            playerHpGauge.Damage(damage);
+            //Debug.Log("エネミーの弾と当たった");
+        }
+        if (other.gameObject.tag == "Boss")
+        {
+            HP -= (int)damage;
+            playerHpGauge.Damage(damage);
             //Debug.Log("エネミーの弾と当たった");
         }
         if (other.gameObject.tag == "GaugeEnergy")
