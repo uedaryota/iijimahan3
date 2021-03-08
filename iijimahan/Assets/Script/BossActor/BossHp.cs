@@ -26,7 +26,7 @@ public class BossHp : MonoBehaviour
     {
         status = Status.Normal;
         Hp = MaxHp;
-        damege = 0;
+        damege = 1;
         alpha_Sin = 255;
         _color = this.gameObject.GetComponent<Renderer>().material.color;
         SetRev = false;
