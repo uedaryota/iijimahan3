@@ -17,6 +17,7 @@ public class EnemyManager : MonoBehaviour
 
     public int wave = 1;
 
+    private bool gameclear;
     private Object[] tagcheckenemy;
     private float timer;
     private float x_rnd;
@@ -31,6 +32,7 @@ public class EnemyManager : MonoBehaviour
     void Start()
     {
         bosschack = true;
+        gameclear = false;
     }
 
     void Update()
@@ -56,6 +58,10 @@ public class EnemyManager : MonoBehaviour
                 enemyrnd = Random.Range(0, 1);
                 BossRespawn();
                 EnemyRespawn();
+                return;
+
+            case 3:
+                gameclear = true;
                 return;
 
             default:
@@ -129,5 +135,15 @@ public class EnemyManager : MonoBehaviour
                 wave++;
             }
         }
+    }
+    
+    public bool GetGameClear()
+    {
+        return gameclear;
+    }
+    
+    public int GetWave()
+    {
+        return wave;
     }
 }
