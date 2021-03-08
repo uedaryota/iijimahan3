@@ -141,4 +141,9 @@ public class EnemyManager : MonoBehaviour
     {
         return gameclear;
     }
+    
+    public int GetWave()
+    {
+        return wave;
+    }
 }
