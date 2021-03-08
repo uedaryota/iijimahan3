@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4443109365030374586}
   - component: {fileID: 4443109365030374587}
   - component: {fileID: 4443109365030374599}
+  - component: {fileID: 7335741766070554710}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -91,10 +92,10 @@ BoxCollider:
   m_GameObject: {fileID: 4443109365030374588}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
-  m_Enabled: 1
+  m_Enabled: 0
   serializedVersion: 2
-  m_Size: {x: 1.1821995, y: 1.2843181, z: 1}
-  m_Center: {x: 0.08267483, y: 0.10270071, z: 0}
+  m_Size: {x: 1.1821995, y: 1.4356431, z: 1}
+  m_Center: {x: 0.08267486, y: 0.027038217, z: 0}
 --- !u!114 &4443109365030374599
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -110,6 +111,19 @@ MonoBehaviour:
   HP: 100
   speed: 10
   bullet: {fileID: 1922788138837067288, guid: 3e5ccf0119e346244a493eff2880f1b0, type: 3}
+--- !u!135 &7335741766070554710
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4443109365030374588}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.7
+  m_Center: {x: 0.1, y: 0, z: 0}
 --- !u!1001 &7075142506260985697
 PrefabInstance:
   m_ObjectHideFlags: 0
