@@ -20,6 +20,7 @@ public class EnemyManager : MonoBehaviour
     private bool gameclear;
     private Object[] tagcheckenemy;
     private float timer;
+    private float timer2;
     private float x_rnd;
     private float y_rnd;
     private int old_wave;
@@ -50,12 +51,12 @@ public class EnemyManager : MonoBehaviour
         switch (wave)
         {
             case 1:
-                enemyrnd = Random.Range(0, 1);
+                enemyrnd = Random.Range(0, 2);
                 EnemyRespawn();
                 return;
 
             case 2:
-                enemyrnd = Random.Range(0, 1);
+                enemyrnd = Random.Range(0, 2);
                 BossRespawn();
                 EnemyRespawn();
                 return;
@@ -75,10 +76,10 @@ public class EnemyManager : MonoBehaviour
         timer += Time.deltaTime;
         
         //現在のwaveで生成するエネミーの数に足りているか
-        if (enemycountlimit[wave - 1] > enemycount)
+        if (enemycountlimit[wave - 1] > enemycount )
         {
             //一定時間毎に
-            if (timer > interval[wave - 1])
+            if (timer >= interval[wave - 1])
             {
                 timer = 0;
 
@@ -122,10 +123,11 @@ public class EnemyManager : MonoBehaviour
 
     void EnemyCheck(string tagname)
     {
+        timer2 += Time.deltaTime;
         //一定時間毎に
-        if (timer > EnemyChackInterval)
+        if (timer2 > EnemyChackInterval)
         {
-            timer = 0;
+            timer2 = 0;
             //エネミーが何体居るかの確認
             tagcheckenemy = GameObject.FindGameObjectsWithTag(tagname);
             //エネミーが存在しなくなったとき
