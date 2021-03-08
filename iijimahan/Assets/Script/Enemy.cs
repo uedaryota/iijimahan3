@@ -63,6 +63,10 @@ public class Enemy : MonoBehaviour
     }
     void CheckDead()
     {
+        if (hp <= 0)
+        {
+            deadFlag = true;
+        }
         if(deadFlag)
         {
             GaugeEnergyDrop(); 
