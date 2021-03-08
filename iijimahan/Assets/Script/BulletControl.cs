@@ -31,6 +31,24 @@ public class BulletControl : MonoBehaviour
             transform.localScale += new Vector3(value, value, 0);
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        
+
+        if (other.gameObject.tag == "Enemy")
+        {
+            Destroy(this.gameObject);
+            Debug.Log("エネミーと当たった");
+        }
+        //if (other.gameObject.tag == "EnemyBullet")
+        //{
+        //    Destroy(this.gameObject);
+        //    Debug.Log("エネミーの弾と当たった");
+        //}
+        
+    }
+
     public void SetVelocity(Vector3 vec3)
     {
         velocity = vec3;
@@ -48,4 +66,5 @@ public class BulletControl : MonoBehaviour
     {
         scaleFlag = fl;
     }
+
 }
