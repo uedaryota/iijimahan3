@@ -145,4 +145,13 @@ public class PlayerControl : MonoBehaviour
         float rad = Mathf.Atan2(dy, dx);
         return rad * Mathf.Rad2Deg;
     }
+
+    public bool GetisDead()
+    {
+        if(playerState == PlayerState.Dead)
+        {
+            return true;
+        }
+        return false;
+    }
 }

@@ -25,9 +25,9 @@ public class GameSceneManager : MonoBehaviour
         {
             SceneManager.LoadScene("GameClearScene");
         }
-        //if(playerscript.GetisDead() == true)
-        //{
-        //    SceneManager.LoadScene("GameOverScene");
-        //}
+        if(playerscript.GetisDead() == true)
+        {
+            SceneManager.LoadScene("GameOverScene");
+        }
     }
 }
