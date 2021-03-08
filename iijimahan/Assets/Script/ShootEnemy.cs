@@ -77,8 +77,8 @@ public class ShootEnemy : MonoBehaviour
     void Update()
     {
        CheckTarget();
-        Move();
-        Attack();
+       Move();
+       Attack();
        CheakDead();
     }
     private void OnTriggerEnter(Collider other)
@@ -98,6 +98,18 @@ public class ShootEnemy : MonoBehaviour
             {
                 BulletDamage(other.gameObject);
             }
+            if (other.gameObject.tag == "Friend")
+            {
+                if (other.GetComponent<ShootEnemy>() != null)
+                {
+                    Damage(other.GetComponent<ShootEnemy>().hp);
+                }
+                else if (other.GetComponent<Enemy>() != null) 
+                {
+                    Damage(other.GetComponent<Enemy>().hp);
+                }
+            }
+
             return;
         }
         if (this.gameObject.tag == "Friend")
@@ -157,6 +169,10 @@ public class ShootEnemy : MonoBehaviour
         hp--;
         //弾の親のオブジェクトがターゲット
         target = other.transform.parent.gameObject;
+    }
+    void Damage(int damage)
+    {
+        this.hp -= damage;
     }
     public void GaugeEnergyDrop()
     {
