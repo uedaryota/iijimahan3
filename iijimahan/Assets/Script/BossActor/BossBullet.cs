@@ -7,7 +7,7 @@ public class BossBullet : MonoBehaviour//自動追尾弾だぜ
     #region//インスペクターで設定する
     [Header("弾速※現状いじれないのでスクリプトの中身から弄ってください")] public float　Speed=10.0f;
     [Header("弾角度")] public float Angle;
-    [Header("追尾時間※現状いじれないのでスクリプトの中身から弄ってください")] public float OikakeTime=700;
+    [Header("追尾時間※現状いじれないのでスクリプトの中身から弄ってください")] public float OikakeTime=300;
     float Cnt = 0;
     Vector3 pos = GameObject.FindGameObjectWithTag("Player").transform.position;
     float x, y;
@@ -46,7 +46,7 @@ public class BossBullet : MonoBehaviour//自動追尾弾だぜ
             transform.position += GetDirectionPI(Angle) * Speed * Time.deltaTime;
         }
 
-        if(Cnt>1400)
+        if(Cnt>1200)
         {
             deadFlag = true;
         }

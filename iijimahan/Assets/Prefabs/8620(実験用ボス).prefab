@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4107852146061760931
+--- !u!1 &5065546897333047580
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,15 +8,16 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4107852146061760935}
-  - component: {fileID: 4107852146061760934}
-  - component: {fileID: 4107852146061760933}
-  - component: {fileID: 4107852146061760932}
-  - component: {fileID: 4107852146061760952}
-  - component: {fileID: 4107852146061760953}
-  - component: {fileID: 4107852146061760957}
-  - component: {fileID: 4107852146061760956}
-  - component: {fileID: 4107852146061760955}
+  - component: {fileID: 7369894819634264167}
+  - component: {fileID: 2423943815591569303}
+  - component: {fileID: 2039298128243654841}
+  - component: {fileID: 8118863064477631724}
+  - component: {fileID: 9103231485529357173}
+  - component: {fileID: 3770588858661481748}
+  - component: {fileID: 4428269698313089116}
+  - component: {fileID: 864217904133780860}
+  - component: {fileID: 9185192984891052793}
+  - component: {fileID: 4097354099196149098}
   m_Layer: 0
   m_Name: "8620(\u5B9F\u9A13\u7528\u30DC\u30B9)"
   m_TagString: Boss
@@ -24,35 +25,35 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4107852146061760935
+--- !u!4 &7369894819634264167
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4107852146061760931}
+  m_GameObject: {fileID: 5065546897333047580}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.4, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &4107852146061760934
+--- !u!33 &2423943815591569303
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4107852146061760931}
+  m_GameObject: {fileID: 5065546897333047580}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &4107852146061760933
+--- !u!23 &2039298128243654841
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4107852146061760931}
+  m_GameObject: {fileID: 5065546897333047580}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -85,26 +86,26 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &4107852146061760932
+--- !u!65 &8118863064477631724
 BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4107852146061760931}
+  m_GameObject: {fileID: 5065546897333047580}
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &4107852146061760952
+--- !u!114 &9103231485529357173
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4107852146061760931}
+  m_GameObject: {fileID: 5065546897333047580}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c69c0255276c0d40a9738e450f43513, type: 3}
@@ -121,13 +122,13 @@ MonoBehaviour:
   Yswitch: 0
   BattleSwitch1: 0
   BattleSwitch2: 0
---- !u!114 &4107852146061760953
+--- !u!114 &3770588858661481748
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4107852146061760931}
+  m_GameObject: {fileID: 5065546897333047580}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3dd530f8171773b4cacce6acf19fd3e7, type: 3}
@@ -137,46 +138,62 @@ MonoBehaviour:
   Superarmor: 5
   status: 0
   Hp: 0
---- !u!114 &4107852146061760957
+--- !u!114 &4428269698313089116
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4107852146061760931}
+  m_GameObject: {fileID: 5065546897333047580}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6370cbba1826a0f49bee85ed1e4c9fbf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ComOnX: 10
-  ComOnY: 1
+  ComOnX: 3
+  ComOnY: 3
   Move: 1
   Speed: 6
   action: 0
   BattleSwitch1: 0
   BattleSwitch2: 0
---- !u!114 &4107852146061760956
+--- !u!114 &864217904133780860
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4107852146061760931}
+  m_GameObject: {fileID: 5065546897333047580}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b3507170eb8d29649a081b20d3ed2739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &4107852146061760955
+--- !u!114 &9185192984891052793
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4107852146061760931}
+  m_GameObject: {fileID: 5065546897333047580}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a9c4810c68313da498ea63be791926f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!54 &4097354099196149098
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5065546897333047580}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
