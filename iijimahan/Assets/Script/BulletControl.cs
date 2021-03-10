@@ -17,7 +17,7 @@ public class BulletControl : MonoBehaviour
     void Update()
     {
         if (timer > 600 && !scaleFlag) Destroy(this.gameObject);
-        if(timer > 120 && scaleFlag) Destroy(this.gameObject);
+        if(timer > 80 && scaleFlag) Destroy(this.gameObject);
 
         velocity.Normalize();
         velocity *= speed;
@@ -27,14 +27,14 @@ public class BulletControl : MonoBehaviour
 
         if(scaleFlag)
         {
-            float value = 0.5f;
-            transform.localScale += new Vector3(value, value, 0);
+            float value = 120f;
+            transform.localScale += new Vector3(value, value, 0) * Time.deltaTime;
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        if (scaleFlag) return;
 
         if (other.gameObject.tag == "Enemy")
         {

@@ -19,18 +19,18 @@ public class PlayerHpGauge : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            Debug.Log("aiueo");
-            greenDamage = 10;
-            redDamage = 10f / 100f;
-            Debug.Log("g" + redDamage);
-        }
-        if (Input.GetKeyDown(KeyCode.Y))
-        {
-            Debug.Log("aiueo");
-            GreenGauge.fillAmount += 0.1f;
-        }
+        //if (Input.GetKeyDown(KeyCode.T))
+        //{
+        //    Debug.Log("aiueo");
+        //    greenDamage = 10;
+        //    redDamage = 10f / 100f;
+        //    Debug.Log("g" + redDamage);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Y))
+        //{
+        //    Debug.Log("aiueo");
+        //    GreenGauge.fillAmount += 0.1f;
+        //}
         // GreenGauge.fillAmount -= greenDamage/100;
         if (greenDamage != 0)
         {
@@ -40,7 +40,7 @@ public class PlayerHpGauge : MonoBehaviour
         }
         if (RedGauge.fillAmount >= GreenGauge.fillAmount)
         {
-            Debug.Log(redDamage);
+            //Debug.Log(redDamage);
             RedGauge.fillAmount -= redDamage * Time.deltaTime;
             if (RedGauge.fillAmount == GreenGauge.fillAmount)
             {
