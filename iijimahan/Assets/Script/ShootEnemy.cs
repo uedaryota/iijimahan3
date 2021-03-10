@@ -77,9 +77,13 @@ public class ShootEnemy : MonoBehaviour
     void Update()
     {
        CheckTarget();
-       Move();
-        ObjectRotate();
-       Attack();
+       if (target!=null)
+        {
+            Move();
+            ObjectRotate();
+            Attack();
+        }
+ 
        CheakDead();
     }
     private void OnTriggerEnter(Collider other)
@@ -150,19 +154,40 @@ public class ShootEnemy : MonoBehaviour
         {
             if (target == null)
             {
-             //   if (target.tag != "Enemy")
-                {
-                    target = GameObject.FindGameObjectWithTag("Player");
-                }
-            }
-            else if (target.tag != "Enemy") 
-            {
-                target = GameObject.FindGameObjectWithTag("Enemy");
+                target = GameObject.FindGameObjectWithTag("Boss");
                 if (target == null)
                 {
-                    Destroy(this.gameObject);
+                    //Destroy(this.gameObject);
+                    target = GameObject.FindGameObjectWithTag("Enemy");
+                    if (target == null)
+                    {
+                        //Destroy(this.gameObject);
+                    }
                 }
+                //if (target.tag != "Enemy") 
+                //{
+                //  //  target = GameObject.FindGameObjectWithTag("Player");
+                //}
             }
+            else if(target.tag != "Enemy" && target.tag != "Boss")
+            {
+                target = GameObject.FindGameObjectWithTag("Boss");
+                if (target == null)
+                {
+                    //Destroy(this.gameObject);
+                    target = GameObject.FindGameObjectWithTag("Enemy");
+                    if (target == null)
+                    {
+                        //Destroy(this.gameObject);
+                    }
+                }
+               
+               
+            }
+            //else if (target.tag != "Enemy")
+            //{
+               
+            //}
         }
 
     }
@@ -172,11 +197,17 @@ public class ShootEnemy : MonoBehaviour
         //弾の親のオブジェクトがターゲット
         if (other.tag == "FriendBullet")
         {
-            target = other.GetComponent<FriendBullet>().GetParent();
+            if (target != null)
+            {
+                target = other.GetComponent<FriendBullet>().GetParent();
+            }
         }
         if (other.tag == "EnemyBullet")
         {
-            target = other.GetComponent<EnemyBullet>().GetParent();
+            if (target != null)
+            {
+                target = other.GetComponent<EnemyBullet>().GetParent();
+            }
         }
        
     }

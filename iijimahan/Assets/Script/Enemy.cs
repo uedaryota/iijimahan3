@@ -27,8 +27,12 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         CheckTarget();
-        ObjectRotate();
-        CheckDead();
+        if(target!=null)
+        {
+            ObjectRotate();
+            CheckDead();
+        }
+     
         Move();
     }
     void Move()
@@ -47,8 +51,11 @@ public class Enemy : MonoBehaviour
         }
         else
         {
-            velocity = target.transform.position - transform.position;
-            velocity = Vector3.Normalize(velocity) * 5;
+            if (target != null)
+            {
+                velocity = target.transform.position - transform.position;
+                velocity = Vector3.Normalize(velocity) * 5;
+            }
         }
     }
     void CheckTarget()
@@ -76,17 +83,23 @@ public class Enemy : MonoBehaviour
                     target = GameObject.FindGameObjectWithTag("Player");
                 }
             }
-            else if (target.tag != "Enemy")
+            else if (target.tag != "Enemy" && target.tag != "Boss")
             {
-                target = GameObject.FindGameObjectWithTag("Enemy");
+                target = GameObject.FindGameObjectWithTag("Boss");
                 if (target == null)
                 {
-                    Destroy(this.gameObject);
+                    //Destroy(this.gameObject);
+                    target = GameObject.FindGameObjectWithTag("Enemy");
+                    if (target == null)
+                    {
+                        //Destroy(this.gameObject);
+                    }
                 }
+
+
             }
         }
-
-    }
+        }
     void CheckDead()
     {
         if (hp <= 0)
