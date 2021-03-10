@@ -67,6 +67,6 @@ public class PlayerEnergyGauge : MonoBehaviour
     {
         greenGauge += num/100f;
         GreenGauge.fillAmount += num / 100f;
-        Debug.Log("numnunm");
+        //Debug.Log("numnunm");
     }
 }

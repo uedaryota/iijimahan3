@@ -10,6 +10,8 @@ public class PlayerControl : MonoBehaviour
     public float speed = 10f;
     [SerializeField, Header("プレイヤーのが撃つ弾")]
     public GameObject bullet;
+    [SerializeField, Header("プレイヤーのモデル")]
+    public GameObject model;
 
     private PlayerHpGauge playerHpGauge;
 
@@ -22,8 +24,14 @@ public class PlayerControl : MonoBehaviour
 
     private int timer = 0;//計測用
 
+    private bool mutekiFlag = false;
+    private float mutekiCounter = 0;
+    private bool tenmetuFlag = false;
+    //private Color cr;
+    //private float cl;
+
     //デバッグ用***コメントアウトする
-    
+
     //デバッグ用
 
     public enum PlayerState
@@ -44,13 +52,19 @@ public class PlayerControl : MonoBehaviour
         playerHpGauge = GameObject.FindObjectOfType<PlayerHpGauge>();
         //playerEnergyGauge = GaugeUI.GetComponent<PlayerEnergyGauge>();
         playerEnergyGauge = GameObject.FindObjectOfType<PlayerEnergyGauge>();
+        //cr = model.GetComponent<Renderer>().material.color;
+        //cl = 255 - cr.r;
     }
     // Update is called once per frame
     void Update()
     {
+        //ポーズの時に止める
+        if (Time.timeScale <= 0) return;
+
         timer++;
         //デバッグ用*******************************
 
+        //Debug.Log(mutekiCounter);
         //Debug.Log(Screen.width);
         //Debug.Log(Screen.height);
         //Debug.Log(HP);
@@ -60,6 +74,30 @@ public class PlayerControl : MonoBehaviour
         if ( HP <= 0 )
         {
             playerState = PlayerState.Dead;
+        }
+        if (mutekiFlag)
+        {
+            mutekiCounter += 60f * Time.deltaTime;
+        }
+        //if ((int)mutekiCounter % 40 == 0 && mutekiFlag)
+        //{
+
+        //    if (!tenmetuFlag)
+        //    {
+        //        tenmetuFlag = !tenmetuFlag;
+        //        model.SetActive(false);Debug.Log("false;");
+        //    }
+        //    else
+        //    {
+        //        tenmetuFlag = !tenmetuFlag;
+        //        model.SetActive(true); Debug.Log("true;");
+        //    }
+
+        //}
+        if (mutekiCounter > 120)
+        {
+            mutekiFlag = false;
+            //model.SetActive(true);
         }
 
         Move();
@@ -134,34 +172,41 @@ public class PlayerControl : MonoBehaviour
   
     private void OnTriggerEnter(Collider other)
     {
-        if (playerState != PlayerState.Alive) return;
+        if (playerState != PlayerState.Alive ) return;
 
-        float damage = 5f;
-        if (other.gameObject.tag == "Enemy")
-        {
-            HP -= (int)damage;
-            playerHpGauge.Damage(damage);
-            //Debug.Log("エネミーと当たった");
-        }
-        if (other.gameObject.tag == "EnemyBullet")
-        {
-            HP -= (int)damage;
-            playerHpGauge.Damage(damage);
-            //Debug.Log("エネミーの弾と当たった");
-        }
-        if (other.gameObject.tag == "Boss")
-        {
-            HP -= (int)damage;
-            playerHpGauge.Damage(damage);
-            //Debug.Log("エネミーの弾と当たった");
-        }
         if (other.gameObject.tag == "GaugeEnergy")
         {
             gauge += 20;
             //GaugeUI.GetComponent<PlayerEnergyGauge>().UpGauge(20f);
             playerEnergyGauge.UpGauge(20f);
 
-        }  
+        }
+
+        if (mutekiFlag) return;
+
+        float damage = 5f;
+        if (other.gameObject.tag == "Enemy")
+        {
+            HP -= (int)damage;
+            playerHpGauge.Damage(damage);
+            MutekiFlagActive();
+            //Debug.Log("エネミーと当たった");
+        }
+        if (other.gameObject.tag == "EnemyBullet")
+        {
+            HP -= (int)damage;
+            playerHpGauge.Damage(damage);
+            MutekiFlagActive();
+            //Debug.Log("エネミーの弾と当たった");
+        }
+        if (other.gameObject.tag == "Boss")
+        {
+            HP -= (int)damage;
+            playerHpGauge.Damage(damage);
+            MutekiFlagActive();
+            //Debug.Log("エネミーの弾と当たった");
+        }
+        
     }
 
     public float GetAim(Vector2 from, Vector2 to)
@@ -184,5 +229,11 @@ public class PlayerControl : MonoBehaviour
     public int GetGauge()
     {
         return gauge;
+    }
+
+    public void MutekiFlagActive()
+    {
+        mutekiFlag = true;
+        mutekiCounter = 0;
     }
 }

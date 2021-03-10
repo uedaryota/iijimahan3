@@ -111,6 +111,7 @@ MonoBehaviour:
   HP: 100
   speed: 10
   bullet: {fileID: 1922788138837067288, guid: 3e5ccf0119e346244a493eff2880f1b0, type: 3}
+  model: {fileID: 7993499348186876464}
 --- !u!135 &7335741766070554710
 SphereCollider:
   m_ObjectHideFlags: 0
@@ -208,6 +209,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a72ac9968c2c9ec4c8f17be6c2ca4cb4, type: 3}
+--- !u!1 &7993499348186876464 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: a72ac9968c2c9ec4c8f17be6c2ca4cb4,
+    type: 3}
+  m_PrefabInstance: {fileID: 7075142506260985697}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7324346005574291594 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: a72ac9968c2c9ec4c8f17be6c2ca4cb4,
