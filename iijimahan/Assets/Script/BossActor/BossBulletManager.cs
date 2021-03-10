@@ -49,13 +49,13 @@ public class BossBulletManager : MonoBehaviour
             rg.useGravity = false;
             if (ColliderType)
             {
-                CircleCollider2D cc = Bullet.AddComponent<CircleCollider2D>();//.radius = SizeX;
+                CapsuleCollider cc = Bullet.AddComponent<CapsuleCollider>();//.radius = SizeX;
                 cc.radius = Radius;
                 cc.isTrigger = true;
             }
             else
             {
-                BoxCollider2D bc = Bullet.AddComponent<BoxCollider2D>();//.size = new Vector2(SizeX, SizeY);
+                BoxCollider bc = Bullet.AddComponent<BoxCollider>();//.size = new Vector2(SizeX, SizeY);
                 bc.size = new Vector2(SizeX, SizeY);
                 bc.isTrigger = true;
             }

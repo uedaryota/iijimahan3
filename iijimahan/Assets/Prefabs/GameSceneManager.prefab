@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &7373758588227234053
+--- !u!1 &3275734236746026461
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,54 +8,52 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7373758588227234055}
-  - component: {fileID: 7373758588227234052}
+  - component: {fileID: 3275734236746026459}
+  - component: {fileID: 3275734236746026458}
+  - component: {fileID: 3275734236746026456}
   m_Layer: 0
-  m_Name: EnemyManager
+  m_Name: GameSceneManager
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7373758588227234055
+--- !u!4 &3275734236746026459
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7373758588227234053}
+  m_GameObject: {fileID: 3275734236746026461}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 257, y: 125, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7373758588227234052
+--- !u!114 &3275734236746026458
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7373758588227234053}
+  m_GameObject: {fileID: 3275734236746026461}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f920aca6b15b744488327600985c2a5, type: 3}
+  m_Script: {fileID: 11500000, guid: 0bd03f401bdd9c6429fbd7c5369c745d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyboxes:
-  - {fileID: 7265182206125767360, guid: b060fbfc14d1df54d8cc47ff2c64876b, type: 3}
-  - {fileID: 9176157743581955875, guid: d59a16b65e9234f4481e9633e60fec5d, type: 3}
-  bossboxes:
-  - {fileID: 5065546897333047580, guid: e65874558ee555c448cb7bae9ff6376a, type: 3}
-  enemycountlimit: 030000009f860100
-  interval:
-  - 2
-  - 3
-  y_high: 10
-  y_low: -10
-  x_high: 10
-  x_low: 20
-  x_bosspos: 0
-  y_bosspos: 0
-  wave: 1
+--- !u!114 &3275734236746026456
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3275734236746026461}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 736f47adec222f6439dd01a9ca09a4b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  text_obj: {fileID: 0}

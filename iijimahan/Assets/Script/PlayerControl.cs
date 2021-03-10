@@ -13,6 +13,10 @@ public class PlayerControl : MonoBehaviour
 
     private PlayerHpGauge playerHpGauge;
 
+    private PlayerEnergyGauge playerEnergyGauge;
+
+    private GameObject GaugeUI;
+
     private Vector3 velocity;  
     private int gauge = 0;
 
@@ -38,6 +42,8 @@ public class PlayerControl : MonoBehaviour
     {
         playerState = PlayerState.Alive;
         playerHpGauge = GameObject.FindObjectOfType<PlayerHpGauge>();
+        //playerEnergyGauge = GaugeUI.GetComponent<PlayerEnergyGauge>();
+        playerEnergyGauge = GameObject.FindObjectOfType<PlayerEnergyGauge>();
     }
     // Update is called once per frame
     void Update()
@@ -48,6 +54,7 @@ public class PlayerControl : MonoBehaviour
         //Debug.Log(Screen.width);
         //Debug.Log(Screen.height);
         //Debug.Log(HP);
+        //gauge = 100;
         //デバッグ用*******************************
         if (gauge >= 100) gauge = 100;
         if ( HP <= 0 )
@@ -78,6 +85,8 @@ public class PlayerControl : MonoBehaviour
             vel.z = 0;
             bullets.GetComponent<BulletControl>().SetTransform(vel, this.transform.position);
             Debug.Log("撃つ");
+            //playerEnergyGauge.UpGauge(20f);
+            //gauge += 20;
 
         }
         if(Input.GetKeyDown(KeyCode.E) && gauge>=40)
@@ -87,6 +96,8 @@ public class PlayerControl : MonoBehaviour
             GameObject bullets = Instantiate(bullet) as GameObject;
             bullets.GetComponent<BulletControl>().SetPosition(this.transform.position);
             bullets.GetComponent<BulletControl>().SetGaugeFlag(true);
+            //GaugeUI.GetComponent<PlayerEnergyGauge>().SetGauge(40f);
+            playerEnergyGauge.SetGauge(40f);
         }
         if (Input.GetKeyDown(KeyCode.Q) && gauge >= 40)
         {
@@ -147,6 +158,9 @@ public class PlayerControl : MonoBehaviour
         if (other.gameObject.tag == "GaugeEnergy")
         {
             gauge += 20;
+            //GaugeUI.GetComponent<PlayerEnergyGauge>().UpGauge(20f);
+            playerEnergyGauge.UpGauge(20f);
+
         }  
     }
 
@@ -165,5 +179,10 @@ public class PlayerControl : MonoBehaviour
             return true;
         }
         return false;
+    }
+
+    public int GetGauge()
+    {
+        return gauge;
     }
 }
