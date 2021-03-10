@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class ShootEnemy : MonoBehaviour
 {
     public int hp;
@@ -13,6 +12,7 @@ public class ShootEnemy : MonoBehaviour
     public float targetDistance;
     private float shotInterval;
     public int shotIntervalStart;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -45,7 +45,7 @@ public class ShootEnemy : MonoBehaviour
                 shotInterval = shotIntervalStart;
                 bullet.GetComponent<FriendBullet>().SetVelocity(Vector3.Normalize(target.transform.position - transform.position));
                 bullet.transform.position = transform.position;
-                bullet.transform.parent = this.gameObject.transform;
+                bullet.GetComponent<FriendBullet>().SetParent(this.gameObject);
             }
         }
         else if (this.gameObject.tag == "Enemy") 
@@ -57,7 +57,7 @@ public class ShootEnemy : MonoBehaviour
                 shotInterval = shotIntervalStart;
                 bullet.GetComponent<EnemyBullet>().SetVelocity(Vector3.Normalize(target.transform.position - transform.position));
                 bullet.transform.position = transform.position;
-                bullet.transform.parent = this.gameObject.transform;
+                bullet.GetComponent<EnemyBullet>().SetParent(this.gameObject);
             }
         }
     }
@@ -78,6 +78,7 @@ public class ShootEnemy : MonoBehaviour
     {
        CheckTarget();
        Move();
+        ObjectRotate();
        Attack();
        CheakDead();
     }
@@ -93,6 +94,7 @@ public class ShootEnemy : MonoBehaviour
             if (other.gameObject.tag == "PlayerBullet")
             {
                 this.gameObject.tag = "Friend";
+               
             }
             if (other.gameObject.tag == "FriendBullet")
             {
@@ -168,7 +170,15 @@ public class ShootEnemy : MonoBehaviour
     {
         hp--;
         //弾の親のオブジェクトがターゲット
-        target = other.transform.parent.gameObject;
+        if (other.tag == "FriendBullet")
+        {
+            target = other.GetComponent<FriendBullet>().GetParent();
+        }
+        if (other.tag == "EnemyBullet")
+        {
+            target = other.GetComponent<EnemyBullet>().GetParent();
+        }
+       
     }
     void Damage(int damage)
     {
@@ -179,5 +189,27 @@ public class ShootEnemy : MonoBehaviour
         GameObject energys = Instantiate(energy) as GameObject;
         energys.GetComponent<GaugeEnergyControl>().SetPosition(this.transform.position);
     }
+    void ObjectRotate()
+    {
+        if (target != null)
+        {
+            if (this.gameObject.tag == "Enemy")
+            {
+                this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
+            }
 
+            if (this.gameObject.tag == "Friend")
+            {
+                this.transform.LookAt(target.transform, new Vector3(0, 0, -1));
+            }
+
+        }
+
+    }
+    void ToBack()
+    {
+        Quaternion aim = this.transform.rotation;
+        aim.Set(aim.x, aim.y, aim.z + 180, aim.w);
+        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, aim, 0.5f);
+    }
 }
