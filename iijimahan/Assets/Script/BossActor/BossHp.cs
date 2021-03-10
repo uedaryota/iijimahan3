@@ -66,9 +66,9 @@ public class BossHp : MonoBehaviour
     {
         Destroy(gameObject);
     }
-    public void OnCollisionEnter(Collision other)
+    private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag=="FriendBullet" &&status == 0 || other.gameObject.tag == "Friend" && status == 0)//味方になったエネミーの弾のタグを設定
+        if(other.gameObject.tag=="FriendBullet" &&status ==Status.Normal || other.gameObject.tag == "Friend" && status == Status.Normal)//味方になったエネミーの弾のタグを設定
         {
             //damege = other.gameObject.GetComponent<>();
             Hp = Hp - damege;
