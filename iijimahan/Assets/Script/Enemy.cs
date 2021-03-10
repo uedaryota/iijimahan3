@@ -13,7 +13,7 @@ public class Enemy : MonoBehaviour
     private Vector3 velocity;
     private bool deadFlag = false;
     public GameObject energy;
- 
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +26,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        CheckTarget();
+        ObjectRotate();
         CheckDead();
         Move();
     }
@@ -34,7 +36,7 @@ public class Enemy : MonoBehaviour
         currentCharge++;
         if (currentCharge > chargeTime)
         {
-          
+
             transform.position += velocity * Time.deltaTime;
             currentMove++;
             if (currentMove > moveTime)
@@ -83,6 +85,7 @@ public class Enemy : MonoBehaviour
                 }
             }
         }
+
     }
     void CheckDead()
     {
@@ -90,16 +93,16 @@ public class Enemy : MonoBehaviour
         {
             deadFlag = true;
         }
-        if(deadFlag)
+        if (deadFlag)
         {
-            GaugeEnergyDrop(); 
+            GaugeEnergyDrop();
             Destroy(this.gameObject);
         }
     }
     public void GaugeEnergyDrop()
     {
         GameObject energys = Instantiate(energy) as GameObject;
-        energys.GetComponent <GaugeEnergyControl>().SetPosition(this.transform.position);
+        energys.GetComponent<GaugeEnergyControl>().SetPosition(this.transform.position);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -136,6 +139,23 @@ public class Enemy : MonoBehaviour
     }
     public void testmove()
     {
+
+    }
+    void ObjectRotate()
+    {
+        if (target != null)
+        {
+            if (this.gameObject.tag == "Enemy")
+            {
+                this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
+            }
+
+            if (this.gameObject.tag == "Friend")
+            {
+                this.transform.LookAt(target.transform, new Vector3(0, 0, -1));
+            }
+
+        }
 
     }
 }

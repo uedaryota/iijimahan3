@@ -8,6 +8,7 @@ public class EnemyBullet : MonoBehaviour
     private int life;
     public int speed;
     private bool deadFlag = false;
+    private GameObject parent;
     enum State
     {
         Flont, Back
@@ -66,6 +67,14 @@ public class EnemyBullet : MonoBehaviour
     public void SetVelocity(Vector3 velocity)
     {
         this.velocity = velocity;
+    }
+    public void SetParent(GameObject parent)
+    {
+        this.parent = parent;
+    }
+    public GameObject GetParent()
+    {
+        return parent;
     }
 }
 
