@@ -17,6 +17,7 @@ public class SkyRotate : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Time.timeScale <= 0) return;
         skyrotate = Mathf.Repeat(skybox.GetFloat("_Rotation") + rotateSpeed, 360);
         skybox.SetFloat("_Rotation",skyrotate);
     }
