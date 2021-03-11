@@ -10,6 +10,8 @@ public class PlayerControl : MonoBehaviour
     public float speed = 10f;
     [SerializeField, Header("プレイヤーのが撃つ弾")]
     public GameObject bullet;
+    [SerializeField, Header("プレイヤーのゲージ技の弾")]
+    public GameObject gaugebullet;
     [SerializeField, Header("プレイヤーのモデル")]
     public GameObject model;
 
@@ -27,6 +29,7 @@ public class PlayerControl : MonoBehaviour
     private bool mutekiFlag = false;
     private float mutekiCounter = 0;
     private bool tenmetuFlag = false;
+
     //private Color cr;
     //private float cl;
 
@@ -131,10 +134,14 @@ public class PlayerControl : MonoBehaviour
         {
             Debug.Log("敵をひっくり返す技");
             gauge = gauge - 40;
-            GameObject bullets = Instantiate(bullet) as GameObject;
-            bullets.GetComponent<BulletControl>().SetPosition(this.transform.position);
-            bullets.GetComponent<BulletControl>().SetGaugeFlag(true);
+            //GameObject bullets = Instantiate(bullet) as GameObject;
+            //bullets.GetComponent<BulletControl>().SetPosition(this.transform.position);
+            //bullets.GetComponent<BulletControl>().SetGaugeFlag(true);
             //GaugeUI.GetComponent<PlayerEnergyGauge>().SetGauge(40f);
+
+            GameObject gmobj = Instantiate(gaugebullet) as GameObject;
+            gmobj.GetComponent<PlayerGaugeBulletControl>().SetPosition(this.transform.position);
+            gmobj.GetComponent<PlayerGaugeBulletControl>().SetGaugeFlag(true);
             playerEnergyGauge.SetGauge(40f);
         }
         if (Input.GetKeyDown(KeyCode.Q) && gauge >= 40)
