@@ -29,8 +29,8 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         CheckTarget();
-        ObjectRotate();
-        ChangeRotate();
+        
+      //  ChangeRotate();
         if (target!=null)
         {
             CheckDead();
@@ -51,11 +51,18 @@ public class Enemy : MonoBehaviour
                 currentMove = 0;
                 currentCharge = 0;
             }
+            if (rotateTime != 0)
+            {
+                ObjectRotate();
+                ChangeRotate();
+            }
         }
         else
         {
             if (target != null)
             {
+                ObjectRotate();
+                ChangeRotate();
                 velocity = target.transform.position - transform.position;
                 velocity = Vector3.Normalize(velocity) * 5;
             }
@@ -191,7 +198,7 @@ public class Enemy : MonoBehaviour
 
         if (this.gameObject.tag == "Enemy")
         {
-            if (rotateTime > MaxrotateTime)
+            if (rotateTime > 0)
             {
                 rotateTime--;
             }
@@ -202,7 +209,6 @@ public class Enemy : MonoBehaviour
         {
             if (rotateTime < MaxrotateTime)
             {
-
                 rotateTime++;
             }
             this.transform.Rotate(0, 0, 180 / MaxrotateTime * rotateTime);
