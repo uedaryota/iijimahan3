@@ -23,6 +23,9 @@ public class GaugeEnergyControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //ポーズの時に止める
+        if (Time.timeScale <= 0) return;
+
         playerPos = player.transform.position;
         speed = Easing.SineInOut(easingCount, num, speed, maxSpeed);
         velocity = Move();

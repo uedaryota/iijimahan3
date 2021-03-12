@@ -33,7 +33,7 @@ public class PlayerControl : MonoBehaviour
     private Vector3 padvelocity;
     private Vector3 padRvelocity;
     private Vector3 padRvelocity2;
-    private Vector3 poolvelocity;
+    private Vector3 poolvelocity = new Vector3(1, 0, 0);
 
     private bool keyboardFlag = true;
 
@@ -65,6 +65,7 @@ public class PlayerControl : MonoBehaviour
         playerEnergyGauge = GameObject.FindObjectOfType<PlayerEnergyGauge>();
         //cr = model.GetComponent<Renderer>().material.color;
         //cl = 255 - cr.r;
+        transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, 180);
     }
     // Update is called once per frame
     void Update()
