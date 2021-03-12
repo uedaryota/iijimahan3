@@ -13,7 +13,9 @@ public class Enemy : MonoBehaviour
     private Vector3 velocity;
     private bool deadFlag = false;
     public GameObject energy;
-
+    public int MaxrotateTime = 60;
+    int rotateTime = 0;
+    Transform lastTransform;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,9 +29,10 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         CheckTarget();
-        if(target!=null)
+        ObjectRotate();
+        ChangeRotate();
+        if (target!=null)
         {
-            ObjectRotate();
             CheckDead();
         }
      
@@ -154,21 +157,44 @@ public class Enemy : MonoBehaviour
     {
 
     }
+    void ChangeRotate()
+    {
+        //  this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
+
+        if (this.gameObject.tag == "Enemy")
+        {
+            if (rotateTime > MaxrotateTime)
+            {
+                rotateTime--;
+            }
+            this.transform.Rotate(0, 0, 180 / MaxrotateTime * rotateTime);
+        }
+
+        if (this.gameObject.tag == "Friend")
+        {
+            if (rotateTime < MaxrotateTime)
+            {
+
+                rotateTime++;
+            }
+            this.transform.Rotate(0, 0, 180 / MaxrotateTime * rotateTime);
+        }
+
+
+
+    }
     void ObjectRotate()
     {
         if (target != null)
         {
-            if (this.gameObject.tag == "Enemy")
-            {
-                this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
-            }
-
-            if (this.gameObject.tag == "Friend")
-            {
-                this.transform.LookAt(target.transform, new Vector3(0, 0, -1));
-            }
-
+            this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
+            lastTransform = this.target.transform;
+        }
+        else
+        {
+            this.transform.LookAt(lastTransform, new Vector3(0, 0, 1));
         }
 
     }
+
 }

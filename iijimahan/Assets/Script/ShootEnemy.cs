@@ -82,15 +82,13 @@ public class ShootEnemy : MonoBehaviour
         CheckTarget();
         ObjectRotate();
         ChangeRotate();
-        if (target!=null)
+        if (target != null)
         {
             Move();
-          
+
             Attack();
         }
- 
-       CheakDead();
-
+        CheakDead();
     }
     private void OnTriggerEnter(Collider other)
     {
