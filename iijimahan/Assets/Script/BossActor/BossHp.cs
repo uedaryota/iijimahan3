@@ -35,7 +35,9 @@ public class BossHp : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Hp==0)
+        //ポーズの時に止める
+        if (Time.timeScale <= 0) return;
+        if (Hp==0)
         {
             Dead();
         }
