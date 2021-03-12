@@ -70,6 +70,7 @@ public class Enemy : MonoBehaviour
                 // if (target.tag != "Player")
                 {
                     target = GameObject.FindGameObjectWithTag("Player");
+
                 }
             }
             else if (target.tag != "Player" && target.tag != "Friend")
@@ -79,30 +80,39 @@ public class Enemy : MonoBehaviour
         }
         if (this.gameObject.tag == "Friend")
         {
-            if (target == null)
-            {
-                //   if (target.tag != "Enemy")
-                {
-                    target = GameObject.FindGameObjectWithTag("Player");
-                }
-            }
-            else if (target.tag != "Enemy" && target.tag != "Boss")
+            if (target == null || target.tag == "Player" || target.tag == "Friend")
             {
                 target = GameObject.FindGameObjectWithTag("Boss");
-                if (target == null)
+                if (target == null || target.tag == "Player")
                 {
                     //Destroy(this.gameObject);
-                    target = GameObject.FindGameObjectWithTag("Enemy");
-                    if (target == null)
+                    GameObject[] objects;
+                    objects = GameObject.FindGameObjectsWithTag("Enemy");
+                    GameObject near = null;
+                    for (int a = 0; a < objects.Length; a++)
                     {
-                        //Destroy(this.gameObject);
+                        if (near == null)
+                        {
+                            near = objects[a];
+                        }
+                        else
+                        {
+                            float len1, len2;
+                            len1 = Vector3.Dot(this.transform.position - near.transform.position, this.transform.position - near.transform.position);
+                            len2 = Vector3.Dot(this.transform.position - objects[a].transform.position, this.transform.position - objects[a].transform.position);
+                            if (len1 < len2)
+                            {
+                                near = objects[a];
+                            }
+                        }
                     }
+                    target = near;
                 }
-
-
             }
+
         }
-        }
+
+    }
     void CheckDead()
     {
         if (hp <= 0)
@@ -122,7 +132,6 @@ public class Enemy : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-
         if (this.gameObject.tag == "Enemy")
         {
             if (other.gameObject.tag == "Player")
@@ -133,8 +142,25 @@ public class Enemy : MonoBehaviour
             if (other.gameObject.tag == "PlayerBullet")
             {
                 this.gameObject.tag = "Friend";
-                CheckTarget();
+
             }
+            if (other.gameObject.tag == "FriendBullet")
+            {
+                BulletDamage(other.gameObject);
+            }
+            if (other.gameObject.tag == "Friend")
+            {
+                if (other.GetComponent<ShootEnemy>() != null)
+                {
+                    Damage(other.GetComponent<ShootEnemy>().hp);
+                }
+                else if (other.GetComponent<Enemy>() != null)
+                {
+                    Damage(other.GetComponent<Enemy>().hp);
+                }
+            }
+
+            return;
         }
         if (this.gameObject.tag == "Friend")
         {
@@ -145,9 +171,11 @@ public class Enemy : MonoBehaviour
 
             if (other.gameObject.tag == "EnemyBullet")
             {
-                hp--;
+                BulletDamage(other.gameObject);
             }
+            return;
         }
+
     }
     void Damage(int damage)
     {
@@ -196,5 +224,37 @@ public class Enemy : MonoBehaviour
         }
 
     }
+    void BulletDamage(GameObject other)
+    {
+        hp--;
+        //弾の親のオブジェクトがターゲット
+        if (other.tag == "FriendBullet")
+        {
+            if (target != null)
+            {
+                if (other.GetComponent<FriendBullet>() != null)
+                {
+                    if (other.GetComponent<FriendBullet>().GetParent() != null)
+                    {
+                        target = other.GetComponent<FriendBullet>().GetParent();
+                    }
+                }
+            }
+        }
+        if (other.tag == "EnemyBullet")
+        {
+            if (target != null)
+            {
+                if (other.GetComponent<EnemyBullet>() != null)
+                {
 
+                    if (other.GetComponent<EnemyBullet>().GetParent() != null)
+                    {
+                        target = other.GetComponent<EnemyBullet>().GetParent();
+                    }
+                }
+            }
+        }
+
+    }
 }

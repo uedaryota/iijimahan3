@@ -108,10 +108,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd81bd1f902d224694df6e8977e63b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 10
+  hp: 3
   energy: {fileID: 956122239005918985, guid: 290abd1f2d9b09b40baa65fbdb4e09a3, type: 3}
   targetDistance: 7
   shotIntervalStart: 180
+  MaxrotateTime: 60
 --- !u!54 &4829690134863951202
 Rigidbody:
   m_ObjectHideFlags: 0

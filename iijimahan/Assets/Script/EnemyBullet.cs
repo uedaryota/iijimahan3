@@ -42,6 +42,10 @@ public class EnemyBullet : MonoBehaviour
         {
             deadFlag = true;
         }
+        if (other.gameObject.tag == "Boss")
+        {
+            deadFlag = true;
+        }
     }
     
     void Move()
