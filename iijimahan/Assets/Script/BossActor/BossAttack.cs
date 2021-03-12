@@ -21,7 +21,9 @@ public class BossAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(act)
+        //ポーズの時に止める
+        if (Time.timeScale <= 0) return;
+        switch (act)
         {
             case Acter.Start:
                 if (GameObject.FindGameObjectWithTag("Boss").GetComponent<BossFirstAction>().action==BossFirstAction.MoveAction.End)

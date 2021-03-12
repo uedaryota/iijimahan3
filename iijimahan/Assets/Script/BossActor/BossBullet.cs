@@ -24,6 +24,8 @@ public class BossBullet : MonoBehaviour//自動追尾弾だぜ
     }
     void Update()
     {
+        //ポーズの時に止める
+        if (Time.timeScale <= 0) return;
         if (deadFlag)
         {
             Destroy(this.gameObject);
