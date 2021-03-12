@@ -67,7 +67,7 @@ public class BossBullet : MonoBehaviour//自動追尾弾だぜ
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player"|| other.gameObject.tag == "Friend")
         {
             deadFlag = true;
         }

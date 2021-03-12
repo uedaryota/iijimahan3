@@ -12,11 +12,14 @@ public class ShootEnemy : MonoBehaviour
     public float targetDistance;
     private float shotInterval;
     public int shotIntervalStart;
-
+    public int MaxrotateTime = 60;
+    int rotateTime = 0;
+    Transform lastTransform;
     // Start is called before the first frame update
     void Start()
     {
         deadFlag = false;
+        rotateTime = 0;
         CheckTarget();
         shotInterval = shotIntervalStart;
     }
@@ -76,15 +79,16 @@ public class ShootEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       CheckTarget();
-       if (target!=null)
+        CheckTarget();
+        ObjectRotate();
+        ChangeRotate();
+        if (target != null)
         {
             Move();
-            ObjectRotate();
+
             Attack();
         }
- 
-       CheakDead();
+        CheakDead();
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -143,6 +147,7 @@ public class ShootEnemy : MonoBehaviour
                 // if (target.tag != "Player")
                 {
                     target = GameObject.FindGameObjectWithTag("Player");
+
                 }
             }
             else if (target.tag != "Player" && target.tag != "Friend") 
@@ -158,7 +163,27 @@ public class ShootEnemy : MonoBehaviour
                 if (target == null)
                 {
                     //Destroy(this.gameObject);
-                    target = GameObject.FindGameObjectWithTag("Enemy");
+                    GameObject[] objects;
+                    objects = GameObject.FindGameObjectsWithTag("Enemy");
+                    GameObject near = null;
+                    for (int a = 0; a < objects.Length; a++)
+                    {
+                        if (near == null) 
+                        {
+                            near = objects[a];
+                        }
+                        else
+                        {
+                            float len1, len2;
+                            len1 = Vector3.Dot(this.transform.position - near.transform.position, this.transform.position - near.transform.position);
+                            len2 = Vector3.Dot(this.transform.position - objects[a].transform.position, this.transform.position - objects[a].transform.position);
+                            if (len1 < len2)
+                            {
+                                near = objects[a];
+                            }
+
+                        }
+                    }
                     if (target == null)
                     {
                         //Destroy(this.gameObject);
@@ -220,27 +245,44 @@ public class ShootEnemy : MonoBehaviour
         GameObject energys = Instantiate(energy) as GameObject;
         energys.GetComponent<GaugeEnergyControl>().SetPosition(this.transform.position);
     }
-    void ObjectRotate()
+    void ChangeRotate()
     {
-        if (target != null)
-        {
+      //  this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
+       
             if (this.gameObject.tag == "Enemy")
             {
-                this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
+                if (rotateTime > MaxrotateTime)
+                {  
+                    rotateTime--;
+                }
+                this.transform.Rotate(0, 0, 180 / MaxrotateTime * rotateTime);
             }
 
             if (this.gameObject.tag == "Friend")
             {
-                this.transform.LookAt(target.transform, new Vector3(0, 0, -1));
+                if (rotateTime < MaxrotateTime)
+                {
+                    
+                    rotateTime++;
+                }
+                this.transform.Rotate(0, 0, 180 / MaxrotateTime * rotateTime);
             }
 
-        }
+     
 
     }
-    void ToBack()
+    void ObjectRotate()
     {
-        Quaternion aim = this.transform.rotation;
-        aim.Set(aim.x, aim.y, aim.z + 180, aim.w);
-        this.transform.rotation = Quaternion.Slerp(this.transform.rotation, aim, 0.5f);
+        if (target != null)
+        {
+            this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
+            lastTransform = this.target.transform;
+        }
+        else
+        {
+            this.transform.LookAt(lastTransform, new Vector3(0, 0, 1));
+        }
+         
     }
+  
 }
