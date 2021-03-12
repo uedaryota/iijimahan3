@@ -7,7 +7,7 @@ public class PlayerGaugeBulletControl : MonoBehaviour
 
     private Vector3 velocity;
     public float speed = 20.0f;
-    private int timer = 0;
+    private float timer = 0;
     private bool scaleFlag = false;
 
     // Start is called before the first frame update
@@ -23,12 +23,12 @@ public class PlayerGaugeBulletControl : MonoBehaviour
         if (Time.timeScale <= 0) return;
 
         if (timer > 600 && !scaleFlag) Destroy(this.gameObject);
-        if (timer > 80 && scaleFlag) Destroy(this.gameObject);
+        if (timer > 40 && scaleFlag) Destroy(this.gameObject);
 
         velocity.Normalize();
         velocity *= speed;
         transform.position += velocity * Time.deltaTime;
-        timer++;
+        timer += 100 * Time.deltaTime;
 
 
         if (scaleFlag)
