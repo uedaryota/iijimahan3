@@ -111,6 +111,8 @@ MonoBehaviour:
   HP: 100
   speed: 10
   bullet: {fileID: 1922788138837067288, guid: 3e5ccf0119e346244a493eff2880f1b0, type: 3}
+  gaugebullet: {fileID: 7208866156865108524, guid: 2b0c02b65db9a78498bb8b2e8cd4cb90,
+    type: 3}
   model: {fileID: 7993499348186876464}
 --- !u!135 &7335741766070554710
 SphereCollider:
