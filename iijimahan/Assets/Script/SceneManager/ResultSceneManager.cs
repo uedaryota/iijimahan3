@@ -7,7 +7,7 @@ public class ResultSceneManager : MonoBehaviour
 {
     void Update()
     {
-        if(Input.GetMouseButton(0))
+        if (Input.GetMouseButton(0) || Input.GetKeyDown(KeyCode.Joystick1Button0))
         {
             SceneManager.LoadScene("TitleScene");
         }
