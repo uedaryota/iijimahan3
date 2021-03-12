@@ -51,7 +51,7 @@ public class BossBullet2 : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
+        if (other.gameObject.tag == "Player" || other.gameObject.tag == "Friend")
         {
             deadFlag = true;
         }
