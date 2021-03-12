@@ -19,10 +19,6 @@ public class PlayerGaugeBulletControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        //ポーズの時に止める
-        if (Time.timeScale <= 0) return;
-
         if (timer > 600 && !scaleFlag) Destroy(this.gameObject);
         if (timer > 80 && scaleFlag) Destroy(this.gameObject);
 

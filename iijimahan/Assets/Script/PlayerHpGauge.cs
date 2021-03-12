@@ -19,10 +19,6 @@ public class PlayerHpGauge : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        //ポーズの時に止める
-        if (Time.timeScale <= 0) return;
-
         //if (Input.GetKeyDown(KeyCode.T))
         //{
         //    Debug.Log("aiueo");
