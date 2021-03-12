@@ -10,6 +10,8 @@ public class PlayerControl : MonoBehaviour
     public float speed = 10f;
     [SerializeField, Header("プレイヤーのが撃つ弾")]
     public GameObject bullet;
+    [SerializeField, Header("プレイヤーのゲージ技の弾")]
+    public GameObject gaugebullet;
     [SerializeField, Header("プレイヤーのモデル")]
     public GameObject model;
 
@@ -27,6 +29,15 @@ public class PlayerControl : MonoBehaviour
     private bool mutekiFlag = false;
     private float mutekiCounter = 0;
     private bool tenmetuFlag = false;
+
+    private Vector3 padvelocity;
+    private Vector3 padRvelocity;
+    private Vector3 padRvelocity2;
+    private Vector3 poolvelocity;
+
+    private bool keyboardFlag = true;
+
+
     //private Color cr;
     //private float cl;
 
@@ -75,75 +86,146 @@ public class PlayerControl : MonoBehaviour
         {
             playerState = PlayerState.Dead;
         }
-        if (mutekiFlag)
+
+        Muteki();//muteki
+
+        CheckControlDevice();//操作デバイスチェック       
+
+        if(keyboardFlag)//キーボード操作
         {
-            mutekiCounter += 60f * Time.deltaTime;
+            Move();
+            transform.position += velocity * Time.deltaTime;
+            velocity = Vector3.zero;
+            //マウスの時
+            //マウスの方向に弾を飛ばす
+            Vector3 screen_point = Input.mousePosition;
+            Vector3 screen_playerPos = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
+            //マウスの方向にむく
+            var screenPos = Camera.main.WorldToScreenPoint(transform.position);
+            var direction = Input.mousePosition - screenPos;
+            var angle = GetAim(Vector3.zero, direction);
+            transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, angle - 180);
+
+
+            //マウスの右クリックで弾発射
+            if (Input.GetMouseButtonDown(0))
+            {
+                GameObject bullets = Instantiate(bullet) as GameObject;
+                Vector3 vel = screen_point - screen_playerPos;
+                vel.z = 0;
+                bullets.GetComponent<BulletControl>().SetTransform(vel, this.transform.position);
+                Debug.Log("撃つ");
+                //playerEnergyGauge.UpGauge(20f);
+                //gauge += 20;
+
+            }
+            if (Input.GetKeyDown(KeyCode.E) && gauge >= 40)
+            {
+                Debug.Log("敵をひっくり返す技");
+                gauge = gauge - 40;
+
+                GameObject gmobj = Instantiate(gaugebullet) as GameObject;
+                gmobj.GetComponent<PlayerGaugeBulletControl>().SetPosition(this.transform.position);
+                gmobj.GetComponent<PlayerGaugeBulletControl>().SetGaugeFlag(true);
+                playerEnergyGauge.SetGauge(40f);
+            }
+            if (Input.GetKeyDown(KeyCode.Q) && gauge >= 40)
+            {
+                Debug.Log("味方を強化する技");
+                gauge = gauge - 40;
+
+            }
         }
-        //if ((int)mutekiCounter % 40 == 0 && mutekiFlag)
-        //{
-
-        //    if (!tenmetuFlag)
-        //    {
-        //        tenmetuFlag = !tenmetuFlag;
-        //        model.SetActive(false);Debug.Log("false;");
-        //    }
-        //    else
-        //    {
-        //        tenmetuFlag = !tenmetuFlag;
-        //        model.SetActive(true); Debug.Log("true;");
-        //    }
-
-        //}
-        if (mutekiCounter > 120)
+        else//パッド操作
         {
-            mutekiFlag = false;
-            //model.SetActive(true);
+
+            Vector3 screen_playerPos2 = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
+
+            padvelocity.x = Input.GetAxis("L_Horizontal");
+            padvelocity.y = Input.GetAxis("L_Vertical") * -1;
+            padRvelocity.x = Input.GetAxis("R_Horizontal");
+            padRvelocity.y = Input.GetAxis("R_Vertical") * -1;
+
+            if (padRvelocity != padRvelocity2)
+            {
+                if (padRvelocity.x == 0 && padRvelocity.y == 0)
+                {
+                }
+                else
+                {
+                    poolvelocity = padRvelocity;
+                    var h = Input.GetAxis("R_Horizontal");
+                    var v = Input.GetAxis("R_Vertical");
+                    float radian = Mathf.Atan2(v, -h) * Mathf.Rad2Deg;
+                    if (radian < 0)
+                    {
+                        radian += 360;
+                    }
+                    transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, radian);
+
+                }
+            }
+
+            //画面外処理
+            if (screen_playerPos2.y > Screen.height - 50 && Input.GetAxis("L_Vertical") * -1 >0)
+            {
+                padvelocity.y = 0;
+            }
+            if (screen_playerPos2.y < 0 + 50 && Input.GetAxis("L_Vertical") * -1 < 0)
+            {
+                padvelocity.y = 0;
+            }
+            if (screen_playerPos2.x < 0 + 50 && Input.GetAxis("L_Horizontal") < 0)
+            {
+                padvelocity.x = 0;
+            }
+            if (screen_playerPos2.x > Screen.width - 50 && Input.GetAxis("L_Horizontal") > 0)
+            {
+                padvelocity.x = 0;
+            }
+
+            float padspeed = speed / 200;
+            transform.position += padvelocity * padspeed;
+
+
+            if (Input.GetKeyDown("joystick button 5"))
+            {
+                // 弾丸の複製
+                GameObject bullets = Instantiate(bullet) as GameObject;     
+                bullets.GetComponent<BulletControl>().SetTransform(poolvelocity, this.transform.position);
+            }
+            if(Input.GetKeyDown("joystick button 1") && gauge >= 40)
+            {
+                Debug.Log("敵をひっくり返す技");
+                gauge = gauge - 40;
+                GameObject gmobj = Instantiate(gaugebullet) as GameObject;
+                gmobj.GetComponent<PlayerGaugeBulletControl>().SetPosition(this.transform.position);
+                gmobj.GetComponent<PlayerGaugeBulletControl>().SetGaugeFlag(true);
+                playerEnergyGauge.SetGauge(40f);
+            }
+
+            padRvelocity2 = padRvelocity;
+
         }
 
-        Move();
-        transform.position += velocity * Time.deltaTime;
-        velocity = Vector3.zero;   
+       
 
-        //マウスの時
-        //マウスの方向に弾を飛ばす
-        Vector3 screen_point = Input.mousePosition;
-        Vector3 screen_playerPos = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
-        //マウスの方向にむく
-        var screenPos = Camera.main.WorldToScreenPoint(transform.position);
-        var direction = Input.mousePosition - screenPos;
-        var angle = GetAim(Vector3.zero, direction);    
-        transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, angle - 180 );
-
-
-        //マウスの右クリックで弾発射
-        if (Input.GetMouseButtonDown(0))
+    }
+    public void CheckControlDevice()
+    {
+        if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)
+          || Input.GetKey(KeyCode.Space) || Input.GetMouseButtonDown(0))
         {
-            GameObject bullets = Instantiate(bullet) as GameObject;
-            Vector3 vel = screen_point - screen_playerPos;
-            vel.z = 0;
-            bullets.GetComponent<BulletControl>().SetTransform(vel, this.transform.position);
-            Debug.Log("撃つ");
-            //playerEnergyGauge.UpGauge(20f);
-            //gauge += 20;
+            keyboardFlag = true;
+        }
+        if (Input.GetAxis("L_Horizontal") == 0 && Input.GetAxis("L_Vertical") == 0)
+        {
 
         }
-        if(Input.GetKeyDown(KeyCode.E) && gauge>=40)
+        else
         {
-            Debug.Log("敵をひっくり返す技");
-            gauge = gauge - 40;
-            GameObject bullets = Instantiate(bullet) as GameObject;
-            bullets.GetComponent<BulletControl>().SetPosition(this.transform.position);
-            bullets.GetComponent<BulletControl>().SetGaugeFlag(true);
-            //GaugeUI.GetComponent<PlayerEnergyGauge>().SetGauge(40f);
-            playerEnergyGauge.SetGauge(40f);
+            keyboardFlag = false;
         }
-        if (Input.GetKeyDown(KeyCode.Q) && gauge >= 40)
-        {
-            Debug.Log("味方を強化する技");
-            gauge = gauge - 40;
-            
-        }
-
     }
     public void Move()
     {
@@ -207,6 +289,19 @@ public class PlayerControl : MonoBehaviour
             //Debug.Log("エネミーの弾と当たった");
         }
         
+    }
+
+    public void Muteki()
+    {
+        if (mutekiFlag)
+        {
+            mutekiCounter += 60f * Time.deltaTime;
+        }
+
+        if (mutekiCounter > 120)
+        {
+            mutekiFlag = false;
+        }
     }
 
     public float GetAim(Vector2 from, Vector2 to)
