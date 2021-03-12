@@ -102,7 +102,7 @@ public class ShootEnemy : MonoBehaviour
             if (other.gameObject.tag == "PlayerBullet")
             {
                 this.gameObject.tag = "Friend";
-               
+
             }
             if (other.gameObject.tag == "FriendBullet")
             {
@@ -114,7 +114,7 @@ public class ShootEnemy : MonoBehaviour
                 {
                     Damage(other.GetComponent<ShootEnemy>().hp);
                 }
-                else if (other.GetComponent<Enemy>() != null) 
+                else if (other.GetComponent<Enemy>() != null)
                 {
                     Damage(other.GetComponent<Enemy>().hp);
                 }
@@ -135,7 +135,7 @@ public class ShootEnemy : MonoBehaviour
             }
             return;
         }
-    
+
     }
 
     private void CheckTarget()
@@ -150,17 +150,17 @@ public class ShootEnemy : MonoBehaviour
 
                 }
             }
-            else if (target.tag != "Player" && target.tag != "Friend") 
+            else if (target.tag != "Player" && target.tag != "Friend")
             {
                 target = GameObject.FindGameObjectWithTag("Player");
             }
         }
         if (this.gameObject.tag == "Friend")
         {
-            if (target == null)
+            if (target == null || target.tag == "Player" || target.tag == "Friend")
             {
                 target = GameObject.FindGameObjectWithTag("Boss");
-                if (target == null)
+                if (target == null || target.tag == "Player")
                 {
                     //Destroy(this.gameObject);
                     GameObject[] objects;
@@ -168,7 +168,7 @@ public class ShootEnemy : MonoBehaviour
                     GameObject near = null;
                     for (int a = 0; a < objects.Length; a++)
                     {
-                        if (near == null) 
+                        if (near == null)
                         {
                             near = objects[a];
                         }
@@ -177,41 +177,19 @@ public class ShootEnemy : MonoBehaviour
                             float len1, len2;
                             len1 = Vector3.Dot(this.transform.position - near.transform.position, this.transform.position - near.transform.position);
                             len2 = Vector3.Dot(this.transform.position - objects[a].transform.position, this.transform.position - objects[a].transform.position);
-                            if (len1 < len2)
+                            if (len1 > len2)
                             {
                                 near = objects[a];
                             }
-
                         }
                     }
-                    if (target == null)
-                    {
-                        //Destroy(this.gameObject);
-                    }
+                    target = near;
                 }
-                //if (target.tag != "Enemy") 
-                //{
-                //  //  target = GameObject.FindGameObjectWithTag("Player");
-                //}
             }
-            else if(target.tag != "Enemy" && target.tag != "Boss")
-            {
-                target = GameObject.FindGameObjectWithTag("Boss");
-                if (target == null)
-                {
-                    //Destroy(this.gameObject);
-                    target = GameObject.FindGameObjectWithTag("Enemy");
-                    if (target == null)
-                    {
-                        //Destroy(this.gameObject);
-                    }
-                }
-               
-               
-            }
+
             //else if (target.tag != "Enemy")
             //{
-               
+
             //}
         }
 
@@ -224,17 +202,31 @@ public class ShootEnemy : MonoBehaviour
         {
             if (target != null)
             {
-                target = other.GetComponent<FriendBullet>().GetParent();
+                if (other.GetComponent<FriendBullet>() != null)
+                {
+                    if (other.GetComponent<FriendBullet>().GetParent() != null)
+                    {
+                        target = other.GetComponent<FriendBullet>().GetParent();
+                    }
+                }
             }
         }
         if (other.tag == "EnemyBullet")
         {
             if (target != null)
             {
-                target = other.GetComponent<EnemyBullet>().GetParent();
+                if (other.GetComponent<EnemyBullet>() != null)
+                {
+
+                    if (other.GetComponent<EnemyBullet>().GetParent() != null)
+                    {
+                        target = other.GetComponent<EnemyBullet>().GetParent();
+                    }
+                }
             }
         }
-       
+
+
     }
     void Damage(int damage)
     {
