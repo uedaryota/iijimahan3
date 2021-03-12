@@ -61,6 +61,7 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 60;
         playerState = PlayerState.Alive;
         playerHpGauge = GameObject.FindObjectOfType<PlayerHpGauge>();
         //playerEnergyGauge = GaugeUI.GetComponent<PlayerEnergyGauge>();
