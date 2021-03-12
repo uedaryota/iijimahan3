@@ -177,7 +177,7 @@ public class ShootEnemy : MonoBehaviour
                             float len1, len2;
                             len1 = Vector3.Dot(this.transform.position - near.transform.position, this.transform.position - near.transform.position);
                             len2 = Vector3.Dot(this.transform.position - objects[a].transform.position, this.transform.position - objects[a].transform.position);
-                            if (len1 < len2)
+                            if (len1 > len2)
                             {
                                 near = objects[a];
                             }
