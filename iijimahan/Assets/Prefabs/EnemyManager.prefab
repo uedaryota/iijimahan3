@@ -52,10 +52,9 @@ MonoBehaviour:
   interval:
   - 2
   - 3
-  y_high: 10
-  y_low: -10
-  x_high: 10
-  x_low: 20
-  x_bosspos: 0
+  waverespawn: 0100000002000000
+  y_pos: 10
+  x_pos: 10
+  x_bosspos: 20
   y_bosspos: 0
   wave: 1
