@@ -37,7 +37,7 @@ public class PlayerControl : MonoBehaviour
 
     private bool keyboardFlag = true;
 
-    private int gaugeCount = 0;
+    private static int gaugeCount = 0;
 
 
     //private Color cr;
@@ -337,7 +337,7 @@ public class PlayerControl : MonoBehaviour
         mutekiCounter = 0;
     }
 
-    public int GetGaugeCount()
+    public static int GetGaugeCount()
     {
         return gaugeCount;
     }
