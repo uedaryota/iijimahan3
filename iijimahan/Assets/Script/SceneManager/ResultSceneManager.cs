@@ -10,9 +10,11 @@ public class ResultSceneManager : MonoBehaviour
     private PlayerControl script;
     private int gauge;
     private float time;
+    private float interval;
     
     void Start()
     {
+        interval = 0;
         gauge = PlayerControl.GetGaugeCount();
         time = GameSceneManager.GetClearTime();
         Text text = text_obj.GetComponent<Text>();
@@ -20,9 +22,13 @@ public class ResultSceneManager : MonoBehaviour
     }
     void Update()
     {
-        if (Input.GetMouseButton(0) || Input.GetKeyDown(KeyCode.Joystick1Button0))
+        interval += Time.deltaTime;
+        if (interval >= 2.0f)
         {
-            SceneManager.LoadScene("TitleScene");
+            if (Input.GetMouseButton(0) || Input.GetKeyDown(KeyCode.Joystick1Button0))
+            {
+                SceneManager.LoadScene("TitleScene");
+            }
         }
     }
 }
