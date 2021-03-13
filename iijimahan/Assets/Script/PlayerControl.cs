@@ -16,6 +16,8 @@ public class PlayerControl : MonoBehaviour
     public GameObject model;
     [SerializeField, Header("点滅周期")]
     public float tenmetuInterval = 1.0f;
+    [SerializeField, Header("エネルギーたまる量")]
+    public int upenergy = 10;
 
 
     private PlayerHpGauge playerHpGauge;
@@ -264,9 +266,9 @@ public class PlayerControl : MonoBehaviour
 
         if (other.gameObject.tag == "GaugeEnergy")
         {
-            gauge += 20;
+            gauge += upenergy;
             //GaugeUI.GetComponent<PlayerEnergyGauge>().UpGauge(20f);
-            playerEnergyGauge.UpGauge(20f);
+            playerEnergyGauge.UpGauge((float)upenergy);
 
         }
 
