@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyBullet : MonoBehaviour
 {
     private Vector3 velocity;
-    private int life;
+    private float life;
     public int speed;
     private bool deadFlag = false;
     private GameObject parent;
@@ -17,7 +17,7 @@ public class EnemyBullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        life = 300;
+        life = 5;
         state = State.Flont;
         deadFlag = false;
         //shotInterval = 30;
@@ -51,7 +51,7 @@ public class EnemyBullet : MonoBehaviour
     void Move()
     {
         transform.position += speed * velocity * Time.deltaTime;
-        life--;
+        life -= Time.deltaTime;
         if (life <= 0)
         {
             deadFlag = true;
@@ -63,7 +63,7 @@ public class EnemyBullet : MonoBehaviour
     }
     public void Initialize()
     {
-        life = 300;
+        life = 5;
         velocity = Vector3.zero;
         state = State.Flont;
         deadFlag = false;

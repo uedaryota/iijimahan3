@@ -6,22 +6,18 @@ public class Enemy : MonoBehaviour
 {
     public int hp;
     private GameObject target;
-    public int moveTime = 30;
-    public int chargeTime = 30;
-    private int currentMove;
-    private int currentCharge;
+
     private Vector3 velocity;
+    public float speed = 5;
     private bool deadFlag = false;
     public GameObject energy;
-    public int MaxrotateTime = 60;
-    int rotateTime = 0;
+    public float MaxrotateTime =0.5f;
+    float rotateTime = 0;
     Transform lastTransform;
     // Start is called before the first frame update
     void Start()
     {
         deadFlag = false;
-        currentCharge = 0;
-        currentMove = 0;
         target = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -40,33 +36,17 @@ public class Enemy : MonoBehaviour
     }
     void Move()
     {
-        currentCharge++;
-        if (currentCharge > chargeTime)
+        //少しずつ加速度に追加していく
+       if( target!=null)
         {
-
+            Vector3 vel = Vector3.Normalize(target.transform.position - transform.position) / 13;
+            velocity += vel;
+            velocity = Vector3.Normalize(velocity) * speed;
             transform.position += velocity * Time.deltaTime;
-            currentMove++;
-            if (currentMove > moveTime)
-            {
-                currentMove = 0;
-                currentCharge = 0;
-            }
-            if (rotateTime != 0)
-            {
-                ObjectRotate();
-                ChangeRotate();
-            }
         }
-        else
-        {
-            if (target != null)
-            {
-                ObjectRotate();
-                ChangeRotate();
-                velocity = target.transform.position - transform.position;
-                velocity = Vector3.Normalize(velocity) * 5;
-            }
-        }
+      
+        ObjectRotate();
+        ChangeRotate();
     }
     void CheckTarget()
     {
@@ -198,9 +178,9 @@ public class Enemy : MonoBehaviour
 
         if (this.gameObject.tag == "Enemy")
         {
-            if (rotateTime > 0)
+            if (rotateTime > MaxrotateTime)
             {
-                rotateTime--;
+                rotateTime -= Time.deltaTime;
             }
             this.transform.Rotate(0, 0, 180 / MaxrotateTime * rotateTime);
         }
@@ -209,7 +189,7 @@ public class Enemy : MonoBehaviour
         {
             if (rotateTime < MaxrotateTime)
             {
-                rotateTime++;
+                rotateTime += Time.deltaTime;
             }
             this.transform.Rotate(0, 0, 180 / MaxrotateTime * rotateTime);
         }
