@@ -32,9 +32,9 @@ public class BossAttack : MonoBehaviour
                 }
                 break;
             case Acter.Attack:
-                if (Cnt == 200)
+                if (Cnt == 60)
                 {
-                    for (int x = 0; x < 10; x++)
+                    for (int x = 0; x < 15; x++)
                     {
                         GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet2(transform.position, 0);
                     }
