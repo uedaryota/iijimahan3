@@ -21,7 +21,9 @@ public class BossAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        switch(act)
+        //ポーズの時に止める
+        if (Time.timeScale <= 0) return;
+        switch (act)
         {
             case Acter.Start:
                 if (GameObject.FindGameObjectWithTag("Boss").GetComponent<BossFirstAction>().action==BossFirstAction.MoveAction.End)
@@ -30,9 +32,9 @@ public class BossAttack : MonoBehaviour
                 }
                 break;
             case Acter.Attack:
-                if (Cnt == 200)
+                if (Cnt == 60)
                 {
-                    for (int x = 0; x < 10; x++)
+                    for (int x = 0; x < 15; x++)
                     {
                         GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet2(transform.position, 0);
                     }

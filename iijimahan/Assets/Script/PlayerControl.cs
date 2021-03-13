@@ -37,6 +37,8 @@ public class PlayerControl : MonoBehaviour
 
     private bool keyboardFlag = true;
 
+    private static int gaugeCount = 0;
+
 
     //private Color cr;
     //private float cl;
@@ -59,6 +61,7 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 60;
         playerState = PlayerState.Alive;
         playerHpGauge = GameObject.FindObjectOfType<PlayerHpGauge>();
         //playerEnergyGauge = GaugeUI.GetComponent<PlayerEnergyGauge>();
@@ -129,13 +132,14 @@ public class PlayerControl : MonoBehaviour
                 gmobj.GetComponent<PlayerGaugeBulletControl>().SetPosition(this.transform.position);
                 gmobj.GetComponent<PlayerGaugeBulletControl>().SetGaugeFlag(true);
                 playerEnergyGauge.SetGauge(40f);
+                gaugeCount++;
             }
-            if (Input.GetKeyDown(KeyCode.Q) && gauge >= 40)
-            {
-                Debug.Log("味方を強化する技");
-                gauge = gauge - 40;
+            //if (Input.GetKeyDown(KeyCode.Q) && gauge >= 40)
+            //{
+            //    Debug.Log("味方を強化する技");
+            //    gauge = gauge - 40;
 
-            }
+            //}
         }
         else//パッド操作
         {
@@ -203,6 +207,7 @@ public class PlayerControl : MonoBehaviour
                 gmobj.GetComponent<PlayerGaugeBulletControl>().SetPosition(this.transform.position);
                 gmobj.GetComponent<PlayerGaugeBulletControl>().SetGaugeFlag(true);
                 playerEnergyGauge.SetGauge(40f);
+                gaugeCount++;
             }
 
             padRvelocity2 = padRvelocity;
@@ -331,5 +336,10 @@ public class PlayerControl : MonoBehaviour
     {
         mutekiFlag = true;
         mutekiCounter = 0;
+    }
+
+    public static int GetGaugeCount()
+    {
+        return gaugeCount;
     }
 }

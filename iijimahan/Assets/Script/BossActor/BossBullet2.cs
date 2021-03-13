@@ -25,6 +25,8 @@ public class BossBullet2 : MonoBehaviour
     }
     void Update()
     {
+        //ポーズの時に止める
+        if (Time.timeScale <= 0) return;
         Cnt++;
         if (deadFlag)
         {
