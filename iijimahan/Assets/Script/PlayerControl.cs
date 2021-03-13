@@ -73,6 +73,7 @@ public class PlayerControl : MonoBehaviour
         //cr = model.GetComponent<Renderer>().material.color;
         //cl = 255 - cr.r;
         transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, 180);
+        gaugeCount = 0;
     }
     // Update is called once per frame
     void Update()
