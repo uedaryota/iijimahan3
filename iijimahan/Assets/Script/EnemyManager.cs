@@ -4,9 +4,20 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
-    [SerializeField, Header("enemyboxオブジェクト手入力用")] Object[] enemyboxes_Manual;
-    [SerializeField, Header("enemynoの生成位置手入力用")] Vector2[] pos_Manual;
-    [SerializeField, Header("生成間隔手入力用")] float[] interval_Manual;
+    [System.Serializable]
+    public struct WaveEnemy
+    {
+        [SerializeField, Header("生成するエネミーオブジェクト")]
+        public Object[] enemyboxes_Manual;
+        [SerializeField, Header("生成数")]
+        public int enemycountlimit_Manual;
+        [SerializeField, Header("生成位置")]
+        public Vector2[] pos_Manual;
+        [SerializeField, Header("生成間隔")]
+        public float[] interval_Manual;
+    }
+
+    [SerializeField, Header("wave毎の手入力エネミー")] WaveEnemy[] enemy_Manual;
 
     [SerializeField, Header("enemyboxオブジェクト")] Object[] enemyboxes;
     [SerializeField, Header("bossオブジェクト")] Object[] bossboxes;
@@ -16,7 +27,11 @@ public class EnemyManager : MonoBehaviour
     [SerializeField, Header("enemyの生成用の座標")] Vector2 pos = new Vector2(20, 20);
     [SerializeField, Header("bossの生成用の座標")] Vector2 bosspos = new Vector2(20, 0);
 
+    //手動用
+    private float timer_Manual;
+    private int interval_count;
 
+    //自動用
 
     public int wave = 1;
 
@@ -41,6 +56,8 @@ public class EnemyManager : MonoBehaviour
         gameclear = false;
         old_pos_chack = pos.y;
         old_old_pos_chack *= -pos.y;
+        interval_count = 0;
+        //enemy_Manual = new WaveEnemy[wave - 1];
     }
 
     void Update()
@@ -48,20 +65,23 @@ public class EnemyManager : MonoBehaviour
         if(old_wave != wave)
         {
             enemycount = 0;
+            interval_count = 0;
             if(bosschack == false)
             {
                 bosschack = true;
             }
+            //enemy_Manual = new WaveEnemy[wave - 1];
         }
         old_wave = wave;
 
         switch (wave)
         {
             case 1:
-                EnemyRespawn(waverespawn[wave - 1]);
+                EnemyRespawn_Manual();
                 return;
 
             case 2:
+                EnemyRespawn_Manual();
                 BossRespawn();
                 EnemyRespawn(waverespawn[wave - 1]);
                 return;
@@ -130,9 +150,30 @@ public class EnemyManager : MonoBehaviour
         }
     }
 
-    void EnemyRespawn2()
+    void EnemyRespawn_Manual()
     {
+        timer_Manual += Time.deltaTime;
 
+        //現在のwaveで生成するエネミーの数に足りているか
+        if (enemy_Manual[wave-1].enemycountlimit_Manual > enemycount)
+        {
+            //一定時間毎に
+            if (timer_Manual >= enemy_Manual[wave - 1].interval_Manual[interval_count])
+            {
+                //座標の割り当て
+                transform.position = enemy_Manual[wave - 1].pos_Manual[enemycount];
+                //エネミーの生成
+                Instantiate(enemy_Manual[wave - 1].enemyboxes_Manual[enemycount], transform.position, Quaternion.identity);
+                //ループ処理用の変数達
+                timer_Manual = 0;
+                interval_count++;
+                enemycount++;
+            }
+        }
+        else
+        {
+            EnemyCheck("Enemy");
+        }
     }
 
     void BossRespawn()
