@@ -81,7 +81,6 @@ public class EnemyManager : MonoBehaviour
                 return;
 
             case 2:
-                EnemyRespawn_Manual();
                 BossRespawn();
                 EnemyRespawn(waverespawn[wave - 1]);
                 return;

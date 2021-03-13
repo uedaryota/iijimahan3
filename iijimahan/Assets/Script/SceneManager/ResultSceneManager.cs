@@ -16,7 +16,7 @@ public class ResultSceneManager : MonoBehaviour
         gauge = PlayerControl.GetGaugeCount();
         time = GameSceneManager.GetClearTime();
         Text text = text_obj.GetComponent<Text>();
-        text.text = "ゲージ使用回数 : " + gauge + "クリアタイム : " + time;
+        text.text = "ゲージ使用回数 : " + gauge + "      タイム : " + time;
     }
     void Update()
     {
