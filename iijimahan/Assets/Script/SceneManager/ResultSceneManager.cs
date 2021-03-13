@@ -2,9 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ResultSceneManager : MonoBehaviour
 {
+    public GameObject text_obj;
+    private PlayerControl script;
+    private int gauge;
+    
+    void Start()
+    {
+        gauge = PlayerControl.GetGaugeCount();
+        Text text = text_obj.GetComponent<Text>();
+        text.text = "ゲージ使用回数 : " + gauge;
+    }
     void Update()
     {
         if (Input.GetMouseButton(0) || Input.GetKeyDown(KeyCode.Joystick1Button0))
