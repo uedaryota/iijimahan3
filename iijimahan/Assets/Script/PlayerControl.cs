@@ -33,9 +33,11 @@ public class PlayerControl : MonoBehaviour
     private Vector3 padvelocity;
     private Vector3 padRvelocity;
     private Vector3 padRvelocity2;
-    private Vector3 poolvelocity;
+    private Vector3 poolvelocity = new Vector3(1, 0, 0);
 
     private bool keyboardFlag = true;
+
+    private static int gaugeCount = 0;
 
 
     //private Color cr;
@@ -59,12 +61,14 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Application.targetFrameRate = 60;
         playerState = PlayerState.Alive;
         playerHpGauge = GameObject.FindObjectOfType<PlayerHpGauge>();
         //playerEnergyGauge = GaugeUI.GetComponent<PlayerEnergyGauge>();
         playerEnergyGauge = GameObject.FindObjectOfType<PlayerEnergyGauge>();
         //cr = model.GetComponent<Renderer>().material.color;
         //cl = 255 - cr.r;
+        transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, 180);
     }
     // Update is called once per frame
     void Update()
@@ -128,13 +132,14 @@ public class PlayerControl : MonoBehaviour
                 gmobj.GetComponent<PlayerGaugeBulletControl>().SetPosition(this.transform.position);
                 gmobj.GetComponent<PlayerGaugeBulletControl>().SetGaugeFlag(true);
                 playerEnergyGauge.SetGauge(40f);
+                gaugeCount++;
             }
-            if (Input.GetKeyDown(KeyCode.Q) && gauge >= 40)
-            {
-                Debug.Log("味方を強化する技");
-                gauge = gauge - 40;
+            //if (Input.GetKeyDown(KeyCode.Q) && gauge >= 40)
+            //{
+            //    Debug.Log("味方を強化する技");
+            //    gauge = gauge - 40;
 
-            }
+            //}
         }
         else//パッド操作
         {
@@ -202,6 +207,7 @@ public class PlayerControl : MonoBehaviour
                 gmobj.GetComponent<PlayerGaugeBulletControl>().SetPosition(this.transform.position);
                 gmobj.GetComponent<PlayerGaugeBulletControl>().SetGaugeFlag(true);
                 playerEnergyGauge.SetGauge(40f);
+                gaugeCount++;
             }
 
             padRvelocity2 = padRvelocity;
@@ -330,5 +336,10 @@ public class PlayerControl : MonoBehaviour
     {
         mutekiFlag = true;
         mutekiCounter = 0;
+    }
+
+    public static int GetGaugeCount()
+    {
+        return gaugeCount;
     }
 }

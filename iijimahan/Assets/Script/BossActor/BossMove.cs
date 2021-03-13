@@ -36,6 +36,8 @@ public class BossMove : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //ポーズの時に止める
+        if (Time.timeScale <= 0) return;
         Transform transform = this.gameObject.GetComponent<Transform>();
         Vector2 pos = transform.position;
         switch (action)

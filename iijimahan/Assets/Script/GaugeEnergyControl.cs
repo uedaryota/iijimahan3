@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GaugeEnergyControl : MonoBehaviour
 {
-    private int easingCount = 0;
+    private float easingCount = 0;
     //private bool easingFlag = false;
     public int num = 80;
     public float maxSpeed = 30;
@@ -23,12 +23,15 @@ public class GaugeEnergyControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //ポーズの時に止める
+        if (Time.timeScale <= 0) return;
+
         playerPos = player.transform.position;
         speed = Easing.SineInOut(easingCount, num, speed, maxSpeed);
         velocity = Move();
-        transform.position += velocity * speed * Time.deltaTime;
+        transform.position += velocity * speed * Time.deltaTime * 2;
 
-        easingCount++;
+        easingCount = easingCount + 90 *Time.deltaTime;
     }
 
     public Vector3 Move()

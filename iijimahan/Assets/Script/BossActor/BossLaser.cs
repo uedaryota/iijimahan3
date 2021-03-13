@@ -23,6 +23,8 @@ public class BossLaser : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //ポーズの時に止める
+        if (Time.timeScale <= 0) return;
         Cnt++;
         if(Cnt>Speed)
         {

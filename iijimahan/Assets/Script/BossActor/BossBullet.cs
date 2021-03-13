@@ -9,7 +9,6 @@ public class BossBullet : MonoBehaviour//自動追尾弾だぜ
     [Header("弾角度")] public float Angle;
     [Header("追尾時間※現状いじれないのでスクリプトの中身から弄ってください")] public float OikakeTime=300;
     float Cnt = 0;
-    Vector3 pos = GameObject.FindGameObjectWithTag("Player").transform.position;
     float x, y;
     private bool deadFlag = false;
     #endregion
@@ -25,6 +24,8 @@ public class BossBullet : MonoBehaviour//自動追尾弾だぜ
     }
     void Update()
     {
+        //ポーズの時に止める
+        if (Time.timeScale <= 0) return;
         if (deadFlag)
         {
             Destroy(this.gameObject);
@@ -32,7 +33,7 @@ public class BossBullet : MonoBehaviour//自動追尾弾だぜ
         Cnt++;
         if (Cnt < OikakeTime)
         {
-            pos = GameObject.FindGameObjectWithTag("Player").transform.position;
+            Vector3 pos = GameObject.FindGameObjectWithTag("Player").transform.position;
             Vector3 dir = pos - transform.position;
             Angle = Mathf.Atan2(pos.y - transform.position.y, pos.x - transform.position.x);
             x = pos.x - transform.position.x;
@@ -41,6 +42,7 @@ public class BossBullet : MonoBehaviour//自動追尾弾だぜ
         }
         else
         {
+            Vector3 pos = GameObject.FindGameObjectWithTag("Player").transform.position;
             Vector3 dir = pos - transform.position;
             Angle = Mathf.Atan2(y, x);
             transform.position += GetDirectionPI(Angle) * Speed * Time.deltaTime;

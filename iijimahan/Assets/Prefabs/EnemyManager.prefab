@@ -47,7 +47,7 @@ MonoBehaviour:
   - {fileID: 7265182206125767360, guid: b060fbfc14d1df54d8cc47ff2c64876b, type: 3}
   - {fileID: 9176157743581955875, guid: d59a16b65e9234f4481e9633e60fec5d, type: 3}
   bossboxes:
-  - {fileID: 5065546897333047580, guid: e65874558ee555c448cb7bae9ff6376a, type: 3}
+  - {fileID: 4124705426971988586, guid: 4432ac9641e89e243a64a3ca6f862150, type: 3}
   enemycountlimit: 030000009f860100
   interval:
   - 2

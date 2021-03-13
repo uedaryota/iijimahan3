@@ -7,11 +7,14 @@ public class PauseButton : MonoBehaviour
 {
     void OnClickStartButton()
     {
-        if(transform.name == "TitleButton")SceneManager.LoadScene("TitleScene");
+        if (transform.name == "TitleButton")
+        {
+            SceneManager.LoadScene("TitleScene");
+        }
         if (transform.name == "ResetButton")
         {
             SceneManager.LoadScene("GameScene");
-            Time.timeScale = 1f;
         }
+        Time.timeScale = 1f;
     }
 }
