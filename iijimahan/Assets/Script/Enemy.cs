@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
     public float speed = 5;
     private bool deadFlag = false;
     public GameObject energy;
-    public float MaxrotateTime =0.5f;
+    float MaxrotateTime = 0.5f;
     float rotateTime = 0;
     Transform lastTransform;
     // Start is called before the first frame update
@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
         //少しずつ加速度に追加していく
        if( target!=null)
         {
-            Vector3 vel = Vector3.Normalize(target.transform.position - transform.position) / 13;
+            Vector3 vel = Vector3.Normalize(target.transform.position - transform.position) / 11;
             velocity += vel;
             velocity = Vector3.Normalize(velocity) * speed;
             transform.position += velocity * Time.deltaTime;
