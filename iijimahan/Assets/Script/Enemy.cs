@@ -39,7 +39,7 @@ public class Enemy : MonoBehaviour
         //少しずつ加速度に追加していく
        if( target!=null)
         {
-            Vector3 vel = Vector3.Normalize(target.transform.position - transform.position) / 11;
+            Vector3 vel = Vector3.Normalize(target.transform.position - transform.position) / 5;
             velocity += vel;
             velocity = Vector3.Normalize(velocity) * speed;
             transform.position += velocity * Time.deltaTime;
