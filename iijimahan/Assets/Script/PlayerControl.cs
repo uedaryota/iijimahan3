@@ -14,6 +14,9 @@ public class PlayerControl : MonoBehaviour
     public GameObject gaugebullet;
     [SerializeField, Header("プレイヤーのモデル")]
     public GameObject model;
+    [SerializeField, Header("点滅周期")]
+    public float tenmetuInterval = 1.0f;
+
 
     private PlayerHpGauge playerHpGauge;
 
@@ -27,7 +30,6 @@ public class PlayerControl : MonoBehaviour
     private int timer = 0;//計測用
 
     private bool mutekiFlag = false;
-    private float mutekiCounter = 0;
     private bool tenmetuFlag = false;
 
     private Vector3 padvelocity;
@@ -76,14 +78,14 @@ public class PlayerControl : MonoBehaviour
         //ポーズの時に止める
         if (Time.timeScale <= 0) return;
 
-        timer++;
+        //timer++;
         //デバッグ用*******************************
 
-        //Debug.Log(mutekiCounter);
         //Debug.Log(Screen.width);
         //Debug.Log(Screen.height);
         //Debug.Log(HP);
         //gauge = 100;
+
         //デバッグ用*******************************
         if (gauge >= 100) gauge = 100;
         if ( HP <= 0 )
@@ -91,13 +93,11 @@ public class PlayerControl : MonoBehaviour
             playerState = PlayerState.Dead;
         }
 
-        Muteki();//muteki
-
         CheckControlDevice();//操作デバイスチェック       
 
         if(keyboardFlag)//キーボード操作
         {
-            Move();
+            KeyBoardMove();
             transform.position += velocity * Time.deltaTime;
             velocity = Vector3.zero;
             //マウスの時
@@ -119,8 +119,6 @@ public class PlayerControl : MonoBehaviour
                 vel.z = 0;
                 bullets.GetComponent<BulletControl>().SetTransform(vel, this.transform.position);
                 Debug.Log("撃つ");
-                //playerEnergyGauge.UpGauge(20f);
-                //gauge += 20;
 
             }
             if (Input.GetKeyDown(KeyCode.E) && gauge >= 40)
@@ -134,64 +132,16 @@ public class PlayerControl : MonoBehaviour
                 playerEnergyGauge.SetGauge(40f);
                 gaugeCount++;
             }
-            //if (Input.GetKeyDown(KeyCode.Q) && gauge >= 40)
-            //{
-            //    Debug.Log("味方を強化する技");
-            //    gauge = gauge - 40;
-
-            //}
+            if (Input.GetKeyDown(KeyCode.Q) && gauge >= 40)
+            {
+                Debug.Log("味方を強化する技");
+                //gauge = gauge - 40;
+            }
         }
         else//パッド操作
         {
 
-            Vector3 screen_playerPos2 = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
-
-            padvelocity.x = Input.GetAxis("L_Horizontal");
-            padvelocity.y = Input.GetAxis("L_Vertical") * -1;
-            padRvelocity.x = Input.GetAxis("R_Horizontal");
-            padRvelocity.y = Input.GetAxis("R_Vertical") * -1;
-
-            if (padRvelocity != padRvelocity2)
-            {
-                if (padRvelocity.x == 0 && padRvelocity.y == 0)
-                {
-                }
-                else
-                {
-                    poolvelocity = padRvelocity;
-                    var h = Input.GetAxis("R_Horizontal");
-                    var v = Input.GetAxis("R_Vertical");
-                    float radian = Mathf.Atan2(v, -h) * Mathf.Rad2Deg;
-                    if (radian < 0)
-                    {
-                        radian += 360;
-                    }
-                    transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, radian);
-
-                }
-            }
-
-            //画面外処理
-            if (screen_playerPos2.y > Screen.height - 50 && Input.GetAxis("L_Vertical") * -1 >0)
-            {
-                padvelocity.y = 0;
-            }
-            if (screen_playerPos2.y < 0 + 50 && Input.GetAxis("L_Vertical") * -1 < 0)
-            {
-                padvelocity.y = 0;
-            }
-            if (screen_playerPos2.x < 0 + 50 && Input.GetAxis("L_Horizontal") < 0)
-            {
-                padvelocity.x = 0;
-            }
-            if (screen_playerPos2.x > Screen.width - 50 && Input.GetAxis("L_Horizontal") > 0)
-            {
-                padvelocity.x = 0;
-            }
-
-            float padspeed = speed / 200;
-            transform.position += padvelocity * padspeed;
-
+            PadMove();//移動、回転、画面外に行かない処理
 
             if (Input.GetKeyDown("joystick button 5"))
             {
@@ -230,10 +180,10 @@ public class PlayerControl : MonoBehaviour
         }
         else
         {
-            keyboardFlag = false;
+            keyboardFlag = false;//パッド操作
         }
     }
-    public void Move()
+    public void KeyBoardMove()
     {
         Vector3 screen_playerPos2 = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
 
@@ -257,6 +207,56 @@ public class PlayerControl : MonoBehaviour
         velocity *= speed;
     }
 
+    public void PadMove()
+    {
+        Vector3 screen_playerPos2 = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
+
+        padvelocity.x = Input.GetAxis("L_Horizontal");
+        padvelocity.y = Input.GetAxis("L_Vertical") * -1;
+        padRvelocity.x = Input.GetAxis("R_Horizontal");
+        padRvelocity.y = Input.GetAxis("R_Vertical") * -1;
+
+        if (padRvelocity != padRvelocity2)
+        {
+            if (padRvelocity.x == 0 && padRvelocity.y == 0)
+            {
+            }
+            else
+            {
+                poolvelocity = padRvelocity;
+                var h = Input.GetAxis("R_Horizontal");
+                var v = Input.GetAxis("R_Vertical");
+                float radian = Mathf.Atan2(v, -h) * Mathf.Rad2Deg;
+                if (radian < 0)
+                {
+                    radian += 360;
+                }
+                transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, radian);
+            }
+        }
+
+        //画面外処理
+        if (screen_playerPos2.y > Screen.height - 50 && Input.GetAxis("L_Vertical") * -1 > 0)
+        {
+            padvelocity.y = 0;
+        }
+        if (screen_playerPos2.y < 0 + 50 && Input.GetAxis("L_Vertical") * -1 < 0)
+        {
+            padvelocity.y = 0;
+        }
+        if (screen_playerPos2.x < 0 + 50 && Input.GetAxis("L_Horizontal") < 0)
+        {
+            padvelocity.x = 0;
+        }
+        if (screen_playerPos2.x > Screen.width - 50 && Input.GetAxis("L_Horizontal") > 0)
+        {
+            padvelocity.x = 0;
+        }
+
+        float padspeed = speed / 60;
+        transform.position += padvelocity * padspeed;
+    }
+
   
     private void OnTriggerEnter(Collider other)
     {
@@ -270,7 +270,7 @@ public class PlayerControl : MonoBehaviour
 
         }
 
-        if (mutekiFlag) return;
+        if (mutekiFlag) return;//無敵なら以下処理しない
 
         float damage = 5f;
         if (other.gameObject.tag == "Enemy")
@@ -297,18 +297,7 @@ public class PlayerControl : MonoBehaviour
         
     }
 
-    public void Muteki()
-    {
-        if (mutekiFlag)
-        {
-            mutekiCounter += 60f * Time.deltaTime;
-        }
-
-        if (mutekiCounter > 120)
-        {
-            mutekiFlag = false;
-        }
-    }
+    
 
     public float GetAim(Vector2 from, Vector2 to)
     {
@@ -335,11 +324,33 @@ public class PlayerControl : MonoBehaviour
     public void MutekiFlagActive()
     {
         mutekiFlag = true;
-        mutekiCounter = 0;
+        StartCoroutine("WaitSpriteAlpha");//点滅処理開始
     }
 
     public static int GetGaugeCount()
     {
         return gaugeCount;
+    }
+
+    IEnumerator WaitSpriteAlpha()
+    {
+        if (tenmetuFlag)
+        {
+            yield break;
+        }
+        tenmetuFlag = true;
+
+        for (int i = 0; i < 8; i++)
+        {
+            model.SetActive(false);
+            yield return new WaitForSeconds(0.15f);
+
+            model.SetActive(true);
+            yield return new WaitForSeconds(0.15f);
+        }
+
+        yield return new WaitForSeconds(0.15f);
+        tenmetuFlag = false;
+        mutekiFlag = false;
     }
 }

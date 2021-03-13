@@ -9,12 +9,14 @@ public class ResultSceneManager : MonoBehaviour
     public GameObject text_obj;
     private PlayerControl script;
     private int gauge;
+    private float time;
     
     void Start()
     {
         gauge = PlayerControl.GetGaugeCount();
+        time = GameSceneManager.GetClearTime();
         Text text = text_obj.GetComponent<Text>();
-        text.text = "ゲージ使用回数 : " + gauge;
+        text.text = "ゲージ使用回数 : " + gauge + "クリアタイム : " + time;
     }
     void Update()
     {

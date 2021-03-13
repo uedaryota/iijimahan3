@@ -11,9 +11,9 @@ public class ShootEnemy : MonoBehaviour
     public GameObject energy;
     public float targetDistance;
     private float shotInterval;
-    public int shotIntervalStart;
-    public int MaxrotateTime = 60;
-    int rotateTime = 0;
+    public float shotIntervalStart = 1.5f;
+    public float MaxrotateTime = 0.5f;
+    float rotateTime = 0;
     Transform lastTransform;
     // Start is called before the first frame update
     void Start()
@@ -28,20 +28,18 @@ public class ShootEnemy : MonoBehaviour
         if(target!=null)
         {
             velocity = Vector3.Normalize(target.transform.position - transform.position);
-            if (Vector3.Distance(target.transform.position, transform.position) <= targetDistance)
+            if (Vector3.Distance(target.transform.position, transform.position) <= targetDistance) 
             {
                 velocity = Vector3.zero;
             }
             transform.position += velocity * Time.deltaTime;
         }
-     
     }
-        
     void Attack()
     {
         if (this.gameObject.tag == "Friend")
         {
-            shotInterval--;
+            shotInterval -= Time.deltaTime;
             if (shotInterval <= 0)
             {
                 GameObject bullet = Instantiate(Resources.Load<GameObject>("FriendBullet"));
@@ -53,7 +51,7 @@ public class ShootEnemy : MonoBehaviour
         }
         else if (this.gameObject.tag == "Enemy") 
         {
-            shotInterval--;
+            shotInterval -= Time.deltaTime;
             if (shotInterval <= 0)
             {
                 GameObject bullet = Instantiate(Resources.Load<GameObject>("EnemyBullet"));
@@ -101,6 +99,8 @@ public class ShootEnemy : MonoBehaviour
 
             if (other.gameObject.tag == "PlayerBullet")
             {
+                GameObject effect = Instantiate(Resources.Load<GameObject>("Mebius"));
+                effect.transform.position = transform.position;
                 this.gameObject.tag = "Friend";
 
             }
@@ -239,28 +239,27 @@ public class ShootEnemy : MonoBehaviour
     }
     void ChangeRotate()
     {
-      //  this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
-       
-            if (this.gameObject.tag == "Enemy")
-            {
-                if (rotateTime > MaxrotateTime)
-                {  
-                    rotateTime--;
-                }
-                this.transform.Rotate(0, 0, 180 / MaxrotateTime * rotateTime);
-            }
+        //  this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
 
-            if (this.gameObject.tag == "Friend")
+        if (this.gameObject.tag == "Enemy")
+        {
+            if (rotateTime > MaxrotateTime)
             {
-                if (rotateTime < MaxrotateTime)
-                {
-                    
-                    rotateTime++;
-                }
-                this.transform.Rotate(0, 0, 180 / MaxrotateTime * rotateTime);
+                rotateTime -= Time.deltaTime;
             }
+            this.transform.Rotate(0, 0, 180/ MaxrotateTime * rotateTime);
+        }
 
-     
+        if (this.gameObject.tag == "Friend")
+        {
+            if (rotateTime < MaxrotateTime)
+            {
+                rotateTime += Time.deltaTime;
+            }
+            this.transform.Rotate(0, 0, 180 / MaxrotateTime * rotateTime);
+        }
+
+
 
     }
     void ObjectRotate()

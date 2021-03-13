@@ -9,6 +9,8 @@ public class GameSceneManager : MonoBehaviour
     private EnemyManager enemymanagerscript;
     private GameObject player;
     private PlayerControl playerscript;
+    private float timer = 0;
+    private static float ClearTime = 0;
 
     void Start()
     {
@@ -16,11 +18,15 @@ public class GameSceneManager : MonoBehaviour
         enemymanagerscript = enemymanager.GetComponent<EnemyManager>();
         player = GameObject.Find("Player");
         playerscript = player.GetComponent<PlayerControl>();
+        timer = 0;
+        ClearTime = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
+        timer++;
+        ClearTime = timer * Time.deltaTime;
         if(enemymanagerscript.GetGameClear() == true)
         {
             SceneManager.LoadScene("GameClearScene");
@@ -29,5 +35,10 @@ public class GameSceneManager : MonoBehaviour
         {
             SceneManager.LoadScene("GameOverScene");
         }
+    }
+
+    public static float GetClearTime()
+    {
+        return ClearTime;
     }
 }
