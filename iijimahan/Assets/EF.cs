@@ -4,20 +4,20 @@ using UnityEngine;
 
 public class EF : MonoBehaviour
 {
-    MeshRenderer mr;
+    SpriteRenderer mr;
 
     // Start is called before the first frame update
     void Start()
     {
-        mr = GetComponent<MeshRenderer>();
+        mr = GetComponent<SpriteRenderer>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        transform.localScale *= 1.02f;
+      //  transform.localScale *= Time.deltaTime;
 
-        mr.material.color -= new Color(0.004f, 0.004f, 0.004f, 0.004f);
+        mr.material.color -= new Color(0.4f * Time.deltaTime, 0.4f * Time.deltaTime, 0.4f * Time.deltaTime, 0.4f * Time.deltaTime);
 
         if(mr.material.color.a <= 0)
         {

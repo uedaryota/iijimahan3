@@ -129,7 +129,8 @@ public class Enemy : MonoBehaviour
             if (other.gameObject.tag == "PlayerBullet")
             {
                 this.gameObject.tag = "Friend";
-
+                GameObject effect = Instantiate(Resources.Load<GameObject>("Mebius"));
+                effect.transform.position = transform.position;
             }
             if (other.gameObject.tag == "FriendBullet")
             {

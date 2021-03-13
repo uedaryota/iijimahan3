@@ -99,6 +99,8 @@ public class ShootEnemy : MonoBehaviour
 
             if (other.gameObject.tag == "PlayerBullet")
             {
+                GameObject effect = Instantiate(Resources.Load<GameObject>("Mebius"));
+                effect.transform.position = transform.position;
                 this.gameObject.tag = "Friend";
 
             }
