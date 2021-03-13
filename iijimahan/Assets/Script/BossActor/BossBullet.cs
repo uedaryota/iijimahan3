@@ -7,7 +7,7 @@ public class BossBullet : MonoBehaviour//自動追尾弾だぜ
     #region//インスペクターで設定する
     [Header("弾速※現状いじれないのでスクリプトの中身から弄ってください")] public float　Speed=10.0f;
     [Header("弾角度")] public float Angle;
-    [Header("追尾時間※現状いじれないのでスクリプトの中身から弄ってください")] public float OikakeTime=300;
+    [Header("追尾時間※現状いじれないのでスクリプトの中身から弄ってください")] public float OikakeTime=60;
     float Cnt = 0;
     float x, y;
     private bool deadFlag = false;
