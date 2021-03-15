@@ -86,6 +86,24 @@ public class EnemyManager : MonoBehaviour
                 return;
 
             case 3:
+                EnemyRespawn_Manual();
+                return;
+
+            case 4:
+                BossRespawn();
+                EnemyRespawn(waverespawn[wave - 1]);
+                return;
+
+            case 5:
+                EnemyRespawn_Manual();
+                return;
+
+            case 6:
+                BossRespawn();
+                EnemyRespawn(waverespawn[wave - 1]);
+                return;
+                
+            case 7:
                 gameclear = true;
                 return;
 
@@ -100,7 +118,7 @@ public class EnemyManager : MonoBehaviour
         timer += Time.deltaTime;
         
         //現在のwaveで生成するエネミーの数に足りているか
-        if (enemycountlimit[wave - 1] > enemycount )
+        if (enemycountlimit[wave - 1] > enemycount || enemycountlimit[wave - 1]  > 100)
         {
             //一定時間毎に
             if (timer >= interval[wave - 1])
