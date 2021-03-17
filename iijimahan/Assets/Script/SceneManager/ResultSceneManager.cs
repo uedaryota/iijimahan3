@@ -30,5 +30,19 @@ public class ResultSceneManager : MonoBehaviour
                 SceneManager.LoadScene("TitleScene");
             }
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown("joystick button 1"))
+        {
+            Quit();
+        }
+    }
+
+    void Quit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_STANDALONE
+      UnityEngine.Application.Quit();
+#endif
     }
 }

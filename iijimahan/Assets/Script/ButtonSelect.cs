@@ -5,26 +5,62 @@ using UnityEngine.UI;
 
 public class ButtonSelect : MonoBehaviour
 {
-    Button button;
-    Button button2;
-    string num;
+    [SerializeField] private Button[] button;
+    [SerializeField, Header("インターバル")] private float interval = 10f;
+    //Button button;
+    //Button button2;
+    int indexnum;
+    float timer;
 
     void Start()
     {
-        button = GameObject.Find("pause/Panel/TitleButton").GetComponent<Button>();
-        button2 = GameObject.Find("pause/Panel/ResetButton").GetComponent<Button>();
-        button.Select();
+        indexnum = 0;
+        timer = 5.0f;
+        button[0].Select();
     }
-    
+
     void Update()
     {
-        //if(Input.GetKeyDown(KeyCode.Joystick1Button0))
-        //{
-        //    button.Select();
-        //}
-        //if (Input.GetKeyDown(KeyCode.Joystick1Button1))
-        //{
-        //    button2.Select();
-        //}
+        timer++;
+        if (Input.GetKeyDown(KeyCode.UpArrow) && indexnum != 0 && timer >= interval)
+        {
+            timer = 0.0f;
+            indexnum--;
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow) && indexnum != button.Length - 1 && timer >= interval)
+        {
+            timer = 0.0f;
+            indexnum++;
+        }
+        if (PadControlUp() && indexnum != 0 && timer >= interval)
+        {
+            timer = 0.0f;
+            indexnum--;
+        }
+        if (PadControlDown() && indexnum != button.Length - 1 && timer >= interval)
+        {
+            timer = 0.0f;
+            indexnum++;
+        }
+
+        button[indexnum].Select();
+    }
+
+    bool PadControlUp()
+    {
+        if(Input.GetAxis("L_Vertical") <= -0.5f)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    bool PadControlDown()
+    {
+        if (Input.GetAxis("L_Vertical") >= 0.5f)
+        {
+            return true;
+        }
+        return false;
     }
 }
