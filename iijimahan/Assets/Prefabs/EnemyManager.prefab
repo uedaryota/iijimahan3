@@ -43,18 +43,88 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f920aca6b15b744488327600985c2a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemy_Manual:
+  - enemyboxes_Manual:
+    - {fileID: 7265182206125767360, guid: b060fbfc14d1df54d8cc47ff2c64876b, type: 3}
+    - {fileID: 7265182206125767360, guid: b060fbfc14d1df54d8cc47ff2c64876b, type: 3}
+    - {fileID: 8670145571796672101, guid: 590429abf11bc1c409e9d8a800dd9aa3, type: 3}
+    - {fileID: 8670145571796672101, guid: 590429abf11bc1c409e9d8a800dd9aa3, type: 3}
+    - {fileID: 8670145571796672101, guid: 590429abf11bc1c409e9d8a800dd9aa3, type: 3}
+    enemycountlimit_Manual: 5
+    pos_Manual:
+    - {x: 15, y: 5}
+    - {x: 15, y: 3}
+    - {x: 15, y: 0}
+    - {x: 15, y: -3}
+    - {x: 15, y: -5}
+    interval_Manual:
+    - 3
+    - 3
+    - 2
+    - 2
+    - 2
+  - enemyboxes_Manual: []
+    enemycountlimit_Manual: 0
+    pos_Manual: []
+    interval_Manual: []
+  - enemyboxes_Manual:
+    - {fileID: 7265182206125767360, guid: b060fbfc14d1df54d8cc47ff2c64876b, type: 3}
+    - {fileID: 7265182206125767360, guid: b060fbfc14d1df54d8cc47ff2c64876b, type: 3}
+    - {fileID: 8670145571796672101, guid: 590429abf11bc1c409e9d8a800dd9aa3, type: 3}
+    - {fileID: 8670145571796672101, guid: 590429abf11bc1c409e9d8a800dd9aa3, type: 3}
+    - {fileID: 8670145571796672101, guid: 590429abf11bc1c409e9d8a800dd9aa3, type: 3}
+    enemycountlimit_Manual: 5
+    pos_Manual:
+    - {x: 15, y: 5}
+    - {x: 15, y: 3}
+    - {x: 15, y: 0}
+    - {x: 15, y: -3}
+    - {x: 15, y: -5}
+    interval_Manual:
+    - 2
+    - 2
+    - 1
+    - 1
+    - 1
+  - enemyboxes_Manual: []
+    enemycountlimit_Manual: 0
+    pos_Manual: []
+    interval_Manual: []
+  - enemyboxes_Manual:
+    - {fileID: 7265182206125767360, guid: b060fbfc14d1df54d8cc47ff2c64876b, type: 3}
+    - {fileID: 7265182206125767360, guid: b060fbfc14d1df54d8cc47ff2c64876b, type: 3}
+    - {fileID: 7265182206125767360, guid: b060fbfc14d1df54d8cc47ff2c64876b, type: 3}
+    - {fileID: 7265182206125767360, guid: b060fbfc14d1df54d8cc47ff2c64876b, type: 3}
+    - {fileID: 7265182206125767360, guid: b060fbfc14d1df54d8cc47ff2c64876b, type: 3}
+    enemycountlimit_Manual: 5
+    pos_Manual:
+    - {x: 15, y: 5}
+    - {x: 15, y: 3}
+    - {x: 15, y: 0}
+    - {x: 15, y: -3}
+    - {x: 15, y: -5}
+    interval_Manual:
+    - 0
+    - 0
+    - 0
+    - 0
+    - 0
   enemyboxes:
   - {fileID: 7265182206125767360, guid: b060fbfc14d1df54d8cc47ff2c64876b, type: 3}
-  - {fileID: 9176157743581955875, guid: d59a16b65e9234f4481e9633e60fec5d, type: 3}
+  - {fileID: 8670145571796672101, guid: 590429abf11bc1c409e9d8a800dd9aa3, type: 3}
   bossboxes:
   - {fileID: 4124705426971988586, guid: 4432ac9641e89e243a64a3ca6f862150, type: 3}
-  enemycountlimit: 030000009f860100
+  - {fileID: 4124705426971988586, guid: 4432ac9641e89e243a64a3ca6f862150, type: 3}
+  - {fileID: 4124705426971988586, guid: 4432ac9641e89e243a64a3ca6f862150, type: 3}
+  enemycountlimit: 000000006400000000000000640000000000000064000000
   interval:
   - 2
   - 3
-  waverespawn: 0100000002000000
-  y_pos: 10
-  x_pos: 10
-  x_bosspos: 20
-  y_bosspos: 0
+  - 3
+  - 3
+  - 3
+  - 3
+  waverespawn: 010000000200000002000000020000000200000002000000
+  pos: {x: 20, y: 20}
+  bosspos: {x: 20, y: 0}
   wave: 1
