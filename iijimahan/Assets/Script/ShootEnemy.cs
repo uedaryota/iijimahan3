@@ -37,30 +37,40 @@ public class ShootEnemy : MonoBehaviour
     }
     void Attack()
     {
-        if (this.gameObject.tag == "Friend")
+        Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
+
+        if (screenPos.x < Screen.width && screenPos.x > 0)
         {
-            shotInterval -= Time.deltaTime;
-            if (shotInterval <= 0)
+            if (screenPos.y < Screen.height & screenPos.y > 0)
             {
-                GameObject bullet = Instantiate(Resources.Load<GameObject>("FriendBullet"));
-                shotInterval = shotIntervalStart;
-                bullet.GetComponent<FriendBullet>().SetVelocity(Vector3.Normalize(target.transform.position - transform.position));
-                bullet.transform.position = transform.position;
-                bullet.GetComponent<FriendBullet>().SetParent(this.gameObject);
+                if (this.gameObject.tag == "Friend")
+                {
+                    shotInterval -= Time.deltaTime;
+                    if (shotInterval <= 0)
+                    {
+                        GameObject bullet = Instantiate(Resources.Load<GameObject>("FriendBullet"));
+                        shotInterval = shotIntervalStart;
+                        bullet.GetComponent<FriendBullet>().SetVelocity(Vector3.Normalize(target.transform.position - transform.position));
+                        bullet.transform.position = transform.position;
+                        bullet.GetComponent<FriendBullet>().SetParent(this.gameObject);
+                    }
+                }
+                else if (this.gameObject.tag == "Enemy")
+                {
+                    shotInterval -= Time.deltaTime;
+                    if (shotInterval <= 0)
+                    {
+                        GameObject bullet = Instantiate(Resources.Load<GameObject>("EnemyBullet"));
+                        shotInterval = shotIntervalStart;
+                        bullet.GetComponent<EnemyBullet>().SetVelocity(Vector3.Normalize(target.transform.position - transform.position));
+                        bullet.transform.position = transform.position;
+                        bullet.GetComponent<EnemyBullet>().SetParent(this.gameObject);
+                    }
+                }
             }
         }
-        else if (this.gameObject.tag == "Enemy") 
-        {
-            shotInterval -= Time.deltaTime;
-            if (shotInterval <= 0)
-            {
-                GameObject bullet = Instantiate(Resources.Load<GameObject>("EnemyBullet"));
-                shotInterval = shotIntervalStart;
-                bullet.GetComponent<EnemyBullet>().SetVelocity(Vector3.Normalize(target.transform.position - transform.position));
-                bullet.transform.position = transform.position;
-                bullet.GetComponent<EnemyBullet>().SetParent(this.gameObject);
-            }
-        }
+
+      
     }
     void CheakDead()
     {
@@ -90,52 +100,62 @@ public class ShootEnemy : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (this.gameObject.tag == "Enemy")
+        Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
+
+        if (screenPos.x < Screen.width && screenPos.x > 0)
         {
-            if (other.gameObject.tag == "Player")
-            {
-                deadFlag = true;
-            }
-
-            if (other.gameObject.tag == "PlayerBullet")
-            {
-                GameObject effect = Instantiate(Resources.Load<GameObject>("Mebius"));
-                effect.transform.position = transform.position;
-                this.gameObject.tag = "Friend";
-
-            }
-            if (other.gameObject.tag == "FriendBullet")
-            {
-                BulletDamage(other.gameObject);
-            }
-            if (other.gameObject.tag == "Friend")
-            {
-                if (other.GetComponent<ShootEnemy>() != null)
+            if (screenPos.y < Screen.height & screenPos.y > 0)
+            { 
+                if (this.gameObject.tag == "Enemy")
                 {
-                    Damage(other.GetComponent<ShootEnemy>().hp);
+                    if (other.gameObject.tag == "Player")
+                    {
+                        deadFlag = true;
+                    }
+
+                    if (other.gameObject.tag == "PlayerBullet")
+                    {
+                        GameObject effect = Instantiate(Resources.Load<GameObject>("Mebius"));
+                        effect.transform.position = transform.position;
+                        this.gameObject.tag = "Friend";
+
+                    }
+                    if (other.gameObject.tag == "FriendBullet")
+                    {
+                        BulletDamage(other.gameObject);
+                    }
+                    if (other.gameObject.tag == "Friend")
+                    {
+                        if (other.GetComponent<ShootEnemy>() != null)
+                        {
+                            Damage(other.GetComponent<ShootEnemy>().hp);
+                        }
+                        else if (other.GetComponent<Enemy>() != null)
+                        {
+                            Damage(other.GetComponent<Enemy>().hp);
+                        }
+                    }
+
+                    return;
                 }
-                else if (other.GetComponent<Enemy>() != null)
+                if (this.gameObject.tag == "Friend")
                 {
-                    Damage(other.GetComponent<Enemy>().hp);
+                    if (other.gameObject.tag == "Enemy")
+                    {
+                        deadFlag = true;
+                    }
+
+                    if (other.gameObject.tag == "EnemyBullet")
+                    {
+                        BulletDamage(other.gameObject);
+                    }
+                    return;
                 }
-            }
 
-            return;
-        }
-        if (this.gameObject.tag == "Friend")
-        {
-            if (other.gameObject.tag == "Enemy")
-            {
-                deadFlag = true;
             }
-
-            if (other.gameObject.tag == "EnemyBullet")
-            {
-                BulletDamage(other.gameObject);
-            }
-            return;
         }
 
+      
     }
 
     private void CheckTarget()

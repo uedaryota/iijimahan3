@@ -119,49 +119,59 @@ public class Enemy : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if (this.gameObject.tag == "Enemy")
+        Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
+
+        if (screenPos.x < Screen.width &&screenPos.x > 0)
         {
-            if (other.gameObject.tag == "Player")
+            if (screenPos.y < Screen.height & screenPos.y > 0)
             {
-                deadFlag = true;
-            }
 
-            if (other.gameObject.tag == "PlayerBullet")
-            {
-                this.gameObject.tag = "Friend";
-                GameObject effect = Instantiate(Resources.Load<GameObject>("Mebius"));
-                effect.transform.position = transform.position;
-            }
-            if (other.gameObject.tag == "FriendBullet")
-            {
-                BulletDamage(other.gameObject);
-            }
-            if (other.gameObject.tag == "Friend")
-            {
-                if (other.GetComponent<ShootEnemy>() != null)
+                if (this.gameObject.tag == "Enemy")
                 {
-                    Damage(other.GetComponent<ShootEnemy>().hp);
+                    if (other.gameObject.tag == "Player")
+                    {
+                        deadFlag = true;
+                    }
+
+                    if (other.gameObject.tag == "PlayerBullet")
+                    {
+                        this.gameObject.tag = "Friend";
+                        GameObject effect = Instantiate(Resources.Load<GameObject>("Mebius"));
+                        effect.transform.position = transform.position;
+                    }
+                    if (other.gameObject.tag == "FriendBullet")
+                    {
+                        BulletDamage(other.gameObject);
+                    }
+                    if (other.gameObject.tag == "Friend")
+                    {
+                        if (other.GetComponent<ShootEnemy>() != null)
+                        {
+                            Damage(other.GetComponent<ShootEnemy>().hp);
+                        }
+                        else if (other.GetComponent<Enemy>() != null)
+                        {
+                            Damage(other.GetComponent<Enemy>().hp);
+                        }
+                    }
+
+                    return;
                 }
-                else if (other.GetComponent<Enemy>() != null)
+                if (this.gameObject.tag == "Friend")
                 {
-                    Damage(other.GetComponent<Enemy>().hp);
+                    if (other.gameObject.tag == "Enemy")
+                    {
+                        deadFlag = true;
+                    }
+
+                    if (other.gameObject.tag == "EnemyBullet")
+                    {
+                        BulletDamage(other.gameObject);
+                    }
+                    return;
                 }
-            }
 
-            return;
-        }
-        if (this.gameObject.tag == "Friend")
-        {
-            if (other.gameObject.tag == "Enemy")
-            {
-                deadFlag = true;
             }
-
-            if (other.gameObject.tag == "EnemyBullet")
-            {
-                BulletDamage(other.gameObject);
-            }
-            return;
         }
 
     }
