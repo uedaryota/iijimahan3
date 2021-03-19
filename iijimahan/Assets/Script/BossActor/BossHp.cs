@@ -8,6 +8,8 @@ public class BossHp : MonoBehaviour
     #region//インスペクターで設定する
     [Header("ボス最大体力")] public float MaxHp;
     [Header("無敵時間")] public float Superarmor;
+    [Header("ボス点滅インターバル")] public float interval=0.1f;
+    [Header("ボスモデル")] public Material bossmodel;
     public enum　Status
     {
         Normal, Damege,
@@ -20,6 +22,7 @@ public class BossHp : MonoBehaviour
     float alpha_Sin=255;
     bool SetRev = false;
     Color _color;
+   
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +31,7 @@ public class BossHp : MonoBehaviour
         Hp = MaxHp;
         damege = 1;
         alpha_Sin = 255;
-        _color = this.gameObject.GetComponent<Renderer>().material.color;
+        bossmodel.color = Color.green;
         SetRev = false;
     }
 
@@ -43,24 +46,9 @@ public class BossHp : MonoBehaviour
         }
         if(status==Status.Damege)
         {
-            if (!SetRev)
-            {
-                alpha_Sin--;
-                if(alpha_Sin<1)
-                {
-                    SetRev = true;
-                }
-            }
-            else
-            {
-                alpha_Sin++;
-                if(alpha_Sin>254)
-                {
-                    SetRev = false;
-                }
-            }
-            Invoke("ArmorOff",Superarmor);
+            Blink();
             Col();
+            Invoke("ArmorOff",Superarmor);
         }
     }
 
@@ -79,12 +67,21 @@ public class BossHp : MonoBehaviour
     }
     public void ArmorOff()
     {
-        this.gameObject.GetComponent<Renderer>().material.color = _color;
+        bossmodel.color=Color.green;
         status = Status.Normal;
     }
    public void Col()
    { 
         //_color.a = alpha_Sin;
-        this.gameObject.GetComponent<Renderer>().material.color = Color.black;//_color;     
+        bossmodel.color = Color.black;//_color;     
    }
+    IEnumerator Blink()
+    {
+        while (true)
+        {
+            var renderComponent = GetComponent<MeshRenderer>();
+            renderComponent.enabled = !renderComponent.enabled;
+            yield return new WaitForSeconds(interval);
+        }
+    }
 }
