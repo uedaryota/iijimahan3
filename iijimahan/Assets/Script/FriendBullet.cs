@@ -42,7 +42,10 @@ public class FriendBullet : MonoBehaviour
         {
             deadFlag = true;
         }
-
+        if (other.gameObject.tag == "Boss")
+        {
+            deadFlag = true;
+        }
     }
 
     void Move()
