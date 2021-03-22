@@ -12,6 +12,8 @@ public class PlayerControl : MonoBehaviour
     public GameObject bullet;
     [SerializeField, Header("プレイヤーのゲージ技の弾")]
     public GameObject gaugebullet;
+    [SerializeField, Header("強化のゲージ技の弾")]
+    public GameObject kyoukabullet;
     [SerializeField, Header("プレイヤーのモデル")]
     public GameObject model;
     //[SerializeField, Header("点滅周期")]
@@ -157,7 +159,14 @@ public class PlayerControl : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Q) && gauge >= 40)
             {
                 Debug.Log("味方を強化する技");
-                //gauge = gauge - 40;
+                gauge = gauge - 40;
+
+                GameObject gmobj = Instantiate(kyoukabullet) as GameObject;
+                gmobj.GetComponent<PlayerGaugeBulletControl>().SetPosition(this.transform.position);
+                gmobj.GetComponent<PlayerGaugeBulletControl>().SetGaugeFlag(true);
+                playerEnergyGauge.SetGauge(40f);
+                gaugeCount++;
+
                 //音
                 audioSource.PlayOneShot(playerGaugeShootKyoukaSE);
             }
