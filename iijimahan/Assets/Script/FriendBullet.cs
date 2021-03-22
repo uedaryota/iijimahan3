@@ -10,6 +10,7 @@ public class FriendBullet : MonoBehaviour
     public int speed;
     private bool deadFlag = false;
     private GameObject parent;
+  
     enum State
     {
         Flont, Back
@@ -21,6 +22,7 @@ public class FriendBullet : MonoBehaviour
         life = 5;
         state = State.Flont;
         deadFlag = false;
+      
         //shotInterval = 30;
     }
 
@@ -33,6 +35,7 @@ public class FriendBullet : MonoBehaviour
         Move();
         if (deadFlag)
         {
+          
             Destroy(this.gameObject);
         }
     }
@@ -40,10 +43,15 @@ public class FriendBullet : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
+            GameObject burst = Instantiate(Resources.Load<GameObject>("Burst"));
+            burst.transform.position = transform.position;
+            burst.GetComponent<EffectScript>().HitSE();
             deadFlag = true;
         }
         if (other.gameObject.tag == "Boss")
         {
+            GameObject burst = Instantiate(Resources.Load<GameObject>("Burst"));
+            burst.GetComponent<EffectScript>().HitSE();
             deadFlag = true;
         }
     }

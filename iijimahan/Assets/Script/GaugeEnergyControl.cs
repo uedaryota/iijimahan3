@@ -53,7 +53,6 @@ public class GaugeEnergyControl : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            Debug.Log("playerに当たった");
             Destroy(this.gameObject);
         }       
     }

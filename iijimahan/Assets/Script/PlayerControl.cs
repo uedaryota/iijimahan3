@@ -14,11 +14,25 @@ public class PlayerControl : MonoBehaviour
     public GameObject gaugebullet;
     [SerializeField, Header("プレイヤーのモデル")]
     public GameObject model;
-    [SerializeField, Header("点滅周期")]
-    public float tenmetuInterval = 1.0f;
+    //[SerializeField, Header("点滅周期")]
+    //public float tenmetuInterval = 1.0f;
     [SerializeField, Header("エネルギーたまる量")]
     public int upenergy = 10;
+    [SerializeField, Header("テストSE")]
+    public AudioClip testAudio;
+    [SerializeField, Header("プレイヤー弾撃つSE")]
+    public AudioClip playerBulletSE;
+    [SerializeField, Header("被弾SE")]
+    public AudioClip dameageSE;
+    [SerializeField, Header("プレイヤー弾ゲージショット反転SE")]
+    public AudioClip playerGaugeShootHantenSE;
+    [SerializeField, Header("プレイヤー弾ゲージショット強化SE")]
+    public AudioClip playerGaugeShootKyoukaSE;
+    [SerializeField, Header("エネルギー回収SE")]
+    public AudioClip playerEnergyUpSE;
 
+
+    private AudioSource audioSource;
 
     private PlayerHpGauge playerHpGauge;
 
@@ -29,7 +43,7 @@ public class PlayerControl : MonoBehaviour
     private Vector3 velocity;  
     private int gauge = 0;
 
-    private int timer = 0;//計測用
+    //private int timer = 0;//計測用
 
     private bool mutekiFlag = false;
     private bool tenmetuFlag = false;
@@ -74,6 +88,8 @@ public class PlayerControl : MonoBehaviour
         //cl = 255 - cr.r;
         transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, 180);
         gaugeCount = 0;
+
+        audioSource = GetComponent<AudioSource>();
     }
     // Update is called once per frame
     void Update()
@@ -121,7 +137,8 @@ public class PlayerControl : MonoBehaviour
                 Vector3 vel = screen_point - screen_playerPos;
                 vel.z = 0;
                 bullets.GetComponent<BulletControl>().SetTransform(vel, this.transform.position);
-                Debug.Log("撃つ");
+                //音
+                audioSource.PlayOneShot(playerBulletSE);
 
             }
             if (Input.GetKeyDown(KeyCode.E) && gauge >= 40)
@@ -134,11 +151,15 @@ public class PlayerControl : MonoBehaviour
                 gmobj.GetComponent<PlayerGaugeBulletControl>().SetGaugeFlag(true);
                 playerEnergyGauge.SetGauge(40f);
                 gaugeCount++;
+                //音
+                audioSource.PlayOneShot(playerGaugeShootHantenSE);
             }
             if (Input.GetKeyDown(KeyCode.Q) && gauge >= 40)
             {
                 Debug.Log("味方を強化する技");
                 //gauge = gauge - 40;
+                //音
+                audioSource.PlayOneShot(playerGaugeShootKyoukaSE);
             }
         }
         else//パッド操作
@@ -151,6 +172,8 @@ public class PlayerControl : MonoBehaviour
                 // 弾丸の複製
                 GameObject bullets = Instantiate(bullet) as GameObject;     
                 bullets.GetComponent<BulletControl>().SetTransform(poolvelocity, this.transform.position);
+                //音
+                audioSource.PlayOneShot(playerBulletSE);
             }
             if(Input.GetKeyDown("joystick button 1") && gauge >= 40)
             {
@@ -161,6 +184,8 @@ public class PlayerControl : MonoBehaviour
                 gmobj.GetComponent<PlayerGaugeBulletControl>().SetGaugeFlag(true);
                 playerEnergyGauge.SetGauge(40f);
                 gaugeCount++;
+                //音
+                audioSource.PlayOneShot(playerGaugeShootHantenSE);
             }
 
             padRvelocity2 = padRvelocity;
@@ -270,6 +295,8 @@ public class PlayerControl : MonoBehaviour
             gauge += upenergy;
             //GaugeUI.GetComponent<PlayerEnergyGauge>().UpGauge(20f);
             playerEnergyGauge.UpGauge((float)upenergy);
+            //音
+            audioSource.PlayOneShot(playerEnergyUpSE);
 
         }
 
@@ -281,21 +308,24 @@ public class PlayerControl : MonoBehaviour
             HP -= (int)damage;
             playerHpGauge.Damage(damage);
             MutekiFlagActive();
-            //Debug.Log("エネミーと当たった");
+            //音
+            audioSource.PlayOneShot(dameageSE);
         }
         if (other.gameObject.tag == "EnemyBullet")
         {
             HP -= (int)damage;
             playerHpGauge.Damage(damage);
             MutekiFlagActive();
-            //Debug.Log("エネミーの弾と当たった");
+            //音
+            audioSource.PlayOneShot(dameageSE);
         }
         if (other.gameObject.tag == "Boss")
         {
             HP -= (int)damage;
             playerHpGauge.Damage(damage);
             MutekiFlagActive();
-            //Debug.Log("エネミーの弾と当たった");
+            //音
+            audioSource.PlayOneShot(dameageSE);
         }
         
     }
