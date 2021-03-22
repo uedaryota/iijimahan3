@@ -23,7 +23,7 @@ public class GameSceneManager : MonoBehaviour
         timer = 0;
         ClearTime = 0;
         audioSource = GetComponent<AudioSource>();
-        audioSource.PlayOneShot(BGM);
+        audioSource.Play();
     }
 
     // Update is called once per frame
