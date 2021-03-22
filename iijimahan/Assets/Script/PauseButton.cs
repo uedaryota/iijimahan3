@@ -5,8 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class PauseButton : MonoBehaviour
 {
+    [SerializeField, Header("ポーズ画面を選択した時の音")]public AudioClip SelectSE;
+    AudioSource audioSource;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
     public void OnClickStartButton()
     {
+        audioSource.PlayOneShot(SelectSE);
         if (transform.name == "TitleButton")
         {
             SceneManager.LoadScene("TitleScene");

@@ -6,17 +6,19 @@ using UnityEngine.SceneManagement;
 public class TitleSceneManager : MonoBehaviour
 {
     public AudioClip BGM;
+    [SerializeField, Header("ボタンを押したときの音")] public AudioClip SelectSE;
     AudioSource audioSource;
 
     void Start()
     {
-        audioSource.PlayOneShot(BGM);
+        audioSource.Play();
     }
 
     void Update()
     {
         if(Input.GetMouseButton(0) || Input.GetKeyDown(KeyCode.Joystick1Button0))
         {
+            audioSource.PlayOneShot(SelectSE);
             SceneManager.LoadScene("GameScene");
         }
         
