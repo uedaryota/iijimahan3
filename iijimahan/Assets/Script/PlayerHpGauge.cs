@@ -11,7 +11,7 @@ public class PlayerHpGauge : MonoBehaviour
     public Image RedGauge;
     float greenDamage = 0;
     float redDamage = 0;
-    int poolDamage = 0;
+    //int poolDamage = 0;
 
     void Start()
     {
