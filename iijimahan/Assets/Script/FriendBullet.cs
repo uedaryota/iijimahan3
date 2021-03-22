@@ -51,6 +51,7 @@ public class FriendBullet : MonoBehaviour
         if (other.gameObject.tag == "Boss")
         {
             GameObject burst = Instantiate(Resources.Load<GameObject>("Burst"));
+            burst.transform.position = transform.position;
             burst.GetComponent<EffectScript>().HitSE();
             deadFlag = true;
         }
