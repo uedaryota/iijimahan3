@@ -11,6 +11,8 @@ public class GameSceneManager : MonoBehaviour
     private PlayerControl playerscript;
     private float timer = 0;
     private static float ClearTime = 0;
+    public AudioClip BGM;
+    AudioSource audioSource;
 
     void Start()
     {
@@ -20,6 +22,8 @@ public class GameSceneManager : MonoBehaviour
         playerscript = player.GetComponent<PlayerControl>();
         timer = 0;
         ClearTime = 0;
+        audioSource = GetComponent<AudioSource>();
+        audioSource.PlayOneShot(BGM);
     }
 
     // Update is called once per frame

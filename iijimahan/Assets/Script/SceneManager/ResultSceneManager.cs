@@ -11,7 +11,9 @@ public class ResultSceneManager : MonoBehaviour
     private int gauge;
     private float time;
     private float interval;
-    
+    public AudioClip BGM;
+    AudioSource audioSource;
+
     void Start()
     {
         interval = 0;
@@ -19,6 +21,7 @@ public class ResultSceneManager : MonoBehaviour
         time = GameSceneManager.GetClearTime();
         Text text = text_obj.GetComponent<Text>();
         text.text = "ゲージ使用回数 : " + gauge + "      タイム : " + time;
+        audioSource.PlayOneShot(BGM);
     }
     void Update()
     {
