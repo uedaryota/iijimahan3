@@ -116,7 +116,6 @@ MonoBehaviour:
   gaugebullet: {fileID: 7208866156865108524, guid: 2b0c02b65db9a78498bb8b2e8cd4cb90,
     type: 3}
   model: {fileID: 3837738459303177619}
-  tenmetuInterval: 1
   upenergy: 10
   testAudio: {fileID: 8300000, guid: 77e7fae62c37b754e8c7751b5858d55b, type: 3}
   playerBulletSE: {fileID: 8300000, guid: 52f1a0bc42fa8874fb32b189d7cfcbca, type: 3}
@@ -137,7 +136,7 @@ SphereCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 0.7
+  m_Radius: 0.6
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!82 &9057348208788675810
 AudioSource:
