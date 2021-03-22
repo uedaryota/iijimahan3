@@ -11,7 +11,6 @@ public class PlayerEnergyGauge : MonoBehaviour
     public Image RedGauge;
     float greenGauge = 0;
     float redGauge = 0;
-    int poolDamage = 0;
 
     void Start()
     {
