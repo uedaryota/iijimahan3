@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-enum Acter
-{
-    Start,Attack,
-    End,
-}
-public class BossAttack : MonoBehaviour
+
+public class LaserBoss : MonoBehaviour
 {
     int Cnt = 0;
-    int Cnt2=0;
+    int Cnt2 = 0;
     Acter act;
     [SerializeField, Header("ボス攻撃SE")] public AudioClip BulletSE;
     private AudioSource audioSource;
@@ -29,7 +25,7 @@ public class BossAttack : MonoBehaviour
         switch (act)
         {
             case Acter.Start:
-                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<BossFirstAction>().action==BossFirstAction.MoveAction.End)
+                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<BossFirstAction>().action == BossFirstAction.MoveAction.End)
                 {
                     act = Acter.Attack;
                 }
@@ -37,10 +33,10 @@ public class BossAttack : MonoBehaviour
             case Acter.Attack:
                 if (Cnt == 60)
                 {
-                    for (int x = 0; x < 15; x++)
+                    for (int x = 0; x < 6; x++)
                     {
                         audioSource.PlayOneShot(BulletSE);
-                        GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet2(transform.position, 0);
+                        GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 0);
                     }
                     Cnt = 0;
                     Cnt2++;
