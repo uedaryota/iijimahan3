@@ -136,11 +136,11 @@ public class ShootEnemy : MonoBehaviour
                     {
                         if (other.GetComponent<ShootEnemy>() != null)
                         {
-                            Damage(other.GetComponent<ShootEnemy>().hp);
+                            Damage(other.GetComponent<ShootEnemy>().GetPower());
                         }
                         else if (other.GetComponent<Enemy>() != null)
                         {
-                            Damage(other.GetComponent<Enemy>().hp);
+                            Damage(other.GetComponent<Enemy>().GetPower());
                         }
                     }
 
