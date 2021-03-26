@@ -4,7 +4,11 @@ using System.Collections.Generic;
 using UnityEngine;
 public class ShootEnemy : MonoBehaviour
 {
-    public int hp;
+    public float StartHp = 300;
+    float hp;
+    public float StartPower = 100;
+    float power;
+    int BuffLevel = 0;
     private GameObject target;
     private Vector3 velocity;
     private bool deadFlag = false;
@@ -14,11 +18,15 @@ public class ShootEnemy : MonoBehaviour
     public float shotIntervalStart = 1.5f;
     public float MaxrotateTime = 0.5f;
     float rotateTime = 0;
+
+
     Transform lastTransform;
     // Start is called before the first frame update
     void Start()
     {
         deadFlag = false;
+        hp = StartHp;
+        power = StartPower;
         rotateTime = 0;
         CheckTarget();
         shotInterval = shotIntervalStart;
@@ -248,7 +256,7 @@ public class ShootEnemy : MonoBehaviour
 
 
     }
-    void Damage(int damage)
+    void Damage(float damage)
     {
         this.hp -= damage;
     }
@@ -295,5 +303,29 @@ public class ShootEnemy : MonoBehaviour
         }
          
     }
-  
+    public float GetPower()
+    {
+        return power;
+    }
+    void Buff()
+    {
+        BuffLevel += 1;
+        if (BuffLevel == 1)
+        {
+            hp += StartHp * 1.3f;
+            power += StartPower * 1.5f;
+        }
+        if (BuffLevel == 2)
+        {
+
+            hp += StartHp * 1.3f;
+            power += StartPower * 1.5f;
+        }
+        if (BuffLevel == 3)
+        {
+
+            hp += StartHp * 1.3f;
+            power += StartPower * 1.5f;
+        }
+    }
 }

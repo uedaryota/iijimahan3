@@ -10,6 +10,7 @@ public class BossHp : MonoBehaviour
     [Header("無敵時間")] public float Superarmor;
     [Header("ボス点滅インターバル")] public float interval=0.1f;
     [Header("ボスモデル")] public Material bossmodel;
+    [SerializeField, Header("被弾SE")] public AudioClip dameageSE;
     public enum　Status
     {
         Normal, Damege,
@@ -18,21 +19,24 @@ public class BossHp : MonoBehaviour
 
     public Status status;
     public float Hp;//ボス現在体力
-    float damege = 1;
+    float damege = 5;
     float alpha_Sin=255;
     bool SetRev = false;
     Color _color;
-   
+    private BossHpGauge hpGauge;
+    private AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
     {
         status = Status.Normal;
         Hp = MaxHp;
-        damege = 1;
+        damege = 5;
         alpha_Sin = 255;
         bossmodel.color = Color.green;
         SetRev = false;
+        hpGauge = GameObject.FindObjectOfType<BossHpGauge>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -54,7 +58,8 @@ public class BossHp : MonoBehaviour
 
     void Dead()
     {
-        Destroy(gameObject);
+        GameObject obj = GameObject.FindGameObjectWithTag("BossBox");
+        Destroy(obj);
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -62,6 +67,9 @@ public class BossHp : MonoBehaviour
         {
             //damege = other.gameObject.GetComponent<>();
             Hp = Hp - damege;
+            hpGauge.Damage(damege);
+            //音
+            audioSource.PlayOneShot(dameageSE);
             status = Status.Damege;
         }
     }
