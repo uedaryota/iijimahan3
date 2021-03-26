@@ -31,8 +31,8 @@ public class ResultSceneManager : MonoBehaviour
         {
             if (Input.GetMouseButton(0) || Input.GetKeyDown(KeyCode.Joystick1Button0))
             {
-                audioSource.PlayOneShot(SelectSE);
                 SceneManager.LoadScene("TitleScene");
+                audioSource.PlayOneShot(SelectSE);
             }
         }
 

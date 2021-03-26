@@ -112,6 +112,7 @@ MonoBehaviour:
   enemyboxes:
   - {fileID: 7265182206125767360, guid: b060fbfc14d1df54d8cc47ff2c64876b, type: 3}
   - {fileID: 8670145571796672101, guid: 590429abf11bc1c409e9d8a800dd9aa3, type: 3}
+  - {fileID: 2924209551728552548, guid: bb2a132d24422f742a8f7f6571cc9b0f, type: 3}
   bossboxes:
   - {fileID: 4124705426971988586, guid: 4432ac9641e89e243a64a3ca6f862150, type: 3}
   - {fileID: 4124705426971988586, guid: 4432ac9641e89e243a64a3ca6f862150, type: 3}
