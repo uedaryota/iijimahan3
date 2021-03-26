@@ -9,15 +9,31 @@ public class BossLaser : MonoBehaviour
     [Header("弾角度")] public float Angle;
     [Header("継続攻撃時間")] public float LimitTime = 700;
     float Cnt = 0;
-    Vector3 pos = GameObject.FindGameObjectWithTag("Player").transform.position;
     float x, y;
     private bool deadFlag = false;
+    private float Hutosa;
+    private LineRenderer line;
+    Vector3[] positions;
+    Vector3 startpos;
+    Vector3 goalpos;
+    Vector3 Pulus;
+    Vector3 Mainus;
     #endregion
     // Start is called before the first frame update
     void Start()
     {
         Cnt = 0;
         deadFlag = false;
+        Hutosa=0.1f;
+        Pulus = new Vector3(20, 20, 0);
+        Mainus = new Vector3(20, -20, 0);
+        line = gameObject.AddComponent<LineRenderer>();
+        startpos= GameObject.FindGameObjectWithTag("Boss").transform.position;
+        goalpos = new Vector3(Random.Range(-35,+35), Random.Range(-100, +100), 0);
+        positions = new Vector3[]{
+        startpos,               // 開始点
+        new Vector3(20, 0, 0),               // 終了点
+    };
     }
 
     // Update is called once per frame
@@ -25,11 +41,30 @@ public class BossLaser : MonoBehaviour
     {
         //ポーズの時に止める
         if (Time.timeScale <= 0) return;
+
         Cnt++;
-        if(Cnt>Speed)
+            //startpos = GameObject.FindGameObjectWithTag("Boss").transform.position;
+            positions = new Vector3[]{
+        startpos,               // 開始点
+        goalpos,               // 終了点
+    };
+        line.material = new Material(Shader.Find("Sprites/Default"));
+        line.startColor = Color.red;
+        line.endColor = Color.red;
+
+        if (Cnt/30.0f>Speed)
         {
+            Hutosa = 1.0f;
             this.tag = "EnemyBullet";
+        } 
+        if(Cnt/30.0f>Speed*2)
+        {
+            Destroy(gameObject);
         }
+        line.startWidth = Hutosa;                   // 開始点の太さを0.1にする
+        line.endWidth = Hutosa;                     // 終了点の太さを0.1にする
+  
+            line.SetPositions(positions);
 
     }
 }
