@@ -18,8 +18,8 @@ public class TitleSceneManager : MonoBehaviour
     {
         if(Input.GetMouseButton(0) || Input.GetKeyDown(KeyCode.Joystick1Button0))
         {
-            audioSource.PlayOneShot(SelectSE);
             SceneManager.LoadScene("GameScene");
+            audioSource.PlayOneShot(SelectSE);
         }
         
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown("joystick button 1"))

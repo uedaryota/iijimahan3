@@ -11,7 +11,8 @@ TagManager:
   - Boss
   - Friend
   - FriendBullet
-  - BossBox
+  - KyoukaBullet
+  - Rock
   layers:
   - Default
   - TransparentFX

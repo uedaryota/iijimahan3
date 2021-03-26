@@ -14,7 +14,6 @@ public class PauseButton : MonoBehaviour
     }
     public void OnClickStartButton()
     {
-        audioSource.PlayOneShot(SelectSE);
         if (transform.name == "TitleButton")
         {
             SceneManager.LoadScene("TitleScene");
@@ -27,6 +26,7 @@ public class PauseButton : MonoBehaviour
         {
             Quit();
         }
+        audioSource.PlayOneShot(SelectSE);
         Time.timeScale = 1f;
     }
     void Quit()

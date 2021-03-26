@@ -10,8 +10,6 @@ public class ButtonSelect : MonoBehaviour
     [SerializeField, Header("ポーズ画面を開いた時の音")]public AudioClip pauseSE;
     [SerializeField, Header("ポーズ画面の項目を移動する時の音")] public AudioClip selectSE;
     AudioSource audioSource;
-    //Button button;
-    //Button button2;
     int indexnum;
     float timer;
 

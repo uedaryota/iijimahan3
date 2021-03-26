@@ -43,7 +43,7 @@ public class BulletControl : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             Destroy(this.gameObject);
-            Debug.Log("エネミーと当たった");
+            //Debug.Log("エネミーと当たった");
         }
         //if (other.gameObject.tag == "EnemyBullet")
         //{
