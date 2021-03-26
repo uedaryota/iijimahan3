@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public int hp;
+
+    public float StartHp = 300;
+    float hp;
+    public float StartPower = 100;
+    float power;
+    int BuffLevel = 0;
     private GameObject target;
 
     private Vector3 velocity;
@@ -147,11 +152,11 @@ public class Enemy : MonoBehaviour
                     {
                         if (other.GetComponent<ShootEnemy>() != null)
                         {
-                            Damage(other.GetComponent<ShootEnemy>().hp);
+                            Damage(other.GetComponent<ShootEnemy>().GetPower());
                         }
                         else if (other.GetComponent<Enemy>() != null)
                         {
-                            Damage(other.GetComponent<Enemy>().hp);
+                            Damage(other.GetComponent<Enemy>().GetPower());
                         }
                     }
 
@@ -175,7 +180,7 @@ public class Enemy : MonoBehaviour
         }
 
     }
-    void Damage(int damage)
+    void Damage(float damage)
     {
         hp -= damage;
     }
@@ -254,4 +259,30 @@ public class Enemy : MonoBehaviour
         }
 
     }
+    public float GetPower()
+    {
+        return power;
+    }
+    void Buff()
+    {
+        BuffLevel += 1;
+        if (BuffLevel == 1)
+        {
+            hp += StartHp * 1.3f;
+            power += StartPower * 1.5f;
+        }
+        if (BuffLevel == 2)
+        {
+
+            hp += StartHp * 1.3f;
+            power += StartPower * 1.5f;
+        }
+        if (BuffLevel == 3)
+        {
+
+            hp += StartHp * 1.3f;
+            power += StartPower * 1.5f;
+        }
+    }
+
 }
