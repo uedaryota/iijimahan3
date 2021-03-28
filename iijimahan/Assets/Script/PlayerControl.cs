@@ -196,8 +196,21 @@ public class PlayerControl : MonoBehaviour
                 //音
                 audioSource.PlayOneShot(playerGaugeShootHantenSE);
             }
+            if (Input.GetKeyDown("joystick button 0") && gauge >= 40)
+            {
+                Debug.Log("味方を強化する技");
+                gauge = gauge - 40;
 
-            padRvelocity2 = padRvelocity;
+                GameObject gmobj = Instantiate(kyoukabullet) as GameObject;
+                gmobj.GetComponent<PlayerGaugeBulletControl>().SetPosition(this.transform.position);
+                gmobj.GetComponent<PlayerGaugeBulletControl>().SetGaugeFlag(true);
+                playerEnergyGauge.SetGauge(40f);
+                gaugeCount++;
+                //音
+                audioSource.PlayOneShot(playerGaugeShootKyoukaSE);
+            }
+
+            padRvelocity2 = padRvelocity;//velocityを保存
 
         }
 
@@ -253,6 +266,7 @@ public class PlayerControl : MonoBehaviour
         padRvelocity.x = Input.GetAxis("R_Horizontal");
         padRvelocity.y = Input.GetAxis("R_Vertical") * -1;
 
+        //前の向き方変更があったら通る
         if (padRvelocity != padRvelocity2)
         {
             if (padRvelocity.x == 0 && padRvelocity.y == 0)
@@ -260,6 +274,7 @@ public class PlayerControl : MonoBehaviour
             }
             else
             {
+                //プレイヤーの向きを決める
                 poolvelocity = padRvelocity;
                 var h = Input.GetAxis("R_Horizontal");
                 var v = Input.GetAxis("R_Vertical");
@@ -297,16 +312,14 @@ public class PlayerControl : MonoBehaviour
   
     private void OnTriggerEnter(Collider other)
     {
-        if (playerState != PlayerState.Alive ) return;
+        if (playerState != PlayerState.Alive ) return;//生きてなかったら以下処理しない
 
         if (other.gameObject.tag == "GaugeEnergy")
         {
             gauge += upenergy;
-            //GaugeUI.GetComponent<PlayerEnergyGauge>().UpGauge(20f);
             playerEnergyGauge.UpGauge((float)upenergy);
             //音
             audioSource.PlayOneShot(playerEnergyUpSE);
-
         }
 
         if (mutekiFlag) return;//無敵なら以下処理しない
@@ -376,6 +389,7 @@ public class PlayerControl : MonoBehaviour
 
     IEnumerator WaitSpriteAlpha()
     {
+        //点滅処理
         if (tenmetuFlag)
         {
             yield break;
