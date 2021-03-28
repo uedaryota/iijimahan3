@@ -12,6 +12,7 @@ TagManager:
   - Friend
   - FriendBullet
   - KyoukaBullet
+  - Rock
   layers:
   - Default
   - TransparentFX
