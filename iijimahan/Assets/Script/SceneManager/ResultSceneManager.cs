@@ -22,6 +22,7 @@ public class ResultSceneManager : MonoBehaviour
         time = GameSceneManager.GetClearTime();
         Text text = text_obj.GetComponent<Text>();
         text.text = "ゲージ使用回数 : " + gauge + "      タイム : " + time;
+        audioSource = GetComponent<AudioSource>();
         audioSource.Play();
     }
     void Update()
