@@ -18,7 +18,8 @@ public class ShootEnemy : MonoBehaviour
     public float shotIntervalStart = 1.5f;
     public float MaxrotateTime = 0.5f;
     float rotateTime = 0;
-
+    // public GameObject buffEffect;
+    GameObject buffInstance;
 
     Transform lastTransform;
     // Start is called before the first frame update
@@ -110,6 +111,13 @@ public class ShootEnemy : MonoBehaviour
     {
         Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
 
+        if (other.gameObject.tag == "KyoukaBullet")
+        {
+            if (this.gameObject.tag == "Friend")
+            {
+                Buff();
+            }
+        }
         if (screenPos.x < Screen.width && screenPos.x > 0)
         {
             if (screenPos.y < Screen.height & screenPos.y > 0)
@@ -123,6 +131,7 @@ public class ShootEnemy : MonoBehaviour
 
                     if (other.gameObject.tag == "PlayerBullet")
                     {
+                       // Buff();
                         GameObject effect = Instantiate(Resources.Load<GameObject>("Mebius"));
                         effect.transform.position = transform.position;
                         this.gameObject.tag = "Friend";
@@ -312,6 +321,11 @@ public class ShootEnemy : MonoBehaviour
     void Buff()
     {
         BuffLevel += 1;
+        if (buffInstance == null)
+        {
+            buffInstance = Instantiate(Resources.Load<GameObject>("BuffParticle"));
+            buffInstance.GetComponent<BuffEffectScript>().SetParent(gameObject);
+        }
         if (BuffLevel == 1)
         {
             hp += StartHp * 1.3f;
@@ -329,5 +343,9 @@ public class ShootEnemy : MonoBehaviour
             hp += StartHp * 1.3f;
             power += StartPower * 1.5f;
         }
+    }
+   public float GetBuffLevel()
+    {
+        return BuffLevel;
     }
 }

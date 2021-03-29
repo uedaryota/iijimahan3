@@ -43,14 +43,17 @@ public class BulletControl : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             Destroy(this.gameObject);
-            //Debug.Log("エネミーと当たった");
+        }
+        if (other.gameObject.tag == "Rock")
+        {
+            Destroy(this.gameObject);
         }
         //if (other.gameObject.tag == "EnemyBullet")
         //{
         //    Destroy(this.gameObject);
         //    Debug.Log("エネミーの弾と当たった");
         //}
-        
+
     }
 
     public void SetVelocity(Vector3 vec3)

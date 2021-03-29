@@ -108,11 +108,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87668f7f565b5b64296ba746b3fa802f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 3
-  moveTime: 120
-  chargeTime: 120
+  StartHp: 300
+  StartPower: 100
+  speed: 5
   energy: {fileID: 956122239005918985, guid: 290abd1f2d9b09b40baa65fbdb4e09a3, type: 3}
-  MaxrotateTime: 60
 --- !u!54 &7265182206125767366
 Rigidbody:
   m_ObjectHideFlags: 0

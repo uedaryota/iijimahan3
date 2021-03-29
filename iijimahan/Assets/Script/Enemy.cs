@@ -9,7 +9,7 @@ public class Enemy : MonoBehaviour
     float hp;
     public float StartPower = 100;
     float power;
-    int BuffLevel = 0;
+    float BuffLevel = 0;
     private GameObject target;
 
     private Vector3 velocity;
@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
     float MaxrotateTime = 0.5f;
     float rotateTime = 0;
     Transform lastTransform;
+    GameObject buffInstance;
     // Start is called before the first frame update
     void Start()
     {
@@ -128,6 +129,13 @@ public class Enemy : MonoBehaviour
     {
         Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
 
+        if (other.gameObject.tag == "KyoukaBullet")
+        {
+            if (this.gameObject.tag == "Friend")
+            {
+                Buff();
+            }
+        }
         if (screenPos.x < Screen.width &&screenPos.x > 0)
         {
             if (screenPos.y < Screen.height & screenPos.y > 0)
@@ -142,6 +150,7 @@ public class Enemy : MonoBehaviour
 
                     if (other.gameObject.tag == "PlayerBullet")
                     {
+                      //  Buff();
                         this.gameObject.tag = "Friend";
                         GameObject effect = Instantiate(Resources.Load<GameObject>("Mebius"));
                         effect.transform.position = transform.position;
@@ -167,6 +176,11 @@ public class Enemy : MonoBehaviour
                 if (this.gameObject.tag == "Friend")
                 {
                     if (other.gameObject.tag == "Enemy")
+                    {
+                        deadFlag = true;
+                    }
+
+                    if (other.gameObject.tag == "Boss")
                     {
                         deadFlag = true;
                     }
@@ -270,6 +284,11 @@ public class Enemy : MonoBehaviour
     void Buff()
     {
         BuffLevel += 1;
+        if (buffInstance == null)
+        {
+            buffInstance = Instantiate(Resources.Load<GameObject>("BuffParticle"));
+            buffInstance.GetComponent<BuffEffectScript>().SetParent(gameObject);
+        }
         if (BuffLevel == 1)
         {
             hp += StartHp * 1.3f;
@@ -288,5 +307,8 @@ public class Enemy : MonoBehaviour
             power += StartPower * 1.5f;
         }
     }
-
+   public float GetBuffLevel()
+    {
+        return BuffLevel;
+    }
 }
