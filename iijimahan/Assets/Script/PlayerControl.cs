@@ -33,6 +33,8 @@ public class PlayerControl : MonoBehaviour
     [SerializeField, Header("エネルギー回収SE")]
     public AudioClip playerEnergyUpSE;
 
+    public Rigidbody rd;
+
 
     private AudioSource audioSource;
 
@@ -58,6 +60,14 @@ public class PlayerControl : MonoBehaviour
     private bool keyboardFlag = true;
 
     private static int gaugeCount = 0;
+
+    private GameObject rock;
+
+    private Vector3 nockbackVel = Vector3.zero;
+
+    private bool nockBackFlag = false;
+    private float nockBackCount = 0;
+    Vector3 rockPos;
 
 
     //private Color cr;
@@ -114,9 +124,15 @@ public class PlayerControl : MonoBehaviour
             playerState = PlayerState.Dead;
         }
 
-        CheckControlDevice();//操作デバイスチェック       
-
-        if(keyboardFlag)//キーボード操作
+        CheckControlDevice();//操作デバイスチェック     
+        
+        if(nockBackFlag)//ノックバック処理
+        {
+            NockBack();
+            Gamenn();
+        }
+        Gamenn();
+        if (keyboardFlag)//キーボード操作
         {
             KeyBoardMove();
             transform.position += velocity * Time.deltaTime;
@@ -217,6 +233,40 @@ public class PlayerControl : MonoBehaviour
        
 
     }
+
+    public void NockBack()
+    {
+        if (nockBackCount > 0.2f)
+        {
+            nockBackFlag = false;
+            nockBackCount = 0;
+        }
+        //if(nockbackVel == Vector3.zero)
+        //{
+        //    UnityEditor.EditorApplication.isPaused = true;
+        //}
+
+        transform.position += nockbackVel * Time.deltaTime * 30f;
+        Vector3 screen_playerPos2 = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
+        if (screen_playerPos2.y > Screen.height - 50)
+        {
+            nockbackVel.y = 0;
+        }
+        if (screen_playerPos2.y < 50)
+        {
+            nockbackVel.y = 0;
+        }
+        if (screen_playerPos2.x > Screen.width - 50)
+        {
+            nockbackVel.x = 0;
+        }
+        if (screen_playerPos2.x < 50)
+        {
+            nockbackVel.x = 0;
+        }
+
+        nockBackCount += 1 * Time.deltaTime;
+    }
     public void CheckControlDevice()
     {
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)
@@ -233,8 +283,14 @@ public class PlayerControl : MonoBehaviour
             keyboardFlag = false;//パッド操作
         }
     }
+
+    public void Gamenn()
+    {
+        
+    }
     public void KeyBoardMove()
     {
+        if (nockBackFlag) return;
         Vector3 screen_playerPos2 = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
 
         if (Input.GetKey(KeyCode.W) && screen_playerPos2.y < Screen.height -50)
@@ -259,6 +315,7 @@ public class PlayerControl : MonoBehaviour
 
     public void PadMove()
     {
+        if (nockBackFlag) return;
         Vector3 screen_playerPos2 = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
 
         padvelocity.x = Input.GetAxis("L_Horizontal");
@@ -309,9 +366,19 @@ public class PlayerControl : MonoBehaviour
         transform.position += padvelocity * padspeed;
     }
 
+    public void RockDamage(float dame)
+    {
+        if (mutekiFlag) return;
+
+        HP -= (int)dame;
+        playerHpGauge.Damage(dame);
+        MutekiFlagActive();
+    }
   
     private void OnTriggerEnter(Collider other)
     {
+        float damage = 5f;
+
         if (playerState != PlayerState.Alive ) return;//生きてなかったら以下処理しない
 
         if (other.gameObject.tag == "GaugeEnergy")
@@ -322,9 +389,32 @@ public class PlayerControl : MonoBehaviour
             audioSource.PlayOneShot(playerEnergyUpSE);
         }
 
+       
+
+       
+
+
+        if (other.gameObject.tag == "Rock")
+        {
+
+
+            RockDamage(damage);
+            //音
+            audioSource.PlayOneShot(dameageSE);
+            //当たったRockを探す
+            SerchObject();
+
+            nockbackVel = (transform.position - other.transform.position).normalized;
+
+            nockBackFlag = true;
+
+
+
+        }
+
         if (mutekiFlag) return;//無敵なら以下処理しない
 
-        float damage = 5f;
+
         if (other.gameObject.tag == "Enemy")
         {
             HP -= (int)damage;
@@ -349,6 +439,7 @@ public class PlayerControl : MonoBehaviour
             //音
             audioSource.PlayOneShot(dameageSE);
         }
+        
         
     }
 
@@ -408,5 +499,29 @@ public class PlayerControl : MonoBehaviour
         yield return new WaitForSeconds(0.15f);
         tenmetuFlag = false;
         mutekiFlag = false;
+    }
+
+    public void  SerchObject()
+    {
+        float distance = 0;
+        float ansDist = 0;
+        
+
+
+     
+        GameObject[] obj = GameObject.FindGameObjectsWithTag("Rock");
+
+        for(int i = 0; i<obj.Length; i++)
+        {
+            distance = Vector3.Distance(obj[i].transform.position, this.transform.position);
+            if (ansDist > distance || distance == 0)
+            {
+                ansDist = distance;
+                rockPos = obj[i].transform.position;
+            }
+        }
+
+  
+       
     }
 }

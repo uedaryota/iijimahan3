@@ -403,10 +403,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Location: 0
-  m_Width: 0.55
+  m_Width: 0.72
   m_Softness: 1
   m_Brightness: 1
-  m_Rotation: 78
+  m_Rotation: 42
   m_Highlight: 1
   m_EffectMaterial: {fileID: 2100000, guid: 2d37c4afca8784ce9ab899810e29aa9c, type: 2}
 --- !u!1 &7453100993744514695
