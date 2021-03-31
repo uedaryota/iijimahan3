@@ -155,7 +155,11 @@ public class EnemyManager : MonoBehaviour
     [SerializeField, Header("wave毎の手入力エネミー")]
     [EnumLabel(typeof(wave_enemy))]
     public WaveEnemy[] enemy_Manual;
-        
+
+    [SerializeField, Header("Wave毎にリピートで無限に生成するか")]
+    [EnumLabel(typeof(wave_enemy))]
+    public bool[] Repeat;
+
 
     [SerializeField, Header("enemyboxオブジェクト")]
     [EnumLabel(typeof(enemy_box))]
@@ -230,6 +234,7 @@ public class EnemyManager : MonoBehaviour
 
             case 2:
                 BossRespawn();
+                EnemyRespawn_Manual();
                 EnemyRespawn(waverespawn[wave / 2 - 1]);
                 return;
 
@@ -239,6 +244,7 @@ public class EnemyManager : MonoBehaviour
 
             case 4:
                 BossRespawn();
+                EnemyRespawn_Manual();
                 EnemyRespawn(waverespawn[wave / 2 - 1]);
                 return;
 
@@ -248,6 +254,7 @@ public class EnemyManager : MonoBehaviour
 
             case 6:
                 BossRespawn();
+                EnemyRespawn_Manual();
                 EnemyRespawn(waverespawn[wave / 2 - 1]);
                 return;
                 
@@ -317,27 +324,54 @@ public class EnemyManager : MonoBehaviour
 
     void EnemyRespawn_Manual()
     {
+        if (enemy_Manual[wave - 1].enemycountlimit_Manual <= 0) return;
         timer_Manual += Time.deltaTime;
-
-        //現在のwaveで生成するエネミーの数に足りているか
-        if (enemy_Manual[wave-1].enemycountlimit_Manual > enemycount)
+        if (Repeat[wave - 1] == true)
         {
-            //一定時間毎に
-            if (timer_Manual >= enemy_Manual[wave - 1].interval_Manual[interval_count])
+            //現在のwaveで生成するエネミーの数に足りているか
+            if (enemy_Manual[wave - 1].enemycountlimit_Manual > enemycount)
             {
-                //座標の割り当て
-                transform.position = enemy_Manual[wave - 1].pos_Manual[enemycount];
-                //エネミーの生成
-                Instantiate(enemy_Manual[wave - 1].enemyboxes_Manual[enemycount], transform.position, Quaternion.identity);
-                //ループ処理用の変数達
-                timer_Manual = 0;
-                interval_count++;
-                enemycount++;
+                //一定時間毎に
+                if (timer_Manual >= enemy_Manual[wave - 1].interval_Manual[interval_count])
+                {
+                    //座標の割り当て
+                    transform.position = enemy_Manual[wave - 1].pos_Manual[enemycount];
+                    //エネミーの生成
+                    Instantiate(enemy_Manual[wave - 1].enemyboxes_Manual[enemycount], transform.position, Quaternion.identity);
+                    //ループ処理用の変数達
+                    timer_Manual = 0;
+                    interval_count++;
+                    enemycount++;
+                }
+            }
+            else
+            {
+                enemycount = 0;
+                interval_count = 0;
             }
         }
         else
         {
-            EnemyCheck("Enemy");
+            //現在のwaveで生成するエネミーの数に足りているか
+            if (enemy_Manual[wave - 1].enemycountlimit_Manual > enemycount)
+            {
+                //一定時間毎に
+                if (timer_Manual >= enemy_Manual[wave - 1].interval_Manual[interval_count])
+                {
+                    //座標の割り当て
+                    transform.position = enemy_Manual[wave - 1].pos_Manual[enemycount];
+                    //エネミーの生成
+                    Instantiate(enemy_Manual[wave - 1].enemyboxes_Manual[enemycount], transform.position, Quaternion.identity);
+                    //ループ処理用の変数達
+                    timer_Manual = 0;
+                    interval_count++;
+                    enemycount++;
+                }
+            }
+            else
+            {
+                EnemyCheck("Enemy");
+            }
         }
     }
 
