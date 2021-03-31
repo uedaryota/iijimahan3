@@ -20,7 +20,35 @@ public class EnemyManager : MonoBehaviour
         Wave9の敵,
         Wave10の敵,
     }
+    
+    private enum wave_enemy2
+    {
+        Wave2の敵,
+        Wave4の敵,
+        Wave6の敵,
+        Wave8の敵,
+        Wave10の敵,
+        Wave12の敵,
+        Wave14の敵,
+        Wave16の敵,
+        Wave18の敵,
+        Wave20の敵,
+    }
 
+    private enum wave_boss
+    {
+        Wave2のボス,
+        Wave4のボス,
+        Wave6のボス,
+        Wave8のボス,
+        Wave10のボス,
+        Wave12のボス,
+        Wave14のボス,
+        Wave16のボス,
+        Wave18のボス,
+        Wave20のボス,
+    }
+    
     private enum enemy_box
     {
         敵1体目,
@@ -129,11 +157,21 @@ public class EnemyManager : MonoBehaviour
     public WaveEnemy[] enemy_Manual;
         
 
-    [SerializeField, Header("enemyboxオブジェクト")] Object[] enemyboxes;
-    [SerializeField, Header("bossオブジェクト")] Object[] bossboxes;
-    [SerializeField, Header("wave毎のenemyの生成上限")] int[] enemycountlimit;
-    [SerializeField, Header("wave毎の生成間隔")] float[] interval;
-    [SerializeField, Header("wave毎の沸き方(1:上下交互, 2:上2回下2回)")] int[] waverespawn;
+    [SerializeField, Header("enemyboxオブジェクト")]
+    [EnumLabel(typeof(enemy_box))]
+    Object[] enemyboxes;
+    [SerializeField, Header("bossオブジェクト")]
+    [EnumLabel(typeof(wave_boss))]
+    Object[] bossboxes;
+    [SerializeField, Header("wave毎のenemyの生成上限")]
+    [EnumLabel(typeof(wave_enemy2))]
+    int[] enemycountlimit;
+    [SerializeField, Header("wave毎の生成間隔")]
+    [EnumLabel(typeof(wave_enemy2))]
+    float[] interval;
+    [SerializeField, Header("wave毎の沸き方(1:上下交互, 2:上2回下2回)")]
+    [EnumLabel(typeof(wave_enemy2))]
+    int[] waverespawn;
     [SerializeField, Header("enemyの生成用の座標")] Vector2 pos = new Vector2(20, 20);
     [SerializeField, Header("bossの生成用の座標")] Vector2 bosspos = new Vector2(20, 0);
 
@@ -192,7 +230,7 @@ public class EnemyManager : MonoBehaviour
 
             case 2:
                 BossRespawn();
-                EnemyRespawn(waverespawn[wave - 1]);
+                EnemyRespawn(waverespawn[wave / 2 - 1]);
                 return;
 
             case 3:
@@ -201,7 +239,7 @@ public class EnemyManager : MonoBehaviour
 
             case 4:
                 BossRespawn();
-                EnemyRespawn(waverespawn[wave - 1]);
+                EnemyRespawn(waverespawn[wave / 2 - 1]);
                 return;
 
             case 5:
@@ -210,7 +248,7 @@ public class EnemyManager : MonoBehaviour
 
             case 6:
                 BossRespawn();
-                EnemyRespawn(waverespawn[wave - 1]);
+                EnemyRespawn(waverespawn[wave / 2 - 1]);
                 return;
                 
             case 7:
@@ -228,10 +266,10 @@ public class EnemyManager : MonoBehaviour
         timer += Time.deltaTime;
         
         //現在のwaveで生成するエネミーの数に足りているか
-        if (enemycountlimit[wave - 1] > enemycount || enemycountlimit[wave - 1]  > 100)
+        if (enemycountlimit[wave / 2 - 1] > enemycount || enemycountlimit[wave / 2 - 1]  > 100)
         {
             //一定時間毎に
-            if (timer >= interval[wave - 1])
+            if (timer >= interval[wave / 2 - 1])
             {
                 timer = 0;
                 enemycount++;
