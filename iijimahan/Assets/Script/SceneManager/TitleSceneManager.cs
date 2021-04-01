@@ -11,6 +11,7 @@ public class TitleSceneManager : MonoBehaviour
 
     void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         audioSource.Play();
     }
 
