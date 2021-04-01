@@ -1,7 +1,9 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class ShootEnemy : MonoBehaviour
 {
     public float StartHp = 300;
@@ -303,9 +305,16 @@ public class ShootEnemy : MonoBehaviour
     }
     void ObjectRotate()
     {
+       
         if (target != null)
         {
-            this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
+            Quaternion a = Quaternion.identity;
+            Vector3 angle3 = target.transform.position - transform.position;
+            float angle = Mathf.Atan2(0, 1);
+            a.eulerAngles= new Vector3(0, angle, 0);
+            transform.rotation = a;
+           // transform.Rotate(0, 0, angle);
+            //   this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
             lastTransform = this.target.transform;
         }
         else
