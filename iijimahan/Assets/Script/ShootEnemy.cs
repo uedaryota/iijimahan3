@@ -20,6 +20,8 @@ public class ShootEnemy : MonoBehaviour
     public float shotIntervalStart = 1.5f;
     public float MaxrotateTime = 0.5f;
     float rotateTime = 0;
+    float rotateX, rotateY;
+    float currentrotateZ, rotateZ;
     // public GameObject buffEffect;
     GameObject buffInstance;
 
@@ -27,6 +29,10 @@ public class ShootEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rotateX = 0;
+        rotateY = 0;
+        currentrotateZ = 180;
+        rotateZ = 0;
         deadFlag = false;
         hp = StartHp;
         power = StartPower;
@@ -136,6 +142,7 @@ public class ShootEnemy : MonoBehaviour
                        // Buff();
                         GameObject effect = Instantiate(Resources.Load<GameObject>("Mebius"));
                         effect.transform.position = transform.position;
+                        Destroy(other.gameObject);
                         this.gameObject.tag = "Friend";
 
                     }
@@ -287,8 +294,10 @@ public class ShootEnemy : MonoBehaviour
             if (rotateTime > MaxrotateTime)
             {
                 rotateTime -= Time.deltaTime;
+
+                rotateX = 180 / MaxrotateTime * rotateTime;
             }
-            this.transform.Rotate(0, 0, 180/ MaxrotateTime * rotateTime);
+          //  this.transform.Rotate(0, 0, 180/ MaxrotateTime * rotateTime);
         }
 
         if (this.gameObject.tag == "Friend")
@@ -296,8 +305,10 @@ public class ShootEnemy : MonoBehaviour
             if (rotateTime < MaxrotateTime)
             {
                 rotateTime += Time.deltaTime;
+                rotateX = -180 / MaxrotateTime * rotateTime;
             }
-            this.transform.Rotate(0, 0, 180 / MaxrotateTime * rotateTime);
+            // this.transform.Rotate(0, 0, 180 / MaxrotateTime * rotateTime);
+
         }
 
 
@@ -305,15 +316,48 @@ public class ShootEnemy : MonoBehaviour
     }
     void ObjectRotate()
     {
-       
+        
         if (target != null)
         {
             Quaternion a = Quaternion.identity;
-            Vector3 angle3 = target.transform.position - transform.position;
-            float angle = Mathf.Atan2(0, 1);
-            a.eulerAngles= new Vector3(0, angle, 0);
+            Vector3 dir = target.transform.position - transform.position;
+            float angle = Mathf.Atan2(dir.y,dir.x);
+            rotateZ = angle / (3.1415f / 180);
+            if (rotateZ < 0)
+            {
+                rotateZ = rotateZ + 360;
+            }
+            if(Mathf.Abs(rotateZ) - Mathf.Abs(currentrotateZ)>300)
+            {
+                rotateZ += 360;
+            }
+            if (Mathf.Abs(rotateZ) - Mathf.Abs(currentrotateZ) > 0) 
+            {
+                if (rotateZ - currentrotateZ  < 0) 
+                {
+                    currentrotateZ -= Time.deltaTime * 60;
+                }
+                else
+                {
+                    currentrotateZ += Time.deltaTime * 60;
+                }
+            }
+            else if(Mathf.Abs(rotateZ) - Mathf.Abs(currentrotateZ) < 0)
+            {
+                if (rotateZ - currentrotateZ < 0)
+                {
+                    currentrotateZ -= Time.deltaTime * 60;
+                }
+                else
+                {
+                    currentrotateZ += Time.deltaTime * 60;
+                }
+            }
+            a.eulerAngles = new Vector3(0, 0, currentrotateZ);
             transform.rotation = a;
-           // transform.Rotate(0, 0, angle);
+
+            transform.Rotate(new Vector3(rotateX, rotateY, 0));
+            // transform.Rotate(0, 0, angle);
             //   this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
             lastTransform = this.target.transform;
         }
