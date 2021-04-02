@@ -20,6 +20,9 @@ public class PlayerControl : MonoBehaviour
     //public float tenmetuInterval = 1.0f;
     [SerializeField, Header("エネルギーたまる量")]
     public int upenergy = 10;
+    [SerializeField, Header("プレイヤーが受けるダメージ")]
+    public float damage = 5f;
+
     [SerializeField, Header("テストSE")]
     public AudioClip testAudio;
     [SerializeField, Header("プレイヤー弾撃つSE")]
@@ -33,8 +36,9 @@ public class PlayerControl : MonoBehaviour
     [SerializeField, Header("エネルギー回収SE")]
     public AudioClip playerEnergyUpSE;
 
-    public Rigidbody rd;
+   // public GameObject bulletbox;
 
+    public Rigidbody rd;
 
     private AudioSource audioSource;
 
@@ -155,6 +159,9 @@ public class PlayerControl : MonoBehaviour
                 Vector3 vel = screen_point - screen_playerPos;
                 vel.z = 0;
                 bullets.GetComponent<BulletControl>().SetTransform(vel, this.transform.position);
+                bullets.GetComponent<BulletControl>().SetRotation(
+                    new Vector3(transform.rotation.x,transform.rotation.y,angle-180));
+                //bullets.transform.parent = bulletbox.transform;
                 //音
                 audioSource.PlayOneShot(playerBulletSE);
 
@@ -197,6 +204,8 @@ public class PlayerControl : MonoBehaviour
                 // 弾丸の複製
                 GameObject bullets = Instantiate(bullet) as GameObject;     
                 bullets.GetComponent<BulletControl>().SetTransform(poolvelocity, this.transform.position);
+                bullets.GetComponent<BulletControl>().SetRotation(
+                  new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z * 100));
                 //音
                 audioSource.PlayOneShot(playerBulletSE);
             }
@@ -377,7 +386,7 @@ public class PlayerControl : MonoBehaviour
   
     private void OnTriggerEnter(Collider other)
     {
-        float damage = 5f;
+        
 
         if (playerState != PlayerState.Alive ) return;//生きてなかったら以下処理しない
 
@@ -388,11 +397,6 @@ public class PlayerControl : MonoBehaviour
             //音
             audioSource.PlayOneShot(playerEnergyUpSE);
         }
-
-       
-
-       
-
 
         if (other.gameObject.tag == "Rock")
         {

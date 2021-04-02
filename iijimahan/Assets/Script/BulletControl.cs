@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletControl : MonoBehaviour
 {
     private Vector3 velocity;
-    public float speed = 20.0f;
+    public float speed = 30.0f;
     private int timer = 0;
     private bool scaleFlag = false;
     // Start is called before the first frame update
@@ -43,10 +43,12 @@ public class BulletControl : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             Destroy(this.gameObject);
+            //UnityEditor.EditorApplication.isPaused = true;
         }
         if (other.gameObject.tag == "Rock")
         {
             Destroy(this.gameObject);
+            //UnityEditor.EditorApplication.isPaused = true;
         }
         //if (other.gameObject.tag == "EnemyBullet")
         //{
@@ -72,6 +74,11 @@ public class BulletControl : MonoBehaviour
     public void SetGaugeFlag(bool fl)
     {
         scaleFlag = fl;
+    }
+
+    public void SetRotation(Vector3 rotaion)
+    {
+        transform.localEulerAngles = rotaion;
     }
 
 }
