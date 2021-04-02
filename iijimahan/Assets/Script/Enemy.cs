@@ -26,6 +26,10 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        rotateX = 0;
+        rotateY = 0;
+        currentrotateZ = 180;
+        rotateZ = 0;
         hp = StartHp;
         power = StartPower;
         deadFlag = false;

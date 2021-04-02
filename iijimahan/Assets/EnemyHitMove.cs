@@ -15,7 +15,7 @@ public class EnemyHitMove : MonoBehaviour
         if (other.transform.tag == "Enemy" || other.transform.tag == "Player") 
         {
             Vector3 vel = other.transform.position - transform.position;
-            vel = vel.normalized / 10;
+            vel = vel.normalized / 50;
             transform.position -= vel;
         }
        
