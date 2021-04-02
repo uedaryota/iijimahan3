@@ -20,7 +20,20 @@ public class BulletControl : MonoBehaviour
         //ポーズの時に止める
         if (Time.timeScale <= 0) return;
 
-        if (timer > 600 && !scaleFlag) Destroy(this.gameObject);
+
+        //Collider[] c = Physics.OverlapSphere(this.transform.position, 1, 1 << 8);
+        Collider[] c = Physics.OverlapBox(this.transform.position, new Vector3(0.5f, 0.5f, 0.5f));
+
+        //for(int i = 0; i< c.Length;i++)
+        //{
+        //    if(c[i].gameObject.tag == "Enemy")
+        //    {
+        //        UnityEditor.EditorApplication.isPaused = true;
+        //    }
+        //}
+
+
+        if (timer > 60 && !scaleFlag) Destroy(this.gameObject);
         if(timer > 80 && scaleFlag) Destroy(this.gameObject);
 
         velocity.Normalize();
@@ -40,11 +53,11 @@ public class BulletControl : MonoBehaviour
     {
         if (scaleFlag) return;
 
-        if (other.gameObject.tag == "Enemy")
-        {
-            Destroy(this.gameObject);
-            //UnityEditor.EditorApplication.isPaused = true;
-        }
+        //if (other.gameObject.tag == "Enemy")
+        //{
+        //    Destroy(this.gameObject);
+        //    //UnityEditor.EditorApplication.isPaused = true;
+        //}
         if (other.gameObject.tag == "Rock")
         {
             Destroy(this.gameObject);

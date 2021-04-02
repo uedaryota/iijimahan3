@@ -36,7 +36,7 @@ public class PlayerControl : MonoBehaviour
     [SerializeField, Header("エネルギー回収SE")]
     public AudioClip playerEnergyUpSE;
 
-   // public GameObject bulletbox;
+    //public GameObject bulletbox;
 
     public Rigidbody rd;
 
