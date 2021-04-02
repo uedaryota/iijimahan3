@@ -337,6 +337,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1512255dcc9b45040a147ac1cdaf26fe, type: 3}
+--- !u!1 &200868786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 200868787}
+  m_Layer: 0
+  m_Name: BulletBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &200868787
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200868786}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.07342374, y: -0.064367, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &201008905
 GameObject:
   m_ObjectHideFlags: 0
@@ -587,6 +617,11 @@ PrefabInstance:
       propertyPath: GaugeUI
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4443109365030374599, guid: 3eb9d23ad59d5e748bcfed4f86d0ccc1,
+        type: 3}
+      propertyPath: bulletbox
+      value: 
+      objectReference: {fileID: 200868786}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eb9d23ad59d5e748bcfed4f86d0ccc1, type: 3}
 --- !u!1 &640177320
