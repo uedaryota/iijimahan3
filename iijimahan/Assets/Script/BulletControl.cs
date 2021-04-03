@@ -8,6 +8,7 @@ public class BulletControl : MonoBehaviour
     public float speed = 30.0f;
     private int timer = 0;
     private bool scaleFlag = false;
+    [SerializeField, Header("爆発エフェクト")] private Object effect;
     // Start is called before the first frame update
     void Start()
     {
@@ -60,6 +61,7 @@ public class BulletControl : MonoBehaviour
         //}
         if (other.gameObject.tag == "Rock")
         {
+            Instantiate(effect, transform.position, Quaternion.identity);
             Destroy(this.gameObject);
             //UnityEditor.EditorApplication.isPaused = true;
         }

@@ -109,6 +109,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 100
   deletetime: 20
+  effect: {fileID: 4397370641252077987, guid: 5951faab9d9166b4fa3d10747d4e8323, type: 3}
+  HP: 20
 --- !u!1001 &5781800070381366296
 PrefabInstance:
   m_ObjectHideFlags: 0
