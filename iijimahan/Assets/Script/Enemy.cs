@@ -22,6 +22,8 @@ public class Enemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        hp = StartHp;
+        power = StartPower;
         deadFlag = false;
         target = GameObject.FindGameObjectWithTag("Player");
     }
@@ -228,7 +230,7 @@ public class Enemy : MonoBehaviour
     }
     void BulletDamage(GameObject other)
     {
-        hp--;
+       
         //弾の親のオブジェクトがターゲット
         if (other.tag == "FriendBullet")
         {
@@ -239,6 +241,7 @@ public class Enemy : MonoBehaviour
                     if (other.GetComponent<FriendBullet>().GetParent() != null)
                     {
                         target = other.GetComponent<FriendBullet>().GetParent();
+                        hp -= target.GetComponent<ShootEnemy>().GetPower();
                     }
                 }
             }
@@ -253,6 +256,7 @@ public class Enemy : MonoBehaviour
                     if (other.GetComponent<EnemyBullet>().GetParent() != null)
                     {
                         target = other.GetComponent<EnemyBullet>().GetParent();
+                        hp -= target.GetComponent<ShootEnemy>().GetPower();
                     }
                 }
             }

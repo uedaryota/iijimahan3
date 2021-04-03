@@ -224,7 +224,7 @@ public class ShootEnemy : MonoBehaviour
     }
     void BulletDamage(GameObject other)
     {
-        hp--;
+        
         //弾の親のオブジェクトがターゲット
         if (other.tag == "FriendBullet")
         {
@@ -235,6 +235,7 @@ public class ShootEnemy : MonoBehaviour
                     if (other.GetComponent<FriendBullet>().GetParent() != null)
                     {
                         target = other.GetComponent<FriendBullet>().GetParent();
+                        hp -= target.GetComponent<ShootEnemy>().GetPower();
                     }
                 }
             }
@@ -249,6 +250,7 @@ public class ShootEnemy : MonoBehaviour
                     if (other.GetComponent<EnemyBullet>().GetParent() != null)
                     {
                         target = other.GetComponent<EnemyBullet>().GetParent();
+                        hp -= target.GetComponent<ShootEnemy>().GetPower();
                     }
                 }
             }
