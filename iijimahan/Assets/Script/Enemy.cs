@@ -150,6 +150,12 @@ public class Enemy : MonoBehaviour
 
                 if (this.gameObject.tag == "Enemy")
                 {
+                    if (other.gameObject.tag == "GaugeBullet")
+                    {
+                        this.gameObject.tag = "Friend";
+                        GameObject effect = Instantiate(Resources.Load<GameObject>("Mebius"));
+                        effect.transform.position = transform.position;
+                    }
                     if (other.gameObject.tag == "Player")
                     {
                         deadFlag = true;

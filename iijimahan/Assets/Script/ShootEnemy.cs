@@ -132,6 +132,13 @@ public class ShootEnemy : MonoBehaviour
             { 
                 if (this.gameObject.tag == "Enemy")
                 {
+                    if (other.gameObject.tag == "GaugeBullet")
+                    {
+                        //  Buff();
+                        this.gameObject.tag = "Friend";
+                        GameObject effect = Instantiate(Resources.Load<GameObject>("Mebius"));
+                        effect.transform.position = transform.position;
+                    }
                     if (other.gameObject.tag == "Player")
                     {
                         deadFlag = true;
@@ -323,10 +330,10 @@ public class ShootEnemy : MonoBehaviour
             Vector3 dir = target.transform.position - transform.position;
             float angle = Mathf.Atan2(dir.y,dir.x);
             rotateZ = angle / (3.1415f / 180);
-            if (rotateZ < 0)
-            {
-                rotateZ = rotateZ + 360;
-            }
+            //if (rotateZ < 0)
+            //{
+            //    rotateZ = rotateZ + 360;
+            //}
             if(Mathf.Abs(rotateZ) - Mathf.Abs(currentrotateZ)>300)
             {
                 rotateZ += 360;
