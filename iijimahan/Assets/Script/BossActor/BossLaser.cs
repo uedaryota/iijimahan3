@@ -54,7 +54,7 @@ public class BossLaser : MonoBehaviour
 
         if (Cnt/30.0f>Speed)
         {
-            Hutosa = 1.0f;
+            Hutosa = 2.0f;
             this.tag = "EnemyBullet";
         } 
         if(Cnt/30.0f>Speed*2)
