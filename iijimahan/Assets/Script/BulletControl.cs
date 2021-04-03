@@ -5,7 +5,7 @@ using UnityEngine;
 public class BulletControl : MonoBehaviour
 {
     private Vector3 velocity;
-    public float speed = 20.0f;
+    public float speed = 30.0f;
     private int timer = 0;
     private bool scaleFlag = false;
     // Start is called before the first frame update
@@ -20,7 +20,20 @@ public class BulletControl : MonoBehaviour
         //ポーズの時に止める
         if (Time.timeScale <= 0) return;
 
-        if (timer > 600 && !scaleFlag) Destroy(this.gameObject);
+
+        //Collider[] c = Physics.OverlapSphere(this.transform.position, 1, 1 << 8);
+        Collider[] c = Physics.OverlapBox(this.transform.position, new Vector3(0.5f, 0.5f, 0.5f));
+
+        //for(int i = 0; i< c.Length;i++)
+        //{
+        //    if(c[i].gameObject.tag == "Enemy")
+        //    {
+        //        UnityEditor.EditorApplication.isPaused = true;
+        //    }
+        //}
+
+
+        if (timer > 60 && !scaleFlag) Destroy(this.gameObject);
         if(timer > 80 && scaleFlag) Destroy(this.gameObject);
 
         velocity.Normalize();
@@ -40,17 +53,22 @@ public class BulletControl : MonoBehaviour
     {
         if (scaleFlag) return;
 
-        if (other.gameObject.tag == "Enemy")
+        //if (other.gameObject.tag == "Enemy")
+        //{
+        //    Destroy(this.gameObject);
+        //    //UnityEditor.EditorApplication.isPaused = true;
+        //}
+        if (other.gameObject.tag == "Rock")
         {
             Destroy(this.gameObject);
-            //Debug.Log("エネミーと当たった");
+            //UnityEditor.EditorApplication.isPaused = true;
         }
         //if (other.gameObject.tag == "EnemyBullet")
         //{
         //    Destroy(this.gameObject);
         //    Debug.Log("エネミーの弾と当たった");
         //}
-        
+
     }
 
     public void SetVelocity(Vector3 vec3)
@@ -69,6 +87,11 @@ public class BulletControl : MonoBehaviour
     public void SetGaugeFlag(bool fl)
     {
         scaleFlag = fl;
+    }
+
+    public void SetRotation(Vector3 rotaion)
+    {
+        transform.localEulerAngles = rotaion;
     }
 
 }

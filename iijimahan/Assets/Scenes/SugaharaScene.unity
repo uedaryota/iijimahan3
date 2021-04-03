@@ -225,6 +225,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerHPUI (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 2289881948638634488, guid: 1512255dcc9b45040a147ac1cdaf26fe,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2289881948638634492, guid: 1512255dcc9b45040a147ac1cdaf26fe,
         type: 3}
       propertyPath: m_Pivot.x
@@ -332,6 +337,36 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1512255dcc9b45040a147ac1cdaf26fe, type: 3}
+--- !u!1 &200868786
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 200868787}
+  m_Layer: 0
+  m_Name: BulletBox
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &200868787
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 200868786}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.07342374, y: -0.064367, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &201008905
 GameObject:
   m_ObjectHideFlags: 0
@@ -582,6 +617,11 @@ PrefabInstance:
       propertyPath: GaugeUI
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 4443109365030374599, guid: 3eb9d23ad59d5e748bcfed4f86d0ccc1,
+        type: 3}
+      propertyPath: bulletbox
+      value: 
+      objectReference: {fileID: 200868786}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3eb9d23ad59d5e748bcfed4f86d0ccc1, type: 3}
 --- !u!1 &640177320
@@ -843,6 +883,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerGaugeUI (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7327983741577572496, guid: 8147d8b1ac75e724ca423565e426de9b,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7327983741577572500, guid: 8147d8b1ac75e724ca423565e426de9b,
         type: 3}
@@ -1444,7 +1489,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 1
-  m_FillAmount: 0
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -1485,7 +1530,7 @@ MonoBehaviour:
   m_Width: 0.55
   m_Softness: 1
   m_Brightness: 1
-  m_Rotation: 78
+  m_Rotation: 42
   m_Highlight: 1
   m_EffectMaterial: {fileID: 2100000, guid: 2d37c4afca8784ce9ab899810e29aa9c, type: 2}
 --- !u!114 &7327983741127731445
@@ -1710,7 +1755,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &7327983742472674941
 MonoBehaviour:
   m_ObjectHideFlags: 0

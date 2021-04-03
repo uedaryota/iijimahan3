@@ -29,7 +29,7 @@ public class UIEffectscript : MonoBehaviour
     {
         counter += 1*Time.deltaTime;
         float num = image.fillAmount;
-        Debug.Log(num);
+        //Debug.Log(num);
         if(counter>1 && num>=0.3888f)
         {
             m_shiny.Play();

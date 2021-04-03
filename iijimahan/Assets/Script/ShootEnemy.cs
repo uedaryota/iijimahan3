@@ -1,7 +1,9 @@
-﻿using System;
+﻿
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+
 public class ShootEnemy : MonoBehaviour
 {
     public float StartHp = 300;
@@ -18,12 +20,19 @@ public class ShootEnemy : MonoBehaviour
     public float shotIntervalStart = 1.5f;
     public float MaxrotateTime = 0.5f;
     float rotateTime = 0;
-
+    float rotateX, rotateY;
+    float currentrotateZ, rotateZ;
+    // public GameObject buffEffect;
+    GameObject buffInstance;
 
     Transform lastTransform;
     // Start is called before the first frame update
     void Start()
     {
+        rotateX = 0;
+        rotateY = 0;
+        currentrotateZ = 180;
+        rotateZ = 0;
         deadFlag = false;
         hp = StartHp;
         power = StartPower;
@@ -110,6 +119,13 @@ public class ShootEnemy : MonoBehaviour
     {
         Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
 
+        if (other.gameObject.tag == "KyoukaBullet")
+        {
+            if (this.gameObject.tag == "Friend")
+            {
+                Buff();
+            }
+        }
         if (screenPos.x < Screen.width && screenPos.x > 0)
         {
             if (screenPos.y < Screen.height & screenPos.y > 0)
@@ -123,8 +139,10 @@ public class ShootEnemy : MonoBehaviour
 
                     if (other.gameObject.tag == "PlayerBullet")
                     {
+                       // Buff();
                         GameObject effect = Instantiate(Resources.Load<GameObject>("Mebius"));
                         effect.transform.position = transform.position;
+                        Destroy(other.gameObject);
                         this.gameObject.tag = "Friend";
 
                     }
@@ -276,8 +294,10 @@ public class ShootEnemy : MonoBehaviour
             if (rotateTime > MaxrotateTime)
             {
                 rotateTime -= Time.deltaTime;
+
+                rotateX = 180 / MaxrotateTime * rotateTime;
             }
-            this.transform.Rotate(0, 0, 180/ MaxrotateTime * rotateTime);
+          //  this.transform.Rotate(0, 0, 180/ MaxrotateTime * rotateTime);
         }
 
         if (this.gameObject.tag == "Friend")
@@ -285,8 +305,10 @@ public class ShootEnemy : MonoBehaviour
             if (rotateTime < MaxrotateTime)
             {
                 rotateTime += Time.deltaTime;
+                rotateX = -180 / MaxrotateTime * rotateTime;
             }
-            this.transform.Rotate(0, 0, 180 / MaxrotateTime * rotateTime);
+            // this.transform.Rotate(0, 0, 180 / MaxrotateTime * rotateTime);
+
         }
 
 
@@ -294,9 +316,49 @@ public class ShootEnemy : MonoBehaviour
     }
     void ObjectRotate()
     {
+        
         if (target != null)
         {
-            this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
+            Quaternion a = Quaternion.identity;
+            Vector3 dir = target.transform.position - transform.position;
+            float angle = Mathf.Atan2(dir.y,dir.x);
+            rotateZ = angle / (3.1415f / 180);
+            if (rotateZ < 0)
+            {
+                rotateZ = rotateZ + 360;
+            }
+            if(Mathf.Abs(rotateZ) - Mathf.Abs(currentrotateZ)>300)
+            {
+                rotateZ += 360;
+            }
+            if (Mathf.Abs(rotateZ) - Mathf.Abs(currentrotateZ) > 0) 
+            {
+                if (rotateZ - currentrotateZ  < 0) 
+                {
+                    currentrotateZ -= Time.deltaTime * 60;
+                }
+                else
+                {
+                    currentrotateZ += Time.deltaTime * 60;
+                }
+            }
+            else if(Mathf.Abs(rotateZ) - Mathf.Abs(currentrotateZ) < 0)
+            {
+                if (rotateZ - currentrotateZ < 0)
+                {
+                    currentrotateZ -= Time.deltaTime * 60;
+                }
+                else
+                {
+                    currentrotateZ += Time.deltaTime * 60;
+                }
+            }
+            a.eulerAngles = new Vector3(0, 0, currentrotateZ);
+            transform.rotation = a;
+
+            transform.Rotate(new Vector3(rotateX, rotateY, 0));
+            // transform.Rotate(0, 0, angle);
+            //   this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
             lastTransform = this.target.transform;
         }
         else
@@ -312,6 +374,11 @@ public class ShootEnemy : MonoBehaviour
     void Buff()
     {
         BuffLevel += 1;
+        if (buffInstance == null)
+        {
+            buffInstance = Instantiate(Resources.Load<GameObject>("BuffParticle"));
+            buffInstance.GetComponent<BuffEffectScript>().SetParent(gameObject);
+        }
         if (BuffLevel == 1)
         {
             hp += StartHp * 1.3f;
@@ -329,5 +396,9 @@ public class ShootEnemy : MonoBehaviour
             hp += StartHp * 1.3f;
             power += StartPower * 1.5f;
         }
+    }
+   public float GetBuffLevel()
+    {
+        return BuffLevel;
     }
 }

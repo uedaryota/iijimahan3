@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6447404859915565652}
   - component: {fileID: 6321795372898172783}
   - component: {fileID: 4829690134863951202}
+  - component: {fileID: -5200244306766135491}
   m_Layer: 0
   m_Name: ShootEnemy 1
   m_TagString: Enemy
@@ -108,7 +109,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd81bd1f902d224694df6e8977e63b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hp: 3
+  StartHp: 300
+  StartPower: 100
   energy: {fileID: 956122239005918985, guid: 290abd1f2d9b09b40baa65fbdb4e09a3, type: 3}
   targetDistance: 7
   shotIntervalStart: 3
@@ -129,6 +131,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &-5200244306766135491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8670145571796672101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 465ceea1307303b4ead72cec32124d67, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &46414697835982243
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -159,22 +173,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: fee2a38bd916cda40be8fe06a1d8e334,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fee2a38bd916cda40be8fe06a1d8e334,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fee2a38bd916cda40be8fe06a1d8e334,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fee2a38bd916cda40be8fe06a1d8e334,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: 1
+      value: -0.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fee2a38bd916cda40be8fe06a1d8e334,
         type: 3}
@@ -184,12 +198,12 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: fee2a38bd916cda40be8fe06a1d8e334,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
+      value: 90
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: fee2a38bd916cda40be8fe06a1d8e334,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 180
+      value: -90
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: fee2a38bd916cda40be8fe06a1d8e334,
         type: 3}

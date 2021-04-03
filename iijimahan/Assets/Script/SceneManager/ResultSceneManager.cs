@@ -10,44 +10,19 @@ public class ResultSceneManager : MonoBehaviour
     private PlayerControl script;
     private int gauge;
     private float time;
-    private float interval;
     public AudioClip BGM;
-    [SerializeField, Header("ボタンを押したときの音")]public AudioClip SelectSE;
     AudioSource audioSource;
 
     void Start()
     {
-        interval = 0;
         gauge = PlayerControl.GetGaugeCount();
         time = GameSceneManager.GetClearTime();
         Text text = text_obj.GetComponent<Text>();
         text.text = "ゲージ使用回数 : " + gauge + "      タイム : " + time;
+        audioSource = GetComponent<AudioSource>();
         audioSource.Play();
     }
     void Update()
     {
-        interval += Time.deltaTime;
-        if (interval >= 2.0f)
-        {
-            if (Input.GetMouseButton(0) || Input.GetKeyDown(KeyCode.Joystick1Button0))
-            {
-                SceneManager.LoadScene("TitleScene");
-                audioSource.PlayOneShot(SelectSE);
-            }
-        }
-
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown("joystick button 1"))
-        {
-            Quit();
-        }
-    }
-
-    void Quit()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#elif UNITY_STANDALONE
-      UnityEngine.Application.Quit();
-#endif
     }
 }
