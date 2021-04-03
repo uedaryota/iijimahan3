@@ -48,7 +48,7 @@ public class BossBullet : MonoBehaviour//自動追尾弾だぜ
             transform.position += GetDirectionPI(Angle) * Speed * Time.deltaTime;
         }
 
-        if(Cnt>1200)
+        if(Cnt>700)
         {
             deadFlag = true;
         }

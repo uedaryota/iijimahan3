@@ -35,7 +35,7 @@ public class BossBullet2 : MonoBehaviour
         Vector3 dir = pos - transform.position;
             Angle = Mathf.Atan2(y,pos.x--);
             transform.position += GetDirectionPI(Angle) * Speed * Time.deltaTime;
-        if(Cnt>1400)
+        if(Cnt>700)
         {
             deadFlag = true;
         }

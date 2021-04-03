@@ -11,6 +11,7 @@ public class BossHp : MonoBehaviour
     [Header("ボス点滅インターバル")] public float interval=0.1f;
     [Header("ボスモデル")] public Material bossmodel;
     [SerializeField, Header("被弾SE")] public AudioClip dameageSE;
+    [SerializeField, Header("ボス攻撃力")] public float ATK;
     public enum　Status
     {
         Normal, Damege,
@@ -66,7 +67,17 @@ public class BossHp : MonoBehaviour
         if(other.gameObject.tag=="FriendBullet" &&status ==Status.Normal || other.gameObject.tag == "Friend" && status == Status.Normal)//味方になったエネミーの弾のタグを設定
         {
             //damege = other.gameObject.GetComponent<>();
-            Hp = Hp - damege;
+            if (other.gameObject.tag == "Friend")
+            {
+                if (other.GetComponent<ShootEnemy>() != null)
+                {
+                    Damage(other.GetComponent<ShootEnemy>().GetPower());
+                }
+                else if (other.GetComponent<Enemy>() != null)
+                {
+                    Damage(other.GetComponent<Enemy>().GetPower());
+                }
+            }
             hpGauge.Damage(damege);
             //音
             audioSource.PlayOneShot(dameageSE);
@@ -92,4 +103,13 @@ public class BossHp : MonoBehaviour
             yield return new WaitForSeconds(interval);
         }
     }
+    public float GetPower()
+    {
+        return ATK;
+    }
+    void Damage(float damage)
+    {
+        this.Hp -= damage;
+    }
+
 }

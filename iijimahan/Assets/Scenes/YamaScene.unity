@@ -309,7 +309,9 @@ GameObject:
   - component: {fileID: 375885858}
   - component: {fileID: 375885857}
   - component: {fileID: 375885856}
+  - component: {fileID: 375885861}
   - component: {fileID: 375885860}
+  - component: {fileID: 375885862}
   m_Layer: 0
   m_Name: "\u6C7D\u5B50"
   m_TagString: Boss
@@ -400,12 +402,41 @@ MonoBehaviour:
   m_GameObject: {fileID: 375885855}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07389786304000c4981087a19aa3011c, type: 3}
+  m_Script: {fileID: 11500000, guid: a9c4810c68313da498ea63be791926f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 10
-  Angle: 0
-  LimitTime: 700
+--- !u!114 &375885861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375885855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7185ef2d769ee8f43be79ee50d0b7923, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BulletSE: {fileID: 0}
+--- !u!114 &375885862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 375885855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6370cbba1826a0f49bee85ed1e4c9fbf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ComOnX: 1
+  ComOnY: 1
+  Move: 5
+  Speed: 5
+  action: 0
+  BattleSwitch1: 0
+  BattleSwitch2: 0
 --- !u!1 &390308808
 GameObject:
   m_ObjectHideFlags: 0
