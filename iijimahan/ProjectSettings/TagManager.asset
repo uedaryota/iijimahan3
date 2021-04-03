@@ -13,6 +13,8 @@ TagManager:
   - FriendBullet
   - KyoukaBullet
   - Rock
+  - BossBox
+  - GaugeBullet
   layers:
   - Default
   - TransparentFX
