@@ -1351,7 +1351,7 @@ MonoBehaviour:
   dameageSE: {fileID: 0}
   ATK: 0
   status: 0
-  Hp: 0
+  Hp: 100
 --- !u!114 &5487881192288749419
 MonoBehaviour:
   m_ObjectHideFlags: 0
