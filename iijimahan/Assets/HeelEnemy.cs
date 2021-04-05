@@ -2,16 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour
+public class HeelEnemy : MonoBehaviour
 {
-
     public float StartHp = 300;
     float hp;
-    public float StartPower = 100;
-    float power;
+    public float StartHeel = 30;
+    float heel;
     float BuffLevel = 0;
     private GameObject target;
-
+    public float targetDistance = 7;
     private Vector3 velocity;
     public float speed = 5;
     private bool deadFlag = false;
@@ -23,15 +22,17 @@ public class Enemy : MonoBehaviour
     float rotateX, rotateY;
     float currentrotateZ, rotateZ;
     GameObject buffInstance;
+    float heelCoolTime;
     // Start is called before the first frame update
     void Start()
     {
+        heelCoolTime = 1;
         rotateX = 0;
         rotateY = 0;
         currentrotateZ = 180;
         rotateZ = 0;
         hp = StartHp;
-        power = StartPower;
+        heel = StartHeel;
         deadFlag = false;
         target = GameObject.FindGameObjectWithTag("Player");
     }
@@ -40,28 +41,42 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         CheckTarget();
-        
-      //  ChangeRotate();
-        if (target!=null)
+        ObjectRotate();
+        ChangeRotate();
+        if (target != null)
         {
-            CheckDead();
+            Move();
+
+            
         }
-     
-        Move();
+        CheakDead();
+    }
+    void CheakDead()
+    {
+        if (hp <= 0)
+        {
+            deadFlag = true;
+        }
+        if (deadFlag)
+        {
+            GaugeEnergyDrop();
+            Destroy(this.gameObject);
+        }
     }
     void Move()
     {
-        //少しずつ加速度に追加していく
+      
         if (target != null)
         {
-            Vector3 vel = Vector3.Normalize(target.transform.position - transform.position) / 5;
-            velocity += vel;
-            velocity = Vector3.Normalize(velocity) * speed;
+            velocity = Vector3.Normalize(target.transform.position - transform.position);
+            if (Vector3.Distance(target.transform.position, transform.position) <= targetDistance)
+            {
+                velocity = Vector3.zero;
+            }
             transform.position += velocity * Time.deltaTime;
         }
 
-        ObjectRotate();
-        ChangeRotate();
+       
     }
     void CheckTarget()
     {
@@ -71,13 +86,13 @@ public class Enemy : MonoBehaviour
             {
                 // if (target.tag != "Player")
                 {
-                    target = GameObject.FindGameObjectWithTag("Player");
+                    target = GameObject.FindGameObjectWithTag("Enemy");
 
                 }
             }
-            else if (target.tag != "Player" && target.tag != "Friend")
+            else if (target.tag != "Enemyr")
             {
-                target = GameObject.FindGameObjectWithTag("Player");
+                target = GameObject.FindGameObjectWithTag("Enemy");
             }
         }
         if (this.gameObject.tag == "Friend")
@@ -89,7 +104,7 @@ public class Enemy : MonoBehaviour
                 {
                     //Destroy(this.gameObject);
                     GameObject[] objects;
-                    objects = GameObject.FindGameObjectsWithTag("Enemy");
+                    objects = GameObject.FindGameObjectsWithTag("Friend");
                     GameObject near = null;
                     for (int a = 0; a < objects.Length; a++)
                     {
@@ -97,7 +112,7 @@ public class Enemy : MonoBehaviour
                         {
                             near = objects[a];
                         }
-                        else
+                     //   else
                         {
                             float len1, len2;
                             len1 = Vector3.Dot(this.transform.position - near.transform.position, this.transform.position - near.transform.position);
@@ -147,7 +162,7 @@ public class Enemy : MonoBehaviour
         {
             if (screenPos.y < Screen.height & screenPos.y > 0)
             {
-
+                //画面内なら
                 if (this.gameObject.tag == "Enemy")
                 {
                     if (other.gameObject.tag == "GaugeBullet")
@@ -210,6 +225,18 @@ public class Enemy : MonoBehaviour
         }
 
     }
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.tag=="Heel")
+        {
+            heelCoolTime -= Time.deltaTime;
+            if (heelCoolTime <= 0)
+            {
+                HeelEnemy heel = other.GetComponent<HeelEnemy>();
+                hp += heel.GetHeel();
+            }
+        }
+    }
     void Damage(float damage)
     {
         hp -= damage;
@@ -243,93 +270,46 @@ public class Enemy : MonoBehaviour
             // this.transform.Rotate(0, 0, 180 / MaxrotateTime * rotateTime);
 
         }
-
-
-
     }
     void ObjectRotate()
     {
-
-        if (target != null)
+        Quaternion a = Quaternion.identity;
+        Vector3 dir = target.transform.position - transform.position;
+        float angle = Mathf.Atan2(dir.y, dir.x);
+        rotateZ = angle / (3.1415f / 180);
+        if (rotateZ < 0)
         {
-            Quaternion a = Quaternion.identity;
-            Vector3 dir = target.transform.position - transform.position;
-            float angle = Mathf.Atan2(dir.y, dir.x);
-            rotateZ = angle / (3.1415f / 180);
-
-            if (rotateZ < 0)
-            {
-                rotateZ += 360;
-            }
-            if (currentrotateZ > 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
-            {
-                currentrotateZ -= 360;
-            }
-            if (currentrotateZ < 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
-            {
-                currentrotateZ += 360;
-            }
-          
-                if (rotateZ - currentrotateZ < 0)
-                {
-                    currentrotateZ -= Time.deltaTime * 90;
-                }
-                else
-                {
-                    currentrotateZ += Time.deltaTime * 90;
-                }
-            
-
-            a.eulerAngles = new Vector3(0, 0, currentrotateZ);
-            transform.rotation = a;
-
-            transform.Rotate(new Vector3(rotateX, rotateY, 0));
-          
-            lastTransform = this.target.transform;
+            rotateZ = rotateZ + 360;
         }
-        else
+        if (Mathf.Abs(rotateZ) - Mathf.Abs(currentrotateZ) > 0)
         {
-            Quaternion a = Quaternion.identity;
-            Vector3 dir = lastTransform.position - transform.position;
-            float angle = Mathf.Atan2(dir.y, dir.x);
-            rotateZ = angle / (3.1415f / 180);
-            //if (rotateZ < 0)
-            //{
-            //    rotateZ = rotateZ + 360;
-            //}
-            if (rotateZ < 0)
+            if (rotateZ - currentrotateZ < 0)
             {
-                rotateZ += 360;
+                currentrotateZ -= Time.deltaTime * 60;
             }
-            if (currentrotateZ > 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
+            else
             {
-                currentrotateZ -= 360;
+                currentrotateZ += Time.deltaTime * 60;
             }
-            if (currentrotateZ < 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
-            {
-                currentrotateZ += 360;
-            }
-            //  if (rotateZ < 0)
-            {
-                if (rotateZ - currentrotateZ < 0)
-                {
-                    currentrotateZ -= Time.deltaTime * 90;
-                }
-                else
-                {
-                    currentrotateZ += Time.deltaTime * 90;
-                }
-            }
-
-            a.eulerAngles = new Vector3(0, 0, currentrotateZ);
-            transform.rotation = a;
-
-            transform.Rotate(new Vector3(rotateX, rotateY, 0));
-            // transform.Rotate(0, 0, angle);
-            //   this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
-           
         }
+        else if (Mathf.Abs(rotateZ) - Mathf.Abs(currentrotateZ) < 0)
+        {
+            if (rotateZ - currentrotateZ < 0)
+            {
+                currentrotateZ -= Time.deltaTime * 60;
+            }
+            else
+            {
+                currentrotateZ += Time.deltaTime * 60;
+            }
+        }
+        a.eulerAngles = new Vector3(0, 0, currentrotateZ);
+        transform.rotation = a;
 
+        transform.Rotate(new Vector3(rotateX, rotateY, 0));
+        // transform.Rotate(0, 0, angle);
+        //   this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
+        lastTransform = this.target.transform;
     }
     void BulletDamage(GameObject other)
     {
@@ -366,9 +346,9 @@ public class Enemy : MonoBehaviour
         }
 
     }
-    public float GetPower()
+    public float GetHeel()
     {
-        return power;
+        return heel;
     }
     void Buff()
     {
@@ -381,19 +361,19 @@ public class Enemy : MonoBehaviour
         if (BuffLevel == 1)
         {
             hp += StartHp * 1.3f;
-            power += StartPower * 1.5f;
+            heel = StartHeel * 1.5f;
         }
         if (BuffLevel == 2)
         {
 
             hp += StartHp * 1.3f;
-            power += StartPower * 1.5f;
+            heel = StartHeel * 1.5f*2;
         }
         if (BuffLevel == 3)
         {
 
             hp += StartHp * 1.3f;
-            power += StartPower * 1.5f;
+            heel = StartHeel * 1.5f*3;
         }
     }
     public float GetBuffLevel()

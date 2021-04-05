@@ -42,10 +42,10 @@ public class ShootEnemy : MonoBehaviour
     }
     private void Move()
     {
-        if(target!=null)
+        if (target != null)
         {
             velocity = Vector3.Normalize(target.transform.position - transform.position);
-            if (Vector3.Distance(target.transform.position, transform.position) <= targetDistance) 
+            if (Vector3.Distance(target.transform.position, transform.position) <= targetDistance)
             {
                 velocity = Vector3.zero;
             }
@@ -181,6 +181,7 @@ public class ShootEnemy : MonoBehaviour
                     if (other.gameObject.tag == "EnemyBullet")
                     {
                         BulletDamage(other.gameObject);
+
                     }
                     return;
                 }
@@ -304,7 +305,7 @@ public class ShootEnemy : MonoBehaviour
 
                 rotateX = 180 / MaxrotateTime * rotateTime;
             }
-          //  this.transform.Rotate(0, 0, 180/ MaxrotateTime * rotateTime);
+            //  this.transform.Rotate(0, 0, 180/ MaxrotateTime * rotateTime);
         }
 
         if (this.gameObject.tag == "Friend")
@@ -323,43 +324,41 @@ public class ShootEnemy : MonoBehaviour
     }
     void ObjectRotate()
     {
-        
+
         if (target != null)
         {
             Quaternion a = Quaternion.identity;
             Vector3 dir = target.transform.position - transform.position;
-            float angle = Mathf.Atan2(dir.y,dir.x);
+            float angle = Mathf.Atan2(dir.y, dir.x);
             rotateZ = angle / (3.1415f / 180);
             //if (rotateZ < 0)
             //{
             //    rotateZ = rotateZ + 360;
             //}
-            if(Mathf.Abs(rotateZ) - Mathf.Abs(currentrotateZ)>300)
+            if (rotateZ < 0)
             {
                 rotateZ += 360;
             }
-            if (Mathf.Abs(rotateZ) - Mathf.Abs(currentrotateZ) > 0) 
+            if (currentrotateZ > 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
             {
-                if (rotateZ - currentrotateZ  < 0) 
-                {
-                    currentrotateZ -= Time.deltaTime * 60;
-                }
-                else
-                {
-                    currentrotateZ += Time.deltaTime * 60;
-                }
+                currentrotateZ -= 360;
             }
-            else if(Mathf.Abs(rotateZ) - Mathf.Abs(currentrotateZ) < 0)
+            if (currentrotateZ < 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
+            {
+                currentrotateZ += 360;
+            }
+            //  if (rotateZ < 0)
             {
                 if (rotateZ - currentrotateZ < 0)
                 {
-                    currentrotateZ -= Time.deltaTime * 60;
+                    currentrotateZ -= Time.deltaTime * 90;
                 }
                 else
                 {
-                    currentrotateZ += Time.deltaTime * 60;
+                    currentrotateZ += Time.deltaTime * 90;
                 }
             }
+
             a.eulerAngles = new Vector3(0, 0, currentrotateZ);
             transform.rotation = a;
 
@@ -370,9 +369,47 @@ public class ShootEnemy : MonoBehaviour
         }
         else
         {
-            this.transform.LookAt(lastTransform, new Vector3(0, 0, 1));
+            Quaternion a = Quaternion.identity;
+            Vector3 dir = lastTransform.position - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x);
+            rotateZ = angle / (3.1415f / 180);
+            //if (rotateZ < 0)
+            //{
+            //    rotateZ = rotateZ + 360;
+            //}
+            if (rotateZ < 0)
+            {
+                rotateZ += 360;
+            }
+            if (currentrotateZ > 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
+            {
+                currentrotateZ -= 360;
+            }
+            if (currentrotateZ < 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
+            {
+                currentrotateZ += 360;
+            }
+            //  if (rotateZ < 0)
+            {
+                if (rotateZ - currentrotateZ < 0)
+                {
+                    currentrotateZ -= Time.deltaTime * 90;
+                }
+                else
+                {
+                    currentrotateZ += Time.deltaTime * 90;
+                }
+            }
+
+            a.eulerAngles = new Vector3(0, 0, currentrotateZ);
+            transform.rotation = a;
+
+            transform.Rotate(new Vector3(rotateX, rotateY, 0));
+            // transform.Rotate(0, 0, angle);
+            //   this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
+            
         }
-         
+
     }
     public float GetPower()
     {

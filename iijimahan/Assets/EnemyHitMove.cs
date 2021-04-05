@@ -12,13 +12,18 @@ public class EnemyHitMove : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        if (other.transform.tag == "Enemy" || other.transform.tag == "Player") 
+        if (other.transform.tag == "Enemy" || other.transform.tag == "Player")  
         {
             Vector3 vel = other.transform.position - transform.position;
             vel = vel.normalized / 50;
             transform.position -= vel;
         }
-       
+        if ( other.transform.tag == "Rock")
+        {
+            Vector3 vel = other.transform.position - transform.position;
+            vel = vel.normalized / 30;
+            transform.position -= vel;
+        }
     }
     // Update is called once per frame
     void Update()

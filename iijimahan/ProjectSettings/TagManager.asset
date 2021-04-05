@@ -15,6 +15,7 @@ TagManager:
   - Rock
   - BossBox
   - GaugeBullet
+  - Heel
   layers:
   - Default
   - TransparentFX
