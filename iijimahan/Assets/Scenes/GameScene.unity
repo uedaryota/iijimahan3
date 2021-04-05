@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0045394697, g: 0.0057711573, b: 0.00806647, a: 1}
+  m_IndirectSpecularColor: {r: 0.01220447, g: 0.015537186, b: 0.021726938, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -131,12 +131,12 @@ PrefabInstance:
     - target: {fileID: 7327983741148677012, guid: 8147d8b1ac75e724ca423565e426de9b,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: 7327983741148677012, guid: 8147d8b1ac75e724ca423565e426de9b,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 1.5
+      value: 1.25
       objectReference: {fileID: 0}
     - target: {fileID: 7327983741148677012, guid: 8147d8b1ac75e724ca423565e426de9b,
         type: 3}
@@ -322,24 +322,6 @@ PrefabInstance:
       propertyPath: waverespawn.Array.size
       value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
-        type: 3}
-      propertyPath: bossboxes.Array.data[0]
-      value: 
-      objectReference: {fileID: 891316403518387600, guid: aa595588e48175046923818ef6bbfe16,
-        type: 3}
-    - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
-        type: 3}
-      propertyPath: bossboxes.Array.data[1]
-      value: 
-      objectReference: {fileID: 3540285229408963248, guid: 9e2c78441d4a85f40aca58d36ea08aee,
-        type: 3}
-    - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
-        type: 3}
-      propertyPath: bossboxes.Array.data[2]
-      value: 
-      objectReference: {fileID: 891316403518387600, guid: aa595588e48175046923818ef6bbfe16,
-        type: 3}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
       propertyPath: enemy_Manual.Array.size
@@ -841,7 +823,7 @@ PrefabInstance:
     - target: {fileID: 2289881948161544956, guid: 1512255dcc9b45040a147ac1cdaf26fe,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 1.5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2289881948161544956, guid: 1512255dcc9b45040a147ac1cdaf26fe,
         type: 3}
@@ -990,7 +972,7 @@ PrefabInstance:
     - target: {fileID: 4443109365030374584, guid: 3eb9d23ad59d5e748bcfed4f86d0ccc1,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -15
       objectReference: {fileID: 0}
     - target: {fileID: 4443109365030374584, guid: 3eb9d23ad59d5e748bcfed4f86d0ccc1,
         type: 3}
@@ -1062,6 +1044,11 @@ PrefabInstance:
       propertyPath: HP
       value: 100
       objectReference: {fileID: 0}
+    - target: {fileID: 4443109365030374599, guid: 3eb9d23ad59d5e748bcfed4f86d0ccc1,
+        type: 3}
+      propertyPath: dameageSE
+      value: 
+      objectReference: {fileID: 8300000, guid: a9ac292acf8035c44913dfa53a4a005d, type: 3}
     - target: {fileID: 4443109365030374599, guid: 3eb9d23ad59d5e748bcfed4f86d0ccc1,
         type: 3}
       propertyPath: m_Enabled

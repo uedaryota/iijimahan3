@@ -73,6 +73,8 @@ public class PlayerControl : MonoBehaviour
     private float nockBackCount = 0;
     Vector3 rockPos;
 
+    private int nomove = 300;
+    private bool startFlag = false;
 
     //private Color cr;
     //private float cl;
@@ -127,6 +129,20 @@ public class PlayerControl : MonoBehaviour
         {
             playerState = PlayerState.Dead;
         }
+
+        float startSpeed = 0.05f;
+
+        if(!startFlag)
+        {
+            transform.position += new Vector3( startSpeed,0,0);
+
+            if(transform.position.x >= -6)
+            {
+                startFlag = true;
+            }
+        }
+
+        if (!startFlag) return;
 
         CheckControlDevice();//操作デバイスチェック     
         
@@ -269,7 +285,7 @@ public class PlayerControl : MonoBehaviour
         {
             nockbackVel.x = 0;
         }
-        if (screen_playerPos2.x < 50)
+        if (screen_playerPos2.x < nomove)
         {
             nockbackVel.x = 0;
         }
@@ -314,7 +330,7 @@ public class PlayerControl : MonoBehaviour
         {
             velocity += new Vector3(speed, 0, 0);
         }
-        if (Input.GetKey(KeyCode.A)&& screen_playerPos2.x > 50)
+        if (Input.GetKey(KeyCode.A)&& screen_playerPos2.x > nomove)
         {
             velocity += new Vector3(-speed, 0, 0);
         }
@@ -362,7 +378,7 @@ public class PlayerControl : MonoBehaviour
         {
             padvelocity.y = 0;
         }
-        if (screen_playerPos2.x < 0 + 50 && Input.GetAxis("L_Horizontal") < 0)
+        if (screen_playerPos2.x < 0 + nomove && Input.GetAxis("L_Horizontal") < 0)
         {
             padvelocity.x = 0;
         }
