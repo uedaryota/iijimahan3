@@ -180,8 +180,14 @@ public class ShootEnemy : MonoBehaviour
 
                     if (other.gameObject.tag == "EnemyBullet")
                     {
-                        BulletDamage(other.gameObject);
-
+                        if (other.GetComponent<BossPower>() != null)
+                        {
+                            hp -= target.GetComponent<BossPower>().GetPower();
+                        }
+                        else
+                        {
+                            BulletDamage(other.gameObject);
+                        }
                     }
                     return;
                 }
