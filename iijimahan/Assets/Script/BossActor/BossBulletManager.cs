@@ -45,6 +45,7 @@ public class BossBulletManager : MonoBehaviour
             sr.sortingLayerName = "BossBullet";
             Bullet.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
             Bullet.AddComponent<BossBullet>();
+            Bullet.AddComponent<BossPower>();
             Rigidbody rg = Bullet.AddComponent<Rigidbody>();
             rg.useGravity = false;
             if (ColliderType)
@@ -72,6 +73,7 @@ public class BossBulletManager : MonoBehaviour
             sr.sortingLayerName = "BossBullet";
             Bullet.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
             Bullet.AddComponent<BossBullet2>();
+            Bullet.AddComponent<BossPower>();
             Rigidbody rg = Bullet.AddComponent<Rigidbody>();
             rg.useGravity = false;
             if (ColliderType)
@@ -98,6 +100,7 @@ public class BossBulletManager : MonoBehaviour
             sr.sortingLayerName = "BossBullet";
             Bullet.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
             Bullet.AddComponent<BossLaser>();
+            Bullet.AddComponent<BossPower>();
             Rigidbody rg = Bullet.AddComponent<Rigidbody>();
             rg.useGravity = false;
             if (ColliderType)
