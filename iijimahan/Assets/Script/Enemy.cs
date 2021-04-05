@@ -279,11 +279,11 @@ public class Enemy : MonoBehaviour
           
                 if (rotateZ - currentrotateZ < 0)
                 {
-                    currentrotateZ -= Time.deltaTime * 90;
+                    currentrotateZ -= Time.deltaTime * 150;
                 }
                 else
                 {
-                    currentrotateZ += Time.deltaTime * 90;
+                    currentrotateZ += Time.deltaTime * 150;
                 }
             
 
