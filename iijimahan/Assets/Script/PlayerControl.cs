@@ -73,7 +73,7 @@ public class PlayerControl : MonoBehaviour
     private float nockBackCount = 0;
     Vector3 rockPos;
 
-    private int nomove = 300;
+    private int nomove = 240;
     private bool startFlag = false;
 
     //private Color cr;
@@ -130,7 +130,7 @@ public class PlayerControl : MonoBehaviour
             playerState = PlayerState.Dead;
         }
 
-        float startSpeed = 0.05f;
+        float startSpeed = 0.075f;
 
         if(!startFlag)
         {
@@ -179,6 +179,7 @@ public class PlayerControl : MonoBehaviour
                     new Vector3(transform.rotation.x,transform.rotation.y,angle-180));
                 //bullets.transform.parent = bulletbox.transform;
                 //音
+                audioSource.volume = 0.5f;
                 audioSource.PlayOneShot(playerBulletSE);
 
             }
@@ -419,6 +420,7 @@ public class PlayerControl : MonoBehaviour
 
 
             RockDamage(damage);
+            audioSource.volume = 0.4f;
             //音
             audioSource.PlayOneShot(dameageSE);
             //当たったRockを探す
@@ -441,6 +443,7 @@ public class PlayerControl : MonoBehaviour
             playerHpGauge.Damage(damage);
             MutekiFlagActive();
             //音
+            audioSource.volume = 0.4f;
             audioSource.PlayOneShot(dameageSE);
         }
         if (other.gameObject.tag == "EnemyBullet")
@@ -449,6 +452,7 @@ public class PlayerControl : MonoBehaviour
             playerHpGauge.Damage(damage);
             MutekiFlagActive();
             //音
+            audioSource.volume = 0.4f;
             audioSource.PlayOneShot(dameageSE);
         }
         if (other.gameObject.tag == "Boss")
@@ -457,6 +461,7 @@ public class PlayerControl : MonoBehaviour
             playerHpGauge.Damage(damage);
             MutekiFlagActive();
             //音
+            audioSource.volume = 0.4f;
             audioSource.PlayOneShot(dameageSE);
         }
         
