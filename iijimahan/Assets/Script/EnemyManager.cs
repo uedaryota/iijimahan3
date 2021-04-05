@@ -152,6 +152,9 @@ public class EnemyManager : MonoBehaviour
         public float[] interval_Manual;
     }
 
+    [SerializeField, Header("最大Wave")]
+    private int maxwave = 6;
+
     [SerializeField, Header("wave毎の手入力エネミー")]
     [EnumLabel(typeof(wave_enemy))]
     public WaveEnemy[] enemy_Manual;
@@ -214,6 +217,10 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
+        if(wave == maxwave + 1)
+        {
+            gameclear = true;
+        }
         if(old_wave != wave)
         {
             enemycount = 0;
@@ -226,45 +233,15 @@ public class EnemyManager : MonoBehaviour
         }
         old_wave = wave;
 
-        switch (wave)
+        if(wave % 2 == 1)
         {
-            case 1:
-                EnemyRespawn_Manual();
-                return;
-
-            case 2:
-                BossRespawn();
-                EnemyRespawn_Manual();
-                EnemyRespawn(waverespawn[wave / 2 - 1]);
-                return;
-
-            case 3:
-                EnemyRespawn_Manual();
-                return;
-
-            case 4:
-                BossRespawn();
-                EnemyRespawn_Manual();
-                EnemyRespawn(waverespawn[wave / 2 - 1]);
-                return;
-
-            case 5:
-                EnemyRespawn_Manual();
-                return;
-
-            case 6:
-                BossRespawn();
-                EnemyRespawn_Manual();
-                EnemyRespawn(waverespawn[wave / 2 - 1]);
-                return;
-                
-            case 7:
-                gameclear = true;
-                return;
-
-            default:
-                Debug.Log("存在しないWaveに到達しました");
-                return;
+            EnemyRespawn_Manual();
+        }
+        else if(wave % 2 == 0)
+        {
+            BossRespawn();
+            EnemyRespawn_Manual();
+            EnemyRespawn(waverespawn[wave / 2 - 1]);
         }
     }
 
