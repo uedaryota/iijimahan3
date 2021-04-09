@@ -451,4 +451,11 @@ public class ShootEnemy : MonoBehaviour
     {
         return BuffLevel;
     }
+    public void LaserDamage()
+    {
+        if (this.gameObject.tag == "Friend")
+        {
+            Damage(100f);
+        }
+    }
 }
