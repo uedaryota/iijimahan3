@@ -76,6 +76,8 @@ public class PlayerControl : MonoBehaviour
     private int nomove = 240;
     private bool startFlag = false;
 
+    private bool nockvelFlag = false;
+
     //private Color cr;
     //private float cl;
 
@@ -154,6 +156,10 @@ public class PlayerControl : MonoBehaviour
         {
             NockBack();
             Gamenn();
+        }
+        else if(!nockBackFlag)
+        {
+            nockvelFlag = false;
         }
         Gamenn();
         if (keyboardFlag)//キーボード操作
@@ -271,34 +277,84 @@ public class PlayerControl : MonoBehaviour
             nockBackFlag = false;
             nockBackCount = 0;
         }
-        //if(nockbackVel == Vector3.zero)
-        //{
-        //    UnityEditor.EditorApplication.isPaused = true;
-        //}
+        
         Vector3 screen_playerPos2 = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
+        //nockbackVel.y = nockbackVel.y * -1;
 
-        if (screen_playerPos2.y > Screen.height - 50)
+        bool upFlag = false;
+        bool upFlag2 = false;
+
+        bool downFlag = false;
+
+        if(!nockvelFlag)
         {
-            nockbackVel.y = 0;
-        }
-        if (screen_playerPos2.y < 50)
-        {
-            nockbackVel.y = 0;
-        }
-        if (screen_playerPos2.x > Screen.width - 50)
-        {
-            nockbackVel.x = 0;
-        }
-        if (screen_playerPos2.x < nomove)
-        {
-            nockbackVel.x = 0;
+            if (screen_playerPos2.y > Screen.height - 50)
+            {
+                //nockbackVel.y = 0;
+                upFlag2 = true;
+            }
+            else if (screen_playerPos2.y < 50)
+            {
+                //nockbackVel.y = 0;
+                upFlag = true;
+                
+            }
+            if (screen_playerPos2.x > Screen.width - 50)
+            {
+                nockbackVel.x = 0;
+                downFlag = true;
+            }
+            else if (screen_playerPos2.x < nomove)
+            {
+                nockbackVel.x = 0;
+                downFlag = true;
+            }
         }
 
-        transform.position += nockbackVel * Time.deltaTime * 30f;
-       
-       
+        if(upFlag && downFlag)
+        {
+            if(nockbackVel.y< 0 && upFlag)
+            {
+                nockbackVel.y = nockbackVel.y * -1;
+            }
+            
+            
+            transform.position += nockbackVel * Time.deltaTime * 30f;
+        }
+        else if (upFlag2 && downFlag)
+        {
+            if (nockbackVel.y > 0 && upFlag2)
+            {
+                nockbackVel.y = nockbackVel.y * -1;
+            }
+
+
+            transform.position += nockbackVel * Time.deltaTime * 30f;
+        }
+        else
+        {
+            if (screen_playerPos2.y > Screen.height - 50)
+            {
+                nockbackVel.y = 0;
+            }
+            if (screen_playerPos2.y < 50)
+            {
+                nockbackVel.y = 0;
+            }
+            if (screen_playerPos2.x > Screen.width - 50)
+            {
+                nockbackVel.x = 0;
+            }
+            if (screen_playerPos2.x < nomove)
+            {
+                nockbackVel.x = 0;
+            }
+        }
+
+        transform.position += nockbackVel * Time.deltaTime * 30f;    
 
         nockBackCount += 1 * Time.deltaTime;
+        nockvelFlag = true;
     }
     public void CheckControlDevice()
     {
@@ -438,6 +494,7 @@ public class PlayerControl : MonoBehaviour
 
         if (mutekiFlag) return;//無敵なら以下処理しない
 
+        return;
 
         if (other.gameObject.tag == "Enemy")
         {
