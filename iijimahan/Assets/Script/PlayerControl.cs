@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerControl : MonoBehaviour
 {
     [SerializeField, Header("プレイヤーの初期HP")]
-    public int HP = 100;
+    public float HP = 100;
     [SerializeField, Header("プレイヤーの移動速度")]
     public float speed = 10f;
     [SerializeField, Header("プレイヤーのが撃つ弾")]
@@ -76,6 +76,8 @@ public class PlayerControl : MonoBehaviour
     private int nomove = 240;
     private bool startFlag = false;
 
+    public bool insekiHitFlag = false;
+    private float insekicount = 0;
     private bool nockvelFlag = false;
 
     //private Color cr;
@@ -125,6 +127,21 @@ public class PlayerControl : MonoBehaviour
         //Debug.Log(HP);
         //gauge = 100;
 
+        //回復
+        //if (Input.GetKey(KeyCode.H))
+        //{
+        //    float heal = 0.05f;
+        //    HP += heal;
+        //    playerHpGauge.Heal(heal / 100);
+        //    if (HP >= 100) HP = 100;
+        //}
+
+        //if (Input.GetKeyDown(KeyCode.O))
+        //{
+        //    HP -= 10;
+        //    playerHpGauge.Damage(10);
+        //}
+
         //デバッグ用*******************************
         if (gauge >= 100) gauge = 100;
         if ( HP <= 0 )
@@ -155,13 +172,24 @@ public class PlayerControl : MonoBehaviour
         if(nockBackFlag)//ノックバック処理
         {
             NockBack();
-            Gamenn();
+            //Gamenn();
         }
         else if(!nockBackFlag)
         {
             nockvelFlag = false;
         }
-        Gamenn();
+        //Gamenn();
+
+        if(insekiHitFlag)
+        {
+            insekicount += 2*Time.deltaTime;
+        }
+        if(insekicount>=1.5f)
+        {
+            insekiHitFlag = false;
+            insekicount = 0;
+        }
+
         if (keyboardFlag)//キーボード操作
         {
             KeyBoardMove();
@@ -270,6 +298,7 @@ public class PlayerControl : MonoBehaviour
 
     }
 
+    //隕石ノックバック処理
     public void NockBack()
     {
         if (nockBackCount > 0.2f)
@@ -356,6 +385,8 @@ public class PlayerControl : MonoBehaviour
         nockBackCount += 1 * Time.deltaTime;
         nockvelFlag = true;
     }
+
+    //コントローラーチェック
     public void CheckControlDevice()
     {
         if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.D)
@@ -373,10 +404,7 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    public void Gamenn()
-    {
-        
-    }
+    //キーボード操作
     public void KeyBoardMove()
     {
         if (nockBackFlag) return;
@@ -402,6 +430,7 @@ public class PlayerControl : MonoBehaviour
         velocity *= speed;
     }
 
+    //パッド操作
     public void PadMove()
     {
         if (nockBackFlag) return;
@@ -455,6 +484,7 @@ public class PlayerControl : MonoBehaviour
         transform.position += padvelocity * padspeed;
     }
 
+    //隕石ダメージ
     public void RockDamage(float dame)
     {
         if (mutekiFlag) return;
@@ -463,11 +493,26 @@ public class PlayerControl : MonoBehaviour
         playerHpGauge.Damage(dame);
         MutekiFlagActive();
     }
-  
+
+    //HP回復
+    public void PlayerHeal()
+    {
+        float heal = 0.05f;
+        HP += heal;
+        playerHpGauge.Heal(heal / 100);
+        if (HP >= 100) HP = 100;
+    }
+
+    private void OnTriggerStay(Collider other)
+    {
+        //if (other.gameObject.tag == "FriendHeal")
+        //{
+        //    PlayerHeal();
+        //}
+    }
+
     private void OnTriggerEnter(Collider other)
     {
-        
-
         if (playerState != PlayerState.Alive ) return;//生きてなかったら以下処理しない
 
         if (other.gameObject.tag == "GaugeEnergy")
@@ -480,6 +525,8 @@ public class PlayerControl : MonoBehaviour
 
         if (other.gameObject.tag == "Rock")
         {
+            if (insekiHitFlag) return;
+            insekiHitFlag = true;
             RockDamage(damage);
             audioSource.volume = 0.4f;
             //音
@@ -489,7 +536,7 @@ public class PlayerControl : MonoBehaviour
 
             nockbackVel = (transform.position - other.transform.position).normalized;
 
-            nockBackFlag = true;
+            nockBackFlag = true;      
         }
 
         if (mutekiFlag) return;//無敵なら以下処理しない
@@ -587,10 +634,7 @@ public class PlayerControl : MonoBehaviour
     {
         float distance = 0;
         float ansDist = 0;
-        
 
-
-     
         GameObject[] obj = GameObject.FindGameObjectsWithTag("Rock");
 
         for(int i = 0; i<obj.Length; i++)
