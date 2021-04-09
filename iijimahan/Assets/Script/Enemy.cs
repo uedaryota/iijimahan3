@@ -5,24 +5,20 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
 
-    public float StartHp = 300;
-    float hp;
-    public float StartPower = 100;
-    float power;
-    float BuffLevel = 0;
+    EnemyState state;
     private GameObject target;
 
     private Vector3 velocity;
     public float speed = 5;
-    private bool deadFlag = false;
-    public GameObject energy;
+   
+    
     float MaxrotateTime = 0.5f;
     float rotateTime = 0;
     Transform lastTransform;
     //float rotateTime = 0;
     float rotateX, rotateY;
     float currentrotateZ, rotateZ;
-    GameObject buffInstance;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,9 +26,8 @@ public class Enemy : MonoBehaviour
         rotateY = 0;
         currentrotateZ = 180;
         rotateZ = 0;
-        hp = StartHp;
-        power = StartPower;
-        deadFlag = false;
+        state = GetComponent<EnemyState>();
+
         target = GameObject.FindGameObjectWithTag("Player");
     }
 
@@ -42,11 +37,7 @@ public class Enemy : MonoBehaviour
         CheckTarget();
         
       //  ChangeRotate();
-        if (target!=null)
-        {
-            CheckDead();
-        }
-     
+ 
         Move();
     }
     void Move()
@@ -115,23 +106,8 @@ public class Enemy : MonoBehaviour
         }
 
     }
-    void CheckDead()
-    {
-        if (hp <= 0)
-        {
-            deadFlag = true;
-        }
-        if (deadFlag)
-        {
-            GaugeEnergyDrop();
-            Destroy(this.gameObject);
-        }
-    }
-    public void GaugeEnergyDrop()
-    {
-        GameObject energys = Instantiate(energy) as GameObject;
-        energys.GetComponent<GaugeEnergyControl>().SetPosition(this.transform.position);
-    }
+   
+   
     private void OnTriggerEnter(Collider other)
     {
         Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
@@ -140,7 +116,7 @@ public class Enemy : MonoBehaviour
         {
             if (this.gameObject.tag == "Friend")
             {
-                Buff();
+                state.Buff();
             }
         }
         if (screenPos.x < Screen.width && screenPos.x > 0)
@@ -158,7 +134,7 @@ public class Enemy : MonoBehaviour
                     }
                     if (other.gameObject.tag == "Player")
                     {
-                        deadFlag = true;
+                        state.Dead();
                     }
 
                     if (other.gameObject.tag == "PlayerBullet")
@@ -175,13 +151,9 @@ public class Enemy : MonoBehaviour
                     }
                     if (other.gameObject.tag == "Friend")
                     {
-                        if (other.GetComponent<ShootEnemy>() != null)
+                      if (other.GetComponent<EnemyState>() != null)
                         {
-                            Damage(other.GetComponent<ShootEnemy>().GetPower());
-                        }
-                        else if (other.GetComponent<Enemy>() != null)
-                        {
-                            Damage(other.GetComponent<Enemy>().GetPower());
+                            Damage(other.GetComponent<EnemyState>().GetPower());
                         }
                     }
 
@@ -191,19 +163,19 @@ public class Enemy : MonoBehaviour
                 {
                     if (other.gameObject.tag == "Enemy")
                     {
-                        deadFlag = true;
+                        state.Dead();
                     }
 
                     if (other.gameObject.tag == "Boss")
                     {
-                        deadFlag = true;
+                        state.Dead();
                     }
 
                     if (other.gameObject.tag == "EnemyBullet")
                     {
                         if (other.GetComponent<BossPower>() != null)
                         {
-                            hp -= target.GetComponent<BossPower>().GetPower();
+                            state.Damage(other.GetComponent<BossPower>().GetPower());
                         }
                         else
                         {
@@ -219,7 +191,7 @@ public class Enemy : MonoBehaviour
     }
     void Damage(float damage)
     {
-        hp -= damage;
+        state.Damage(damage);
     }
     public void testmove()
     {
@@ -351,7 +323,7 @@ public class Enemy : MonoBehaviour
                     if (other.GetComponent<FriendBullet>().GetParent() != null)
                     {
                         target = other.GetComponent<FriendBullet>().GetParent();
-                        hp -= target.GetComponent<ShootEnemy>().GetPower();
+                        state.Damage(target.GetComponent<EnemyState>().GetPower());
                     }
                 }
             }
@@ -366,52 +338,12 @@ public class Enemy : MonoBehaviour
                     if (other.GetComponent<EnemyBullet>().GetParent() != null)
                     {
                         target = other.GetComponent<EnemyBullet>().GetParent();
-                        hp -= target.GetComponent<ShootEnemy>().GetPower();
+                        state.Damage(target.GetComponent<EnemyState>().GetPower());
                     }
                 }
             }
         }
 
     }
-    public float GetPower()
-    {
-        return power;
-    }
-    void Buff()
-    {
-        BuffLevel += 1;
-        if (buffInstance == null)
-        {
-            buffInstance = Instantiate(Resources.Load<GameObject>("BuffParticle"));
-            buffInstance.GetComponent<BuffEffectScript>().SetParent(gameObject);
-        }
-        if (BuffLevel == 1)
-        {
-            hp += StartHp * 1.3f;
-            power += StartPower * 1.5f;
-        }
-        if (BuffLevel == 2)
-        {
 
-            hp += StartHp * 1.3f;
-            power += StartPower * 1.5f;
-        }
-        if (BuffLevel == 3)
-        {
-
-            hp += StartHp * 1.3f;
-            power += StartPower * 1.5f;
-        }
-    }
-    public float GetBuffLevel()
-    {
-        return BuffLevel;
-    }
-    public void LaserDamage()
-    {
-        if (this.gameObject.tag == "Friend")
-        {
-            Damage(100f);
-        }
-    }
 }

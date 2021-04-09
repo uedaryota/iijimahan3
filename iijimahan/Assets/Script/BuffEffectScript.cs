@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class BuffEffectScript : MonoBehaviour
 {
-    Enemy enemy;
-    ShootEnemy shootEnemy;
+    EnemyState enemy;
     GameObject parent;
 
     // Vector3 def;
@@ -13,8 +12,8 @@ public class BuffEffectScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemy = parent.GetComponent<Enemy>();
-        shootEnemy = parent.GetComponent<ShootEnemy>();
+        enemy = parent.GetComponent<EnemyState>();
+       
       //  def = transform.localRotation.eulerAngles;
     }
 
@@ -32,7 +31,7 @@ public class BuffEffectScript : MonoBehaviour
         if(this.gameObject!=null)
         {
             transform.position = parent.transform.position;
-            if (shootEnemy != null && shootEnemy.GetBuffLevel() != 0)
+            if (enemy != null && enemy.GetBuffLevel() != 0)
             {
                 if (!this.gameObject.GetComponent<ParticleSystem>().isPlaying)
                 {
@@ -41,15 +40,7 @@ public class BuffEffectScript : MonoBehaviour
                 }
 
             }
-
-            else if (enemy != null && enemy.GetBuffLevel() != 0)
-            {
-                if (!this.gameObject.GetComponent<ParticleSystem>().isPlaying)
-                {
-                    this.gameObject.GetComponent<ParticleSystem>().Play();
-
-                }
-            }
+            
             else
             {
                 this.gameObject.GetComponent<ParticleSystem>().Stop();

@@ -69,14 +69,11 @@ public class BossHp : MonoBehaviour
             //damege = other.gameObject.GetComponent<>();
             if (other.gameObject.tag == "Friend")
             {
-                if (other.GetComponent<ShootEnemy>() != null)
+                if (other.GetComponent<EnemyState>() != null)
                 {
-                    Damage(other.GetComponent<ShootEnemy>().GetPower());
+                    Damage(other.GetComponent<EnemyState>().GetPower());
                 }
-                else if (other.GetComponent<Enemy>() != null)
-                {
-                    Damage(other.GetComponent<Enemy>().GetPower());
-                }
+            
             }
             hpGauge.Damage(damege);
             //音

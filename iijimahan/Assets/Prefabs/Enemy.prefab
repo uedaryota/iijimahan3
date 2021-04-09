@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7265182206125767365}
   - component: {fileID: 7265182206125767366}
   - component: {fileID: -7628170639105731294}
+  - component: {fileID: -3494675557322838412}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Enemy
@@ -109,10 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87668f7f565b5b64296ba746b3fa802f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartHp: 300
-  StartPower: 100
   speed: 5
-  energy: {fileID: 956122239005918985, guid: 290abd1f2d9b09b40baa65fbdb4e09a3, type: 3}
 --- !u!54 &7265182206125767366
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -141,6 +139,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 465ceea1307303b4ead72cec32124d67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-3494675557322838412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7265182206125767360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 467b1772636727e4aa772034d907ad91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartHp: 300
+  StartPower: 500
+  energy: {fileID: 956122239005918985, guid: 290abd1f2d9b09b40baa65fbdb4e09a3, type: 3}
 --- !u!1001 &7540452129433375356
 PrefabInstance:
   m_ObjectHideFlags: 0
