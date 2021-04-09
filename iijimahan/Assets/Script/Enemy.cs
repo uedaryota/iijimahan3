@@ -248,7 +248,9 @@ public class Enemy : MonoBehaviour
             {
                 currentrotateZ += 360;
             }
-          
+
+            if (Mathf.Abs(rotateZ - currentrotateZ) > 3)
+            {
                 if (rotateZ - currentrotateZ < 0)
                 {
                     currentrotateZ -= Time.deltaTime * 150;
@@ -257,7 +259,9 @@ public class Enemy : MonoBehaviour
                 {
                     currentrotateZ += Time.deltaTime * 150;
                 }
-            
+            }
+
+
 
             a.eulerAngles = new Vector3(0, 0, currentrotateZ);
             transform.rotation = a;

@@ -17,14 +17,30 @@ public class HeelOnTrigger : MonoBehaviour
     
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "Heel")
+        if (other.tag == "EnemyHeal" && gameObject.tag == "Enemy") 
         {
             heelEffect.PlayParticle();
+            EnemyState state = GetComponent<EnemyState>();
+            float healValue = Time.deltaTime * state.GetPower();
+            state.Damage(-healValue);
+            Debug.Log(healValue);
+        }
+        if (other.tag == "FriendHeal" && gameObject.tag == "Friend") 
+        {
+            heelEffect.PlayParticle();
+            EnemyState state = GetComponent<EnemyState>();
+            float healValue = Time.deltaTime * state.GetPower();
+            state.Damage(-healValue);
+            Debug.Log(healValue);
         }
     }
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag == "Heel")
+        if (other.tag == "EnemyHeal")
+        {
+            heelEffect.StopParticle();
+        }
+        if (other.tag == "FriendHeal") 
         {
             heelEffect.StopParticle();
         }

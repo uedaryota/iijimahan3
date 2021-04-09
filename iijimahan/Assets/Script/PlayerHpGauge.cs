@@ -16,6 +16,7 @@ public class PlayerHpGauge : MonoBehaviour
     //int poolDamage = 0;
     float alpha = 0;
     bool UIStartFlag = false;
+    float d = 0;
 
     void Start()
     {
@@ -51,14 +52,15 @@ public class PlayerHpGauge : MonoBehaviour
 
         if (greenDamage != 0)
         {
-            float num = greenDamage / 100;
-            GreenGauge.fillAmount -= num;
-            greenDamage = 0;
+            //float num = greenDamage / 100;
+            //GreenGauge.fillAmount -= num;
+            //greenDamage = 0;
         }
         if (RedGauge.fillAmount >= GreenGauge.fillAmount)
         {
             //Debug.Log(redDamage);
             RedGauge.fillAmount -= redDamage * Time.deltaTime;
+
             if (RedGauge.fillAmount == GreenGauge.fillAmount)
             {
                 redDamage = 0;
@@ -71,9 +73,19 @@ public class PlayerHpGauge : MonoBehaviour
     }
 
     public void Damage(float dame)
-    {      
+    {
         greenDamage = dame;
-        redDamage = dame / 100f;
+        //redDamage = dame / 100f;
+        float d = dame/100;
+        float num = greenDamage / 100;
+        GreenGauge.fillAmount -= num;
+        greenDamage = 0;
+        redDamage = RedGauge.fillAmount - GreenGauge.fillAmount;
+    }
+
+    public void Heal(float heal)
+    {
+        GreenGauge.fillAmount += heal;
     }
 
     public void StartUIAlpha()

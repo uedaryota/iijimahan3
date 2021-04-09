@@ -1302,6 +1302,8 @@ MonoBehaviour:
   Superarmor: 5
   interval: 0.1
   bossmodel: {fileID: 2100000, guid: b2d1911af1fb0fa49ad4c8dc04c505f9, type: 2}
+  dameageSE: {fileID: 0}
+  ATK: 0
   status: 0
   Hp: 0
 --- !u!114 &3002536123364831439
@@ -1316,6 +1318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b3507170eb8d29649a081b20d3ed2739, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BulletSE: {fileID: 0}
 --- !u!114 &4704229316537888637
 MonoBehaviour:
   m_ObjectHideFlags: 0
