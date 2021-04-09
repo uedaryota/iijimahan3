@@ -9,10 +9,11 @@ public class BulletControl : MonoBehaviour
     private int timer = 0;
     private bool scaleFlag = false;
     [SerializeField, Header("爆発エフェクト")] private Object effect;
+    private Vector3 effectpos;
     // Start is called before the first frame update
     void Start()
     {
-
+        effectpos = new Vector3(0, 0, -3);
     }
     // Update is called once per frame
     void Update()
@@ -61,7 +62,7 @@ public class BulletControl : MonoBehaviour
         //}
         if (other.gameObject.tag == "Rock")
         {
-            Instantiate(effect, transform.position, Quaternion.identity);
+            Instantiate(effect, transform.position + effectpos, Quaternion.identity);
             Destroy(this.gameObject);
             //UnityEditor.EditorApplication.isPaused = true;
         }
