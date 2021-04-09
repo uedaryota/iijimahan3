@@ -7,6 +7,8 @@ using Random = UnityEngine.Random;
 
 public class EnemyManager : MonoBehaviour
 {
+    #region Enum一覧
+
     private enum wave_enemy
     {
         Wave1の敵,
@@ -19,6 +21,16 @@ public class EnemyManager : MonoBehaviour
         Wave8の敵,
         Wave9の敵,
         Wave10の敵,
+        Wave11の敵,
+        Wave12の敵,
+        Wave13の敵,
+        Wave14の敵,
+        Wave15の敵,
+        Wave16の敵,
+        Wave17の敵,
+        Wave18の敵,
+        Wave19の敵,
+        Wave20の敵,
     }
     
     private enum wave_enemy2
@@ -71,6 +83,16 @@ public class EnemyManager : MonoBehaviour
         敵18体目,
         敵19体目,
         敵20体目,
+        敵21体目,
+        敵22体目,
+        敵23体目,
+        敵24体目,
+        敵25体目,
+        敵26体目,
+        敵27体目,
+        敵28体目,
+        敵29体目,
+        敵30体目,
         敵31体目,
         敵32体目,
         敵33体目,
@@ -80,6 +102,7 @@ public class EnemyManager : MonoBehaviour
         敵37体目,
         敵38体目,
         敵39体目,
+        敵40体目,
         敵41体目,
         敵42体目,
         敵43体目,
@@ -89,6 +112,7 @@ public class EnemyManager : MonoBehaviour
         敵47体目,
         敵48体目,
         敵49体目,
+        敵50体目,
         敵51体目,
         敵52体目,
         敵53体目,
@@ -98,6 +122,7 @@ public class EnemyManager : MonoBehaviour
         敵57体目,
         敵58体目,
         敵59体目,
+        敵60体目,
         敵61体目,
         敵62体目,
         敵63体目,
@@ -107,6 +132,7 @@ public class EnemyManager : MonoBehaviour
         敵67体目,
         敵68体目,
         敵69体目,
+        敵70体目,
         敵71体目,
         敵72体目,
         敵73体目,
@@ -116,6 +142,7 @@ public class EnemyManager : MonoBehaviour
         敵77体目,
         敵78体目,
         敵79体目,
+        敵80体目,
         敵81体目,
         敵82体目,
         敵83体目,
@@ -125,6 +152,7 @@ public class EnemyManager : MonoBehaviour
         敵87体目,
         敵88体目,
         敵89体目,
+        敵90体目,
         敵91体目,
         敵92体目,
         敵93体目,
@@ -134,8 +162,135 @@ public class EnemyManager : MonoBehaviour
         敵97体目,
         敵98体目,
         敵99体目,
+        敵101体目,
+        敵102体目,
+        敵103体目,
+        敵104体目,
+        敵105体目,
+        敵106体目,
+        敵107体目,
+        敵108体目,
+        敵109体目,
+        敵110体目,
+        敵111体目,
+        敵112体目,
+        敵113体目,
+        敵114体目,
+        敵115体目,
+        敵116体目,
+        敵117体目,
+        敵118体目,
+        敵119体目,
+        敵120体目,
+        敵121体目,
+        敵122体目,
+        敵123体目,
+        敵124体目,
+        敵125体目,
+        敵126体目,
+        敵127体目,
+        敵128体目,
+        敵129体目,
+        敵130体目,
+        敵131体目,
+        敵132体目,
+        敵133体目,
+        敵134体目,
+        敵135体目,
+        敵136体目,
+        敵137体目,
+        敵138体目,
+        敵139体目,
+        敵140体目,
+        敵141体目,
+        敵142体目,
+        敵143体目,
+        敵144体目,
+        敵145体目,
+        敵146体目,
+        敵147体目,
+        敵148体目,
+        敵149体目,
+        敵150体目,
+        敵151体目,
+        敵152体目,
+        敵153体目,
+        敵154体目,
+        敵155体目,
+        敵156体目,
+        敵157体目,
+        敵158体目,
+        敵159体目,
+        敵160体目,
+        敵161体目,
+        敵162体目,
+        敵163体目,
+        敵164体目,
+        敵165体目,
+        敵166体目,
+        敵167体目,
+        敵168体目,
+        敵169体目,
+        敵170体目,
+        敵171体目,
+        敵172体目,
+        敵173体目,
+        敵174体目,
+        敵175体目,
+        敵176体目,
+        敵177体目,
+        敵178体目,
+        敵179体目,
+        敵180体目,
+        敵181体目,
+        敵182体目,
+        敵183体目,
+        敵184体目,
+        敵185体目,
+        敵186体目,
+        敵187体目,
+        敵188体目,
+        敵189体目,
+        敵190体目,
+        敵191体目,
+        敵192体目,
+        敵193体目,
+        敵194体目,
+        敵195体目,
+        敵196体目,
+        敵197体目,
+        敵198体目,
+        敵199体目,
     }
-    
+
+    private enum wave_interval
+    {
+        StartWave1,
+        Wave1Wave2,
+        Wave2Wave3,
+        Wave3Wave4,
+        Wave4Wave5,
+        Wave5Wave6,
+        Wave6Wave7,
+        Wave7Wave8,
+        Wave8Wave9,
+        Wave9Wave10,
+        Wave10Wave11,
+        Wave11Wave12,
+        Wave12Wave13,
+        Wave13Wave14,
+        Wave14Wave15,
+        Wave15Wave16,
+        Wave16Wave17,
+        Wave17Wave18,
+        Wave18Wave19,
+        Wave19Wave20,
+    }
+
+    #endregion
+
+    #region 変数一覧
+
     [System.Serializable]
     public struct WaveEnemy
     {
@@ -159,10 +314,13 @@ public class EnemyManager : MonoBehaviour
     [EnumLabel(typeof(wave_enemy))]
     public WaveEnemy[] enemy_Manual;
 
-    [SerializeField, Header("Wave毎にリピートで無限に生成するか")]
+    [SerializeField, Header("Wave毎に手動エネミーをリピートで無限に生成するか")]
     [EnumLabel(typeof(wave_enemy))]
     public bool[] Repeat;
 
+    [SerializeField, Header("WaveとWaveの間のインターバル")]
+    [EnumLabel(typeof(wave_interval))]
+    private float[] wave_wave_interval;
 
     [SerializeField, Header("enemyboxオブジェクト")]
     [EnumLabel(typeof(enemy_box))]
@@ -204,7 +362,11 @@ public class EnemyManager : MonoBehaviour
     private int enemyrnd;
     private int enemycount;//エネミー生成用のカウント
     private bool bosschack;
-    
+
+    private float wave_timer;
+
+    #endregion
+
     void Start()
     {
         bosschack = true;
@@ -212,7 +374,7 @@ public class EnemyManager : MonoBehaviour
         old_pos_chack = pos.y;
         old_old_pos_chack *= -pos.y;
         interval_count = 0;
-        //enemy_Manual = new WaveEnemy[wave - 1];
+        wave_timer = 0;
     }
 
     void Update()
@@ -225,23 +387,33 @@ public class EnemyManager : MonoBehaviour
         {
             enemycount = 0;
             interval_count = 0;
+            wave_timer = 0;
+
             if(bosschack == false)
             {
                 bosschack = true;
             }
-            //enemy_Manual = new WaveEnemy[wave - 1];
         }
         old_wave = wave;
-
-        if(wave % 2 == 1)
+        
+        //新しいwaveならWaveTimerでカウント
+        if(wave_wave_interval[wave - 1] >= wave_timer)
         {
-            EnemyRespawn_Manual();
+            wave_timer += Time.deltaTime;
         }
-        else if(wave % 2 == 0)
+        //インターバルを迎えたら通常の生成に移行
+        else
         {
-            BossRespawn();
-            EnemyRespawn_Manual();
-            EnemyRespawn(waverespawn[wave / 2 - 1]);
+            if (wave % 2 == 1)
+            {
+                EnemyRespawn_Manual();
+            }
+            else if (wave % 2 == 0)
+            {
+                BossRespawn();
+                EnemyRespawn_Manual();
+                EnemyRespawn(waverespawn[wave / 2 - 1]);
+            }
         }
     }
 
@@ -354,6 +526,7 @@ public class EnemyManager : MonoBehaviour
 
     void BossRespawn()
     {
+        //ボスが
         if (bosschack == true)
         {
             //ボスの座標指定
