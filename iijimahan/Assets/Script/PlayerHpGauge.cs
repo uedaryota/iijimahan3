@@ -9,12 +9,19 @@ public class PlayerHpGauge : MonoBehaviour
     public Image GreenGauge;
     [SerializeField]
     public Image RedGauge;
+    [SerializeField]
+    public Image Waku;
     float greenDamage = 0;
     float redDamage = 0;
     //int poolDamage = 0;
+    float alpha = 0;
+    bool UIStartFlag = false;
 
     void Start()
     {
+        GreenGauge.color = new Color(GreenGauge.color.r, GreenGauge.color.g, GreenGauge.color.b, alpha);
+        RedGauge.color = new Color(RedGauge.color.r, RedGauge.color.g, RedGauge.color.b, alpha);
+        Waku.color = new Color(Waku.color.r, Waku.color.g, Waku.color.b, alpha);
     }
     // Update is called once per frame
     void Update()
@@ -32,6 +39,16 @@ public class PlayerHpGauge : MonoBehaviour
         //    GreenGauge.fillAmount += 0.1f;
         //}
         // GreenGauge.fillAmount -= greenDamage/100;
+
+        //ポーズの時に止める
+        if (Time.timeScale <= 0) return;
+
+        //ゲームが始まったら出てくる
+        if (UIStartFlag)
+        {
+            StartUIAlpha();
+        }
+
         if (greenDamage != 0)
         {
             float num = greenDamage / 100;
@@ -57,5 +74,24 @@ public class PlayerHpGauge : MonoBehaviour
     {      
         greenDamage = dame;
         redDamage = dame / 100f;
+    }
+
+    public void StartUIAlpha()
+    {
+        GreenGauge.color = new Color(GreenGauge.color.r, GreenGauge.color.g, GreenGauge.color.b, alpha);
+        RedGauge.color = new Color(RedGauge.color.r, RedGauge.color.g, RedGauge.color.b, alpha);
+        Waku.color = new Color(Waku.color.r, Waku.color.g, Waku.color.b, alpha);
+
+        alpha += 2.5f * Time.deltaTime;
+
+        if (alpha >= 1.0f)
+        {
+            UIStartFlag = true;
+        }
+    }
+
+    public void SetStartUIflag(bool fl)
+    {
+        UIStartFlag = fl;
     }
 }
