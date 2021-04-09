@@ -22,6 +22,8 @@ public class PlayerControl : MonoBehaviour
     public int upenergy = 10;
     [SerializeField, Header("プレイヤーが受けるダメージ")]
     public float damage = 5f;
+    [SerializeField, Header("レーザーのダメージ上限")]
+    public float damagelimit = 10f;
 
     [SerializeField, Header("テストSE")]
     public AudioClip testAudio;
@@ -79,6 +81,7 @@ public class PlayerControl : MonoBehaviour
     public bool insekiHitFlag = false;
     private float insekicount = 0;
     private bool nockvelFlag = false;
+    private int LaserCnt = 0;
 
     //private Color cr;
     //private float cl;
@@ -652,10 +655,16 @@ public class PlayerControl : MonoBehaviour
     }
     public void LaserDamage()
     {
+        if (mutekiFlag) return;
         float damage2 = 1;
         HP -= (int)damage2;
         playerHpGauge.Damage(damage2);
-        MutekiFlagActive();
+        LaserCnt++;
+        if (LaserCnt == damagelimit)
+        {
+            LaserCnt = 0;
+            MutekiFlagActive();
+        }
         //音
         audioSource.volume = 0.4f;
         audioSource.PlayOneShot(dameageSE);

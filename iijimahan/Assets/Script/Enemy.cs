@@ -14,7 +14,7 @@ public class Enemy : MonoBehaviour
     
     float MaxrotateTime = 0.5f;
     float rotateTime = 0;
-    Transform lastTransform;
+    Vector3 lastPosition;
     //float rotateTime = 0;
     float rotateX, rotateY;
     float currentrotateZ, rotateZ;
@@ -264,12 +264,12 @@ public class Enemy : MonoBehaviour
 
             transform.Rotate(new Vector3(rotateX, rotateY, 0));
           
-            lastTransform = this.target.transform;
+            lastPosition= this.target.transform.position;
         }
         else
         {
             Quaternion a = Quaternion.identity;
-            Vector3 dir = lastTransform.position - transform.position;
+            Vector3 dir = lastPosition - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x);
             rotateZ = angle / (3.1415f / 180);
             //if (rotateZ < 0)
