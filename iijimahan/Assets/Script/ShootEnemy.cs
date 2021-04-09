@@ -331,15 +331,15 @@ void Damage(float damage)
             {
                 currentrotateZ += 360;
             }
-            //  if (rotateZ < 0)
+            if (Mathf.Abs(rotateZ - currentrotateZ) > 1)
             {
                 if (rotateZ - currentrotateZ < 0)
                 {
-                    currentrotateZ -= Time.deltaTime * 90;
+                    currentrotateZ -= Time.deltaTime * 150;
                 }
                 else
                 {
-                    currentrotateZ += Time.deltaTime * 90;
+                    currentrotateZ += Time.deltaTime * 150;
                 }
             }
 
