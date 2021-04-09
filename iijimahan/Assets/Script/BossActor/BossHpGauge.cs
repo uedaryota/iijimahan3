@@ -34,7 +34,7 @@ public class BossHpGauge : MonoBehaviour
         // GreenGauge.fillAmount -= greenDamage/100;
         if (greenDamage != 0)
         {
-            float num = greenDamage / 1000;
+            float num = greenDamage / GameObject.FindGameObjectWithTag("Boss").GetComponent<BossHp>().GetMaxHp();
             GreenGauge.fillAmount -= num;
             greenDamage = 0;
         }

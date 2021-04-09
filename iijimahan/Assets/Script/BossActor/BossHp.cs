@@ -108,5 +108,8 @@ public class BossHp : MonoBehaviour
     {
         this.Hp -= damage;
     }
-
+    public float GetMaxHp()
+    {
+        return MaxHp;
+    }
 }

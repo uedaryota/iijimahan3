@@ -57,7 +57,7 @@ public class BossLaser : MonoBehaviour
             Hutosa = 2.0f;
             this.tag = "EnemyBullet";
         } 
-        if(Cnt/30.0f>Speed*2)
+        if(Cnt/30.0f>Speed+5.0f)
         {
             Destroy(gameObject);
         }
