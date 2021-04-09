@@ -494,8 +494,6 @@ public class PlayerControl : MonoBehaviour
 
         if (mutekiFlag) return;//無敵なら以下処理しない
 
-        return;
-
         if (other.gameObject.tag == "Enemy")
         {
             HP -= (int)damage;
