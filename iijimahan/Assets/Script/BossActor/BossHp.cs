@@ -45,7 +45,7 @@ public class BossHp : MonoBehaviour
     {
         //ポーズの時に止める
         if (Time.timeScale <= 0) return;
-        if (Hp==0)
+        if (Hp<0)
         {
             Dead();
         }
