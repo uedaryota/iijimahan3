@@ -608,4 +608,14 @@ public class PlayerControl : MonoBehaviour
   
        
     }
+    public void LaserDamage()
+    {
+        float damage2 = 1;
+        HP -= (int)damage2;
+        playerHpGauge.Damage(damage2);
+        MutekiFlagActive();
+        //音
+        audioSource.volume = 0.4f;
+        audioSource.PlayOneShot(dameageSE);
+    }
 }

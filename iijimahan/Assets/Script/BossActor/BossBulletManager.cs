@@ -94,7 +94,7 @@ public class BossBulletManager : MonoBehaviour
         {
             GameObject newParent = new GameObject("Empty");
             Bullet = Instantiate(newParent, pos, Quaternion.identity);
-            //Bullet.tag = "EnemyBullet";
+           // Bullet.tag = "EnemyBullet";
             SpriteRenderer sr = Bullet.AddComponent<SpriteRenderer>();
             sr.sprite = BulletSprite[color];
             sr.sortingLayerName = "BossBullet";
@@ -103,18 +103,12 @@ public class BossBulletManager : MonoBehaviour
             Bullet.AddComponent<BossPower>();
             Rigidbody rg = Bullet.AddComponent<Rigidbody>();
             rg.useGravity = false;
-            if (ColliderType)
-            {
-                CapsuleCollider cc = Bullet.AddComponent<CapsuleCollider>();//.radius = SizeX;
-                cc.radius = Radius;
-                cc.isTrigger = true;
-            }
-            else
-            {
-                BoxCollider bc = Bullet.AddComponent<BoxCollider>();//.size = new Vector2(SizeX, SizeY);
-                bc.size = new Vector2(SizeX, SizeY);
-                bc.isTrigger = true;
-            }
+            BoxCollider bc = Bullet.AddComponent<BoxCollider>();//.size = new Vector2(SizeX, SizeY);
+            SizeX =0.0f;
+            SizeY =0.0f;
+            bc.size = new Vector2(SizeX, SizeY);
+            bc.isTrigger = true;
+
             Destroy(newParent);
         }
     }

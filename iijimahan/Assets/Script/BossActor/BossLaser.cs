@@ -65,6 +65,27 @@ public class BossLaser : MonoBehaviour
         line.endWidth = Hutosa;                     // 終了点の太さを0.1にする
   
             line.SetPositions(positions);
+        if (this.tag == "EnemyBullet")
+        {
+            Ray();
+        }
 
+    }
+    void Ray()
+    {
+        Ray ray = new Ray(startpos, goalpos);
+        RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity);
+        foreach(var obj in hits)
+        {
+            if(obj.collider.GetComponent<EnemyState>()!=null)
+            {
+                obj.collider.GetComponent<EnemyState>().LaserDamage();
+            }
+         
+            if(obj.collider.GetComponent<PlayerControl>()!=null)
+            {
+                obj.collider.GetComponent<PlayerControl>().LaserDamage();
+            }
+        }
     }
 }

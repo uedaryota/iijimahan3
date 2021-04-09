@@ -133,13 +133,14 @@ GameObject:
   - component: {fileID: 208896808}
   - component: {fileID: 208896807}
   - component: {fileID: 208896806}
+  - component: {fileID: 208896810}
   m_Layer: 0
-  m_Name: "\u30EA\u30A4\u30B3"
+  m_Name: "\u30B7\u30E5\u30D0\u30EB\u30B4\uFF01(\u7A81\u9032\u30DC\u30B9\u30D7\u30ED\u30C8\u30BF\u30A4\u30D7)"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!65 &208896806
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -171,7 +172,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 845762b835f3ae04089046bf52d4a481, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -208,12 +209,32 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 208896805}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 7.89}
+  m_LocalPosition: {x: -5.24, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &208896810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 208896805}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3dd530f8171773b4cacce6acf19fd3e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  MaxHp: 2000
+  Superarmor: 3
+  interval: 0.1
+  bossmodel: {fileID: 0}
+  dameageSE: {fileID: 0}
+  ATK: 1000
+  status: 0
+  Hp: 0
 --- !u!1 &359380470
 GameObject:
   m_ObjectHideFlags: 0
@@ -1386,6 +1407,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: "\u30EC\u30FC\u30B6\u30FC\u30DC\u30B9\u30D7\u30ED\u30C8\u30BF\u30A4\u30D7"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540285229408963248, guid: 9e2c78441d4a85f40aca58d36ea08aee,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e2c78441d4a85f40aca58d36ea08aee, type: 3}
