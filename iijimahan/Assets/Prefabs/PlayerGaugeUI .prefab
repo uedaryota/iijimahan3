@@ -201,6 +201,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GreenGauge: {fileID: 7327983742385636893}
   RedGauge: {fileID: 7327983740738334084}
+  Waku: {fileID: 7463622137204204894}
 --- !u!1 &7327983741577572496
 GameObject:
   m_ObjectHideFlags: 0
