@@ -4,11 +4,7 @@ using UnityEngine;
 
 public class HeelEnemy : MonoBehaviour
 {
-    public float StartHp = 300;
-    float hp;
-    public float StartHeel = 30;
-    float heel;
-    float BuffLevel = 0;
+    EnemyState state;
     private GameObject target;
     public float targetDistance = 7;
     private Vector3 velocity;
@@ -31,8 +27,7 @@ public class HeelEnemy : MonoBehaviour
         rotateY = 0;
         currentrotateZ = 180;
         rotateZ = 0;
-        hp = StartHp;
-        heel = StartHeel;
+        state = GetComponent<EnemyState>();
         deadFlag = false;
         target = GameObject.FindGameObjectWithTag("Player");
     }
@@ -49,20 +44,9 @@ public class HeelEnemy : MonoBehaviour
 
             
         }
-        CheakDead();
+       
     }
-    void CheakDead()
-    {
-        if (hp <= 0)
-        {
-            deadFlag = true;
-        }
-        if (deadFlag)
-        {
-            GaugeEnergyDrop();
-            Destroy(this.gameObject);
-        }
-    }
+    
     void Move()
     {
       
@@ -130,18 +114,7 @@ public class HeelEnemy : MonoBehaviour
         }
 
     }
-    void CheckDead()
-    {
-        if (hp <= 0)
-        {
-            deadFlag = true;
-        }
-        if (deadFlag)
-        {
-            GaugeEnergyDrop();
-            Destroy(this.gameObject);
-        }
-    }
+   
     public void GaugeEnergyDrop()
     {
         GameObject energys = Instantiate(energy) as GameObject;
@@ -155,7 +128,7 @@ public class HeelEnemy : MonoBehaviour
         {
             if (this.gameObject.tag == "Friend")
             {
-                Buff();
+                state.Buff();
             }
         }
         if (screenPos.x < Screen.width && screenPos.x > 0)
@@ -190,14 +163,11 @@ public class HeelEnemy : MonoBehaviour
                     }
                     if (other.gameObject.tag == "Friend")
                     {
-                        if (other.GetComponent<ShootEnemy>() != null)
+                        if (other.GetComponent<EnemyState>() != null)
                         {
-                            Damage(other.GetComponent<ShootEnemy>().GetPower());
+                            state.Damage(other.GetComponent<EnemyState>().GetPower());
                         }
-                        else if (other.GetComponent<Enemy>() != null)
-                        {
-                            Damage(other.GetComponent<Enemy>().GetPower());
-                        }
+                       
                     }
 
                     return;
@@ -227,20 +197,9 @@ public class HeelEnemy : MonoBehaviour
     }
     private void OnTriggerStay(Collider other)
     {
-        if(other.tag=="Heel")
-        {
-            heelCoolTime -= Time.deltaTime;
-            if (heelCoolTime <= 0)
-            {
-                HeelEnemy heel = other.GetComponent<HeelEnemy>();
-                hp += heel.GetHeel();
-            }
-        }
+        
     }
-    void Damage(float damage)
-    {
-        hp -= damage;
-    }
+  
     public void testmove()
     {
 
@@ -324,7 +283,7 @@ public class HeelEnemy : MonoBehaviour
                     if (other.GetComponent<FriendBullet>().GetParent() != null)
                     {
                         target = other.GetComponent<FriendBullet>().GetParent();
-                        hp -= target.GetComponent<ShootEnemy>().GetPower();
+                        state.Damage(target.GetComponent<EnemyState>().GetPower());
                     }
                 }
             }
@@ -339,45 +298,13 @@ public class HeelEnemy : MonoBehaviour
                     if (other.GetComponent<EnemyBullet>().GetParent() != null)
                     {
                         target = other.GetComponent<EnemyBullet>().GetParent();
-                        hp -= target.GetComponent<ShootEnemy>().GetPower();
+
+                        state.Damage(target.GetComponent<EnemyState>().GetPower());
                     }
                 }
             }
         }
 
     }
-    public float GetHeel()
-    {
-        return heel;
-    }
-    void Buff()
-    {
-        BuffLevel += 1;
-        if (buffInstance == null)
-        {
-            buffInstance = Instantiate(Resources.Load<GameObject>("BuffParticle"));
-            buffInstance.GetComponent<BuffEffectScript>().SetParent(gameObject);
-        }
-        if (BuffLevel == 1)
-        {
-            hp += StartHp * 1.3f;
-            heel = StartHeel * 1.5f;
-        }
-        if (BuffLevel == 2)
-        {
-
-            hp += StartHp * 1.3f;
-            heel = StartHeel * 1.5f*2;
-        }
-        if (BuffLevel == 3)
-        {
-
-            hp += StartHp * 1.3f;
-            heel = StartHeel * 1.5f*3;
-        }
-    }
-    public float GetBuffLevel()
-    {
-        return BuffLevel;
-    }
+  
 }

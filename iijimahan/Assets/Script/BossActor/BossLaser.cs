@@ -77,14 +77,11 @@ public class BossLaser : MonoBehaviour
         RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity);
         foreach(var obj in hits)
         {
-            if(obj.collider.GetComponent<ShootEnemy>()!=null)
+            if(obj.collider.GetComponent<EnemyState>()!=null)
             {
-                obj.collider.GetComponent<ShootEnemy>().LaserDamage();
+                obj.collider.GetComponent<EnemyState>().LaserDamage();
             }
-            if(obj.collider.GetComponent<Enemy>()!=null)
-            {
-                obj.collider.GetComponent<Enemy>().LaserDamage();
-            }
+         
             if(obj.collider.GetComponent<PlayerControl>()!=null)
             {
                 obj.collider.GetComponent<PlayerControl>().LaserDamage();
