@@ -73,7 +73,10 @@ public class BossHp : MonoBehaviour
                 {
                     Damage(other.GetComponent<EnemyState>().GetPower());
                 }
-            
+            }
+            if(other.gameObject.tag== "FriendBullet")
+            {
+                Damage(100);
             }
             hpGauge.Damage(damege);
             //音
