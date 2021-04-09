@@ -31,9 +31,9 @@ public class LaserBoss : MonoBehaviour
                 }
                 break;
             case Acter.Attack:
-                if (Cnt == 180)
+                if (Cnt == 360)
                 {
-                    for (int x = 0; x < 3; x++)
+                    for (int x = 0; x < 6; x++)
                     {
                         audioSource.PlayOneShot(BulletSE);
                         GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 0);
