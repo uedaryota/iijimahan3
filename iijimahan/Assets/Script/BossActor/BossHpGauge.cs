@@ -34,7 +34,7 @@ public class BossHpGauge : MonoBehaviour
         // GreenGauge.fillAmount -= greenDamage/100;
         if (greenDamage != 0)
         {
-            float num = greenDamage / 100;
+            float num = greenDamage / 1000;
             GreenGauge.fillAmount -= num;
             greenDamage = 0;
         }
