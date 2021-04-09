@@ -21,7 +21,7 @@ public class ShootEnemy : MonoBehaviour
     // public GameObject buffEffect;
     GameObject buffInstance;
 
-    Transform lastTransform;
+    Vector3 lastPosition;
     // Start is called before the first frame update
     void Start()
     {
@@ -349,12 +349,13 @@ void Damage(float damage)
             transform.Rotate(new Vector3(rotateX, rotateY, 0));
             // transform.Rotate(0, 0, angle);
             //   this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
-            lastTransform = this.target.transform;
+            lastPosition = this.target.transform.position;
+            
         }
         else
         {
             Quaternion a = Quaternion.identity;
-            Vector3 dir = lastTransform.position - transform.position;
+            Vector3 dir = lastPosition - transform.position;
             float angle = Mathf.Atan2(dir.y, dir.x);
             rotateZ = angle / (3.1415f / 180);
             //if (rotateZ < 0)
