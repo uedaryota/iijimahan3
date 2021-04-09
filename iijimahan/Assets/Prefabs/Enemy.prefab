@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   StartHp: 300
-  StartPower: 100
+  StartPower: 500
   energy: {fileID: 956122239005918985, guid: 290abd1f2d9b09b40baa65fbdb4e09a3, type: 3}
 --- !u!1001 &7540452129433375356
 PrefabInstance:

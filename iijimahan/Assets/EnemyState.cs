@@ -53,7 +53,13 @@ public class EnemyState : MonoBehaviour
     {
         hp -= damage;
     }
-
+    public void LaserDamage()
+    {
+        if (this.gameObject.tag == "Friend")
+        {
+            Damage(100f);
+        }
+    }
     public void Buff()
     {
         BuffLevel += 1;

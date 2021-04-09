@@ -163,7 +163,7 @@ public class ShootEnemy : MonoBehaviour
                     {
                         if (other.GetComponent<BossPower>() != null)
                         {
-                            state.Damage(target.GetComponent<BossPower>().GetPower());
+                            state.Damage(other.GetComponent<BossPower>().GetPower());
                         }
                         else
                         {
