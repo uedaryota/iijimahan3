@@ -58,6 +58,16 @@ PrefabInstance:
       propertyPath: MaxHp
       value: 1500
       objectReference: {fileID: 0}
+    - target: {fileID: 3540285229408963209, guid: 9e2c78441d4a85f40aca58d36ea08aee,
+        type: 3}
+      propertyPath: Move
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3540285229408963209, guid: 9e2c78441d4a85f40aca58d36ea08aee,
+        type: 3}
+      propertyPath: Speed
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 3540285229408963212, guid: 9e2c78441d4a85f40aca58d36ea08aee,
         type: 3}
       propertyPath: m_RootOrder

@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class LaserBoss : MonoBehaviour
 {
-    int Cnt = 0;
-    int Cnt2 = 0;
+    int Cnt = 440;
     Acter act;
     [SerializeField, Header("ボス攻撃SE")] public AudioClip BulletSE;
     private AudioSource audioSource;
@@ -31,7 +30,7 @@ public class LaserBoss : MonoBehaviour
                 }
                 break;
             case Acter.Attack:
-                if (Cnt == 360)
+                if (Cnt == 480)
                 {
                     for (int x = 0; x < 6; x++)
                     {
@@ -39,13 +38,6 @@ public class LaserBoss : MonoBehaviour
                         GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 0);
                     }
                     Cnt = 0;
-                    Cnt2++;
-                    if (Cnt2 == 5)
-                    {
-                        audioSource.PlayOneShot(BulletSE);
-                        GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet(transform.position, 1);
-                        Cnt2 = 0;
-                    }
                 }
                 Cnt++;
                 break;
