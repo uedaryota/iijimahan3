@@ -130,6 +130,8 @@ public class PlayerControl : MonoBehaviour
             playerState = PlayerState.Dead;
         }
 
+        //プレイヤーの最初の行動
+
         float startSpeed = 0.075f;
 
         if(!startFlag)
@@ -139,6 +141,8 @@ public class PlayerControl : MonoBehaviour
             if(transform.position.x >= -6)
             {
                 startFlag = true;
+                playerEnergyGauge.SetStartUIflag(startFlag);
+                playerHpGauge.SetStartUIflag(startFlag);
             }
         }
 
@@ -271,9 +275,8 @@ public class PlayerControl : MonoBehaviour
         //{
         //    UnityEditor.EditorApplication.isPaused = true;
         //}
-
-        transform.position += nockbackVel * Time.deltaTime * 30f;
         Vector3 screen_playerPos2 = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
+
         if (screen_playerPos2.y > Screen.height - 50)
         {
             nockbackVel.y = 0;
@@ -290,6 +293,10 @@ public class PlayerControl : MonoBehaviour
         {
             nockbackVel.x = 0;
         }
+
+        transform.position += nockbackVel * Time.deltaTime * 30f;
+       
+       
 
         nockBackCount += 1 * Time.deltaTime;
     }
@@ -417,8 +424,6 @@ public class PlayerControl : MonoBehaviour
 
         if (other.gameObject.tag == "Rock")
         {
-
-
             RockDamage(damage);
             audioSource.volume = 0.4f;
             //音
@@ -429,9 +434,6 @@ public class PlayerControl : MonoBehaviour
             nockbackVel = (transform.position - other.transform.position).normalized;
 
             nockBackFlag = true;
-
-
-
         }
 
         if (mutekiFlag) return;//無敵なら以下処理しない
@@ -548,5 +550,15 @@ public class PlayerControl : MonoBehaviour
 
   
        
+    }
+    public void LaserDamage()
+    {
+        float damage2 = 1;
+        HP -= (int)damage2;
+        playerHpGauge.Damage(damage2);
+        MutekiFlagActive();
+        //音
+        audioSource.volume = 0.4f;
+        audioSource.PlayOneShot(dameageSE);
     }
 }
