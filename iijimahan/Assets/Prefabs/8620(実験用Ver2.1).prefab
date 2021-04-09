@@ -1349,7 +1349,7 @@ MonoBehaviour:
   interval: 0.1
   bossmodel: {fileID: 2100000, guid: b2d1911af1fb0fa49ad4c8dc04c505f9, type: 2}
   dameageSE: {fileID: 0}
-  ATK: 1000
+  ATK: 200
   status: 0
   Hp: 1000
 --- !u!114 &5487881192288749419
