@@ -6,11 +6,7 @@ using UnityEngine;
 
 public class ShootEnemy : MonoBehaviour
 {
-    public float StartHp = 300;
-    float hp;
-    public float StartPower = 100;
-    float power;
-    int BuffLevel = 0;
+    EnemyState state;
     private GameObject target;
     private Vector3 velocity;
     private bool deadFlag = false;
@@ -34,8 +30,8 @@ public class ShootEnemy : MonoBehaviour
         currentrotateZ = 180;
         rotateZ = 0;
         deadFlag = false;
-        hp = StartHp;
-        power = StartPower;
+
+        state = GetComponent<EnemyState>();
         rotateTime = 0;
         CheckTarget();
         shotInterval = shotIntervalStart;
@@ -89,18 +85,7 @@ public class ShootEnemy : MonoBehaviour
 
       
     }
-    void CheakDead()
-    {
-        if (hp <= 0)
-        {
-            deadFlag = true;
-        }
-        if(deadFlag)
-        {
-            GaugeEnergyDrop();
-            Destroy(this.gameObject);
-        }
-    }
+  
     // Update is called once per frame
     void Update()
     {
@@ -113,7 +98,7 @@ public class ShootEnemy : MonoBehaviour
 
             Attack();
         }
-        CheakDead();
+       
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -123,7 +108,7 @@ public class ShootEnemy : MonoBehaviour
         {
             if (this.gameObject.tag == "Friend")
             {
-                Buff();
+                state.Buff();
             }
         }
         if (screenPos.x < Screen.width && screenPos.x > 0)
@@ -159,13 +144,9 @@ public class ShootEnemy : MonoBehaviour
                     }
                     if (other.gameObject.tag == "Friend")
                     {
-                        if (other.GetComponent<ShootEnemy>() != null)
+                         if (other.GetComponent<EnemyState>() != null)
                         {
-                            Damage(other.GetComponent<ShootEnemy>().GetPower());
-                        }
-                        else if (other.GetComponent<Enemy>() != null)
-                        {
-                            Damage(other.GetComponent<Enemy>().GetPower());
+                            Damage(other.GetComponent<EnemyState>().GetPower());
                         }
                     }
 
@@ -182,7 +163,7 @@ public class ShootEnemy : MonoBehaviour
                     {
                         if (other.GetComponent<BossPower>() != null)
                         {
-                            hp -= target.GetComponent<BossPower>().GetPower();
+                            state.Damage(target.GetComponent<BossPower>().GetPower());
                         }
                         else
                         {
@@ -256,7 +237,7 @@ public class ShootEnemy : MonoBehaviour
     }
     void BulletDamage(GameObject other)
     {
-        
+
         //弾の親のオブジェクトがターゲット
         if (other.tag == "FriendBullet")
         {
@@ -267,7 +248,7 @@ public class ShootEnemy : MonoBehaviour
                     if (other.GetComponent<FriendBullet>().GetParent() != null)
                     {
                         target = other.GetComponent<FriendBullet>().GetParent();
-                        hp -= target.GetComponent<ShootEnemy>().GetPower();
+                        state.Damage(target.GetComponent<EnemyState>().GetPower());
                     }
                 }
             }
@@ -282,23 +263,20 @@ public class ShootEnemy : MonoBehaviour
                     if (other.GetComponent<EnemyBullet>().GetParent() != null)
                     {
                         target = other.GetComponent<EnemyBullet>().GetParent();
-                        hp -= target.GetComponent<ShootEnemy>().GetPower();
+                        state.Damage(target.GetComponent<EnemyState>().GetPower());
                     }
                 }
             }
         }
 
+    }
 
-    }
-    void Damage(float damage)
+
+void Damage(float damage)
     {
-        this.hp -= damage;
+        state.Damage(damage);
     }
-    public void GaugeEnergyDrop()
-    {
-        GameObject energys = Instantiate(energy) as GameObject;
-        energys.GetComponent<GaugeEnergyControl>().SetPosition(this.transform.position);
-    }
+  
     void ChangeRotate()
     {
         //  this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
@@ -417,38 +395,5 @@ public class ShootEnemy : MonoBehaviour
         }
 
     }
-    public float GetPower()
-    {
-        return power;
-    }
-    void Buff()
-    {
-        BuffLevel += 1;
-        if (buffInstance == null)
-        {
-            buffInstance = Instantiate(Resources.Load<GameObject>("BuffParticle"));
-            buffInstance.GetComponent<BuffEffectScript>().SetParent(gameObject);
-        }
-        if (BuffLevel == 1)
-        {
-            hp += StartHp * 1.3f;
-            power += StartPower * 1.5f;
-        }
-        if (BuffLevel == 2)
-        {
-
-            hp += StartHp * 1.3f;
-            power += StartPower * 1.5f;
-        }
-        if (BuffLevel == 3)
-        {
-
-            hp += StartHp * 1.3f;
-            power += StartPower * 1.5f;
-        }
-    }
-   public float GetBuffLevel()
-    {
-        return BuffLevel;
-    }
+   
 }
