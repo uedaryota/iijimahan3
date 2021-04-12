@@ -146,6 +146,7 @@ public class PlayerControl : MonoBehaviour
         //}
 
         //デバッグ用*******************************
+
         if (gauge >= 100) gauge = 100;
         if ( HP <= 0 )
         {
@@ -185,7 +186,7 @@ public class PlayerControl : MonoBehaviour
 
         if(insekiHitFlag)
         {
-            insekicount += 2*Time.deltaTime;
+            insekicount += 1.5f*Time.deltaTime;
         }
         if(insekicount>=1.5f)
         {
@@ -347,7 +348,12 @@ public class PlayerControl : MonoBehaviour
         {
             if(nockbackVel.y< 0 && upFlag)
             {
+                if (nockbackVel.y < 0.2)
+                {
+                    nockbackVel = new Vector3(nockbackVel.x, nockbackVel.y * 2.2f, nockbackVel.z);
+                }
                 nockbackVel.y = nockbackVel.y * -1;
+                
             }
             
             
@@ -355,6 +361,10 @@ public class PlayerControl : MonoBehaviour
         }
         else if (upFlag2 && downFlag)
         {
+            if (nockbackVel.y < 0.2)
+            {
+                nockbackVel = new Vector3(nockbackVel.x, nockbackVel.y * 2.2f, nockbackVel.z);
+            }
             if (nockbackVel.y > 0 && upFlag2)
             {
                 nockbackVel.y = nockbackVel.y * -1;

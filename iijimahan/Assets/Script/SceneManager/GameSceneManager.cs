@@ -13,9 +13,13 @@ public class GameSceneManager : MonoBehaviour
     private static float ClearTime = 0;
     public AudioClip BGM;
     AudioSource audioSource;
+    public GameObject fade;
+    private int sceneCount = 0;
 
     void Start()
     {
+        
+        fade.GetComponent<FadeStart>().FadeInA();
         enemymanager = GameObject.Find("EnemyManager");
         enemymanagerscript = enemymanager.GetComponent<EnemyManager>();
         player = GameObject.Find("Player");
@@ -29,15 +33,18 @@ public class GameSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         timer++;
         ClearTime = timer * Time.deltaTime;
         if(enemymanagerscript.GetGameClear() == true)
         {
-            SceneManager.LoadScene("GameClearScene");
+            fade.GetComponent<FadeStart>().FadeOutNextScene("GameClearScene");
+            //SceneManager.LoadScene("GameClearScene");
         }
         if(playerscript.GetisDead() == true)
         {
-            SceneManager.LoadScene("GameOverScene");
+            fade.GetComponent<FadeStart>().FadeOutNextScene("GameOverScene");
+            //SceneManager.LoadScene("GameOverScene");
         }
     }
 
