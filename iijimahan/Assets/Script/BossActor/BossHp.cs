@@ -26,6 +26,7 @@ public class BossHp : MonoBehaviour
     Color _color;
     private BossHpGauge hpGauge;
     private AudioSource audioSource;
+    float Cnt = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -55,6 +56,13 @@ public class BossHp : MonoBehaviour
             Col();
             Invoke("ArmorOff",Superarmor);
         }
+        Cnt++;
+        if (Cnt == 360)
+        {
+            Cnt = 0;
+            status = Status.Damege;
+        }
+
     }
 
     void Dead()
@@ -81,7 +89,6 @@ public class BossHp : MonoBehaviour
             hpGauge.Damage(damege);
             //音
             audioSource.PlayOneShot(dameageSE);
-            status = Status.Damege;
         }
     }
     public void ArmorOff()

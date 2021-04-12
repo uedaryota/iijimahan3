@@ -44,11 +44,15 @@ public class BossAttack : MonoBehaviour
                     }
                     Cnt = 0;
                     Cnt2++;
-                    if (Cnt2 == 5)
+                    if(GetComponent<BossHp>().status==BossHp.Status.Damege)
                     {
+                        for (int x = 0; x < 3; x++)
+                        {
+                            audioSource.PlayOneShot(BulletSE);
+                            GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet4(transform.position, 1);
+                        }
                         audioSource.PlayOneShot(BulletSE);
                         GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet(transform.position, 1);
-                        Cnt2 = 0;
                     }
                 }
                 Cnt++;
