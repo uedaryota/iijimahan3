@@ -11,6 +11,7 @@ public class BossBulletFrind2 : MonoBehaviour
     float Cnt = 0;
     float x, y;
     private bool deadFlag = false;
+    Vector3 pos;
     #endregion
     void Start()
     {
@@ -33,7 +34,15 @@ public class BossBulletFrind2 : MonoBehaviour
         Cnt++;
         if (Cnt < OikakeTime)
         {
-            Vector3 pos = GameObject.FindGameObjectWithTag("Friend").transform.position;
+            if (GameObject.FindGameObjectWithTag("Friend") == null) 
+            {
+                pos = GameObject.FindGameObjectWithTag("Player").transform.position;
+            }
+            else
+            {
+                pos = GameObject.FindGameObjectWithTag("Friend").transform.position;
+            }
+            Debug.Log("pos:"+pos);
             Vector3 dir = pos - transform.position;
             Angle = Mathf.Atan2(pos.y - transform.position.y, pos.x - transform.position.x);
             x = pos.x - transform.position.x;
@@ -42,7 +51,14 @@ public class BossBulletFrind2 : MonoBehaviour
         }
         else
         {
-            Vector3 pos = GameObject.FindGameObjectWithTag("Friend").transform.position;
+            if (GameObject.FindGameObjectWithTag("Friend") == null)
+            {
+                pos = GameObject.FindGameObjectWithTag("Player").transform.position;
+            }
+            else
+            {
+                pos = GameObject.FindGameObjectWithTag("Friend").transform.position;
+            }
             Vector3 dir = pos - transform.position;
             Angle = Mathf.Atan2(y, x);
             transform.position += GetDirectionPI(Angle) * Speed * Time.deltaTime;
