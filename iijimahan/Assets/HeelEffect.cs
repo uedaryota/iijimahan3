@@ -28,6 +28,10 @@ public class HeelEffect : MonoBehaviour
             Destroy(gameObject);
         }
     }
+    void CheckState()
+    {
+        
+    }
     public void SetParent(GameObject _parent)
     {
         parent = _parent;

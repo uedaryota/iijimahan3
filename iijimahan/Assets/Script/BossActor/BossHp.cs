@@ -45,7 +45,7 @@ public class BossHp : MonoBehaviour
     {
         //ポーズの時に止める
         if (Time.timeScale <= 0) return;
-        if (Hp==0)
+        if (Hp<0)
         {
             Dead();
         }
@@ -73,7 +73,10 @@ public class BossHp : MonoBehaviour
                 {
                     Damage(other.GetComponent<EnemyState>().GetPower());
                 }
-            
+            }
+            if(other.gameObject.tag== "FriendBullet")
+            {
+                Damage(100);
             }
             hpGauge.Damage(damege);
             //音
