@@ -121,6 +121,7 @@ MonoBehaviour:
   model: {fileID: 3837738459303177619}
   upenergy: 10
   damage: 5
+  damagelimit: 10
   testAudio: {fileID: 8300000, guid: 77e7fae62c37b754e8c7751b5858d55b, type: 3}
   playerBulletSE: {fileID: 8300000, guid: 97aa8ca42431c6b448193474539197b8, type: 3}
   dameageSE: {fileID: 8300000, guid: a9ac292acf8035c44913dfa53a4a005d, type: 3}
@@ -130,6 +131,11 @@ MonoBehaviour:
     type: 3}
   playerEnergyUpSE: {fileID: 8300000, guid: 52f1a0bc42fa8874fb32b189d7cfcbca, type: 3}
   rd: {fileID: 8656814828069786456}
+  insekiHitFlag: 0
+  playerBurst: {fileID: 2575148239714593601, guid: a8304800d555332459947603175caa4c,
+    type: 3}
+  gaugeEffect: {fileID: 1307245580990346835, guid: 06f303088e18049439665a01afa06f83,
+    type: 3}
 --- !u!135 &7335741766070554710
 SphereCollider:
   m_ObjectHideFlags: 0

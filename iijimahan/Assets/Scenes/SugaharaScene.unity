@@ -884,6 +884,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: HeelEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 8227044835302925718, guid: e6482dc23efee5c47bfb05127fb60720,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8227044835302925725, guid: e6482dc23efee5c47bfb05127fb60720,
         type: 3}
       propertyPath: m_RootOrder
@@ -1012,6 +1017,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: "\u30EC\u30FC\u30B6\u30FC\u30DC\u30B9"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626864526235431021, guid: 9228ea5dc23165e449d8966ae59e188c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9228ea5dc23165e449d8966ae59e188c, type: 3}
@@ -1974,6 +1984,80 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6822997958732226336}
   m_CullTransparentMesh: 0
+--- !u!1001 &8720738118271680523
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1307245580990346835, guid: 06f303088e18049439665a01afa06f83,
+        type: 3}
+      propertyPath: m_Name
+      value: PlayerEnergyEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307245580990346835, guid: 06f303088e18049439665a01afa06f83,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307245580990346924, guid: 06f303088e18049439665a01afa06f83,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307245580990346924, guid: 06f303088e18049439665a01afa06f83,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307245580990346924, guid: 06f303088e18049439665a01afa06f83,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307245580990346924, guid: 06f303088e18049439665a01afa06f83,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307245580990346924, guid: 06f303088e18049439665a01afa06f83,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307245580990346924, guid: 06f303088e18049439665a01afa06f83,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307245580990346924, guid: 06f303088e18049439665a01afa06f83,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307245580990346924, guid: 06f303088e18049439665a01afa06f83,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307245580990346924, guid: 06f303088e18049439665a01afa06f83,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307245580990346924, guid: 06f303088e18049439665a01afa06f83,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1307245580990346924, guid: 06f303088e18049439665a01afa06f83,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 06f303088e18049439665a01afa06f83, type: 3}
 --- !u!224 &9020612397865557640
 RectTransform:
   m_ObjectHideFlags: 0

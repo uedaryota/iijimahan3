@@ -34,6 +34,13 @@ public class FadeStart : MonoBehaviour
         StartCoroutine(NextScene(scene));
     }
 
+    public void FadeOutNextScene(string scene,float fadeintime,float nextscenetime)//おわり
+    {
+        //StopAllCoroutines();
+        fade.FadeIn(fadeintime);
+        StartCoroutine(NextScene(scene,nextscenetime));
+    }
+
     public void FadeInA()//はじめ
     {
         fade.FadeOut(1f);
@@ -43,8 +50,13 @@ public class FadeStart : MonoBehaviour
         yield return new WaitForSeconds(0.8f);
         SceneManager.LoadScene(scene);
     }
+    private IEnumerator NextScene(string scene ,float time)
+    {
+        yield return new WaitForSeconds(time);
+        SceneManager.LoadScene(scene);
+    }
 
-   
+
 
 
 }

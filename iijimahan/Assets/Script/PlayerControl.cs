@@ -82,6 +82,23 @@ public class PlayerControl : MonoBehaviour
     private float insekicount = 0;
     private bool nockvelFlag = false;
     private int LaserCnt = 0;
+    private float angle = 0;
+
+    public GameObject playerBurst;
+    private bool playerDeadEffectFlag = false;
+    private bool deadMoveFlag = false;
+    private float deadMoveSpeed = 0;
+    private float easingCount = 0;
+    //private bool easingFlag = false;
+    private int num = 350;
+    
+    private float maxSpeed = 0.3f;
+    private float clearMaxSpeed = 0.7f;
+    private float bulletangle = 0;
+    private bool clearFlag = false;
+    private bool clearSceneFlag = false;
+
+    public GameObject gaugeEffect;
 
     //private Color cr;
     //private float cl;
@@ -93,6 +110,8 @@ public class PlayerControl : MonoBehaviour
     public enum PlayerState
     {
         Alive,
+        DeadMove,
+        ClearMove,
         Dead,
     }
 
@@ -145,12 +164,71 @@ public class PlayerControl : MonoBehaviour
             playerHpGauge.Damage(10);
         }
 
+        //if (Input.GetKeyDown(KeyCode.V))
+        //{
+        //    playerState = PlayerState.ClearMove;
+        //}
+
         //デバッグ用*******************************
 
         if (gauge >= 100) gauge = 100;
         if ( HP <= 0 )
         {
-            playerState = PlayerState.Dead;
+            playerState = PlayerState.DeadMove;
+        }
+        if (clearFlag) playerState = PlayerState.ClearMove;
+
+        //クリア演出
+        if(playerState == PlayerState.ClearMove)
+        {
+            //transform.position += new Vector3(0.075f, 0.0f, 0.0f);
+
+            deadMoveSpeed = Easing.SineInOut(easingCount, num, deadMoveSpeed, clearMaxSpeed);
+            float back = 0.1f;
+            //num = 200;
+            //clearMaxSpeed = 0.8f;
+            //deadMoveSpeed = Easing.BackInOut(easingCount, num, deadMoveSpeed, clearMaxSpeed,0.7f);
+            transform.position += new Vector3(deadMoveSpeed - back,0, 0);
+            easingCount = easingCount + 90 * Time.deltaTime;
+
+            transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, 180);
+
+            Vector3 screen_playerPos2 = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
+            if (screen_playerPos2.x > Screen.width)
+            {
+                clearSceneFlag = true;
+            }
+            
+            return;
+        }
+
+        //死んだ時の演出
+        if(playerState == PlayerState.DeadMove)
+        {
+            if(!playerDeadEffectFlag)
+            {
+                StartCoroutine("DeadEffectStart");//点滅処理開始
+                playerDeadEffectFlag = true;
+            }
+
+            if (!deadMoveFlag) return;
+
+            //float speed = 0.25f;
+
+            deadMoveSpeed = Easing.SineInOut(easingCount, num, deadMoveSpeed, maxSpeed);
+            transform.position += new Vector3(0, -deadMoveSpeed, 0);
+
+            angle += 630 * Time.deltaTime;
+            transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, angle);
+            easingCount = easingCount + 90 * Time.deltaTime;
+
+            Vector3 screen_playerPos2 = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
+            if(screen_playerPos2.y<0)
+            {
+                playerState = PlayerState.Dead;
+            }
+
+            return;
         }
 
         //プレイヤーの最初の行動
@@ -264,7 +342,7 @@ public class PlayerControl : MonoBehaviour
                 GameObject bullets = Instantiate(bullet) as GameObject;     
                 bullets.GetComponent<BulletControl>().SetTransform(poolvelocity, this.transform.position);
                 bullets.GetComponent<BulletControl>().SetRotation(
-                  new Vector3(transform.rotation.x, transform.rotation.y, transform.rotation.z * 100));
+                  new Vector3(transform.rotation.x, transform.rotation.y, bulletangle ));
                 //音
                 audioSource.PlayOneShot(playerBulletSE);
             }
@@ -471,6 +549,7 @@ public class PlayerControl : MonoBehaviour
                 {
                     radian += 360;
                 }
+                bulletangle = radian;
                 transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, radian);
             }
         }
@@ -524,6 +603,14 @@ public class PlayerControl : MonoBehaviour
         //}
     }
 
+    public void GaugeUp()
+    {
+        gauge += upenergy;
+        playerEnergyGauge.UpGauge((float)upenergy);
+        //音
+        audioSource.PlayOneShot(playerEnergyUpSE);
+    }
+
     private void OnTriggerEnter(Collider other)
     {
         if (playerState != PlayerState.Alive ) return;//生きてなかったら以下処理しない
@@ -532,6 +619,10 @@ public class PlayerControl : MonoBehaviour
         {
             gauge += upenergy;
             playerEnergyGauge.UpGauge((float)upenergy);
+            GameObject effect = Instantiate(gaugeEffect);
+            effect.transform.position = transform.position;
+            effect.transform.localScale = new Vector3(2, 2, 2);
+            effect.GetComponent<PlayerBurstScript>().SetModeFlag(true);
             //音
             audioSource.PlayOneShot(playerEnergyUpSE);
         }
@@ -620,6 +711,44 @@ public class PlayerControl : MonoBehaviour
         return gaugeCount;
     }
 
+    public bool GetClearSceneFlag()
+    {
+        return clearSceneFlag;
+    }
+
+    IEnumerator DeadEffectStart()
+    {
+       
+
+        GameObject burst2 = Instantiate(playerBurst);
+        burst2.transform.position = transform.position + new Vector3(0.5f,0.7f,-0.6f);
+        //音
+        audioSource.volume = 0.4f;
+        audioSource.PlayOneShot(dameageSE);
+
+        yield return new WaitForSeconds(0.5f);
+
+        GameObject burst3 = Instantiate(playerBurst);
+        burst3.transform.position = transform.position + new Vector3(-0.5f, -0.7f, -0.6f); ;
+        //音
+        audioSource.volume = 0.4f;
+        audioSource.PlayOneShot(dameageSE);
+
+        yield return new WaitForSeconds(0.5f);
+
+        GameObject burst = Instantiate(playerBurst);
+        burst.transform.position = transform.position + new Vector3(0.3f, -0.3f, -0.6f);
+        //音
+        audioSource.volume = 0.4f;
+        audioSource.PlayOneShot(dameageSE);
+
+        yield return new WaitForSeconds(0.5f);
+        deadMoveFlag = true;
+
+        
+
+    }
+
     IEnumerator WaitSpriteAlpha()
     {
         //点滅処理
@@ -678,5 +807,10 @@ public class PlayerControl : MonoBehaviour
         //音
         audioSource.volume = 0.4f;
         audioSource.PlayOneShot(dameageSE);
+    }
+
+    public void SetClearFlag(bool fl)
+    {
+        clearFlag = fl;
     }
 }

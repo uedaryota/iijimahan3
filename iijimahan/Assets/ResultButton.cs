@@ -7,16 +7,25 @@ public class ResultButton : MonoBehaviour
 {
     [SerializeField, Header("次のシーンを選択した時の音")] public AudioClip SelectSE;
     AudioSource audioSource;
+    public GameObject fade;
+    private bool sceneChangeFlag = true;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        fade.GetComponent<FadeStart>().FadeInA();
     }
     public void OnClickStartButton()
     {
         if (transform.name == "TitleButton")
         {
-            SceneManager.LoadScene("TitleScene");
+            //SceneManager.LoadScene("TitleScene");
+            if(sceneChangeFlag)
+            {
+                fade.GetComponent<FadeStart>().FadeOutNextScene("TitleScene");
+                sceneChangeFlag = false;
+            }
+            
         }
         if (transform.name == "GameEndButton")
         {
