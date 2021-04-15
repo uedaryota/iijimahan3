@@ -29,6 +29,7 @@ public class FadeStart : MonoBehaviour
 
     public void FadeOutNextScene(string scene)//おわり
     {
+        //StopAllCoroutines();
         fade.FadeIn(0.5f);
         StartCoroutine(NextScene(scene));
     }
@@ -37,9 +38,6 @@ public class FadeStart : MonoBehaviour
     {
         fade.FadeOut(1f);
     }
-
-    
-
     private IEnumerator NextScene(string scene)
     {
         yield return new WaitForSeconds(0.8f);

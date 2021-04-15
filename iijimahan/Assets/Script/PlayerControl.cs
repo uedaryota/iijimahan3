@@ -139,11 +139,11 @@ public class PlayerControl : MonoBehaviour
         //    if (HP >= 100) HP = 100;
         //}
 
-        //if (Input.GetKeyDown(KeyCode.O))
-        //{
-        //    HP -= 10;
-        //    playerHpGauge.Damage(10);
-        //}
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            HP -= 10;
+            playerHpGauge.Damage(10);
+        }
 
         //デバッグ用*******************************
 
