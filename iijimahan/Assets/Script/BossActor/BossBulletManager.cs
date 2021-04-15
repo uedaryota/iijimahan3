@@ -43,7 +43,7 @@ public class BossBulletManager : MonoBehaviour
             SpriteRenderer sr = Bullet.AddComponent<SpriteRenderer>();
             sr.sprite = BulletSprite[color];
             sr.sortingLayerName = "BossBullet";
-            Bullet.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+            Bullet.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
             Bullet.AddComponent<BossBullet>();
             Bullet.AddComponent<BossPower>();
             Rigidbody rg = Bullet.AddComponent<Rigidbody>();
@@ -120,7 +120,7 @@ public class BossBulletManager : MonoBehaviour
             SpriteRenderer sr = Bullet.AddComponent<SpriteRenderer>();
             sr.sprite = BulletSprite[color];
             sr.sortingLayerName = "BossBullet";
-            Bullet.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+            Bullet.transform.localScale = new Vector3(1.1f, 1.1f, 1.1f);
             Bullet.AddComponent<BossBulletFrind2>();
             Bullet.AddComponent<BossPower>();
             Rigidbody rg = Bullet.AddComponent<Rigidbody>();
