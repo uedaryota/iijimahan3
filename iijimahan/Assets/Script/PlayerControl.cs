@@ -100,6 +100,8 @@ public class PlayerControl : MonoBehaviour
 
     public GameObject gaugeEffect;
 
+    private float clearCount = 0;
+
     //private Color cr;
     //private float cl;
 
@@ -138,6 +140,7 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //ポーズの時に止める
         if (Time.timeScale <= 0) return;
 
@@ -183,6 +186,12 @@ public class PlayerControl : MonoBehaviour
         {
             //transform.position += new Vector3(0.075f, 0.0f, 0.0f);
 
+            clearCount += Time.deltaTime * 1;
+
+            transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, 180);
+
+            if (clearCount < 2.5f) return;
+
             deadMoveSpeed = Easing.SineInOut(easingCount, num, deadMoveSpeed, clearMaxSpeed);
             float back = 0.1f;
             //num = 200;
@@ -191,7 +200,7 @@ public class PlayerControl : MonoBehaviour
             transform.position += new Vector3(deadMoveSpeed - back,0, 0);
             easingCount = easingCount + 90 * Time.deltaTime;
 
-            transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, 180);
+          
 
             Vector3 screen_playerPos2 = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
             if (screen_playerPos2.x > Screen.width)
@@ -597,10 +606,10 @@ public class PlayerControl : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        //if (other.gameObject.tag == "FriendHeal")
-        //{
-        //    PlayerHeal();
-        //}
+        if (other.gameObject.tag == "FriendHeal")
+        {
+            PlayerHeal();
+        }
     }
 
     public void GaugeUp()
@@ -615,17 +624,17 @@ public class PlayerControl : MonoBehaviour
     {
         if (playerState != PlayerState.Alive ) return;//生きてなかったら以下処理しない
 
-        if (other.gameObject.tag == "GaugeEnergy")
-        {
-            gauge += upenergy;
-            playerEnergyGauge.UpGauge((float)upenergy);
-            GameObject effect = Instantiate(gaugeEffect);
-            effect.transform.position = transform.position;
-            effect.transform.localScale = new Vector3(2, 2, 2);
-            effect.GetComponent<PlayerBurstScript>().SetModeFlag(true);
-            //音
-            audioSource.PlayOneShot(playerEnergyUpSE);
-        }
+        //if (other.gameObject.tag == "GaugeEnergy")
+        //{
+        //    gauge += upenergy;
+        //    playerEnergyGauge.UpGauge((float)upenergy);
+        //    GameObject effect = Instantiate(gaugeEffect);
+        //    effect.transform.position = transform.position;
+        //    effect.transform.localScale = new Vector3(2, 2, 2);
+        //    effect.GetComponent<PlayerBurstScript>().SetModeFlag(true);
+        //    //音
+        //    audioSource.PlayOneShot(playerEnergyUpSE);
+        //}
 
         if (other.gameObject.tag == "Rock")
         {
