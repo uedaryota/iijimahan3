@@ -12,12 +12,14 @@ public class EnemyState : MonoBehaviour
     private bool deadFlag = false;
     GameObject buffInstance;
     public GameObject energy;
+    EnemyManager manager;
     // Start is called before the first frame update
     void Start()
     {
         hp = StartHp;
         power = StartPower;
         deadFlag = false;
+        manager = GameObject.FindGameObjectWithTag("Manager").GetComponent<EnemyManager>();
     }
 
     // Update is called once per frame
@@ -36,6 +38,10 @@ public class EnemyState : MonoBehaviour
             GaugeEnergyDrop();
             Destroy(this.gameObject);
         }
+        if (manager != null && manager.GetGameClear()) 
+        {
+            Destroy(this.gameObject);
+        }
     }
     public void Dead()
     {
@@ -52,6 +58,10 @@ public class EnemyState : MonoBehaviour
     public void Damage(float damage)
     {
         hp -= damage;
+        if(hp > StartHp + StartHp * 0.3f * BuffLevel)
+        {
+            hp = StartHp + StartHp * 0.3f * BuffLevel;
+        }
     }
     public void LaserDamage()
     {
@@ -95,4 +105,5 @@ public class EnemyState : MonoBehaviour
         GameObject energys = Instantiate(energy) as GameObject;
         energys.GetComponent<GaugeEnergyControl>().SetPosition(this.transform.position);
     }
+
 }

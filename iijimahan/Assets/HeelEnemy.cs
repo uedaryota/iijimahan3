@@ -81,22 +81,71 @@ public class HeelEnemy : MonoBehaviour
                 {
                     if (near == null)
                     {
-                        near = objects[a];
+                       if( objects[a]!=gameObject)
+                        {
+                            near = objects[a];
+                        }
                     }
-                    //   else
+
+                    if (near != null)
                     {
                         float len1, len2;
                         len1 = Vector3.Dot(this.transform.position - near.transform.position, this.transform.position - near.transform.position);
                         len2 = Vector3.Dot(this.transform.position - objects[a].transform.position, this.transform.position - objects[a].transform.position);
                         if (len1 > len2)
                         {
+                            if (objects[a] != gameObject)
+                            {
+                                near = objects[a];
+                            }
+                        }
+                    }
+
+                     
+                    
+                }
+                target = near;
+            }
+            else if (target.tag != "Boss" || target.tag != "Enemy")
+            {
+                target = GameObject.FindGameObjectWithTag("Boss");
+                if (target != null)
+                {
+                    return;
+                }
+                GameObject[] objects;
+                objects = GameObject.FindGameObjectsWithTag("Enemy");
+                GameObject near = null;
+                for (int a = 0; a < objects.Length; a++)
+                {
+
+                    if (near == null)
+                    {
+                        if (objects[a] != gameObject)
+                        {
                             near = objects[a];
+                        }
+                    }
+                    if (near != null)
+                    {
+                        float len1, len2;
+                        len1 = Vector3.Dot(this.transform.position - near.transform.position, this.transform.position - near.transform.position);
+                        len2 = Vector3.Dot(this.transform.position - objects[a].transform.position, this.transform.position - objects[a].transform.position);
+                        if (len1 > len2)
+                        {
+                            if (objects[a] != gameObject)
+                            {
+                                near = objects[a];
+                            }
                         }
                     }
                 }
                 target = near;
             }
-            else if (target.tag == "Boss" || target.tag == "Enemy")
+        }
+        if (this.gameObject.tag == "Friend")
+        {
+            if (target == null)
             {
                 target = GameObject.FindGameObjectWithTag("Player");
                 if (target != null)
@@ -108,39 +157,74 @@ public class HeelEnemy : MonoBehaviour
                 GameObject near = null;
                 for (int a = 0; a < objects.Length; a++)
                 {
+
                     if (near == null)
                     {
-                        near = objects[a];
+                        if (objects[a] != gameObject)
+                        {
+                            near = objects[a];
+                        }
                     }
-                    //   else
+                    if (near != null)
                     {
                         float len1, len2;
                         len1 = Vector3.Dot(this.transform.position - near.transform.position, this.transform.position - near.transform.position);
                         len2 = Vector3.Dot(this.transform.position - objects[a].transform.position, this.transform.position - objects[a].transform.position);
                         if (len1 > len2)
                         {
-                            near = objects[a];
+                            if (objects[a] != gameObject)
+                            {
+                                near = objects[a];
+                            }
                         }
                     }
                 }
                 target = near;
+
             }
-        }
-        if (this.gameObject.tag == "Friend")
-        {
-            if (target == null)
+            else if (target.tag != "Player" || target.tag != "Friend")
             {
-                if (target.tag != "Player" || target.tag != "Friend") 
+                //Destroy(this.gameObject);
+                if (target == null)
                 {
-                    //Destroy(this.gameObject);
-                   
+                    target = GameObject.FindGameObjectWithTag("Player");
+                    if (target != null)
+                    {
+                        return;
+                    }
+                    GameObject[] objects;
+                    objects = GameObject.FindGameObjectsWithTag("Friend");
+                    GameObject near = null;
+                    for (int a = 0; a < objects.Length; a++)
+                    {
+
+                        if (near == null)
+                        {
+                            if (objects[a] != gameObject)
+                            {
+                                near = objects[a];
+                            }
+                        }
+                        if (near != null) 
+                        {
+                            float len1, len2;
+                            len1 = Vector3.Dot(this.transform.position - near.transform.position, this.transform.position - near.transform.position);
+                            len2 = Vector3.Dot(this.transform.position - objects[a].transform.position, this.transform.position - objects[a].transform.position);
+                            if (len1 > len2)
+                            {
+                                if (objects[a] != gameObject)
+                                {
+                                    near = objects[a];
+                                }
+                            }
+                        }
+                    }
+                    target = near;
                 }
             }
 
         }
-
     }
-   
     public void GaugeEnergyDrop()
     {
         GameObject energys = Instantiate(energy) as GameObject;
@@ -262,32 +346,32 @@ public class HeelEnemy : MonoBehaviour
         Vector3 dir = target.transform.position - transform.position;
         float angle = Mathf.Atan2(dir.y, dir.x);
         rotateZ = angle / (3.1415f / 180);
+      
         if (rotateZ < 0)
         {
-            rotateZ = rotateZ + 360;
+            rotateZ += 360;
         }
-        if (Mathf.Abs(rotateZ) - Mathf.Abs(currentrotateZ) > 0)
+        if (currentrotateZ > 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
+        {
+            currentrotateZ -= 360;
+        }
+        if (currentrotateZ < 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
+        {
+            currentrotateZ += 360;
+        }
+
+        if (Mathf.Abs(rotateZ - currentrotateZ) > 3)
         {
             if (rotateZ - currentrotateZ < 0)
             {
-                currentrotateZ -= Time.deltaTime * 60;
+                currentrotateZ -= Time.deltaTime * 150;
             }
             else
             {
-                currentrotateZ += Time.deltaTime * 60;
+                currentrotateZ += Time.deltaTime * 150;
             }
         }
-        else if (Mathf.Abs(rotateZ) - Mathf.Abs(currentrotateZ) < 0)
-        {
-            if (rotateZ - currentrotateZ < 0)
-            {
-                currentrotateZ -= Time.deltaTime * 60;
-            }
-            else
-            {
-                currentrotateZ += Time.deltaTime * 60;
-            }
-        }
+
         a.eulerAngles = new Vector3(0, 0, currentrotateZ);
         transform.rotation = a;
 

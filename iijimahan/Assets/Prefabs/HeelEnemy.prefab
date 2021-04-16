@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 675d588954bd62945a3f9775a352dc8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetDistance: 7
+  targetDistance: 3
   speed: 5
   energy: {fileID: 956122239005918985, guid: 290abd1f2d9b09b40baa65fbdb4e09a3, type: 3}
 --- !u!114 &8227044835302925724

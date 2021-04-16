@@ -40,11 +40,17 @@ public class ShootEnemy : MonoBehaviour
     {
         if (target != null)
         {
-            velocity = Vector3.Normalize(target.transform.position - transform.position);
+            float speed =5;
             if (Vector3.Distance(target.transform.position, transform.position) <= targetDistance)
             {
-                velocity = Vector3.zero;
+                velocity -= Vector3.Normalize(velocity) * speed / 60;
             }
+            else
+            {
+                velocity += Vector3.Normalize(target.transform.position - transform.position);
+                velocity = Vector3.Normalize(velocity) * speed;
+            }
+           
             transform.position += velocity * Time.deltaTime;
         }
     }
@@ -58,26 +64,33 @@ public class ShootEnemy : MonoBehaviour
             {
                 if (this.gameObject.tag == "Friend")
                 {
-                    shotInterval -= Time.deltaTime;
-                    if (shotInterval <= 0)
+                    if(Vector3.Distance(target.transform.position, transform.position) <= targetDistance)
                     {
-                        GameObject bullet = Instantiate(Resources.Load<GameObject>("FriendBullet"));
-                        shotInterval = shotIntervalStart;
-                        bullet.GetComponent<FriendBullet>().SetVelocity(Vector3.Normalize(target.transform.position - transform.position));
-                        bullet.transform.position = transform.position;
-                        bullet.GetComponent<FriendBullet>().SetParent(this.gameObject);
+                        shotInterval -= Time.deltaTime;
+                        if (shotInterval <= 0)
+                        {
+                            GameObject bullet = Instantiate(Resources.Load<GameObject>("FriendBullet"));
+                            shotInterval = shotIntervalStart;
+                            bullet.GetComponent<FriendBullet>().SetVelocity(Vector3.Normalize(target.transform.position - transform.position));
+                            bullet.transform.position = transform.position;
+                            bullet.GetComponent<FriendBullet>().SetParent(this.gameObject);
+                        }
                     }
+                    
                 }
                 else if (this.gameObject.tag == "Enemy")
                 {
-                    shotInterval -= Time.deltaTime;
-                    if (shotInterval <= 0)
+                    if (Vector3.Distance(target.transform.position, transform.position) <= targetDistance)
                     {
-                        GameObject bullet = Instantiate(Resources.Load<GameObject>("EnemyBullet"));
-                        shotInterval = shotIntervalStart;
-                        bullet.GetComponent<EnemyBullet>().SetVelocity(Vector3.Normalize(target.transform.position - transform.position));
-                        bullet.transform.position = transform.position;
-                        bullet.GetComponent<EnemyBullet>().SetParent(this.gameObject);
+                        shotInterval -= Time.deltaTime;
+                        if (shotInterval <= 0)
+                        {
+                            GameObject bullet = Instantiate(Resources.Load<GameObject>("EnemyBullet"));
+                            shotInterval = shotIntervalStart;
+                            bullet.GetComponent<EnemyBullet>().SetVelocity(Vector3.Normalize(target.transform.position - transform.position));
+                            bullet.transform.position = transform.position;
+                            bullet.GetComponent<EnemyBullet>().SetParent(this.gameObject);
+                        }
                     }
                 }
             }
@@ -272,7 +285,7 @@ public class ShootEnemy : MonoBehaviour
     }
 
 
-void Damage(float damage)
+    void Damage(float damage)
     {
         state.Damage(damage);
     }
@@ -286,7 +299,6 @@ void Damage(float damage)
             if (rotateTime > MaxrotateTime)
             {
                 rotateTime -= Time.deltaTime;
-
                 rotateX = 180 / MaxrotateTime * rotateTime;
             }
             //  this.transform.Rotate(0, 0, 180/ MaxrotateTime * rotateTime);
@@ -300,7 +312,6 @@ void Damage(float damage)
                 rotateX = -180 / MaxrotateTime * rotateTime;
             }
             // this.transform.Rotate(0, 0, 180 / MaxrotateTime * rotateTime);
-
         }
 
 

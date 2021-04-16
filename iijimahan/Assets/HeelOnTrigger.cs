@@ -25,7 +25,8 @@ public class HeelOnTrigger : MonoBehaviour
             state.Damage(-healValue);
             Debug.Log(healValue);
         }
-        if (other.tag == "FriendHeal" && gameObject.tag == "Friend") 
+       
+      else  if (other.tag == "FriendHeal" && gameObject.tag == "Friend") 
         {
             heelEffect.PlayParticle();
             EnemyState state = GetComponent<EnemyState>();
@@ -33,6 +34,12 @@ public class HeelOnTrigger : MonoBehaviour
             state.Damage(-healValue);
             Debug.Log(healValue);
         }
+
+        else
+        {
+            heelEffect.StopParticle();
+        }  
+       
     }
     private void OnTriggerExit(Collider other)
     {
