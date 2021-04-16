@@ -11,6 +11,7 @@ public class BulletControl : MonoBehaviour
     [SerializeField, Header("爆発エフェクト")] private Object BurstEffect;
     [SerializeField, Header("破片エフェクト1")] private Object RockEffect1;
     [SerializeField, Header("破片エフェクト2")] private Object RockEffect2;
+    public Vector3 rockeffectpos = new Vector3(0, 0, -2);
     private Vector3 effectpos;
     // Start is called before the first frame update
     void Start()
@@ -64,9 +65,9 @@ public class BulletControl : MonoBehaviour
         //}
         if (other.gameObject.tag == "Rock")
         {
-            Instantiate(BurstEffect, transform.position + effectpos, Quaternion.identity);
             Instantiate(RockEffect1, transform.position + effectpos, Quaternion.identity);
-            Instantiate(RockEffect2, transform.position + effectpos, Quaternion.identity);
+            Instantiate(BurstEffect, transform.position + rockeffectpos, Quaternion.identity);
+            Instantiate(RockEffect2, transform.position + rockeffectpos, Quaternion.identity);
             Destroy(this.gameObject);
             //UnityEditor.EditorApplication.isPaused = true;
         }
