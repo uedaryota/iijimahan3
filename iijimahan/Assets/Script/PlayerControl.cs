@@ -63,7 +63,7 @@ public class PlayerControl : MonoBehaviour
     private Vector3 padRvelocity2;
     private Vector3 poolvelocity = new Vector3(1, 0, 0);
 
-    private bool keyboardFlag = true;
+    private bool keyboardFlag = false;
 
     private static int gaugeCount = 0;
 
@@ -104,6 +104,8 @@ public class PlayerControl : MonoBehaviour
 
     public MeshRenderer mRenderer;
     bool startOneFlag = false;
+
+    private float bulletcounter = 0;
 
     //private Color cr;
     //private float cl;
@@ -305,6 +307,7 @@ public class PlayerControl : MonoBehaviour
             //マウスの右クリックで弾発射
             if (Input.GetMouseButtonDown(0))
             {
+                bulletcounter = 0;
                 GameObject bullets = Instantiate(bullet) as GameObject;
                 Vector3 vel = screen_point - screen_playerPos;
                 vel.z = 0;
@@ -317,6 +320,26 @@ public class PlayerControl : MonoBehaviour
                 audioSource.PlayOneShot(playerBulletSE);
 
             }
+            if (Input.GetMouseButton(0))
+            {
+                bulletcounter += Time.deltaTime * 1;
+                if (bulletcounter > 0.22f)
+                {
+                    GameObject bullets = Instantiate(bullet) as GameObject;
+                    Vector3 vel = screen_point - screen_playerPos;
+                    vel.z = 0;
+                    bullets.GetComponent<BulletControl>().SetTransform(vel, this.transform.position);
+                    bullets.GetComponent<BulletControl>().SetRotation(
+                        new Vector3(transform.rotation.x, transform.rotation.y, angle - 180));
+                    //bullets.transform.parent = bulletbox.transform;
+                    //音
+                    audioSource.volume = 0.5f;
+                    audioSource.PlayOneShot(playerBulletSE);
+                    bulletcounter = 0;
+                }
+               
+            }
+                
             if (Input.GetKeyDown(KeyCode.E) && gauge >= 40)
             {
                 Debug.Log("敵をひっくり返す技");
@@ -332,6 +355,8 @@ public class PlayerControl : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Q) && gauge >= 40)
             {
+
+
                 Debug.Log("味方を強化する技");
                 gauge = gauge - 40;
 
@@ -352,6 +377,7 @@ public class PlayerControl : MonoBehaviour
 
             if (Input.GetKeyDown("joystick button 5"))
             {
+                bulletcounter = 0;
                 // 弾丸の複製
                 GameObject bullets = Instantiate(bullet) as GameObject;     
                 bullets.GetComponent<BulletControl>().SetTransform(poolvelocity, this.transform.position);
@@ -360,7 +386,24 @@ public class PlayerControl : MonoBehaviour
                 //音
                 audioSource.PlayOneShot(playerBulletSE);
             }
-            if(Input.GetKeyDown("joystick button 1") && gauge >= 40)
+            if (Input.GetKey("joystick button 5"))
+            {
+                bulletcounter += Time.deltaTime * 1;
+
+                if(bulletcounter > 0.22f)
+                {
+                    // 弾丸の複製
+                    GameObject bullets = Instantiate(bullet) as GameObject;
+                    bullets.GetComponent<BulletControl>().SetTransform(poolvelocity, this.transform.position);
+                    bullets.GetComponent<BulletControl>().SetRotation(
+                      new Vector3(transform.rotation.x, transform.rotation.y, bulletangle));
+                    //音
+                    audioSource.PlayOneShot(playerBulletSE);
+                    bulletcounter = 0;
+                }
+               
+            }
+            if (Input.GetKeyDown("joystick button 1") && gauge >= 40)
             {
                 Debug.Log("敵をひっくり返す技");
                 gauge = gauge - 40;
@@ -775,6 +818,7 @@ public class PlayerControl : MonoBehaviour
         model.SetActive(false);
 
         yield return new WaitForSeconds(0.9f);
+        model.SetActive(false);
         deadMoveFlag = true;
     }
 
