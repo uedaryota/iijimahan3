@@ -379,10 +379,6 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
-        if(wave == maxwave + 1)
-        {
-            gameclear = true;
-        }
         if(old_wave != wave)
         {
             enemycount = 0;
@@ -554,8 +550,15 @@ public class EnemyManager : MonoBehaviour
             //エネミーが存在しなくなったとき
             if (tagcheckenemy.Length == 0)
             {
-                //waveが進む
-                wave++;
+                if (wave == maxwave)
+                {
+                    gameclear = true;
+                }
+                else
+                {
+                    //waveが進む
+                    wave++;
+                }
             }
         }
     }
