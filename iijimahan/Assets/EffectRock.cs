@@ -9,7 +9,7 @@ public class EffectRock : MonoBehaviour
     
     void Start()
     {
-        OriginalRock = serchTag(gameObject, "EffectRock");
+        OriginalRock = serchTag(gameObject, "Rock");
     }
 
     void Update()
