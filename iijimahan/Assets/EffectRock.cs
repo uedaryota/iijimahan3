@@ -4,19 +4,27 @@ using UnityEngine;
 
 public class EffectRock : MonoBehaviour
 {
+    public float interval = 0.5f;
     private Object OriginalRock;
+    private Vector3 Originalpos;
     private Vector3 velocity;
+    private float timer;
     
     void Start()
     {
-        OriginalRock = serchTag(gameObject, "EffectRock");
+        OriginalRock = serchTag(gameObject, "Rock");
     }
 
     void Update()
     {
+        timer += Time.deltaTime;
+        if(timer >= interval)
+        {
+            Destroy(gameObject);
+        }
         if(transform.name == "EffectRock1")
         {
-
+            
         }
         if(transform.name == "EffectRock2")
         {

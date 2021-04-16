@@ -67,5 +67,14 @@ public class GaugeEnergyControl : MonoBehaviour
         }
     }
 
-   
+    private void OnCollisionEnter(Collision col)
+    {
+        if (col.gameObject.tag == "GaugeTarget")
+        {
+            player.GetComponent<PlayerControl>().GaugeUp();
+            Destroy(this.gameObject);
+        }
+    }
+
+
 }
