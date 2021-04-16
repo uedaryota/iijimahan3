@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class EffectRock : MonoBehaviour
 {
-    public float interval = 0.5f;
+    [SerializeField, Header("エフェクト隕石の角度")] private float angle = 55;
+    [SerializeField, Header("速度")] private float speed = 10.0f;
+    [SerializeField, Header("消えるまでの時間")]public float interval = 0.5f;
     private Object OriginalRock;
     private Vector3 Originalpos;
     private Vector3 velocity;
@@ -12,7 +14,18 @@ public class EffectRock : MonoBehaviour
     
     void Start()
     {
-        OriginalRock = serchTag(gameObject, "Rock");
+        Originalpos = serchTag(gameObject, "Rock").GetComponent<Transform>().position;
+        velocity = Vector3.Normalize(Originalpos - transform.position);
+        velocity = -velocity;
+        velocity.z = 0.0f;
+        if (transform.name == "EffectRock1(Clone)")
+        {
+            velocity = Quaternion.Euler(0, 0, angle) * velocity;
+        }
+        if (transform.name == "EffectRock2(Clone)")
+        {
+            velocity = Quaternion.Euler(0, 0, -angle) * velocity;
+        }
     }
 
     void Update()
@@ -22,21 +35,13 @@ public class EffectRock : MonoBehaviour
         {
             Destroy(gameObject);
         }
-        if(transform.name == "EffectRock1")
-        {
-            
-        }
-        if(transform.name == "EffectRock2")
-        {
-
-        }
+        transform.position += speed * velocity * Time.deltaTime;
     }
 
     GameObject serchTag(GameObject nowObj, string tagName)
     {
         float tmpDis = 0; //距離用一時変数
         float nearDis = 0; //最も近いオブジェクトの距離
-        //string nearObjName = "Rock"; //オブジェクト名称
         GameObject targetObj = null; //オブジェクト
 
         //タグ指定されたオブジェクトを配列で取得する
@@ -50,12 +55,10 @@ public class EffectRock : MonoBehaviour
             if(nearDis == 0 || nearDis > tmpDis)
             {
                 nearDis = tmpDis;
-                //nearObjName = obs.name;
                 targetObj = obs;
             }
         }
         //最も近かったオブジェクトを返す
-        //return gameObject.Find(nearObjName);
         return targetObj;
     }
 

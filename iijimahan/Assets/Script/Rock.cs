@@ -18,7 +18,6 @@ public class Rock : MonoBehaviour
         PlayerPos = GameObject.Find("Player").transform.position;
         velocity = PlayerPos - transform.position;
         velocity *= 0.001f * speed;
-        Debug.Log(PlayerPos);
     }
     
     void Update()
