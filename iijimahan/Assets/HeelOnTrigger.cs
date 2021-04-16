@@ -13,11 +13,12 @@ public class HeelOnTrigger : MonoBehaviour
         heelObject = Instantiate(Resources.Load<GameObject>("HeelEffect"));
         heelEffect = heelObject.GetComponent<HeelEffect>();
         heelEffect.SetParent(gameObject);
+      //  heelEffect.StopParticle();
     }
     
     private void OnTriggerStay(Collider other)
     {
-        if (other.tag == "EnemyHeal" && gameObject.tag == "Enemy") 
+        if (other.tag == "EnemyHeal" && gameObject.tag == "Enemy")
         {
             heelEffect.PlayParticle();
             EnemyState state = GetComponent<EnemyState>();
@@ -25,14 +26,20 @@ public class HeelOnTrigger : MonoBehaviour
             state.Damage(-healValue);
             Debug.Log(healValue);
         }
-       
-      else  if (other.tag == "FriendHeal" && gameObject.tag == "Friend") 
+
+        else if (other.tag == "FriendHeal" && gameObject.tag == "Friend")
         {
             heelEffect.PlayParticle();
             EnemyState state = GetComponent<EnemyState>();
             float healValue = Time.deltaTime * state.GetPower();
             state.Damage(-healValue);
             Debug.Log(healValue);
+        }
+        else if (other.tag == "FriendHeal" && gameObject.tag == "Player")
+        {
+            heelEffect.PlayParticle();
+           
+            
         }
 
         else
