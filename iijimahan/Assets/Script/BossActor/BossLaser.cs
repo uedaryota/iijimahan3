@@ -29,7 +29,7 @@ public class BossLaser : MonoBehaviour
         Mainus = new Vector3(20, -20, 0);
         line = gameObject.AddComponent<LineRenderer>();
         startpos= GameObject.FindGameObjectWithTag("Boss").transform.position;
-        goalpos = new Vector3(Random.Range(-35,+35), Random.Range(-100, +100), 0);
+        goalpos = new Vector3(Random.Range(-100,+100), Random.Range(-100, +100), 0);
         positions = new Vector3[]{
         startpos,               // 開始点
         new Vector3(20, 0, 0),               // 終了点
