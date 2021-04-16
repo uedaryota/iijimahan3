@@ -11,51 +11,24 @@ public class BossHpGauge : MonoBehaviour
     public Image RedGauge;
     float greenDamage = 0;
     float redDamage = 0;
-    //int poolDamage = 0;
+    float maxHp = 155;
+    float currentHp;
+    //Sliderを入れる
+    public Slider slider;
 
     void Start()
     {
+        slider.value = 1;
+        maxHp = gameObject.GetComponent<BossHp>().MaxHp;
+        currentHp = maxHp;
+        Debug.Log("Start currentHp : " + currentHp);
     }
-    // Update is called once per frame
-    void Update()
+    public void Damage(float x)
     {
-        //if (Input.GetKeyDown(KeyCode.T))
-        //{
-        //    Debug.Log("aiueo");
-        //    greenDamage = 10;
-        //    redDamage = 10f / 100f;
-        //    Debug.Log("g" + redDamage);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Y))
-        //{
-        //    Debug.Log("aiueo");
-        //    GreenGauge.fillAmount += 0.1f;
-        //}
-        // GreenGauge.fillAmount -= greenDamage/100;
-        if (greenDamage != 0)
-        {
-            float num = greenDamage / GameObject.FindGameObjectWithTag("Boss").GetComponent<BossHp>().GetMaxHp();
-            GreenGauge.fillAmount -= num;
-            greenDamage = 0;
-        }
-        if (RedGauge.fillAmount >= GreenGauge.fillAmount)
-        {
-            //Debug.Log(redDamage);
-            RedGauge.fillAmount -= redDamage * Time.deltaTime;
-            if (RedGauge.fillAmount == GreenGauge.fillAmount)
-            {
-                redDamage = 0;
-            }
-        }
-        else
-        {
-            RedGauge.fillAmount = GreenGauge.fillAmount;
-        }
-    }
-
-    public void Damage(float dame)
-    {
-        greenDamage = dame;
-        redDamage = dame / 100f;
+        Debug.Log("damage:" + x);
+        float damage = x;
+        currentHp = currentHp - damage;
+        slider.value = (float)currentHp / (float)maxHp;
+        Debug.Log("slider.value : " + slider.value);
     }
 }

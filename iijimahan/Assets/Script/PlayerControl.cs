@@ -63,7 +63,7 @@ public class PlayerControl : MonoBehaviour
     private Vector3 padRvelocity2;
     private Vector3 poolvelocity = new Vector3(1, 0, 0);
 
-    private bool keyboardFlag = true;
+    private bool keyboardFlag = false;
 
     private static int gaugeCount = 0;
 
@@ -101,6 +101,11 @@ public class PlayerControl : MonoBehaviour
     public GameObject gaugeEffect;
 
     private float clearCount = 0;
+
+    public MeshRenderer mRenderer;
+    bool startOneFlag = false;
+
+    private float bulletcounter = 0;
 
     //private Color cr;
     //private float cl;
@@ -190,7 +195,7 @@ public class PlayerControl : MonoBehaviour
 
             transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, 180);
 
-            if (clearCount < 2.5f) return;
+            if (clearCount < 1.7f) return;
 
             deadMoveSpeed = Easing.SineInOut(easingCount, num, deadMoveSpeed, clearMaxSpeed);
             float back = 0.1f;
@@ -216,26 +221,28 @@ public class PlayerControl : MonoBehaviour
         {
             if(!playerDeadEffectFlag)
             {
-                StartCoroutine("DeadEffectStart");//点滅処理開始
+                StartCoroutine("DeadEffectStart");//
                 playerDeadEffectFlag = true;
             }
 
             if (!deadMoveFlag) return;
 
+            playerState = PlayerState.Dead;
+
             //float speed = 0.25f;
 
-            deadMoveSpeed = Easing.SineInOut(easingCount, num, deadMoveSpeed, maxSpeed);
-            transform.position += new Vector3(0, -deadMoveSpeed, 0);
+            //deadMoveSpeed = Easing.SineInOut(easingCount, num, deadMoveSpeed, maxSpeed);
+            //transform.position += new Vector3(0, -deadMoveSpeed, 0);
 
-            angle += 630 * Time.deltaTime;
-            transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, angle);
-            easingCount = easingCount + 90 * Time.deltaTime;
+            //angle += 630 * Time.deltaTime;
+            //transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, angle);
+            //easingCount = easingCount + 90 * Time.deltaTime;
 
-            Vector3 screen_playerPos2 = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
-            if(screen_playerPos2.y<0)
-            {
-                playerState = PlayerState.Dead;
-            }
+            //Vector3 screen_playerPos2 = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
+            //if(screen_playerPos2.y<0)
+            //{
+            //    playerState = PlayerState.Dead;
+            //}
 
             return;
         }
@@ -300,6 +307,7 @@ public class PlayerControl : MonoBehaviour
             //マウスの右クリックで弾発射
             if (Input.GetMouseButtonDown(0))
             {
+                bulletcounter = 0;
                 GameObject bullets = Instantiate(bullet) as GameObject;
                 Vector3 vel = screen_point - screen_playerPos;
                 vel.z = 0;
@@ -312,6 +320,26 @@ public class PlayerControl : MonoBehaviour
                 audioSource.PlayOneShot(playerBulletSE);
 
             }
+            if (Input.GetMouseButton(0))
+            {
+                bulletcounter += Time.deltaTime * 1;
+                if (bulletcounter > 0.22f)
+                {
+                    GameObject bullets = Instantiate(bullet) as GameObject;
+                    Vector3 vel = screen_point - screen_playerPos;
+                    vel.z = 0;
+                    bullets.GetComponent<BulletControl>().SetTransform(vel, this.transform.position);
+                    bullets.GetComponent<BulletControl>().SetRotation(
+                        new Vector3(transform.rotation.x, transform.rotation.y, angle - 180));
+                    //bullets.transform.parent = bulletbox.transform;
+                    //音
+                    audioSource.volume = 0.5f;
+                    audioSource.PlayOneShot(playerBulletSE);
+                    bulletcounter = 0;
+                }
+               
+            }
+                
             if (Input.GetKeyDown(KeyCode.E) && gauge >= 40)
             {
                 Debug.Log("敵をひっくり返す技");
@@ -327,6 +355,8 @@ public class PlayerControl : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Q) && gauge >= 40)
             {
+
+
                 Debug.Log("味方を強化する技");
                 gauge = gauge - 40;
 
@@ -347,6 +377,7 @@ public class PlayerControl : MonoBehaviour
 
             if (Input.GetKeyDown("joystick button 5"))
             {
+                bulletcounter = 0;
                 // 弾丸の複製
                 GameObject bullets = Instantiate(bullet) as GameObject;     
                 bullets.GetComponent<BulletControl>().SetTransform(poolvelocity, this.transform.position);
@@ -355,7 +386,24 @@ public class PlayerControl : MonoBehaviour
                 //音
                 audioSource.PlayOneShot(playerBulletSE);
             }
-            if(Input.GetKeyDown("joystick button 1") && gauge >= 40)
+            if (Input.GetKey("joystick button 5"))
+            {
+                bulletcounter += Time.deltaTime * 1;
+
+                if(bulletcounter > 0.22f)
+                {
+                    // 弾丸の複製
+                    GameObject bullets = Instantiate(bullet) as GameObject;
+                    bullets.GetComponent<BulletControl>().SetTransform(poolvelocity, this.transform.position);
+                    bullets.GetComponent<BulletControl>().SetRotation(
+                      new Vector3(transform.rotation.x, transform.rotation.y, bulletangle));
+                    //音
+                    audioSource.PlayOneShot(playerBulletSE);
+                    bulletcounter = 0;
+                }
+               
+            }
+            if (Input.GetKeyDown("joystick button 1") && gauge >= 40)
             {
                 Debug.Log("敵をひっくり返す技");
                 gauge = gauge - 40;
@@ -385,7 +433,11 @@ public class PlayerControl : MonoBehaviour
 
         }
 
-       
+        if(!startOneFlag)
+        {
+            transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, 180);
+            startOneFlag = true;
+        }
 
     }
 
@@ -727,35 +779,47 @@ public class PlayerControl : MonoBehaviour
 
     IEnumerator DeadEffectStart()
     {
-       
-
+      
         GameObject burst2 = Instantiate(playerBurst);
         burst2.transform.position = transform.position + new Vector3(0.5f,0.7f,-0.6f);
+        burst2.transform.localScale = new Vector3(1.5f, 1.5f, 0.5f);
         //音
         audioSource.volume = 0.4f;
         audioSource.PlayOneShot(dameageSE);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
 
         GameObject burst3 = Instantiate(playerBurst);
-        burst3.transform.position = transform.position + new Vector3(-0.5f, -0.7f, -0.6f); ;
+        burst3.transform.position = transform.position + new Vector3(-0.7f, -0.7f, -0.6f);
+        burst3.transform.localScale = new Vector3(1.5f, 1.5f, 0.5f);
         //音
         audioSource.volume = 0.4f;
         audioSource.PlayOneShot(dameageSE);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
 
         GameObject burst = Instantiate(playerBurst);
         burst.transform.position = transform.position + new Vector3(0.3f, -0.3f, -0.6f);
+        burst.transform.localScale = new Vector3(1.5f, 1.5f, 0.5f);
         //音
         audioSource.volume = 0.4f;
         audioSource.PlayOneShot(dameageSE);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
+
+        GameObject burst4 = Instantiate(playerBurst);
+        burst4.transform.position = transform.position;
+        burst4.transform.localScale = new Vector3(3, 3, 3);
+
+        //音
+        audioSource.volume = 0.4f;
+        audioSource.PlayOneShot(dameageSE);
+
+        model.SetActive(false);
+
+        yield return new WaitForSeconds(0.9f);
+        model.SetActive(false);
         deadMoveFlag = true;
-
-        
-
     }
 
     IEnumerator WaitSpriteAlpha()

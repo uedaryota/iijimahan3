@@ -35,7 +35,7 @@ public class BossHp : MonoBehaviour
         Hp = MaxHp;
         damege = 5;
         alpha_Sin = 255;
-        bossmodel.color = Color.green;
+        bossmodel.color = Color.red;
         SetRev = false;
         hpGauge = GameObject.FindObjectOfType<BossHpGauge>();
         audioSource = GetComponent<AudioSource>();
@@ -86,14 +86,14 @@ public class BossHp : MonoBehaviour
             {
                 Damage(100);
             }
-            hpGauge.Damage(damege);
+            hpGauge.Damage(100);
             //音
             audioSource.PlayOneShot(dameageSE);
         }
     }
     public void ArmorOff()
     {
-        bossmodel.color=Color.green;
+        bossmodel.color=Color.red;
         status = Status.Normal;
     }
    public void Col()

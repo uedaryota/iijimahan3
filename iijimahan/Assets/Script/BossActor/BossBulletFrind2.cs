@@ -42,7 +42,6 @@ public class BossBulletFrind2 : MonoBehaviour
             {
                 pos = GameObject.FindGameObjectWithTag("Friend").transform.position;
             }
-            Debug.Log("pos:"+pos);
             Vector3 dir = pos - transform.position;
             Angle = Mathf.Atan2(pos.y - transform.position.y, pos.x - transform.position.x);
             x = pos.x - transform.position.x;
