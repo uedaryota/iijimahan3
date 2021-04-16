@@ -21,6 +21,7 @@ TagManager:
   - EnemyHeal
   - GaugeTarget
   - EffectRock
+  - Manager
   layers:
   - Default
   - TransparentFX
