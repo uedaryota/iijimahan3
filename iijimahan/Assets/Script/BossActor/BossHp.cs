@@ -93,7 +93,7 @@ public class BossHp : MonoBehaviour
     }
     public void ArmorOff()
     {
-        bossmodel.color=Color.green;
+        bossmodel.color=Color.red;
         status = Status.Normal;
     }
    public void Col()
