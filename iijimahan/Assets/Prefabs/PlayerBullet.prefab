@@ -110,7 +110,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 40
-  effect: {fileID: 4397370641252077987, guid: 5951faab9d9166b4fa3d10747d4e8323, type: 3}
+  BurstEffect: {fileID: 4397370641252077987, guid: 5951faab9d9166b4fa3d10747d4e8323,
+    type: 3}
+  RockEffect1: {fileID: 387087962776953448, guid: 867e0d1a4fa05fc41bb8c7a8c548fe40,
+    type: 3}
+  RockEffect2: {fileID: 7866455036459146464, guid: 66b2a734312f1ae40ad8730f017da467,
+    type: 3}
 --- !u!54 &9163687994741698027
 Rigidbody:
   m_ObjectHideFlags: 0
