@@ -182,12 +182,10 @@ public class HeelEnemy : MonoBehaviour
                 target = near;
 
             }
-            else if (target.tag != "Player" || target.tag != "Friend")
+            else if (target.tag != "Player" && target.tag != "Friend")
             {
                 //Destroy(this.gameObject);
-                if (target == null)
-                {
-                    target = GameObject.FindGameObjectWithTag("Player");
+                 target = GameObject.FindGameObjectWithTag("Player");
                     if (target != null)
                     {
                         return;
@@ -220,7 +218,7 @@ public class HeelEnemy : MonoBehaviour
                         }
                     }
                     target = near;
-                }
+                
             }
 
         }
