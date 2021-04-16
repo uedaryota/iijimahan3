@@ -2173,6 +2173,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4443109365030374599, guid: 3eb9d23ad59d5e748bcfed4f86d0ccc1,
         type: 3}
+      propertyPath: damage
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 4443109365030374599, guid: 3eb9d23ad59d5e748bcfed4f86d0ccc1,
+        type: 3}
+      propertyPath: upenergy
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4443109365030374599, guid: 3eb9d23ad59d5e748bcfed4f86d0ccc1,
+        type: 3}
       propertyPath: dameageSE
       value: 
       objectReference: {fileID: 8300000, guid: a9ac292acf8035c44913dfa53a4a005d, type: 3}
@@ -2180,6 +2190,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Enabled
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4443109365030374599, guid: 3eb9d23ad59d5e748bcfed4f86d0ccc1,
+        type: 3}
+      propertyPath: damagelimit
+      value: 40
       objectReference: {fileID: 0}
     - target: {fileID: 4443109365030374599, guid: 3eb9d23ad59d5e748bcfed4f86d0ccc1,
         type: 3}
