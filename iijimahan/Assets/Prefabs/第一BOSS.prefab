@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1201753664582467520}
   m_Layer: 0
-  m_Name: "8620(\u5B9F\u9A13\u7528Ver2.1)"
+  m_Name: "\u7B2C\u4E00BOSS"
   m_TagString: BossBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

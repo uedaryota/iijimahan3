@@ -41,6 +41,7 @@ public class BossLaser : MonoBehaviour
     {
         //ポーズの時に止める
         if (Time.timeScale <= 0) return;
+        if (GameObject.FindGameObjectWithTag("Boss") == null) Destroy(gameObject);
 
         Cnt++;
             //startpos = GameObject.FindGameObjectWithTag("Boss").transform.position;
@@ -49,8 +50,8 @@ public class BossLaser : MonoBehaviour
         goalpos,               // 終了点
     };
         line.material = new Material(Shader.Find("Sprites/Default"));
-        line.startColor = Color.red;
-        line.endColor = Color.red;
+        line.startColor = Color.blue;
+        line.endColor = Color.cyan;
 
         if (Cnt/30.0f>Speed)
         {
