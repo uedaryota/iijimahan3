@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &6571390485883839605
+--- !u!1 &387087962776953448
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,48 +8,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 6571390485883839602}
-  - component: {fileID: 6571390485883839601}
-  - component: {fileID: 6571390485883839600}
-  - component: {fileID: 6571390485883839607}
-  - component: {fileID: 6571390485883839606}
+  - component: {fileID: 387087962776953455}
+  - component: {fileID: 387087962776953452}
+  - component: {fileID: 387087962776953453}
+  - component: {fileID: 387087962776953450}
+  - component: {fileID: 8703160822594553187}
   m_Layer: 0
-  m_Name: SmallRock
+  m_Name: EffectRock1
   m_TagString: Rock
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &6571390485883839602
+--- !u!4 &387087962776953455
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6571390485883839605}
+  m_GameObject: {fileID: 387087962776953448}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
-  - {fileID: 2565839349497706639}
+  - {fileID: 9076657518479752850}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6571390485883839601
+--- !u!33 &387087962776953452
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6571390485883839605}
+  m_GameObject: {fileID: 387087962776953448}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &6571390485883839600
+--- !u!23 &387087962776953453
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6571390485883839605}
+  m_GameObject: {fileID: 387087962776953448}
   m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -82,40 +82,38 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!135 &6571390485883839607
+--- !u!135 &387087962776953450
 SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6571390485883839605}
+  m_GameObject: {fileID: 387087962776953448}
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &6571390485883839606
+--- !u!114 &8703160822594553187
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6571390485883839605}
+  m_GameObject: {fileID: 387087962776953448}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 10766bec587b95b4a9f47e793eee971c, type: 3}
+  m_Script: {fileID: 11500000, guid: 8f09222b7746a88409ce045f29db9008, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 200
-  deletetime: 20
-  HP: 5
---- !u!1001 &2565839349497307657
+  num: 0
+--- !u!1001 &9076657518479614996
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
-    m_TransformParent: {fileID: 6571390485883839602}
+    m_TransformParent: {fileID: 387087962776953455}
     m_Modifications:
     - target: {fileID: 100006, guid: d03d0c597bb388947bf16f564153364a, type: 3}
       propertyPath: m_Name
@@ -187,9 +185,9 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 44f9d629006bb76409d3626dd82797c0, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d03d0c597bb388947bf16f564153364a, type: 3}
---- !u!4 &2565839349497706639 stripped
+--- !u!4 &9076657518479752850 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400006, guid: d03d0c597bb388947bf16f564153364a,
     type: 3}
-  m_PrefabInstance: {fileID: 2565839349497307657}
+  m_PrefabInstance: {fileID: 9076657518479614996}
   m_PrefabAsset: {fileID: 0}
