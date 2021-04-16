@@ -102,6 +102,9 @@ public class PlayerControl : MonoBehaviour
 
     private float clearCount = 0;
 
+    public MeshRenderer mRenderer;
+    bool startOneFlag = false;
+
     //private Color cr;
     //private float cl;
 
@@ -190,7 +193,7 @@ public class PlayerControl : MonoBehaviour
 
             transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, 180);
 
-            if (clearCount < 2.5f) return;
+            if (clearCount < 1.7f) return;
 
             deadMoveSpeed = Easing.SineInOut(easingCount, num, deadMoveSpeed, clearMaxSpeed);
             float back = 0.1f;
@@ -216,26 +219,28 @@ public class PlayerControl : MonoBehaviour
         {
             if(!playerDeadEffectFlag)
             {
-                StartCoroutine("DeadEffectStart");//点滅処理開始
+                StartCoroutine("DeadEffectStart");//
                 playerDeadEffectFlag = true;
             }
 
             if (!deadMoveFlag) return;
 
+            playerState = PlayerState.Dead;
+
             //float speed = 0.25f;
 
-            deadMoveSpeed = Easing.SineInOut(easingCount, num, deadMoveSpeed, maxSpeed);
-            transform.position += new Vector3(0, -deadMoveSpeed, 0);
+            //deadMoveSpeed = Easing.SineInOut(easingCount, num, deadMoveSpeed, maxSpeed);
+            //transform.position += new Vector3(0, -deadMoveSpeed, 0);
 
-            angle += 630 * Time.deltaTime;
-            transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, angle);
-            easingCount = easingCount + 90 * Time.deltaTime;
+            //angle += 630 * Time.deltaTime;
+            //transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, angle);
+            //easingCount = easingCount + 90 * Time.deltaTime;
 
-            Vector3 screen_playerPos2 = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
-            if(screen_playerPos2.y<0)
-            {
-                playerState = PlayerState.Dead;
-            }
+            //Vector3 screen_playerPos2 = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
+            //if(screen_playerPos2.y<0)
+            //{
+            //    playerState = PlayerState.Dead;
+            //}
 
             return;
         }
@@ -385,7 +390,11 @@ public class PlayerControl : MonoBehaviour
 
         }
 
-       
+        if(!startOneFlag)
+        {
+            transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, 180);
+            startOneFlag = true;
+        }
 
     }
 
@@ -727,35 +736,46 @@ public class PlayerControl : MonoBehaviour
 
     IEnumerator DeadEffectStart()
     {
-       
-
+      
         GameObject burst2 = Instantiate(playerBurst);
         burst2.transform.position = transform.position + new Vector3(0.5f,0.7f,-0.6f);
+        burst2.transform.localScale = new Vector3(1.5f, 1.5f, 0.5f);
         //音
         audioSource.volume = 0.4f;
         audioSource.PlayOneShot(dameageSE);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
 
         GameObject burst3 = Instantiate(playerBurst);
-        burst3.transform.position = transform.position + new Vector3(-0.5f, -0.7f, -0.6f); ;
+        burst3.transform.position = transform.position + new Vector3(-0.7f, -0.7f, -0.6f);
+        burst3.transform.localScale = new Vector3(1.5f, 1.5f, 0.5f);
         //音
         audioSource.volume = 0.4f;
         audioSource.PlayOneShot(dameageSE);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
 
         GameObject burst = Instantiate(playerBurst);
         burst.transform.position = transform.position + new Vector3(0.3f, -0.3f, -0.6f);
+        burst.transform.localScale = new Vector3(1.5f, 1.5f, 0.5f);
         //音
         audioSource.volume = 0.4f;
         audioSource.PlayOneShot(dameageSE);
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.6f);
+
+        GameObject burst4 = Instantiate(playerBurst);
+        burst4.transform.position = transform.position;
+        burst4.transform.localScale = new Vector3(3, 3, 3);
+
+        //音
+        audioSource.volume = 0.4f;
+        audioSource.PlayOneShot(dameageSE);
+
+        model.SetActive(false);
+
+        yield return new WaitForSeconds(0.9f);
         deadMoveFlag = true;
-
-        
-
     }
 
     IEnumerator WaitSpriteAlpha()
