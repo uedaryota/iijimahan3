@@ -8,7 +8,6 @@ public class GameSceneManager : MonoBehaviour
     [SerializeField, Header("ピッチの上がるまでのスピード")] private float pitchup = 0.1f;
     [SerializeField, Header("ピッチの下がるまでのスピード")] private float pitchdown = 0.1f;
     [SerializeField, Header("ピッチの最大")] private float pitchhight = 2.0f;
-    [SerializeField, Header("ボスWave突入SE")] private AudioClip caution;
 
     private GameObject enemymanager;
     private EnemyManager enemymanagerscript;
@@ -54,10 +53,6 @@ public class GameSceneManager : MonoBehaviour
         if (old_wave != wave)
         {
             pitchchange = true;
-            if(wave % 2 == 0)
-            {
-                audioSource.PlayOneShot(caution);
-            }
         }
         if (pitchchange == true)
         {
