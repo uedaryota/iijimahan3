@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7373758588227234052}
   m_Layer: 0
   m_Name: EnemyManager
-  m_TagString: Untagged
+  m_TagString: Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f920aca6b15b744488327600985c2a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxwave: 6
   enemy_Manual:
   - enemyboxes_Manual:
     - {fileID: 7265182206125767360, guid: b060fbfc14d1df54d8cc47ff2c64876b, type: 3}
@@ -109,6 +110,8 @@ MonoBehaviour:
     - 0
     - 0
     - 0
+  Repeat: 
+  wave_wave_interval: []
   enemyboxes:
   - {fileID: 7265182206125767360, guid: b060fbfc14d1df54d8cc47ff2c64876b, type: 3}
   - {fileID: 8670145571796672101, guid: 590429abf11bc1c409e9d8a800dd9aa3, type: 3}
