@@ -150,6 +150,7 @@ public class PlayerControl : MonoBehaviour
         if (Time.timeScale <= 0) return;
 
         //timer++;
+
         //デバッグ用*******************************
 
         //Debug.Log(Screen.width);
@@ -166,11 +167,11 @@ public class PlayerControl : MonoBehaviour
         //    if (HP >= 100) HP = 100;
         //}
 
-        if (Input.GetKeyDown(KeyCode.O))
-        {
-            HP -= 10;
-            playerHpGauge.Damage(10);
-        }
+        //if (Input.GetKeyDown(KeyCode.O))
+        //{
+        //    HP -= 10;
+        //    playerHpGauge.Damage(10);
+        //}
 
         //if (Input.GetKeyDown(KeyCode.V))
         //{
@@ -192,7 +193,6 @@ public class PlayerControl : MonoBehaviour
             //transform.position += new Vector3(0.075f, 0.0f, 0.0f);
 
             clearCount += Time.deltaTime * 1;
-
             transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, 180);
 
             if (clearCount < 1.7f) return;
@@ -221,16 +221,18 @@ public class PlayerControl : MonoBehaviour
         {
             if(!playerDeadEffectFlag)
             {
-                StartCoroutine("DeadEffectStart");//
+                StartCoroutine("DeadEffectStart");//死亡時の爆発エフェクト開始
                 playerDeadEffectFlag = true;
             }
 
-            if (!deadMoveFlag) return;
+            if (!deadMoveFlag) return;//爆発エフェクト終わるまで待機
 
+            //回転しながら落ちるならコメントアウト
             playerState = PlayerState.Dead;
 
-            //float speed = 0.25f;
+            //以下****回転しながら落ちる処理***
 
+            //float speed = 0.25f;
             //deadMoveSpeed = Easing.SineInOut(easingCount, num, deadMoveSpeed, maxSpeed);
             //transform.position += new Vector3(0, -deadMoveSpeed, 0);
 
@@ -265,9 +267,13 @@ public class PlayerControl : MonoBehaviour
 
         if (!startFlag) return;
 
-        CheckControlDevice();//操作デバイスチェック     
+        //******以下通常　Update処理　　****************************************************
+
+        CheckControlDevice();//操作デバイスチェック    
         
-        if(nockBackFlag)//ノックバック処理
+        //隕石に当たった時の処理
+        //ノックバック処理
+        if (nockBackFlag)
         {
             NockBack();
             //Gamenn();
@@ -276,7 +282,6 @@ public class PlayerControl : MonoBehaviour
         {
             nockvelFlag = false;
         }
-        //Gamenn();
 
         if(insekiHitFlag)
         {
@@ -288,7 +293,8 @@ public class PlayerControl : MonoBehaviour
             insekicount = 0;
         }
 
-        if (keyboardFlag)//キーボード操作
+        //キーボード操作処理
+        if (keyboardFlag)
         {
             KeyBoardMove();
             transform.position += velocity * Time.deltaTime;
@@ -320,6 +326,7 @@ public class PlayerControl : MonoBehaviour
                 audioSource.PlayOneShot(playerBulletSE);
 
             }
+            //マウス長押しで弾発射
             if (Input.GetMouseButton(0))
             {
                 bulletcounter += Time.deltaTime * 1;
@@ -339,7 +346,7 @@ public class PlayerControl : MonoBehaviour
                 }
                
             }
-                
+            //ゲージ技
             if (Input.GetKeyDown(KeyCode.E) && gauge >= 40)
             {
                 Debug.Log("敵をひっくり返す技");
@@ -355,8 +362,6 @@ public class PlayerControl : MonoBehaviour
             }
             if (Input.GetKeyDown(KeyCode.Q) && gauge >= 40)
             {
-
-
                 Debug.Log("味方を強化する技");
                 gauge = gauge - 40;
 
@@ -375,6 +380,7 @@ public class PlayerControl : MonoBehaviour
 
             PadMove();//移動、回転、画面外に行かない処理
 
+            //RBを押したら弾を撃つ
             if (Input.GetKeyDown("joystick button 5"))
             {
                 bulletcounter = 0;
@@ -386,6 +392,7 @@ public class PlayerControl : MonoBehaviour
                 //音
                 audioSource.PlayOneShot(playerBulletSE);
             }
+            //長押しで弾を撃つ
             if (Input.GetKey("joystick button 5"))
             {
                 bulletcounter += Time.deltaTime * 1;
@@ -403,6 +410,7 @@ public class PlayerControl : MonoBehaviour
                 }
                
             }
+            //ゲージ技
             if (Input.GetKeyDown("joystick button 1") && gauge >= 40)
             {
                 Debug.Log("敵をひっくり返す技");
@@ -737,8 +745,6 @@ public class PlayerControl : MonoBehaviour
         
     }
 
-    
-
     public float GetAim(Vector2 from, Vector2 to)
     {
         float dx = to.x - from.x;
@@ -861,8 +867,6 @@ public class PlayerControl : MonoBehaviour
                 rockPos = obj[i].transform.position;
             }
         }
-
-  
        
     }
     public void LaserDamage()
