@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1201753664582467520}
   m_Layer: 0
-  m_Name: "8620(\u5B9F\u9A13\u7528Ver2.1)"
+  m_Name: "\u7B2C\u4E00BOSS"
   m_TagString: BossBox
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Size: {x: 0.5, y: 0.5, z: 0.5}
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &2316378873857937754
 MeshRenderer:
@@ -174,12 +174,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd530f8171773b4cacce6acf19fd3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHp: 200
+  MaxHp: 2000
   Superarmor: 2
   interval: 0.1
   bossmodel: {fileID: 2100000, guid: b2d1911af1fb0fa49ad4c8dc04c505f9, type: 2}
   dameageSE: {fileID: 0}
-  ATK: 200
+  ATK: 60
   status: 0
   Hp: 1000
 --- !u!114 &5249170736651241152
@@ -448,6 +448,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a5ef61f16ab726048ae71011bc48349f,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a5ef61f16ab726048ae71011bc48349f,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: a5ef61f16ab726048ae71011bc48349f,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a5ef61f16ab726048ae71011bc48349f,
         type: 3}

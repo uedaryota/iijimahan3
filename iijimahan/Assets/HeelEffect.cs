@@ -38,7 +38,7 @@ public class HeelEffect : MonoBehaviour
     }
     public void PlayParticle()
     {
-        if (!effect.isPlaying)
+        if (effect != null && !effect.isPlaying)
         {
             effect.Play();
         }
@@ -46,7 +46,7 @@ public class HeelEffect : MonoBehaviour
     }
     public void StopParticle()
     {
-        if (effect.isPlaying)
+        if (effect != null && effect.isPlaying)
         {
             effect.Stop();
         }
