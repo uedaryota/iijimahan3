@@ -40,7 +40,7 @@ public class ShootEnemy : MonoBehaviour
     {
         if (target != null)
         {
-            float speed =5;
+            float speed = 5;
             if (Vector3.Distance(target.transform.position, transform.position) <= targetDistance)
             {
                 velocity -= Vector3.Normalize(velocity) * speed / 60;
