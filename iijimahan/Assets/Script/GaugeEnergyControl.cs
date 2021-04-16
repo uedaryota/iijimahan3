@@ -13,11 +13,13 @@ public class GaugeEnergyControl : MonoBehaviour
     private Vector3 velocity;
 
     private GameObject player;
+    private GameObject gauge;
 
     // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        gauge = GameObject.FindGameObjectWithTag("GaugeTarget");
     }
 
     // Update is called once per frame
@@ -27,6 +29,8 @@ public class GaugeEnergyControl : MonoBehaviour
         if (Time.timeScale <= 0) return;
 
         playerPos = player.transform.position;
+        //playerPos = gauge.transform.position;
+
         speed = Easing.SineInOut(easingCount, num, speed, maxSpeed);
         velocity = Move();
         transform.position += velocity * speed * Time.deltaTime * 2;
@@ -54,7 +58,13 @@ public class GaugeEnergyControl : MonoBehaviour
         if (other.gameObject.tag == "Player")
         {
             Destroy(this.gameObject);
-        }       
+        }
+
+        //if (other.gameObject.tag == "GaugeTarget")
+        //{
+        //    player.GetComponent<PlayerControl>().GaugeUp();
+        //    Destroy(this.gameObject);
+        //}
     }
 
    

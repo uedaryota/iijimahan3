@@ -21,4 +21,15 @@ public class Easing : MonoBehaviour
         return -max / 2 * (float)(Mathf.Cos(t * Mathf.PI / totaltime) - 1) + min;
     }
 
+    public static float BackInOut(float t, float totaltime, float min, float max, float s)
+    {
+        max -= min;
+        s *= 1.525f;
+        t /= totaltime / 2;
+        if (t < 1) return max / 2 * (t * t * ((s + 1) * t - s)) + min;
+
+        t = t - 2;
+        return max / 2 * (t * t * ((s + 1) * t + s) + 2) + min;
+    }
+
 }
