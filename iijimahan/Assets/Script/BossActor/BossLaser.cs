@@ -8,6 +8,7 @@ public class BossLaser : MonoBehaviour
     [Header("猶予時間")] public float Speed = 10.0f;
     [Header("弾角度")] public float Angle;
     [Header("継続攻撃時間")] public float LimitTime = 700;
+    public Material Line;
     float Cnt = 0;
     float x, y;
     private bool deadFlag = false;
@@ -16,6 +17,7 @@ public class BossLaser : MonoBehaviour
     Vector3[] positions;
     Vector3 startpos;
     Vector3 goalpos;
+    Vector3 goalpos2;
     Vector3 Pulus;
     Vector3 Mainus;
     #endregion
@@ -30,6 +32,7 @@ public class BossLaser : MonoBehaviour
         line = gameObject.AddComponent<LineRenderer>();
         startpos= GameObject.FindGameObjectWithTag("Boss").transform.position;
         goalpos = new Vector3(Random.Range(-100,+100), Random.Range(-100, +100), 0);
+        goalpos2 = goalpos;
         positions = new Vector3[]{
         startpos,               // 開始点
         new Vector3(20, 0, 0),               // 終了点
@@ -49,12 +52,21 @@ public class BossLaser : MonoBehaviour
         startpos,               // 開始点
         goalpos,               // 終了点
     };
-        line.material = new Material(Shader.Find("Sprites/Default"));
+        line.textureMode = LineTextureMode.Tile;
+        line.material = new Material(Resources.Load<Material>("Unlit_DashLine"));//new Material(Shader.Find("Resources/Materials/Unlit_DashLine"));//Sprites/Default"));
+        line.material.color = Color.blue;
         line.startColor = Color.blue;
         line.endColor = Color.cyan;
-
+        if (Cnt / 30.0f < Speed)
+        {
+            Angle = Mathf.Atan2(startpos.y - goalpos.y, startpos.x - goalpos.x);
+            goalpos += GetDirectionPI(Angle) * 25.0f * Time.deltaTime;
+        }
         if (Cnt/30.0f>Speed)
         {
+            line.material= new Material(Resources.Load<Material>("Def"));
+            line.material.color = Color.blue;
+            goalpos = goalpos2;
             Hutosa = 2.0f;
             this.tag = "EnemyBullet";
         } 
@@ -88,5 +100,14 @@ public class BossLaser : MonoBehaviour
                 obj.collider.GetComponent<PlayerControl>().LaserDamage();
             }
         }
+    }
+    Vector3 GetDirectionPI(float angle)
+    {
+        return new Vector3
+        (
+            Mathf.Cos(angle),
+            Mathf.Sin(angle),
+            0
+        );
     }
 }
