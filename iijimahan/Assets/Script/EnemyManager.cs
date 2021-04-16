@@ -290,6 +290,7 @@ public class EnemyManager : MonoBehaviour
     #endregion
 
     #region 変数一覧
+    [SerializeField, Header("ボスWave突入SE")] private AudioClip caution;
 
     [System.Serializable]
     public struct WaveEnemy
@@ -365,6 +366,8 @@ public class EnemyManager : MonoBehaviour
 
     private float wave_timer;
 
+    AudioSource audioSource;
+
     #endregion
 
     void Start()
@@ -375,6 +378,7 @@ public class EnemyManager : MonoBehaviour
         old_old_pos_chack *= -pos.y;
         interval_count = 0;
         wave_timer = 0;
+        audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -384,6 +388,11 @@ public class EnemyManager : MonoBehaviour
             enemycount = 0;
             interval_count = 0;
             wave_timer = 0;
+
+            if(wave % 2 == 0)
+            {
+                audioSource.PlayOneShot(caution);
+            }
 
             if(bosschack == false)
             {
