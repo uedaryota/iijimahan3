@@ -28,8 +28,8 @@ public class GaugeEnergyControl : MonoBehaviour
         //ポーズの時に止める
         if (Time.timeScale <= 0) return;
 
-        playerPos = player.transform.position;
-        //playerPos = gauge.transform.position;
+        //playerPos = player.transform.position;
+        playerPos = gauge.transform.position;
 
         speed = Easing.SineInOut(easingCount, num, speed, maxSpeed);
         velocity = Move();
@@ -55,16 +55,16 @@ public class GaugeEnergyControl : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "Player")
-        {
-            Destroy(this.gameObject);
-        }
-
-        //if (other.gameObject.tag == "GaugeTarget")
+        //if (other.gameObject.tag == "Player")
         //{
-        //    player.GetComponent<PlayerControl>().GaugeUp();
         //    Destroy(this.gameObject);
         //}
+
+        if (other.gameObject.tag == "GaugeTarget")
+        {
+            player.GetComponent<PlayerControl>().GaugeUp();
+            Destroy(this.gameObject);
+        }
     }
 
    
