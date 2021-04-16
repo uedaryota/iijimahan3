@@ -15,6 +15,8 @@ TagManager:
   - Rock
   - BossBox
   - GaugeBullet
+  - EnemyHeal
+  - FriendHeal
   - Heel
   layers:
   - Default
