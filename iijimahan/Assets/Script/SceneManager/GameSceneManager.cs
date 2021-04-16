@@ -63,7 +63,7 @@ public class GameSceneManager : MonoBehaviour
         {
             if(sceneChangeFlag)
             {
-                fade.GetComponent<FadeStart>().FadeOutNextScene("GameOverScene",1.5f,1.9f);
+                fade.GetComponent<FadeStart>().FadeOutNextScene("GameOverScene",2.3f,2.5f);
                 sceneChangeFlag = false;
             }
             

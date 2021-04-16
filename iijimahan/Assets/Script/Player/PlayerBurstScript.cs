@@ -43,4 +43,9 @@ public class PlayerBurstScript : MonoBehaviour
         mode = fl;
         player = GameObject.FindGameObjectWithTag("Player");
     }
+
+    public void SetScale(Vector3 scale)
+    {
+        transform.localScale = scale;
+    }
 }
