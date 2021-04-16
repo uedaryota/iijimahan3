@@ -37,6 +37,13 @@ public class LaserBoss : MonoBehaviour
                         audioSource.PlayOneShot(BulletSE);
                         GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 0);
                     }
+                    for(int x=0;x<3;x++)
+                    {
+                        audioSource.PlayOneShot(BulletSE);
+                        GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet4(transform.position, 0);
+                    }
+                    audioSource.PlayOneShot(BulletSE);
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet(transform.position, 0);
                     Cnt = 0;
                 }
                 Cnt++;
