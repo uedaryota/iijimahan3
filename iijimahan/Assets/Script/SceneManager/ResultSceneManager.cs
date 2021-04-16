@@ -12,6 +12,8 @@ public class ResultSceneManager : MonoBehaviour
     private float time;
     public AudioClip BGM;
     AudioSource audioSource;
+    public GameObject fade;
+    private bool oneFadeFlag = false;
 
     void Start()
     {
@@ -24,5 +26,10 @@ public class ResultSceneManager : MonoBehaviour
     }
     void Update()
     {
+        if(!oneFadeFlag)
+        {
+            fade.GetComponent<FadeStart>().FadeInA();
+            oneFadeFlag = true;
+        }
     }
 }

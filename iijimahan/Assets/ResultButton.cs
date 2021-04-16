@@ -13,7 +13,7 @@ public class ResultButton : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        fade.GetComponent<FadeStart>().FadeInA();
+        //fade.GetComponent<FadeStart>().FadeInA();
     }
     public void OnClickStartButton()
     {

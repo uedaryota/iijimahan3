@@ -8,6 +8,9 @@ public class TitleSceneManager : MonoBehaviour
     public AudioClip BGM;
     AudioSource audioSource;
 
+    public GameObject fade;
+    private bool oneFadeFlag = false;
+
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -16,5 +19,10 @@ public class TitleSceneManager : MonoBehaviour
 
     void Update()
     {
+        if(!oneFadeFlag)
+        {
+            fade.GetComponent<FadeStart>().FadeInA();
+            oneFadeFlag = true;
+        }
     }
 }

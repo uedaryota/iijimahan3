@@ -6,6 +6,7 @@ using UnityEngine;
 public class LaserBoss : MonoBehaviour
 {
     int Cnt = 440;
+    float Angle;
     Acter act;
     [SerializeField, Header("ボス攻撃SE")] public AudioClip BulletSE;
     private AudioSource audioSource;

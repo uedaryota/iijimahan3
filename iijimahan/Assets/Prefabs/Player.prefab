@@ -137,6 +137,8 @@ MonoBehaviour:
     type: 3}
   gaugeEffect: {fileID: 1307245580990346835, guid: 06f303088e18049439665a01afa06f83,
     type: 3}
+  mRenderer: {fileID: 0}
+  fade: {fileID: 141186, guid: 53c22e1773be7f84aad8ed8b7b58fa6e, type: 3}
 --- !u!135 &7335741766070554710
 SphereCollider:
   m_ObjectHideFlags: 0

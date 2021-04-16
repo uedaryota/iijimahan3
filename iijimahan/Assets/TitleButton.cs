@@ -12,8 +12,8 @@ public class TitleButton : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        fade.GetComponent<FadeStart>().FadeInA();
-        Application.targetFrameRate = 60;
+       // fade.GetComponent<FadeStart>().FadeInA();
+        //Application.targetFrameRate = 60;
     }
     public void OnClickStartButton()
     {
