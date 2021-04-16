@@ -107,6 +107,7 @@ public class PlayerControl : MonoBehaviour
 
     private float bulletcounter = 0;
 
+
     //private Color cr;
     //private float cl;
 

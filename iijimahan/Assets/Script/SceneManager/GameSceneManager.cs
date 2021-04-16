@@ -15,11 +15,12 @@ public class GameSceneManager : MonoBehaviour
     AudioSource audioSource;
     public GameObject fade;
     private bool sceneChangeFlag = true;
+    private bool oneFlagFade = false;
 
     void Start()
     {
-        Application.targetFrameRate = 60;
-        fade.GetComponent<FadeStart>().FadeInA();
+        //Application.targetFrameRate = 60;
+        
         enemymanager = GameObject.Find("EnemyManager");
         enemymanagerscript = enemymanager.GetComponent<EnemyManager>();
         player = GameObject.Find("Player");
@@ -34,7 +35,12 @@ public class GameSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(!oneFlagFade)
+        {
+            fade.GetComponent<FadeStart>().FadeInA();
+            oneFlagFade = true;
+        }
+
         timer++;
         ClearTime = timer * Time.deltaTime;
         if(enemymanagerscript.GetGameClear() == true)
