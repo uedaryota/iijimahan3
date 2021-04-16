@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0046353717, g: 0.005902306, b: 0.008250395, a: 1}
+  m_IndirectSpecularColor: {r: 0.0112458, g: 0.014328182, b: 0.020085467, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -877,7 +877,7 @@ PrefabInstance:
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
       propertyPath: enemyboxes.Array.size
-      value: 2
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
@@ -914,9 +914,27 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
+      propertyPath: enemyboxes.Array.data[0]
+      value: 
+      objectReference: {fileID: 1167943338620006590, guid: ff5a1a0229d39ae479b6c143dd5e5265,
+        type: 3}
+    - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
+        type: 3}
+      propertyPath: enemyboxes.Array.data[1]
+      value: 
+      objectReference: {fileID: 1167943338620006590, guid: 3eb76db4bff1754448288ba0a817eada,
+        type: 3}
+    - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
+        type: 3}
       propertyPath: enemyboxes.Array.data[2]
       value: 
-      objectReference: {fileID: 2924209551728552548, guid: bb2a132d24422f742a8f7f6571cc9b0f,
+      objectReference: {fileID: 8670145571796672101, guid: 590429abf11bc1c409e9d8a800dd9aa3,
+        type: 3}
+    - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
+        type: 3}
+      propertyPath: enemyboxes.Array.data[3]
+      value: 
+      objectReference: {fileID: 7265182206125767360, guid: b060fbfc14d1df54d8cc47ff2c64876b,
         type: 3}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
@@ -976,6 +994,11 @@ PrefabInstance:
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
       propertyPath: enemy_Manual.Array.data[1].pos_Manual.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
+        type: 3}
+      propertyPath: enemy_Manual.Array.data[3].pos_Manual.Array.size
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
@@ -991,6 +1014,11 @@ PrefabInstance:
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
       propertyPath: enemy_Manual.Array.data[1].enemycountlimit_Manual
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
+        type: 3}
+      propertyPath: enemy_Manual.Array.data[3].enemycountlimit_Manual
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
@@ -1101,7 +1129,7 @@ PrefabInstance:
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
       propertyPath: enemy_Manual.Array.data[1].interval_Manual.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
@@ -1122,6 +1150,31 @@ PrefabInstance:
         type: 3}
       propertyPath: enemy_Manual.Array.data[1].pos_Manual.Array.data[1].y
       value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
+        type: 3}
+      propertyPath: enemy_Manual.Array.data[3].interval_Manual.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
+        type: 3}
+      propertyPath: enemy_Manual.Array.data[3].pos_Manual.Array.data[0].x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
+        type: 3}
+      propertyPath: enemy_Manual.Array.data[3].pos_Manual.Array.data[0].y
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
+        type: 3}
+      propertyPath: enemy_Manual.Array.data[3].pos_Manual.Array.data[1].x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
+        type: 3}
+      propertyPath: enemy_Manual.Array.data[3].pos_Manual.Array.data[1].y
+      value: -14
       objectReference: {fileID: 0}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
@@ -1501,7 +1554,7 @@ PrefabInstance:
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
       propertyPath: enemy_Manual.Array.data[1].enemyboxes_Manual.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
@@ -1567,6 +1620,16 @@ PrefabInstance:
         type: 3}
       propertyPath: enemy_Manual.Array.data[1].interval_Manual.Array.data[1]
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
+        type: 3}
+      propertyPath: enemy_Manual.Array.data[3].interval_Manual.Array.data[0]
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
+        type: 3}
+      propertyPath: enemy_Manual.Array.data[3].interval_Manual.Array.data[1]
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
