@@ -53,6 +53,7 @@ public class BossLaser : MonoBehaviour
         goalpos,               // 終了点
     };
         line.textureMode = LineTextureMode.Tile;
+        line.generateLightingData = true;
         line.material = new Material(Resources.Load<Material>("Unlit_DashLine"));//new Material(Shader.Find("Resources/Materials/Unlit_DashLine"));//Sprites/Default"));
         line.material.color = Color.blue;
         line.startColor = Color.blue;
@@ -65,7 +66,7 @@ public class BossLaser : MonoBehaviour
         if (Cnt/30.0f>Speed)
         {
             line.material= new Material(Resources.Load<Material>("Def"));
-            line.generateLightingData = true;
+            
             line.material.color = Color.cyan;
             goalpos = goalpos2;
             Hutosa = 2.0f;
