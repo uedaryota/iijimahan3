@@ -76,23 +76,26 @@ public class EnemyState : MonoBehaviour
                     number = a;
                 }
             }
-            PointY = Screen.height / number;
+            PointY = Screen.height / team.Length * number;
+            bool f = false;
             if (screenPos.x > Screen.width / 7) 
             {
                 transform.position += new Vector3(-Time.deltaTime * 10, 0, 0);
+                f = true;
             }
             if (Mathf.Abs(screenPos.y - PointY) > 10)
             {
                 if (screenPos.y > PointY)
                 {
-             //       transform.position += new Vector3(0, -Time.deltaTime * 10, 0);
+                    transform.position += new Vector3(0, -Time.deltaTime * 5, 0);
                 }
                 else if (screenPos.y < PointY)
                 {
-              //      transform.position += new Vector3(0, Time.deltaTime * 10, 0);
+                   transform.position += new Vector3(0, Time.deltaTime * 5, 0);
                 }
+                f = true;
             }
-            else
+            if (!f) 
             {
                 waveMove = false;
             }
