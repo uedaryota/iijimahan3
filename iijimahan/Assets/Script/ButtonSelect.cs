@@ -13,6 +13,7 @@ public class ButtonSelect : MonoBehaviour
     AudioSource audioSource;
     int indexnum;
     float timer;
+    bool Mouse;
 
     void Start()
     {
@@ -20,71 +21,87 @@ public class ButtonSelect : MonoBehaviour
         timer = 5.0f;
         button[0].Select();
         audioSource = GetComponent<AudioSource>();
-        if (gameObject.name == "pause")
+        if (gameObject.name == "pause(Clone)")
         {
             audioSource.PlayOneShot(pauseSE);
         }
+        Mouse = true;
     }
 
     void Update()
     {
+        if(Input.GetMouseButtonDown(0))
+        {
+            Mouse = true;
+            Debug.Log("マウス解禁");
+        }
         timer++;
         if (sort == 1)
         {
-            if (Input.GetKeyDown(KeyCode.UpArrow) && indexnum != 0 && timer >= interval)
+            if (Input.GetKeyDown(KeyCode.W) && indexnum != 0 && timer >= interval)
             {
                 timer = 0.0f;
                 indexnum--;
                 audioSource.PlayOneShot(selectSE);
+                Mouse = false;
             }
-            if (Input.GetKeyDown(KeyCode.DownArrow) && indexnum != button.Length - 1 && timer >= interval)
+            if (Input.GetKeyDown(KeyCode.S) && indexnum != button.Length - 1 && timer >= interval)
             {
                 timer = 0.0f;
                 indexnum++;
                 audioSource.PlayOneShot(selectSE);
+                Mouse = false;
             }
             if (PadControlUp() && indexnum != 0 && timer >= interval)
             {
                 timer = 0.0f;
                 indexnum--;
                 audioSource.PlayOneShot(selectSE);
+                Mouse = false;
             }
             if (PadControlDown() && indexnum != button.Length - 1 && timer >= interval)
             {
                 timer = 0.0f;
                 indexnum++;
                 audioSource.PlayOneShot(selectSE);
+                Mouse = false;
             }
         }
-        if(sort == 2)
+        if (sort == 2)
         {
-            if (Input.GetKeyDown(KeyCode.LeftArrow) && indexnum != 0 && timer >= interval)
+            if (Input.GetKeyDown(KeyCode.A) && indexnum != 0 && timer >= interval)
             {
                 timer = 0.0f;
                 indexnum--;
                 audioSource.PlayOneShot(selectSE);
+                Mouse = false;
             }
-            if (Input.GetKeyDown(KeyCode.RightArrow) && indexnum != button.Length - 1 && timer >= interval)
+            if (Input.GetKeyDown(KeyCode.D) && indexnum != button.Length - 1 && timer >= interval)
             {
                 timer = 0.0f;
                 indexnum++;
                 audioSource.PlayOneShot(selectSE);
+                Mouse = false;
             }
             if (PadControlLeft() && indexnum != 0 && timer >= interval)
             {
                 timer = 0.0f;
                 indexnum--;
                 audioSource.PlayOneShot(selectSE);
+                Mouse = false;
             }
             if (PadControlRight() && indexnum != button.Length - 1 && timer >= interval)
             {
                 timer = 0.0f;
                 indexnum++;
                 audioSource.PlayOneShot(selectSE);
+                Mouse = false;
             }
         }
-
-        button[indexnum].Select();
+        if (Mouse == true)
+        {
+            button[indexnum].Select();
+        }
     }
 
     bool PadControlUp()
