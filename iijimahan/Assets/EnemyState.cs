@@ -64,6 +64,13 @@ public class EnemyState : MonoBehaviour
     }
     void WaveMove()
     {
+        if (waveMove && gameObject.tag == "Enemy")
+        {
+            GameObject burst = Instantiate(Resources.Load<GameObject>("Burst"));
+            burst.transform.position = transform.position;
+            burst.GetComponent<EffectScript>().HitSE();
+            deadFlag = true;
+        }
         if (waveMove)
         {
             Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
