@@ -1207,6 +1207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   text_obj: {fileID: 1202285218}
   BGM: {fileID: 8300000, guid: 52f1a0bc42fa8874fb32b189d7cfcbca, type: 3}
+  fade: {fileID: 856907014}
 --- !u!4 &1626986087
 Transform:
   m_ObjectHideFlags: 0

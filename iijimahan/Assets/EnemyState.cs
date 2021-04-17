@@ -13,6 +13,10 @@ public class EnemyState : MonoBehaviour
     GameObject buffInstance;
     public GameObject energy;
     EnemyManager manager;
+    float wave;
+    float lastwave;
+    bool waveMove;
+    GameObject[] team;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,12 +24,17 @@ public class EnemyState : MonoBehaviour
         power = StartPower;
         deadFlag = false;
         manager = GameObject.FindGameObjectWithTag("Manager").GetComponent<EnemyManager>();
+        wave = manager.GetWave();
+        lastwave = wave;
+        waveMove = false;
     }
 
     // Update is called once per frame
     void Update()
     {
         CheckDead();
+        CheckWave();
+        WaveMove();
     }
     void CheckDead()
     {
@@ -42,6 +51,63 @@ public class EnemyState : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+    }
+    void CheckWave()
+    {
+        wave = manager.GetWave();
+        if (wave != lastwave)
+        {
+            waveMove = true;
+            team = GameObject.FindGameObjectsWithTag("Friend");
+        }
+        lastwave = wave;
+    }
+    void WaveMove()
+    {
+        if (waveMove && gameObject.tag == "Enemy")
+        {
+            GameObject burst = Instantiate(Resources.Load<GameObject>("Burst"));
+            burst.transform.position = transform.position;
+            burst.GetComponent<EffectScript>().HitSE();
+            deadFlag = true;
+        }
+        if (waveMove)
+        {
+            Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
+            float number = 0;
+            float PointY = 0;
+            for (int a = 0; a < team.Length; a++) 
+            {
+                if (team[a] == this.gameObject)
+                {
+                    number = a;
+                }
+            }
+            PointY = Screen.height / team.Length * number;
+            bool f = false;
+            if (screenPos.x > Screen.width / 7) 
+            {
+                transform.position += new Vector3(-Time.deltaTime * 10, 0, 0);
+                f = true;
+            }
+            if (Mathf.Abs(screenPos.y - PointY) > 10)
+            {
+                if (screenPos.y > PointY)
+                {
+                    transform.position += new Vector3(0, -Time.deltaTime * 5, 0);
+                }
+                else if (screenPos.y < PointY)
+                {
+                   transform.position += new Vector3(0, Time.deltaTime * 5, 0);
+                }
+                f = true;
+            }
+            if (!f) 
+            {
+                waveMove = false;
+            }
+        }
+               
     }
     public void Dead()
     {
