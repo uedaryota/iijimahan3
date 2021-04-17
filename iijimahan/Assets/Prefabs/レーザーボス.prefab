@@ -1,20 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &4130547522003108498
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 249009400473029174}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8c2d8a22d0658241841f39af7dba93c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GreenGauge: {fileID: 194073008463883752}
-  RedGauge: {fileID: 7736493188193105197}
-  slider: {fileID: 8138912242804725180}
 --- !u!82 &1418461165103688952
 AudioSource:
   m_ObjectHideFlags: 0
@@ -111,6 +96,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4130547522003108498
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 249009400473029174}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8c2d8a22d0658241841f39af7dba93c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GreenGauge: {fileID: 194073008463883752}
+  RedGauge: {fileID: 7736493188193105197}
+  slider: {fileID: 8138912242804725180}
 --- !u!54 &120756622053991625
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -746,7 +746,7 @@ PrefabInstance:
     - target: {fileID: 3540285229408963207, guid: 9e2c78441d4a85f40aca58d36ea08aee,
         type: 3}
       propertyPath: MaxHp
-      value: 8000
+      value: 30000
       objectReference: {fileID: 0}
     - target: {fileID: 3540285229408963207, guid: 9e2c78441d4a85f40aca58d36ea08aee,
         type: 3}
