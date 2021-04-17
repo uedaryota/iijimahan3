@@ -11,6 +11,7 @@ public class GaugeEnergyControl : MonoBehaviour
     public float maxSpeed = 30;
     private float maxSpeed2 = 15;
     private float speed = 0.0f;
+    private float speed2 = 0.0f;
     private Vector3 playerPos;
     private Vector3 velocity;
 
@@ -39,10 +40,19 @@ public class GaugeEnergyControl : MonoBehaviour
         //playerPos = player.transform.position;
         //playerPos = gauge.transform.position;
 
-        if (!hit) speed = Easing.SineInOut(easingCount, num, speed, maxSpeed);
+        if (!hit)
+        {
+            speed = Easing.SineInOut(easingCount, num, speed, maxSpeed);
+            float speed2 = Easing.QuartIn(easingCount, num2, speed, maxSpeed);
+
+            speed = speed - speed2/50;
+
+
+        }
         else
         {
             speed = Easing.SineInOut(easingCount, num2, speed, maxSpeed2);
+            
             playerPos = gauge.transform.position;
         }
 
