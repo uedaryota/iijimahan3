@@ -391,6 +391,7 @@ public class PlayerControl : MonoBehaviour
                 bullets.GetComponent<BulletControl>().SetRotation(
                   new Vector3(transform.rotation.x, transform.rotation.y, bulletangle ));
                 //音
+                audioSource.volume = 0.5f;
                 audioSource.PlayOneShot(playerBulletSE);
             }
             //長押しで弾を撃つ
@@ -406,6 +407,7 @@ public class PlayerControl : MonoBehaviour
                     bullets.GetComponent<BulletControl>().SetRotation(
                       new Vector3(transform.rotation.x, transform.rotation.y, bulletangle));
                     //音
+                    audioSource.volume = 0.5f;
                     audioSource.PlayOneShot(playerBulletSE);
                     bulletcounter = 0;
                 }
@@ -422,6 +424,7 @@ public class PlayerControl : MonoBehaviour
                 playerEnergyGauge.SetGauge(40f);
                 gaugeCount++;
                 //音
+                audioSource.volume = 0.5f;
                 audioSource.PlayOneShot(playerGaugeShootHantenSE);
             }
             if (Input.GetKeyDown("joystick button 0") && gauge >= 40)
@@ -435,6 +438,7 @@ public class PlayerControl : MonoBehaviour
                 playerEnergyGauge.SetGauge(40f);
                 gaugeCount++;
                 //音
+                audioSource.volume = 0.5f;
                 audioSource.PlayOneShot(playerGaugeShootKyoukaSE);
             }
 
