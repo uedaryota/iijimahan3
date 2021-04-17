@@ -366,6 +366,8 @@ public class EnemyManager : MonoBehaviour
 
     private float wave_timer;
 
+    private static int waveGameOver;
+
     AudioSource audioSource;
 
     #endregion
@@ -383,6 +385,7 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
+        waveGameOver = wave;
         if(old_wave != wave)
         {
             enemycount = 0;
@@ -580,5 +583,10 @@ public class EnemyManager : MonoBehaviour
     public int GetWave()
     {
         return wave;
+    }
+
+    public static int GetWaveGameOver()
+    {
+        return waveGameOver;
     }
 }

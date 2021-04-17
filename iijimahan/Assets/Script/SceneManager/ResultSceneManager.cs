@@ -10,6 +10,7 @@ public class ResultSceneManager : MonoBehaviour
     private PlayerControl script;
     private int gauge;
     private float time;
+    private int wave;
     public AudioClip BGM;
     AudioSource audioSource;
     public GameObject fade;
@@ -19,8 +20,9 @@ public class ResultSceneManager : MonoBehaviour
     {
         gauge = PlayerControl.GetGaugeCount();
         time = GameSceneManager.GetClearTime();
+        wave = EnemyManager.GetWaveGameOver();
         Text text = text_obj.GetComponent<Text>();
-        text.text = "ゲージ使用回数 : " + gauge + "      タイム : " + time;
+        text.text = "ゲージ使用回数 : " + gauge + "   タイム : " + time + "   最終Wave : " + wave;
         audioSource = GetComponent<AudioSource>();
         audioSource.Play();
     }
