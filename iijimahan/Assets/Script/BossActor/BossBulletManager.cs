@@ -98,7 +98,7 @@ public class BossBulletManager : MonoBehaviour
             SpriteRenderer sr = Bullet.AddComponent<SpriteRenderer>();
             sr.sprite = BulletSprite[color];
             sr.sortingLayerName = "BossBullet";
-            Bullet.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+            Bullet.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
             Bullet.AddComponent<BossLaser>();
             Bullet.AddComponent<BossPower>();
             Rigidbody rg = Bullet.AddComponent<Rigidbody>();

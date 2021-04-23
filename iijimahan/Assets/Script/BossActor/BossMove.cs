@@ -140,7 +140,7 @@ public class BossMove : MonoBehaviour
                         Angle = Mathf.Atan2(movpoi2.y - transform.position.y, movpoi2.x - transform.position.x);
                         x = movpoi2.x - transform.position.x;
                         y = movpoi2.y - transform.position.y;
-                        transform.position += GetDirectionPI(Angle) * Speed * 40 * Time.deltaTime;
+                        transform.position += GetDirectionPI(Angle) * Speed * 10 * Time.deltaTime;
                         if (x < 0.3f && y < 0.3f)
                         {
                             Lesson = 3;
@@ -153,7 +153,7 @@ public class BossMove : MonoBehaviour
                         Angle = Mathf.Atan2(movpoi3.y - transform.position.y, movpoi3.x - transform.position.x);
                         x = movpoi3.x - transform.position.x;
                         y = movpoi3.y - transform.position.y;
-                        transform.position += GetDirectionPI(Angle) * Speed * 40 * Time.deltaTime;
+                        transform.position += GetDirectionPI(Angle) * Speed * 10 * Time.deltaTime;
                         if (Mathf.Abs(x) < 0.3f && Mathf.Abs(y) < 0.3f)
                         {
                             Lesson = 4;
@@ -166,7 +166,7 @@ public class BossMove : MonoBehaviour
                         Angle = Mathf.Atan2(movpoi4.y - transform.position.y, movpoi4.x - transform.position.x);
                         x = movpoi4.x - transform.position.x;
                         y = movpoi4.y - transform.position.y;
-                        transform.position += GetDirectionPI(Angle) * Speed * 40 * Time.deltaTime;
+                        transform.position += GetDirectionPI(Angle) * Speed * 10 * Time.deltaTime;
                         if (Mathf.Abs(x) < 0.3f && Mathf.Abs(y) < 0.3f)
                         {
                             Lesson = 5;
@@ -179,7 +179,7 @@ public class BossMove : MonoBehaviour
                         Angle = Mathf.Atan2(movpoi5.y - transform.position.y, movpoi5.x - transform.position.x);
                         x = movpoi5.x - transform.position.x;
                         y = movpoi5.y - transform.position.y;
-                        transform.position += GetDirectionPI(Angle) * Speed * 40 * Time.deltaTime;
+                        transform.position += GetDirectionPI(Angle) * Speed * 10 * Time.deltaTime;
                         if (Mathf.Abs(x) < 0.3f && Mathf.Abs(y) < 0.3f)
                         {
                             Lesson = 6;

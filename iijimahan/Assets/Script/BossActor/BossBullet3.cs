@@ -31,14 +31,15 @@ public class BossBullet3 : MonoBehaviour
             Destroy(this.gameObject);
         }
         Cnt++;
-      
-           
-            Vector3 dir = pos - transform.position;
-            Angle = Mathf.Atan2(pos.y - transform.position.y, pos.x - transform.position.x);
-            x = pos.x - transform.position.x;
-            y = pos.y - transform.position.y;
-            transform.position += GetDirectionPI(Angle) * Speed * 2 * Time.deltaTime;
-
+        Vector3 dir = pos - transform.position;
+        Angle = Mathf.Atan2(pos.y - transform.position.y, pos.x - transform.position.x);
+        x = pos.x - transform.position.x;
+        y = pos.y - transform.position.y;
+        transform.position += GetDirectionPI(Angle) * Speed * 2 * Time.deltaTime;
+        if(Mathf.Abs(x)<0.25&&Mathf.Abs(y)<0.25)
+        {
+            deadFlag = true;
+        }
         if (Cnt * Time.deltaTime > 8)
         {
             deadFlag = true;
