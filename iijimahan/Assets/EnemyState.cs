@@ -120,20 +120,16 @@ public class EnemyState : MonoBehaviour
             }
            
             bool f = false;
-            if (screenPos.x > PointX)  
-            {
-                transform.position += new Vector3(-Time.deltaTime * 15, 0, 0);
-                f = true;
-            }
+         
             if (Mathf.Abs(screenPos.x - PointX) > 10)
             {
                 if (screenPos.x > PointX)
                 {
-                    transform.position += new Vector3(-Time.deltaTime * 10, 0, 0);
+                    transform.position += new Vector3(-Time.deltaTime * 5, 0, 0);
                 }
                 else if (screenPos.y < PointY)
                 {
-                    transform.position += new Vector3(Time.deltaTime * 10, 0, 0);
+                    transform.position += new Vector3(Time.deltaTime * 5, 0, 0);
                 }
                 f = true;
             }
@@ -141,11 +137,11 @@ public class EnemyState : MonoBehaviour
             {
                 if (screenPos.y > PointY)
                 {
-                    transform.position += new Vector3(0, -Time.deltaTime * 10, 0);
+                    transform.position += new Vector3(0, -Time.deltaTime * 5, 0);
                 }
                 else if (screenPos.y < PointY)
                 {
-                   transform.position += new Vector3(0, Time.deltaTime *10, 0);
+                   transform.position += new Vector3(0, Time.deltaTime *5, 0);
                 }
                 f = true;
             }
