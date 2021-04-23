@@ -6,7 +6,7 @@ public class BulletControl : MonoBehaviour
 {
     private Vector3 velocity;
     public float speed = 30.0f;
-    private int timer = 0;
+    private float timer = 0;
     private bool scaleFlag = false;
     [SerializeField, Header("爆発エフェクト")] private Object BurstEffect;
     [SerializeField, Header("破片エフェクト1")] private Object RockEffect1;
@@ -38,13 +38,13 @@ public class BulletControl : MonoBehaviour
         //}
 
 
-        if (timer > 60 && !scaleFlag) Destroy(this.gameObject);
-        if(timer > 80 && scaleFlag) Destroy(this.gameObject);
+        if (timer > 1 && !scaleFlag) Destroy(this.gameObject);
+        if(timer > 1.4 && scaleFlag) Destroy(this.gameObject);
 
         velocity.Normalize();
         velocity *= speed;
         transform.position += velocity * Time.deltaTime;
-        timer++;
+        timer += 1*Time.deltaTime;
 
 
         if(scaleFlag)
