@@ -6,6 +6,8 @@ using UnityEngine.UI;
 
 public class ResultSceneManager : MonoBehaviour
 {
+    private GameObject option;
+    private Option optionscript;
     public GameObject text_obj;
     private PlayerControl script;
     private int gauge;
@@ -18,6 +20,8 @@ public class ResultSceneManager : MonoBehaviour
 
     void Start()
     {
+        option = GameObject.Find("Option");
+        optionscript = option.GetComponent<Option>();
         gauge = PlayerControl.GetGaugeCount();
         time = GameSceneManager.GetClearTime();
         wave = EnemyManager.GetWaveGameOver();
@@ -28,7 +32,8 @@ public class ResultSceneManager : MonoBehaviour
     }
     void Update()
     {
-        if(!oneFadeFlag)
+        audioSource.volume = optionscript.GetBGMVolume();
+        if (!oneFadeFlag)
         {
             fade.GetComponent<FadeStart>().FadeInA();
             oneFadeFlag = true;

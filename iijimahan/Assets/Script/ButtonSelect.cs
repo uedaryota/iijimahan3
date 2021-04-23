@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class ButtonSelect : MonoBehaviour
 {
+    private GameObject option;
+    private Option script;
     [SerializeField] private Button[] button;
     [SerializeField, Header("縦並び:1 横並び:2")] private int sort = 1;
     [SerializeField, Header("インターバル")] private float interval = 10f;
@@ -17,12 +19,15 @@ public class ButtonSelect : MonoBehaviour
 
     void Start()
     {
+        option = GameObject.Find("Option");
+        script = option.GetComponent<Option>();
         indexnum = 0;
         timer = 5.0f;
         button[0].Select();
         audioSource = GetComponent<AudioSource>();
         if (gameObject.name == "pause(Clone)")
         {
+            audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(pauseSE);
         }
         Mouse = true;
@@ -33,7 +38,6 @@ public class ButtonSelect : MonoBehaviour
         if(Input.GetMouseButtonDown(0))
         {
             Mouse = true;
-            Debug.Log("マウス解禁");
         }
         timer++;
         if (sort == 1)
@@ -42,6 +46,7 @@ public class ButtonSelect : MonoBehaviour
             {
                 timer = 0.0f;
                 indexnum--;
+                audioSource.volume = script.GetSEVolume();
                 audioSource.PlayOneShot(selectSE);
                 Mouse = false;
             }
@@ -49,6 +54,7 @@ public class ButtonSelect : MonoBehaviour
             {
                 timer = 0.0f;
                 indexnum++;
+                audioSource.volume = script.GetSEVolume();
                 audioSource.PlayOneShot(selectSE);
                 Mouse = false;
             }
@@ -56,6 +62,7 @@ public class ButtonSelect : MonoBehaviour
             {
                 timer = 0.0f;
                 indexnum--;
+                audioSource.volume = script.GetSEVolume();
                 audioSource.PlayOneShot(selectSE);
                 Mouse = false;
             }
@@ -63,6 +70,7 @@ public class ButtonSelect : MonoBehaviour
             {
                 timer = 0.0f;
                 indexnum++;
+                audioSource.volume = script.GetSEVolume();
                 audioSource.PlayOneShot(selectSE);
                 Mouse = false;
             }
@@ -73,6 +81,7 @@ public class ButtonSelect : MonoBehaviour
             {
                 timer = 0.0f;
                 indexnum--;
+                audioSource.volume = script.GetSEVolume();
                 audioSource.PlayOneShot(selectSE);
                 Mouse = false;
             }
@@ -80,6 +89,7 @@ public class ButtonSelect : MonoBehaviour
             {
                 timer = 0.0f;
                 indexnum++;
+                audioSource.volume = script.GetSEVolume();
                 audioSource.PlayOneShot(selectSE);
                 Mouse = false;
             }
@@ -87,6 +97,7 @@ public class ButtonSelect : MonoBehaviour
             {
                 timer = 0.0f;
                 indexnum--;
+                audioSource.volume = script.GetSEVolume();
                 audioSource.PlayOneShot(selectSE);
                 Mouse = false;
             }
@@ -94,6 +105,7 @@ public class ButtonSelect : MonoBehaviour
             {
                 timer = 0.0f;
                 indexnum++;
+                audioSource.volume = script.GetSEVolume();
                 audioSource.PlayOneShot(selectSE);
                 Mouse = false;
             }

@@ -106,7 +106,9 @@ public class PlayerControl : MonoBehaviour
     bool startOneFlag = false;
 
     private float bulletcounter = 0;
-
+    
+    private GameObject option;
+    private Option optionscript;
 
     //private Color cr;
     //private float cl;
@@ -131,6 +133,8 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        option = GameObject.Find("Option");
+        optionscript = option.GetComponent<Option>();
         Application.targetFrameRate = 60;
         playerState = PlayerState.Alive;
         playerHpGauge = GameObject.FindObjectOfType<PlayerHpGauge>();
@@ -323,7 +327,7 @@ public class PlayerControl : MonoBehaviour
                     new Vector3(transform.rotation.x,transform.rotation.y,angle-180));
                 //bullets.transform.parent = bulletbox.transform;
                 //音
-                audioSource.volume = 0.5f;
+                audioSource.volume = optionscript.GetSEVolume();
                 audioSource.PlayOneShot(playerBulletSE);
 
             }
@@ -341,7 +345,7 @@ public class PlayerControl : MonoBehaviour
                         new Vector3(transform.rotation.x, transform.rotation.y, angle - 180));
                     //bullets.transform.parent = bulletbox.transform;
                     //音
-                    audioSource.volume = 0.5f;
+                    audioSource.volume = optionscript.GetSEVolume();
                     audioSource.PlayOneShot(playerBulletSE);
                     bulletcounter = 0;
                 }
@@ -359,6 +363,7 @@ public class PlayerControl : MonoBehaviour
                 playerEnergyGauge.SetGauge(40f);
                 gaugeCount++;
                 //音
+                audioSource.volume = optionscript.GetSEVolume();
                 audioSource.PlayOneShot(playerGaugeShootHantenSE);
             }
             if (Input.GetKeyDown(KeyCode.Q) && gauge >= 40)
@@ -373,6 +378,7 @@ public class PlayerControl : MonoBehaviour
                 gaugeCount++;
 
                 //音
+                audioSource.volume = optionscript.GetSEVolume();
                 audioSource.PlayOneShot(playerGaugeShootKyoukaSE);
             }
         }
@@ -391,7 +397,7 @@ public class PlayerControl : MonoBehaviour
                 bullets.GetComponent<BulletControl>().SetRotation(
                   new Vector3(transform.rotation.x, transform.rotation.y, bulletangle ));
                 //音
-                audioSource.volume = 0.5f;
+                audioSource.volume = optionscript.GetSEVolume();
                 audioSource.PlayOneShot(playerBulletSE);
             }
             //長押しで弾を撃つ
@@ -407,7 +413,7 @@ public class PlayerControl : MonoBehaviour
                     bullets.GetComponent<BulletControl>().SetRotation(
                       new Vector3(transform.rotation.x, transform.rotation.y, bulletangle));
                     //音
-                    audioSource.volume = 0.5f;
+                    audioSource.volume = optionscript.GetSEVolume();
                     audioSource.PlayOneShot(playerBulletSE);
                     bulletcounter = 0;
                 }
@@ -424,7 +430,7 @@ public class PlayerControl : MonoBehaviour
                 playerEnergyGauge.SetGauge(40f);
                 gaugeCount++;
                 //音
-                audioSource.volume = 0.5f;
+                audioSource.volume = optionscript.GetSEVolume();
                 audioSource.PlayOneShot(playerGaugeShootHantenSE);
             }
             if (Input.GetKeyDown("joystick button 0") && gauge >= 40)
@@ -438,7 +444,7 @@ public class PlayerControl : MonoBehaviour
                 playerEnergyGauge.SetGauge(40f);
                 gaugeCount++;
                 //音
-                audioSource.volume = 0.5f;
+                audioSource.volume = optionscript.GetSEVolume();
                 audioSource.PlayOneShot(playerGaugeShootKyoukaSE);
             }
 
@@ -682,6 +688,7 @@ public class PlayerControl : MonoBehaviour
         gauge += upenergy;
         playerEnergyGauge.UpGauge((float)upenergy);
         //音
+        audioSource.volume = optionscript.GetSEVolume();
         audioSource.PlayOneShot(playerEnergyUpSE);
     }
 
@@ -706,7 +713,7 @@ public class PlayerControl : MonoBehaviour
             if (insekiHitFlag) return;
             insekiHitFlag = true;
             RockDamage(damage);
-            audioSource.volume = 0.4f;
+            audioSource.volume = optionscript.GetSEVolume();
             //音
             audioSource.PlayOneShot(dameageSE);
             //当たったRockを探す
@@ -725,7 +732,7 @@ public class PlayerControl : MonoBehaviour
             playerHpGauge.Damage(damage);
             MutekiFlagActive();
             //音
-            audioSource.volume = 0.4f;
+            audioSource.volume = optionscript.GetSEVolume();
             audioSource.PlayOneShot(dameageSE);
         }
         if (other.gameObject.tag == "EnemyBullet")
@@ -734,7 +741,7 @@ public class PlayerControl : MonoBehaviour
             playerHpGauge.Damage(damage);
             MutekiFlagActive();
             //音
-            audioSource.volume = 0.4f;
+            audioSource.volume = optionscript.GetSEVolume();
             audioSource.PlayOneShot(dameageSE);
         }
         if (other.gameObject.tag == "Boss")
@@ -743,7 +750,7 @@ public class PlayerControl : MonoBehaviour
             playerHpGauge.Damage(damage);
             MutekiFlagActive();
             //音
-            audioSource.volume = 0.4f;
+            audioSource.volume = optionscript.GetSEVolume();
             audioSource.PlayOneShot(dameageSE);
         }
         
@@ -795,7 +802,7 @@ public class PlayerControl : MonoBehaviour
         burst2.transform.position = transform.position + new Vector3(0.5f,0.7f,-0.6f);
         burst2.transform.localScale = new Vector3(1.5f, 1.5f, 0.5f);
         //音
-        audioSource.volume = 0.4f;
+        audioSource.volume = optionscript.GetSEVolume();
         audioSource.PlayOneShot(dameageSE);
 
         yield return new WaitForSeconds(0.6f);
@@ -804,7 +811,7 @@ public class PlayerControl : MonoBehaviour
         burst3.transform.position = transform.position + new Vector3(-0.7f, -0.7f, -0.6f);
         burst3.transform.localScale = new Vector3(1.5f, 1.5f, 0.5f);
         //音
-        audioSource.volume = 0.4f;
+        audioSource.volume = optionscript.GetSEVolume();
         audioSource.PlayOneShot(dameageSE);
 
         yield return new WaitForSeconds(0.6f);
@@ -813,7 +820,7 @@ public class PlayerControl : MonoBehaviour
         burst.transform.position = transform.position + new Vector3(0.3f, -0.3f, -0.6f);
         burst.transform.localScale = new Vector3(1.5f, 1.5f, 0.5f);
         //音
-        audioSource.volume = 0.4f;
+        audioSource.volume = optionscript.GetSEVolume();
         audioSource.PlayOneShot(dameageSE);
 
         yield return new WaitForSeconds(0.6f);
@@ -823,7 +830,7 @@ public class PlayerControl : MonoBehaviour
         burst4.transform.localScale = new Vector3(3, 3, 3);
 
         //音
-        audioSource.volume = 0.4f;
+        audioSource.volume = optionscript.GetSEVolume();
         audioSource.PlayOneShot(dameageSE);
 
         model.SetActive(false);
@@ -887,7 +894,7 @@ public class PlayerControl : MonoBehaviour
             MutekiFlagActive();
         }
         //音
-        audioSource.volume = 0.4f;
+        audioSource.volume = optionscript.GetSEVolume();
         audioSource.PlayOneShot(dameageSE);
     }
     public void AttackDamage()
