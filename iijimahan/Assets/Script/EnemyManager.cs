@@ -370,10 +370,15 @@ public class EnemyManager : MonoBehaviour
 
     AudioSource audioSource;
 
+    private GameObject option;
+    private Option optionscript;
+
     #endregion
 
     void Start()
     {
+        option = GameObject.Find("Option");
+        optionscript = option.GetComponent<Option>();
         bosschack = true;
         gameclear = false;
         old_pos_chack = pos.y;
@@ -394,6 +399,7 @@ public class EnemyManager : MonoBehaviour
 
             if(wave % 2 == 0)
             {
+                audioSource.volume = optionscript.GetSEVolume();
                 audioSource.PlayOneShot(caution);
             }
 

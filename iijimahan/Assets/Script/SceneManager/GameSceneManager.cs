@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class GameSceneManager : MonoBehaviour
 {
+    private GameObject option;
+    private Option optionscript;
     [SerializeField, Header("ピッチの上がるまでのスピード")] private float pitchup = 0.1f;
     [SerializeField, Header("ピッチの下がるまでのスピード")] private float pitchdown = 0.1f;
     [SerializeField, Header("ピッチの最大")] private float pitchhight = 2.0f;
@@ -29,6 +31,8 @@ public class GameSceneManager : MonoBehaviour
 
     void Start()
     {
+        option = GameObject.Find("Option");
+        optionscript = option.GetComponent<Option>();
         Application.targetFrameRate = 60;
         //fade.GetComponent<FadeStart>().FadeInA();
         enemymanager = GameObject.Find("EnemyManager");
@@ -49,6 +53,7 @@ public class GameSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        audioSource.volume = optionscript.GetBGMVolume();
         if (!oneFlagFade)
         {
             fade.GetComponent<FadeStart>().FadeInA();

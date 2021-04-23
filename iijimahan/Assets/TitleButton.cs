@@ -5,18 +5,24 @@ using UnityEngine.SceneManagement;
 
 public class TitleButton : MonoBehaviour
 {
+    private GameObject option;
+    private Option script;
     [SerializeField, Header("次のシーンを選択した時の音")] public AudioClip SelectSE;
     AudioSource audioSource;
     public GameObject fade;
 
     void Start()
     {
+        option = GameObject.Find("Option");
+        script = option.GetComponent<Option>();
         audioSource = GetComponent<AudioSource>();
        // fade.GetComponent<FadeStart>().FadeInA();
         //Application.targetFrameRate = 60;
     }
     public void OnClickStartButton()
     {
+        audioSource.volume = script.GetSEVolume();
+        audioSource.PlayOneShot(SelectSE);
         if (transform.name == "StartButton")
         {
             fade.GetComponent<FadeStart>().FadeOutNextScene("GameScene");
@@ -26,7 +32,6 @@ public class TitleButton : MonoBehaviour
         {
             Quit();
         }
-        audioSource.PlayOneShot(SelectSE);
     }
     void Quit()
     {
