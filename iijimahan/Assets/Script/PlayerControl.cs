@@ -890,6 +890,18 @@ public class PlayerControl : MonoBehaviour
         audioSource.volume = 0.4f;
         audioSource.PlayOneShot(dameageSE);
     }
+    public void AttackDamage()
+    {
+        if (mutekiFlag) return;
+        float damage2 = 20;
+        HP -= (int)damage2;
+        playerHpGauge.Damage(damage2);
+        //音
+        audioSource.volume = 0.4f;
+        audioSource.PlayOneShot(dameageSE);
+        nockBackFlag = true;
+        Debug.Log("うせやろ");
+    }
 
     public void SetClearFlag(bool fl)
     {
