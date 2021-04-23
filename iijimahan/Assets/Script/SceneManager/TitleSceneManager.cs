@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class TitleSceneManager : MonoBehaviour
 {
+    private GameObject option;
+    private Option script;
     public AudioClip BGM;
     AudioSource audioSource;
 
@@ -13,12 +15,16 @@ public class TitleSceneManager : MonoBehaviour
 
     void Start()
     {
+        option = GameObject.Find("Option");
+        script = option.GetComponent<Option>();
         audioSource = GetComponent<AudioSource>();
         audioSource.Play();
+        
     }
 
     void Update()
     {
+        audioSource.volume = script.GetBGMVolume();
         if(!oneFadeFlag)
         {
             fade.GetComponent<FadeStart>().FadeInA();

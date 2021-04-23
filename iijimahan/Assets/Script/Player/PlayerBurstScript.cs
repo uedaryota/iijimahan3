@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerBurstScript : MonoBehaviour
 {
+    private GameObject option;
+    private Option optionscript;
     public float LifeTime;
     public AudioClip sound;
     AudioSource soundplayer;
@@ -14,6 +16,8 @@ public class PlayerBurstScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        option = GameObject.Find("Option");
+        optionscript = option.GetComponent<Option>();
         soundplayer = gameObject.GetComponent<AudioSource>();
     }
 
@@ -35,6 +39,7 @@ public class PlayerBurstScript : MonoBehaviour
         soundplayer = gameObject.GetComponent<AudioSource>();
         if (sound != null)
         {
+            soundplayer.volume = optionscript.GetSEVolume();
             soundplayer.PlayOneShot(sound);
         }
     }

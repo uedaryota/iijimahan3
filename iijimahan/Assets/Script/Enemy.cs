@@ -349,5 +349,8 @@ public class Enemy : MonoBehaviour
         }
 
     }
-
+    public void DeadEnd()
+    {
+        state.Dead();
+    }
 }

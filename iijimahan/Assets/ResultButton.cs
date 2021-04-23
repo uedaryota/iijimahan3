@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class ResultButton : MonoBehaviour
 {
+    private GameObject option;
+    private Option script;
     [SerializeField, Header("次のシーンを選択した時の音")] public AudioClip SelectSE;
     AudioSource audioSource;
     public GameObject fade;
@@ -12,11 +14,15 @@ public class ResultButton : MonoBehaviour
 
     void Start()
     {
+        option = GameObject.Find("Option");
+        script = option.GetComponent<Option>();
         audioSource = GetComponent<AudioSource>();
         //fade.GetComponent<FadeStart>().FadeInA();
     }
     public void OnClickStartButton()
     {
+        audioSource.volume = script.GetSEVolume();
+        audioSource.PlayOneShot(SelectSE);
         if (transform.name == "TitleButton")
         {
             //SceneManager.LoadScene("TitleScene");
@@ -31,7 +37,6 @@ public class ResultButton : MonoBehaviour
         {
             Quit();
         }
-        audioSource.PlayOneShot(SelectSE);
     }
     void Quit()
     {

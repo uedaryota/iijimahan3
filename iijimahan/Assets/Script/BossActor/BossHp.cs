@@ -62,7 +62,8 @@ public class BossHp : MonoBehaviour
             Cnt = 0;
             status = Status.Damege;
         }
-
+        if(GetComponent<BossMove>().action == BossMove.MoveAction.AttackMove)
+        { status = Status.Damege; }
     }
 
     void Dead()
