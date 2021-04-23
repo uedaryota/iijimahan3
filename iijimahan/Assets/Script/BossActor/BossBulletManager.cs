@@ -167,6 +167,27 @@ public class BossBulletManager : MonoBehaviour
             }
             Destroy(newParent);
         }
+        public void CreateBullet6(Vector3 pos, int color)
+        {
+            GameObject newParent = new GameObject("Empty");
+            Bullet = Instantiate(newParent, pos, Quaternion.identity);
+            // Bullet.tag = "EnemyBullet";
+            SpriteRenderer sr = Bullet.AddComponent<SpriteRenderer>();
+            sr.sprite = BulletSprite[color];
+            sr.sortingLayerName = "BossBullet";
+            Bullet.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+            Bullet.AddComponent<BossSuperLaser>();
+            Bullet.AddComponent<BossPower>();
+            Rigidbody rg = Bullet.AddComponent<Rigidbody>();
+            rg.useGravity = false;
+            BoxCollider bc = Bullet.AddComponent<BoxCollider>();//.size = new Vector2(SizeX, SizeY);
+            SizeX = 0.0f;
+            SizeY = 0.0f;
+            bc.size = new Vector2(SizeX, SizeY);
+            bc.isTrigger = true;
+
+            Destroy(newParent);
+        }
     }
     public BulletFactory[] FBulletFactory = new BulletFactory[]
     {

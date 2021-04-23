@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.014337641, g: 0.018372606, b: 0.025915008, a: 1}
+  m_IndirectSpecularColor: {r: 0.004515173, g: 0.005736573, b: 0.00801481, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -463,12 +463,12 @@ PrefabInstance:
     - target: {fileID: 397079078545487889, guid: 9228ea5dc23165e449d8966ae59e188c,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 397079078545487889, guid: 9228ea5dc23165e449d8966ae59e188c,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 543450651764957130, guid: 9228ea5dc23165e449d8966ae59e188c,
         type: 3}
@@ -549,6 +549,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: "\u30EC\u30FC\u30B6\u30FC\u30DC\u30B9"
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626864526235431021, guid: 9228ea5dc23165e449d8966ae59e188c,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6548443411915304522, guid: 9228ea5dc23165e449d8966ae59e188c,
         type: 3}
@@ -3202,6 +3207,11 @@ PrefabInstance:
         type: 3}
       propertyPath: damagelimit
       value: 40
+      objectReference: {fileID: 0}
+    - target: {fileID: 4443109365030374599, guid: 3eb9d23ad59d5e748bcfed4f86d0ccc1,
+        type: 3}
+      propertyPath: insekiHitFlag
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4443109365030374599, guid: 3eb9d23ad59d5e748bcfed4f86d0ccc1,
         type: 3}
