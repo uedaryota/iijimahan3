@@ -74,8 +74,10 @@ public class EnemyState : MonoBehaviour
         if (waveMove)
         {
             Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
-            float number = 0;
-            float PointY = 0;
+            int number = 0;
+            int PointY = 0;
+            int PointX = 0;
+            //int line = 0;
             for (int a = 0; a < team.Length; a++) 
             {
                 if (team[a] == this.gameObject)
@@ -83,22 +85,67 @@ public class EnemyState : MonoBehaviour
                     number = a;
                 }
             }
-            PointY = Screen.height / team.Length * number;
-            bool f = false;
-            if (screenPos.x > Screen.width / 7) 
+            if ((team.Length - 1) % 5 >= 2) //2以上
             {
-                transform.position += new Vector3(-Time.deltaTime * 10, 0, 0);
+                PointY = Screen.height / ((team.Length - 1) / 5 * 2 + 2);
+                if (number % 5 >= 2)
+                {
+                    PointY = PointY * ((number / 5 * 2) + 1);
+                }
+                else if (number % 5 <= 1)
+                {
+                    PointY = PointY * ((number / 5 * 2));
+                }
+
+            }
+            else if ((team.Length - 1) % 5 <= 1) //1以下
+            {
+                PointY = Screen.height / ((team.Length - 1) / 5 * 2 + 1);
+                if (number % 5 >= 2)
+                {
+                    PointY = PointY * ((number / 5 * 2) + 1);
+                }
+                else if (number % 5 <= 1)
+                {
+                    PointY = PointY * ((number / 5 * 2));
+                }
+            }
+            if (number % 5 >= 2)//2以上
+            {
+                PointX = Screen.width / 3 / 4 * ((number % 5) - 1)+ Screen.width / 7;
+            }
+            else if (number % 5 <= 1) //1以下
+            {
+                PointX = Screen.width / 3 / 3 * ((number % 5) + 1) + Screen.width / 7;
+            }
+           
+            bool f = false;
+            if (screenPos.x > PointX)  
+            {
+                transform.position += new Vector3(-Time.deltaTime * 15, 0, 0);
+                f = true;
+            }
+            if (Mathf.Abs(screenPos.x - PointX) > 10)
+            {
+                if (screenPos.x > PointX)
+                {
+                    transform.position += new Vector3(-Time.deltaTime * 10, 0, 0);
+                }
+                else if (screenPos.y < PointY)
+                {
+                    transform.position += new Vector3(Time.deltaTime * 10, 0, 0);
+                }
                 f = true;
             }
             if (Mathf.Abs(screenPos.y - PointY) > 10)
             {
                 if (screenPos.y > PointY)
                 {
-                    transform.position += new Vector3(0, -Time.deltaTime * 5, 0);
+                    transform.position += new Vector3(0, -Time.deltaTime * 10, 0);
                 }
                 else if (screenPos.y < PointY)
                 {
-                   transform.position += new Vector3(0, Time.deltaTime * 5, 0);
+                   transform.position += new Vector3(0, Time.deltaTime *10, 0);
                 }
                 f = true;
             }
