@@ -123,4 +123,8 @@ public class BossHp : MonoBehaviour
     {
         return MaxHp;
     }
+    public float GetHp()
+    {
+        return Hp;
+    }
 }

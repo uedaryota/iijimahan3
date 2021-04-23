@@ -38,7 +38,7 @@ public class Boss1Attack2 : MonoBehaviour
                         GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet2(transform.position, 0);
                     }
                     Cnt = 0;
-                    GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet5(transform.position, 3);
+                   // GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet5(transform.position, 3);
                     Cnt2++;
                     if (GetComponent<BossHp>().status == BossHp.Status.Damege)
                     {
@@ -49,7 +49,9 @@ public class Boss1Attack2 : MonoBehaviour
                             GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet(transform.position, 1);
                         }
                         audioSource.PlayOneShot(BulletSE);
-                        GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet5(transform.position, 3);
+                       // GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet5(transform.position, 3);
+                        GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 3);
+                        GetComponent<BossMove>().action = BossMove.MoveAction.Action1;
                     }
                 }
                 Cnt++;
