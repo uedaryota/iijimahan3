@@ -10,6 +10,8 @@ public class TitleButton : MonoBehaviour
     [SerializeField, Header("次のシーンを選択した時の音")] public AudioClip SelectSE;
     AudioSource audioSource;
     public GameObject fade;
+    public GameObject OptionCanvas;
+    public GameObject Canvas;
 
     void Start()
     {
@@ -27,6 +29,11 @@ public class TitleButton : MonoBehaviour
         {
             fade.GetComponent<FadeStart>().FadeOutNextScene("GameScene");
             //SceneManager.LoadScene("GameScene");
+        }
+        if(transform.name == "OptionButton")
+        {
+            Canvas.SetActive(false);
+            OptionCanvas.SetActive(true);
         }
         if (transform.name == "GameEndButton")
         {
