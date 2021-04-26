@@ -32,7 +32,7 @@ public class ButtonSelect : MonoBehaviour
 
     void OnEnable()
     {
-        if (gameObject.name != "TitleCanvas")
+        if (gameObject.name == "Canvas")
         {
             audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(pauseSE);
