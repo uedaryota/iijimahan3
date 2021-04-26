@@ -415,10 +415,11 @@ public class PlayerControl : MonoBehaviour
                     bullets.GetComponent<BulletControl>().SetTransform(poolvelocity, this.transform.position);
                     bullets.GetComponent<BulletControl>().SetRotation(
                       new Vector3(transform.rotation.x, transform.rotation.y, bulletangle));
+                    bulletcounter = 0;
                     //音
                     audioSource.volume = optionscript.GetSEVolume();
                     audioSource.PlayOneShot(playerBulletSE);
-                    bulletcounter = 0;
+                    
                 }
                
             }

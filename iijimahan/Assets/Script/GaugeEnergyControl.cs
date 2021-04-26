@@ -8,6 +8,7 @@ public class GaugeEnergyControl : MonoBehaviour
     //private bool easingFlag = false;
     public int num = 80;
     private int num2 = 1200;
+    private int num3 = 400;
     public float maxSpeed = 30;
     private float maxSpeed2 = 15;
     private float speed = 0.0f;
@@ -51,7 +52,7 @@ public class GaugeEnergyControl : MonoBehaviour
         }
         else
         {
-            speed = Easing.SineInOut(easingCount, num2, speed, maxSpeed2);
+            speed = Easing.SineInOut(easingCount, num3, speed, maxSpeed2);
             
             playerPos = gauge.transform.position;
         }
