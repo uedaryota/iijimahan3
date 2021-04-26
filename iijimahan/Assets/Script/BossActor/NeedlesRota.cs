@@ -14,6 +14,8 @@ public class NeedlesRota : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //ポーズの時に止める
+        if (Time.timeScale <= 0) return;
         transform.Rotate(new Vector3(0, x, 0));
     }
 }

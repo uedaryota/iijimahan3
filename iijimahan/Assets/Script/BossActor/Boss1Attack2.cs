@@ -5,7 +5,6 @@ using UnityEngine;
 public class Boss1Attack2 : MonoBehaviour
 {
     int Cnt = 0;
-    int Cnt2 = 0;
     Acter act;
     [SerializeField, Header("ボス攻撃SE")] public AudioClip BulletSE;
     private AudioSource audioSource;
@@ -39,7 +38,6 @@ public class Boss1Attack2 : MonoBehaviour
                     }
                     Cnt = 0;
                    // GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet5(transform.position, 3);
-                    Cnt2++;
                     if (GetComponent<BossHp>().status == BossHp.Status.Damege)
                     {
                         for (int x = 0; x < 3; x++)
