@@ -370,44 +370,91 @@ public class HeelEnemy : MonoBehaviour
     }
     void ObjectRotate()
     {
-        Quaternion a = Quaternion.identity;
-        Vector3 dir = target.transform.position - transform.position;
-        float angle = Mathf.Atan2(dir.y, dir.x);
-        rotateZ = angle / (3.1415f / 180);
-      
-        if (rotateZ < 0)
+        if (target != null)
         {
-            rotateZ += 360;
-        }
-        if (currentrotateZ > 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
-        {
-            currentrotateZ -= 360;
-        }
-        if (currentrotateZ < 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
-        {
-            currentrotateZ += 360;
-        }
-
-        if (Mathf.Abs(rotateZ - currentrotateZ) > 3)
-        {
-            if (rotateZ - currentrotateZ < 0)
+            Quaternion a = Quaternion.identity;
+            Vector3 dir = target.transform.position - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x);
+            rotateZ = angle / (3.1415f / 180);
+         
+            if (rotateZ < 0)
             {
-                currentrotateZ -= Time.deltaTime * 150;
+                rotateZ += 360;
             }
-            else
+            if (currentrotateZ > 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
             {
-                currentrotateZ += Time.deltaTime * 150;
+                currentrotateZ -= 360;
             }
+            if (currentrotateZ < 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
+            {
+                currentrotateZ += 360;
+            }
+            if (Mathf.Abs(rotateZ - currentrotateZ) > 1)
+            {
+                if (rotateZ - currentrotateZ < 0)
+                {
+                    currentrotateZ -= Time.deltaTime * 150;
+                }
+                else
+                {
+                    currentrotateZ += Time.deltaTime * 150;
+                }
+            }
+
+            a.eulerAngles = new Vector3(0, 0, currentrotateZ);
+            transform.rotation = a;
+
+            transform.Rotate(new Vector3(rotateX, rotateY, 0));
+            // transform.Rotate(0, 0, angle);
+            //   this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
+            lastPosition = this.target.transform.position;
+
+        }
+        else
+        {
+            Quaternion a = Quaternion.identity;
+            Vector3 dir = lastPosition - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x);
+            rotateZ = angle / (3.1415f / 180);
+            //if (rotateZ < 0)
+            //{
+            //    rotateZ = rotateZ + 360;
+            //}
+            if (rotateZ < 0)
+            {
+                rotateZ += 360;
+            }
+            if (currentrotateZ > 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
+            {
+                currentrotateZ -= 360;
+            }
+            if (currentrotateZ < 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
+            {
+                currentrotateZ += 360;
+            }
+            //  if (rotateZ < 0)
+            {
+                if (rotateZ - currentrotateZ < 0)
+                {
+                    currentrotateZ -= Time.deltaTime * 90;
+                }
+                else
+                {
+                    currentrotateZ += Time.deltaTime * 90;
+                }
+            }
+
+            a.eulerAngles = new Vector3(0, 0, currentrotateZ);
+            transform.rotation = a;
+
+            transform.Rotate(new Vector3(rotateX, rotateY, 0));
+            // transform.Rotate(0, 0, angle);
+            //   this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
+
         }
 
-        a.eulerAngles = new Vector3(0, 0, currentrotateZ);
-        transform.rotation = a;
-
-        transform.Rotate(new Vector3(rotateX, rotateY, 0));
-        // transform.Rotate(0, 0, angle);
-        //   this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
-        lastPosition = this.target.transform.position;
     }
+
     void BulletDamage(GameObject other)
     {
 

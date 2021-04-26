@@ -394,7 +394,7 @@ public class ShootEnemy : MonoBehaviour
             // transform.Rotate(0, 0, angle);
             //   this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
             lastPosition = this.target.transform.position;
-            
+
         }
         else
         {
@@ -436,9 +436,9 @@ public class ShootEnemy : MonoBehaviour
             transform.Rotate(new Vector3(rotateX, rotateY, 0));
             // transform.Rotate(0, 0, angle);
             //   this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
-            
+
         }
 
     }
-   
+
 }
