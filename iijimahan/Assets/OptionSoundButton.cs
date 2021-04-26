@@ -10,6 +10,7 @@ public class OptionSoundButton : MonoBehaviour
     AudioSource audioSource;
     [SerializeField]private GameObject OptionCanvas;
     private OptionSelect script2;
+    public GameObject Canvas;
 
     void Start()
     {
@@ -37,6 +38,11 @@ public class OptionSoundButton : MonoBehaviour
         if (transform.name == "SEUp")
         {
             script2.SetSEUpClick(true);
+        }
+        if(transform.name == "QuitButton")
+        {
+            Canvas.SetActive(true);
+            OptionCanvas.SetActive(false);
         }
     }
 }
