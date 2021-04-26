@@ -17,6 +17,7 @@ public class EnemyState : MonoBehaviour
     float lastwave;
     bool waveMove;
     GameObject[] team;
+    BuffEffectScript effect;
     // Start is called before the first frame update
     void Start()
     {
@@ -186,23 +187,27 @@ public class EnemyState : MonoBehaviour
         {
             buffInstance = Instantiate(Resources.Load<GameObject>("BuffParticle"));
             buffInstance.GetComponent<BuffEffectScript>().SetParent(gameObject);
+            effect = buffInstance.GetComponent<BuffEffectScript>();
         }
         if (BuffLevel == 1)
         {
             hp += StartHp * 1.3f;
             power += StartPower * 1.5f;
+            effect.ChangeLevel1();
         }
         if (BuffLevel == 2)
         {
 
             hp += StartHp * 1.3f;
             power += StartPower * 1.5f;
+            effect.ChangeLevel2();
         }
         if (BuffLevel == 3)
         {
 
             hp += StartHp * 1.3f;
             power += StartPower * 1.5f;
+            effect.ChangeLevel3();
         }
     }
     public float GetBuffLevel()
