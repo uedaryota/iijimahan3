@@ -126,10 +126,7 @@ public class HeelEnemy : MonoBehaviour
                     {
                         if (objects[a] != gameObject)
                         {
-                            if (near.GetComponent<HeelEnemy>() == null)
-                            {
-                                near = objects[a];
-                            }
+                                near = objects[a];     
                         }
                     }
                     if (near != null)
@@ -211,10 +208,7 @@ public class HeelEnemy : MonoBehaviour
                         {
                         if (objects[a] != gameObject)
                         {
-                            if (near.GetComponent<HeelEnemy>() == null)
-                            {
-                                near = objects[a];
-                            }
+                            near = objects[a];
                         }
                     }
                         if (near != null) 
