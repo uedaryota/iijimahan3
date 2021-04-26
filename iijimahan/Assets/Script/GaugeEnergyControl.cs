@@ -83,7 +83,7 @@ public class GaugeEnergyControl : MonoBehaviour
 
             speed = speed - speed2/50;
 
-            if (Vector3.Distance(targetscreenPos, screenPos) < 500)
+            if (Vector3.Distance(targetscreenPos, screenPos) < 200)
             {
 
                 if (angleans2 != transform.rotation.z)
@@ -93,7 +93,7 @@ public class GaugeEnergyControl : MonoBehaviour
                     var targetscreenPos2 = Camera.main.WorldToScreenPoint(gauge.transform.position);
                     var direction2 = targetscreenPos2 - screenPos2;
                     angleans2 = GetAim(Vector3.zero, direction2);
-                    transform.localEulerAngles += new Vector3(transform.rotation.x, transform.rotation.y, 360) * Time.deltaTime;
+                    transform.localEulerAngles += new Vector3(transform.rotation.x, transform.rotation.y, 180) * Time.deltaTime;
                 }
             }
 
