@@ -96,7 +96,10 @@ public class HeelEnemy : MonoBehaviour
                         {
                             if (objects[a] != gameObject)
                             {
-                                near = objects[a];
+                                if (near.GetComponent<HeelEnemy>() == null)
+                                {
+                                    near = objects[a];
+                                }
                             }
                         }
                     }
@@ -123,7 +126,10 @@ public class HeelEnemy : MonoBehaviour
                     {
                         if (objects[a] != gameObject)
                         {
-                            near = objects[a];
+                            if (near.GetComponent<HeelEnemy>() == null)
+                            {
+                                near = objects[a];
+                            }
                         }
                     }
                     if (near != null)
@@ -135,7 +141,10 @@ public class HeelEnemy : MonoBehaviour
                         {
                             if (objects[a] != gameObject)
                             {
-                                near = objects[a];
+                                if (near.GetComponent<HeelEnemy>() == null)
+                                {
+                                    near = objects[a];
+                                }
                             }
                         }
                     }
@@ -174,7 +183,10 @@ public class HeelEnemy : MonoBehaviour
                         {
                             if (objects[a] != gameObject)
                             {
-                                near = objects[a];
+                                if (near.GetComponent<HeelEnemy>() == null)
+                                {
+                                    near = objects[a];
+                                }
                             }
                         }
                     }
@@ -195,30 +207,48 @@ public class HeelEnemy : MonoBehaviour
                     GameObject near = null;
                     for (int a = 0; a < objects.Length; a++)
                     {
-
                         if (near == null)
                         {
-                            if (objects[a] != gameObject)
+                        if (objects[a] != gameObject)
+                        {
+                            if (near.GetComponent<HeelEnemy>() == null)
                             {
                                 near = objects[a];
                             }
                         }
+                    }
                         if (near != null) 
                         {
                             float len1, len2;
                             len1 = Vector3.Dot(this.transform.position - near.transform.position, this.transform.position - near.transform.position);
                             len2 = Vector3.Dot(this.transform.position - objects[a].transform.position, this.transform.position - objects[a].transform.position);
-                            if (len1 > len2)
+                        if (len1 > len2)
+                        {
+                            if (objects[a] != gameObject)
                             {
-                                if (objects[a] != gameObject)
+                                if (near.GetComponent<HeelEnemy>() == null)
                                 {
                                     near = objects[a];
                                 }
                             }
                         }
                     }
+                    }
                     target = near;
                 
+            }
+
+        }
+        if (target != null)
+        {
+            Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, target.transform.position);
+            if (screenPos.x < 0 || screenPos.x > Screen.width)
+            {
+                target = null;
+            }
+            if (screenPos.y < 0 || screenPos.y > Screen.height)
+            {
+                target = null;
             }
 
         }

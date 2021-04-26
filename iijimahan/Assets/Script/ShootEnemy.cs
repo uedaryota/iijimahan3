@@ -214,15 +214,12 @@ public class ShootEnemy : MonoBehaviour
 
     private void CheckTarget()
     {
+      
         if (this.gameObject.tag == "Enemy")
         {
             if (target == null)
             {
-                // if (target.tag != "Player")
-                {
-                    target = GameObject.FindGameObjectWithTag("Player");
-
-                }
+                target = GameObject.FindGameObjectWithTag("Player");
             }
             else if (target.tag != "Player" && target.tag != "Friend")
             {
@@ -253,18 +250,34 @@ public class ShootEnemy : MonoBehaviour
                             len2 = Vector3.Dot(this.transform.position - objects[a].transform.position, this.transform.position - objects[a].transform.position);
                             if (len1 > len2)
                             {
-                                near = objects[a];
+                                if (len1 > len2)
+                                {
+                                    Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, near.transform.position);
+                                    if (screenPos.x > 0 && screenPos.x < Screen.width
+                                        && screenPos.y > 0 && screenPos.y < Screen.height)
+                                    {
+                                        near = objects[a];
+                                    }
+                                }
                             }
                         }
                     }
                     target = near;
                 }
             }
+            if (target != null)
+            {
+                Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, target.transform.position);
+                if (screenPos.x < 0 || screenPos.x > Screen.width)
+                {
+                    target = null;
+                }
+                if (screenPos.y < 0 || screenPos.y > Screen.height)
+                {
+                    target = null;
+                }
 
-            //else if (target.tag != "Enemy")
-            //{
-
-            //}
+            }
         }
 
     }
