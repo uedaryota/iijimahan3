@@ -24,7 +24,7 @@ public class BossAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Cnt * Time.deltaTime);
+        //Debug.Log(Cnt * Time.deltaTime);
         //ポーズの時に止める
         if (Time.timeScale <= 0) return;
         switch (act)
