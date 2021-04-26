@@ -98,7 +98,7 @@ public class BossBulletManager : MonoBehaviour
             SpriteRenderer sr = Bullet.AddComponent<SpriteRenderer>();
             sr.sprite = BulletSprite[color];
             sr.sortingLayerName = "BossBullet";
-            Bullet.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+            Bullet.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
             Bullet.AddComponent<BossLaser>();
             Bullet.AddComponent<BossPower>();
             Rigidbody rg = Bullet.AddComponent<Rigidbody>();
@@ -137,6 +137,55 @@ public class BossBulletManager : MonoBehaviour
                 bc.size = new Vector2(SizeX, SizeY);
                 bc.isTrigger = true;
             }
+            Destroy(newParent);
+        }
+        //エリア封鎖弾
+        public void CreateBullet5(Vector3 pos, int color)
+        {
+            GameObject newParent = new GameObject("Empty");
+            Bullet = Instantiate(newParent, pos, Quaternion.identity);
+            Bullet.tag = "EnemyBullet";
+            SpriteRenderer sr = Bullet.AddComponent<SpriteRenderer>();
+            sr.sprite = BulletSprite[color];
+            sr.sortingLayerName = "BossBullet";
+            Bullet.transform.localScale = new Vector3(0.3f, 0.3f, 0.3f);
+            Bullet.AddComponent<BossBullet3>();
+            Bullet.AddComponent<BossPower>();
+            Rigidbody rg = Bullet.AddComponent<Rigidbody>();
+            rg.useGravity = false;
+            if (ColliderType)
+            {
+                CapsuleCollider cc = Bullet.AddComponent<CapsuleCollider>();//.radius = SizeX;
+                cc.radius = Radius;
+                cc.isTrigger = true;
+            }
+            else
+            {
+                BoxCollider bc = Bullet.AddComponent<BoxCollider>();//.size = new Vector2(SizeX, SizeY);
+                bc.size = new Vector2(SizeX, SizeY);
+                bc.isTrigger = true;
+            }
+            Destroy(newParent);
+        }
+        public void CreateBullet6(Vector3 pos, int color)
+        {
+            GameObject newParent = new GameObject("Empty");
+            Bullet = Instantiate(newParent, pos, Quaternion.identity);
+            // Bullet.tag = "EnemyBullet";
+            SpriteRenderer sr = Bullet.AddComponent<SpriteRenderer>();
+            sr.sprite = BulletSprite[color];
+            sr.sortingLayerName = "BossBullet";
+            Bullet.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
+            Bullet.AddComponent<BossSuperLaser>();
+            Bullet.AddComponent<BossPower>();
+            Rigidbody rg = Bullet.AddComponent<Rigidbody>();
+            rg.useGravity = false;
+            BoxCollider bc = Bullet.AddComponent<BoxCollider>();//.size = new Vector2(SizeX, SizeY);
+            SizeX = 0.0f;
+            SizeY = 0.0f;
+            bc.size = new Vector2(SizeX, SizeY);
+            bc.isTrigger = true;
+
             Destroy(newParent);
         }
     }

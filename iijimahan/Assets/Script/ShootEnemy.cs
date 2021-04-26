@@ -40,15 +40,35 @@ public class ShootEnemy : MonoBehaviour
     {
         if (target != null)
         {
+
             float speed = 5;
-            if (Vector3.Distance(target.transform.position, transform.position) <= targetDistance)
+            if (Vector3.Distance(target.transform.position, transform.position) <= targetDistance &&
+                Vector3.Distance(target.transform.position, transform.position) >= targetDistance / 2)
             {
-                velocity -= Vector3.Normalize(velocity) * speed / 60;
+                velocity -= Vector3.Normalize(velocity) * speed / 15;
+            }
+            else if (Vector3.Distance(target.transform.position, transform.position) <= targetDistance / 2)
+            {
+                velocity -= Vector3.Normalize(target.transform.position - transform.position);
+                velocity = Vector3.Normalize(velocity) * speed;
             }
             else
             {
                 velocity += Vector3.Normalize(target.transform.position - transform.position);
                 velocity = Vector3.Normalize(velocity) * speed;
+            }
+
+           
+
+            Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
+            if (screenPos.x > Screen.width|| screenPos.x < 0)
+            {
+                velocity = Vector3.Normalize(new Vector3(Screen.width / 2, Screen.height / 2, 0) - screenPos) * speed*3;
+            }
+         
+            if (screenPos.y > Screen.height|| screenPos.y < 0)
+            {
+                velocity = Vector3.Normalize(new Vector3(Screen.width / 2, Screen.height / 2, 0) - screenPos) * speed*3;
             }
            
             transform.position += velocity * Time.deltaTime;

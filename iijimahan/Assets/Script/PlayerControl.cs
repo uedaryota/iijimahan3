@@ -146,6 +146,7 @@ public class PlayerControl : MonoBehaviour
         gaugeCount = 0;
 
         audioSource = GetComponent<AudioSource>();
+        //Application.targetFrameRate = 60;
     }
     // Update is called once per frame
     void Update()
@@ -256,11 +257,12 @@ public class PlayerControl : MonoBehaviour
 
         //プレイヤーの最初の行動
 
-        float startSpeed = 0.075f;
+        //float startSpeed = 0.075f;
+        float startSpeed = 4.875f;
 
         if(!startFlag)
         {
-            transform.position += new Vector3( startSpeed,0,0);
+            transform.position += new Vector3( startSpeed,0,0)* Time.deltaTime;
 
             if(transform.position.x >= -6)
             {
@@ -345,9 +347,10 @@ public class PlayerControl : MonoBehaviour
                         new Vector3(transform.rotation.x, transform.rotation.y, angle - 180));
                     //bullets.transform.parent = bulletbox.transform;
                     //音
+                    bulletcounter = 0;
                     audioSource.volume = optionscript.GetSEVolume();
                     audioSource.PlayOneShot(playerBulletSE);
-                    bulletcounter = 0;
+                   
                 }
                
             }
@@ -412,10 +415,11 @@ public class PlayerControl : MonoBehaviour
                     bullets.GetComponent<BulletControl>().SetTransform(poolvelocity, this.transform.position);
                     bullets.GetComponent<BulletControl>().SetRotation(
                       new Vector3(transform.rotation.x, transform.rotation.y, bulletangle));
+                    bulletcounter = 0;
                     //音
                     audioSource.volume = optionscript.GetSEVolume();
                     audioSource.PlayOneShot(playerBulletSE);
-                    bulletcounter = 0;
+                    
                 }
                
             }
@@ -896,6 +900,18 @@ public class PlayerControl : MonoBehaviour
         //音
         audioSource.volume = optionscript.GetSEVolume();
         audioSource.PlayOneShot(dameageSE);
+    }
+    public void AttackDamage()
+    {
+        if (mutekiFlag) return;
+        float damage2 = 20;
+        HP -= (int)damage2;
+        playerHpGauge.Damage(damage2);
+        //音
+        audioSource.volume = 0.4f;
+        audioSource.PlayOneShot(dameageSE);
+        nockBackFlag = true;
+        Debug.Log("うせやろ");
     }
 
     public void SetClearFlag(bool fl)

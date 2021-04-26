@@ -37,4 +37,8 @@ public class Rock : MonoBehaviour
             HP--;
         }
     }
+    public void AttackBoss()
+    {
+        Destroy(this.gameObject);
+    }
 }
