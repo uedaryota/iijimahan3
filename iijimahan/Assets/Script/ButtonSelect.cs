@@ -9,13 +9,12 @@ public class ButtonSelect : MonoBehaviour
     private Option script;
     [SerializeField] private Button[] button;
     [SerializeField, Header("縦並び:1 横並び:2")] private int sort = 1;
-    [SerializeField, Header("インターバル")] private float interval = 10f;
+    [SerializeField, Header("インターバル")] private float interval = 30f;
     [SerializeField, Header("ポーズ画面を開いた時の音(ポーズ画面じゃなければ入れなくていい)")]public AudioClip pauseSE;
     [SerializeField, Header("項目を移動する時の音")] public AudioClip selectSE;
     AudioSource audioSource;
     int indexnum;
     float timer;
-    bool Mouse;
 
     void Start()
     {
@@ -25,20 +24,23 @@ public class ButtonSelect : MonoBehaviour
         timer = 5.0f;
         button[0].Select();
         audioSource = GetComponent<AudioSource>();
-        if (gameObject.name == "pause(Clone)")
+        if (gameObject.name != "TitleCanvas")
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
+    void OnEnable()
+    {
+        if (gameObject.name != "TitleCanvas")
         {
             audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(pauseSE);
         }
-        Mouse = true;
     }
 
     void Update()
     {
-        if(Input.GetMouseButtonDown(0))
-        {
-            Mouse = true;
-        }
         timer++;
         if (sort == 1)
         {
@@ -48,7 +50,6 @@ public class ButtonSelect : MonoBehaviour
                 indexnum--;
                 audioSource.volume = script.GetSEVolume();
                 audioSource.PlayOneShot(selectSE);
-                Mouse = false;
             }
             if (Input.GetKeyDown(KeyCode.S) && indexnum != button.Length - 1 && timer >= interval)
             {
@@ -56,7 +57,6 @@ public class ButtonSelect : MonoBehaviour
                 indexnum++;
                 audioSource.volume = script.GetSEVolume();
                 audioSource.PlayOneShot(selectSE);
-                Mouse = false;
             }
             if (PadControlUp() && indexnum != 0 && timer >= interval)
             {
@@ -64,7 +64,6 @@ public class ButtonSelect : MonoBehaviour
                 indexnum--;
                 audioSource.volume = script.GetSEVolume();
                 audioSource.PlayOneShot(selectSE);
-                Mouse = false;
             }
             if (PadControlDown() && indexnum != button.Length - 1 && timer >= interval)
             {
@@ -72,7 +71,6 @@ public class ButtonSelect : MonoBehaviour
                 indexnum++;
                 audioSource.volume = script.GetSEVolume();
                 audioSource.PlayOneShot(selectSE);
-                Mouse = false;
             }
         }
         if (sort == 2)
@@ -83,7 +81,6 @@ public class ButtonSelect : MonoBehaviour
                 indexnum--;
                 audioSource.volume = script.GetSEVolume();
                 audioSource.PlayOneShot(selectSE);
-                Mouse = false;
             }
             if (Input.GetKeyDown(KeyCode.D) && indexnum != button.Length - 1 && timer >= interval)
             {
@@ -91,7 +88,6 @@ public class ButtonSelect : MonoBehaviour
                 indexnum++;
                 audioSource.volume = script.GetSEVolume();
                 audioSource.PlayOneShot(selectSE);
-                Mouse = false;
             }
             if (PadControlLeft() && indexnum != 0 && timer >= interval)
             {
@@ -99,7 +95,6 @@ public class ButtonSelect : MonoBehaviour
                 indexnum--;
                 audioSource.volume = script.GetSEVolume();
                 audioSource.PlayOneShot(selectSE);
-                Mouse = false;
             }
             if (PadControlRight() && indexnum != button.Length - 1 && timer >= interval)
             {
@@ -107,13 +102,9 @@ public class ButtonSelect : MonoBehaviour
                 indexnum++;
                 audioSource.volume = script.GetSEVolume();
                 audioSource.PlayOneShot(selectSE);
-                Mouse = false;
             }
         }
-        if (Mouse == true)
-        {
-            button[indexnum].Select();
-        }
+        button[indexnum].Select();
     }
 
     bool PadControlUp()

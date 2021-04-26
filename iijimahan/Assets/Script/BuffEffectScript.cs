@@ -13,8 +13,8 @@ public class BuffEffectScript : MonoBehaviour
     void Start()
     {
         enemy = parent.GetComponent<EnemyState>();
-       
-      //  def = transform.localRotation.eulerAngles;
+
+        //  def = transform.localRotation.eulerAngles;
     }
 
     // Update is called once per frame
@@ -24,11 +24,11 @@ public class BuffEffectScript : MonoBehaviour
 
         // //修正箇所
         //// transform.localRotation = Quaternion.Euler(def - _parent);
-        if(DeadCheck())
+        if (DeadCheck())
         {
             return;
         }
-        if(this.gameObject!=null)
+        if (this.gameObject != null)
         {
             transform.position = parent.transform.position;
             if (enemy != null && enemy.GetBuffLevel() != 0)
@@ -40,7 +40,7 @@ public class BuffEffectScript : MonoBehaviour
                 }
 
             }
-            
+
             else
             {
                 this.gameObject.GetComponent<ParticleSystem>().Stop();
@@ -55,11 +55,24 @@ public class BuffEffectScript : MonoBehaviour
     }
     bool DeadCheck()
     {
-        if (parent == null) 
+        if (parent == null)
         {
             Destroy(gameObject);
             return true;
         }
         return false;
+    }
+    public void ChangeLevel1()
+    {
+        this.gameObject.GetComponent<ParticleSystem>().startColor = Color.blue;
+    }
+    public void ChangeLevel2()
+    {
+
+        this.gameObject.GetComponent<ParticleSystem>().startColor = Color.cyan;
+    }
+    public void ChangeLevel3()
+    {
+        this.gameObject.GetComponent<ParticleSystem>().startColor = Color.white;
     }
 }
