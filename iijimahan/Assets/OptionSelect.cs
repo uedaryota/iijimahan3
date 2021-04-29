@@ -256,7 +256,6 @@ public class OptionSelect : MonoBehaviour
                 text3.color = color;
                 if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button0))
                 {
-                    Time.timeScale = 1.0f;
                     Canvas.SetActive(true);
                     OptionCanvas.SetActive(false);
                 }
