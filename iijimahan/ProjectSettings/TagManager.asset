@@ -22,6 +22,9 @@ TagManager:
   - GaugeTarget
   - EffectRock
   - Manager
+  - PlayerBulletEffect
+  - GaugeTarget2
+  - PlayerBulletEffect2
   layers:
   - Default
   - TransparentFX

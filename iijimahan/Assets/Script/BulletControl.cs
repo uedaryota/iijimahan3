@@ -13,6 +13,13 @@ public class BulletControl : MonoBehaviour
     [SerializeField, Header("破片エフェクト2")] private Object RockEffect2;
     public Vector3 rockeffectpos = new Vector3(0, 0, -2);
     private Vector3 effectpos;
+
+    public GameObject barrierTarget;
+    public GameObject barrierEffect;
+    private Vector3 rote;
+
+    public GameObject particle;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,14 +70,30 @@ public class BulletControl : MonoBehaviour
         //    Destroy(this.gameObject);
         //    //UnityEditor.EditorApplication.isPaused = true;
         //}
-        if (other.gameObject.tag == "Rock")
-        {
-            Instantiate(RockEffect1, transform.position + effectpos, Quaternion.identity);
-            Instantiate(BurstEffect, transform.position + rockeffectpos, Quaternion.identity);
-            Instantiate(RockEffect2, transform.position + rockeffectpos, Quaternion.identity);
-            Destroy(this.gameObject);
-            //UnityEditor.EditorApplication.isPaused = true;
-        }
+
+        //if(other.gameObject.tag == "Boss")
+        //{
+        //    //GameObject effect = Instantiate(barrierEffect) as GameObject;
+        //    //effect.GetComponent<BarrierControl>().SetRotation(new Vector3(rote.x, rote.y, rote.z - 180));
+        //    //effect.GetComponent<BarrierControl>().SetPosition(transform.position);
+        //    //GameObject paticles = Instantiate(particle) as GameObject;
+        //    //paticles.transform.position = transform.position;
+        //    //paticles.transform.localEulerAngles = new Vector3(rote.x, rote.y, rote.z - 180);
+        //    //Destroy(this.gameObject);
+
+        //}
+
+        //if (other.gameObject.tag == "Rock" )
+        //{
+
+
+        //    Instantiate(RockEffect1, transform.position + effectpos, Quaternion.identity);
+        //    Instantiate(BurstEffect, transform.position + rockeffectpos, Quaternion.identity);
+        //    Instantiate(RockEffect2, transform.position + rockeffectpos, Quaternion.identity);
+        //    Destroy(this.gameObject);
+        //    //UnityEditor.EditorApplication.isPaused = true;
+        //}
+
         //if (other.gameObject.tag == "EnemyBullet")
         //{
         //    Destroy(this.gameObject);
@@ -100,6 +123,12 @@ public class BulletControl : MonoBehaviour
     public void SetRotation(Vector3 rotaion)
     {
         transform.localEulerAngles = rotaion;
+        rote = rotaion;
+    }
+
+    public Vector3 GetRote()
+    {
+        return rote;
     }
 
 }
