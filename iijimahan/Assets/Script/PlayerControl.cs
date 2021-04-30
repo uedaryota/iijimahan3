@@ -905,16 +905,21 @@ public class PlayerControl : MonoBehaviour
         if (mutekiFlag) return;
         float damage2 = 1;
         HP -= (int)damage2;
+        audioSource.volume = optionscript.GetSEVolume() ;
         playerHpGauge.Damage(damage2);
         LaserCnt++;
         if (LaserCnt == damagelimit)
         {
             LaserCnt = 0;
             MutekiFlagActive();
+           
         }
+
         //音
-        audioSource.volume = optionscript.GetSEVolume();
+        audioSource.volume = optionscript.GetSEVolume() * 0.2f;
         audioSource.PlayOneShot(dameageSE);
+        audioSource.volume = optionscript.GetSEVolume();
+
     }
     public void AttackDamage()
     {
