@@ -8,12 +8,15 @@ public class LaserBoss : MonoBehaviour
     int Cnt = 440;
     Acter act;
     [SerializeField, Header("ボス攻撃SE")] public AudioClip BulletSE;
+    [SerializeField, Header("ボス攻撃SE")] public AudioClip LaserSE;
+    bool SECharge = false;
     private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
     {
         act = Acter.Start;
         audioSource = GetComponent<AudioSource>();
+        SECharge = false;
     }
 
     // Update is called once per frame
@@ -50,6 +53,23 @@ public class LaserBoss : MonoBehaviour
                 break;
         }
     }
+    public void ChargeFinish()
+    {
+        if (SECharge == true)
+        {
+            Debug.Log("Charge終了");
+            audioSource.Stop();
+            SECharge = false;
+        }
+    }
+    public void ChargeStart()
+    {
+        if (SECharge == false)
+        {
+            Debug.Log("チャージ中");
+            audioSource.PlayOneShot(LaserSE);
+            SECharge = true;
+        }
+    }
 
-   
 }

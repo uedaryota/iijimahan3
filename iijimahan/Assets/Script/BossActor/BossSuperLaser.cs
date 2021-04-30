@@ -20,11 +20,15 @@ public class BossSuperLaser : MonoBehaviour
     Vector3 goalpos2;
     Vector3 Pulus;
     Vector3 Mainus;
+    public bool Chage = false;
+    public bool Chage0 = false;
     #endregion
     // Start is called before the first frame update
     void Start()
     {
         Cnt = 0;
+        Chage = true;
+        Chage0 = true;
         deadFlag = false;
         Hutosa = 0.1f;
         Pulus = new Vector3(20, 20, 0);
@@ -78,6 +82,18 @@ public class BossSuperLaser : MonoBehaviour
         if (Cnt / 30.0f < 8.0f)
         {
             goalpos = GameObject.FindGameObjectWithTag("Player").transform.position;
+            if (Chage0)
+            {
+                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>() != null)
+                {
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>().ChargeStart();
+                }
+                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>() != null)
+                {
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>().ChargeStart();
+                }
+                Chage0 = false;
+            }
             if (goalpos.x > 0)
             {
                 goalpos.x = goalpos.x + 10;
@@ -111,6 +127,18 @@ public class BossSuperLaser : MonoBehaviour
         }
         if (Cnt / 30.0f > Speed)
         {
+            if (Chage)
+            {
+                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>() != null)
+                {
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>().ChargeFinish();
+                }
+                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>() != null)
+                {
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>().ChargeFinish();
+                }
+                Chage = false;
+            }
             line.material = new Material(Resources.Load<Material>("Def"));
 
             line.material.color = Color.red;

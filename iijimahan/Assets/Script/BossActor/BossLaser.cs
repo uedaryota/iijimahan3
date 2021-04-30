@@ -20,12 +20,16 @@ public class BossLaser : MonoBehaviour
     Vector3 goalpos2;
     Vector3 Pulus;
     Vector3 Mainus;
+    public bool Chage = false;
+    public bool Chage0 = false;
     #endregion
     // Start is called before the first frame update
     void Start()
     {
         Cnt = 0;
         deadFlag = false;
+        Chage = true;
+        Chage0 = true;
         Hutosa=0.1f;
         Pulus = new Vector3(20, 20, 0);
         Mainus = new Vector3(20, -20, 0);
@@ -61,13 +65,36 @@ public class BossLaser : MonoBehaviour
         line.endColor = Color.cyan;
         if (Cnt / 30.0f < Speed)
         {
+            if(Chage0)
+            {
+                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>() != null)
+                {
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>().ChargeStart();
+                }
+                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>() != null)
+                {
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>().ChargeStart();
+                }
+                Chage0 = false;
+            }
             Angle = Mathf.Atan2(startpos.y - goalpos.y, startpos.x - goalpos.x);
             goalpos += GetDirectionPI(Angle) * 25.0f * Time.deltaTime;
         }
         if (Cnt/30.0f>Speed)
         {
             line.material= new Material(Resources.Load<Material>("Def"));
-            
+            if(Chage)
+            {
+                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>() != null)
+                {
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>().ChargeFinish();
+                }
+                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>() != null)
+                {
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>().ChargeFinish();
+                }
+                Chage = false;
+            }
             line.material.color = Color.cyan;
             goalpos = goalpos2;
             Hutosa = 2.0f;
@@ -112,5 +139,9 @@ public class BossLaser : MonoBehaviour
             Mathf.Sin(angle),
             0
         );
+    }
+    public bool CHAGE()
+    {
+        return Chage;
     }
 }

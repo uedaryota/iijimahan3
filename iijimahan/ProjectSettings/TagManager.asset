@@ -22,6 +22,8 @@ TagManager:
   - GaugeTarget
   - EffectRock
   - Manager
+  - GaugeTarget2
+  - Charge
   layers:
   - Default
   - TransparentFX
