@@ -8,7 +8,10 @@ public class LaserBoss2 : MonoBehaviour
     float Angle;
     Acter act;
     int Cnt2 = 0;
+  
     [SerializeField, Header("ボス攻撃SE")] public AudioClip BulletSE;
+    [SerializeField, Header("ボス攻撃SE")] public AudioClip LaserSE;
+    bool SECharge = false;
     private AudioSource audioSource;
     // Start is called before the first frame update
     void Start()
@@ -16,6 +19,7 @@ public class LaserBoss2 : MonoBehaviour
         act = Acter.Start;
         audioSource = GetComponent<AudioSource>();
         Cnt2 = 0;
+        SECharge = false;
     }
 
     // Update is called once per frame
@@ -50,21 +54,57 @@ public class LaserBoss2 : MonoBehaviour
                     audioSource.PlayOneShot(BulletSE);
                     GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet(transform.position, 1);
                     GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet6(transform.position, 1);
+                    Cnt = 0;
+                }
+                if(Cnt>100&& GetComponent<BossHp>().GetHp() < GetComponent<BossHp>().GetMaxHp() / 5)
+                {
                     if (GetComponent<BossHp>().GetHp() < GetComponent<BossHp>().GetMaxHp() / 5)
                     {
                         Cnt2++;
-                        if (Cnt2 > 2)
+                        if (Cnt2 > 16)
                         {
-                            GetComponent<BossMove>().action = BossMove.MoveAction.AttackMove;
+                            for (int x = 0; x < 10; x++)
+                            {
+                                audioSource.PlayOneShot(BulletSE);
+                                GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);
+                            }
                             Cnt2 = 0;
                         }
+
                     }
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet6(transform.position, 1);
                     Cnt = 0;
                 }
+                
                 Cnt++;
+
+                
+            
                 break;
+        }
+        
+    }
+    public void ChargeFinish()
+    {
+        if (SECharge == true)
+        {
+            Debug.Log("Charge終了");
+            audioSource.Stop();
+            SECharge = false;
+        }
+    }
+    public void ChargeStart()
+    {
+        if (SECharge == false)
+        {
+            Debug.Log("チャージ中");
+            audioSource.PlayOneShot(LaserSE);
+            SECharge = true;
         }
     }
 
-
+    public AudioClip ChageMosic()
+    {
+        return LaserSE;
+    }
 }

@@ -36,7 +36,7 @@ public class BossBullet3 : MonoBehaviour
         x = pos.x - transform.position.x;
         y = pos.y - transform.position.y;
         transform.position += GetDirectionPI(Angle) * Speed * 2 * Time.deltaTime;
-        if(Mathf.Abs(x)<0.25&&Mathf.Abs(y)<0.25)
+        if(Mathf.Abs(x)<0.3&&Mathf.Abs(y)<0.3)
         {
             deadFlag = true;
         }
