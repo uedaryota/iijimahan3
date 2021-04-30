@@ -42,6 +42,7 @@ public class GameSceneManager : MonoBehaviour
         timer = 0;
         ClearTime = 0;
         audioSource = GetComponent<AudioSource>();
+        audioSource.clip = BGM;
         audioSource.Play();
         sceneChangeFlag = true;
 

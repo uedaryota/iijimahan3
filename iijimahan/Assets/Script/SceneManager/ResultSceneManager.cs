@@ -28,6 +28,7 @@ public class ResultSceneManager : MonoBehaviour
         Text text = text_obj.GetComponent<Text>();
         text.text = "ゲージ使用回数 : " + gauge + "   タイム : " + time + "   最終Wave : " + wave;
         audioSource = GetComponent<AudioSource>();
+        audioSource.clip = BGM;
         audioSource.Play();
     }
     void Update()

@@ -18,6 +18,7 @@ public class TitleSceneManager : MonoBehaviour
         option = GameObject.Find("Option");
         script = option.GetComponent<Option>();
         audioSource = GetComponent<AudioSource>();
+        audioSource.clip = BGM;
         audioSource.Play();
         
     }
