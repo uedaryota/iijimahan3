@@ -96,7 +96,10 @@ public class HeelEnemy : MonoBehaviour
                         {
                             if (objects[a] != gameObject)
                             {
-                                near = objects[a];
+                                if (near.GetComponent<HeelEnemy>() == null)
+                                {
+                                    near = objects[a];
+                                }
                             }
                         }
                     }
@@ -123,7 +126,7 @@ public class HeelEnemy : MonoBehaviour
                     {
                         if (objects[a] != gameObject)
                         {
-                            near = objects[a];
+                                near = objects[a];     
                         }
                     }
                     if (near != null)
@@ -135,7 +138,10 @@ public class HeelEnemy : MonoBehaviour
                         {
                             if (objects[a] != gameObject)
                             {
-                                near = objects[a];
+                                if (near.GetComponent<HeelEnemy>() == null)
+                                {
+                                    near = objects[a];
+                                }
                             }
                         }
                     }
@@ -174,7 +180,10 @@ public class HeelEnemy : MonoBehaviour
                         {
                             if (objects[a] != gameObject)
                             {
-                                near = objects[a];
+                                if (near.GetComponent<HeelEnemy>() == null)
+                                {
+                                    near = objects[a];
+                                }
                             }
                         }
                     }
@@ -195,30 +204,45 @@ public class HeelEnemy : MonoBehaviour
                     GameObject near = null;
                     for (int a = 0; a < objects.Length; a++)
                     {
-
                         if (near == null)
                         {
-                            if (objects[a] != gameObject)
-                            {
-                                near = objects[a];
-                            }
+                        if (objects[a] != gameObject)
+                        {
+                            near = objects[a];
                         }
+                    }
                         if (near != null) 
                         {
                             float len1, len2;
                             len1 = Vector3.Dot(this.transform.position - near.transform.position, this.transform.position - near.transform.position);
                             len2 = Vector3.Dot(this.transform.position - objects[a].transform.position, this.transform.position - objects[a].transform.position);
-                            if (len1 > len2)
+                        if (len1 > len2)
+                        {
+                            if (objects[a] != gameObject)
                             {
-                                if (objects[a] != gameObject)
+                                if (near.GetComponent<HeelEnemy>() == null)
                                 {
                                     near = objects[a];
                                 }
                             }
                         }
                     }
+                    }
                     target = near;
                 
+            }
+
+        }
+        if (target != null)
+        {
+            Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, target.transform.position);
+            if (screenPos.x < 0 || screenPos.x > Screen.width)
+            {
+                target = null;
+            }
+            if (screenPos.y < 0 || screenPos.y > Screen.height)
+            {
+                target = null;
             }
 
         }
@@ -340,44 +364,91 @@ public class HeelEnemy : MonoBehaviour
     }
     void ObjectRotate()
     {
-        Quaternion a = Quaternion.identity;
-        Vector3 dir = target.transform.position - transform.position;
-        float angle = Mathf.Atan2(dir.y, dir.x);
-        rotateZ = angle / (3.1415f / 180);
-      
-        if (rotateZ < 0)
+        if (target != null)
         {
-            rotateZ += 360;
-        }
-        if (currentrotateZ > 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
-        {
-            currentrotateZ -= 360;
-        }
-        if (currentrotateZ < 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
-        {
-            currentrotateZ += 360;
-        }
-
-        if (Mathf.Abs(rotateZ - currentrotateZ) > 3)
-        {
-            if (rotateZ - currentrotateZ < 0)
+            Quaternion a = Quaternion.identity;
+            Vector3 dir = target.transform.position - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x);
+            rotateZ = angle / (3.1415f / 180);
+         
+            if (rotateZ < 0)
             {
-                currentrotateZ -= Time.deltaTime * 150;
+                rotateZ += 360;
             }
-            else
+            if (currentrotateZ > 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
             {
-                currentrotateZ += Time.deltaTime * 150;
+                currentrotateZ -= 360;
             }
+            if (currentrotateZ < 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
+            {
+                currentrotateZ += 360;
+            }
+            if (Mathf.Abs(rotateZ - currentrotateZ) > 1)
+            {
+                if (rotateZ - currentrotateZ < 0)
+                {
+                    currentrotateZ -= Time.deltaTime * 150;
+                }
+                else
+                {
+                    currentrotateZ += Time.deltaTime * 150;
+                }
+            }
+
+            a.eulerAngles = new Vector3(0, 0, currentrotateZ);
+            transform.rotation = a;
+
+            transform.Rotate(new Vector3(rotateX, rotateY, 0));
+            // transform.Rotate(0, 0, angle);
+            //   this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
+            lastPosition = this.target.transform.position;
+
+        }
+        else
+        {
+            Quaternion a = Quaternion.identity;
+            Vector3 dir = lastPosition - transform.position;
+            float angle = Mathf.Atan2(dir.y, dir.x);
+            rotateZ = angle / (3.1415f / 180);
+            //if (rotateZ < 0)
+            //{
+            //    rotateZ = rotateZ + 360;
+            //}
+            if (rotateZ < 0)
+            {
+                rotateZ += 360;
+            }
+            if (currentrotateZ > 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
+            {
+                currentrotateZ -= 360;
+            }
+            if (currentrotateZ < 180 && Mathf.Abs(rotateZ - currentrotateZ) > 180)
+            {
+                currentrotateZ += 360;
+            }
+            //  if (rotateZ < 0)
+            {
+                if (rotateZ - currentrotateZ < 0)
+                {
+                    currentrotateZ -= Time.deltaTime * 90;
+                }
+                else
+                {
+                    currentrotateZ += Time.deltaTime * 90;
+                }
+            }
+
+            a.eulerAngles = new Vector3(0, 0, currentrotateZ);
+            transform.rotation = a;
+
+            transform.Rotate(new Vector3(rotateX, rotateY, 0));
+            // transform.Rotate(0, 0, angle);
+            //   this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
+
         }
 
-        a.eulerAngles = new Vector3(0, 0, currentrotateZ);
-        transform.rotation = a;
-
-        transform.Rotate(new Vector3(rotateX, rotateY, 0));
-        // transform.Rotate(0, 0, angle);
-        //   this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
-        lastPosition = this.target.transform.position;
     }
+
     void BulletDamage(GameObject other)
     {
 

@@ -9,7 +9,7 @@ public class GaugeEnergyControl : MonoBehaviour
     public int num = 80;
     private int num2 = 1200;
     private int num3 = 400;
-    public float maxSpeed = 30;
+    public float maxSpeed = 40;
     private float maxSpeed2 = 15;
     private float speed = 0.0f;
     private float speed2 = 0.0f;

@@ -32,7 +32,11 @@ public class Rock : MonoBehaviour
     
     void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "PlayerBullet")
+        //if(other.gameObject.tag == "PlayerBullet")
+        //{
+        //    HP--;
+        //}
+        if (other.gameObject.tag == "PlayerBulletEffect")
         {
             HP--;
         }

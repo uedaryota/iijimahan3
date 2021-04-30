@@ -106,6 +106,9 @@ public class PlayerControl : MonoBehaviour
     bool startOneFlag = false;
 
     private float bulletcounter = 0;
+
+    private bool bossBarrierFlag = false;
+    private float bossBarrierCounter = 0;
     
     private GameObject option;
     private Option optionscript;
@@ -154,6 +157,18 @@ public class PlayerControl : MonoBehaviour
 
         //ポーズの時に止める
         if (Time.timeScale <= 0) return;
+
+
+        if(bossBarrierFlag)
+        {
+            bossBarrierCounter += 60 * Time.deltaTime;
+
+            if(bossBarrierCounter>30)
+            {
+                bossBarrierCounter = 0;
+                bossBarrierFlag = false;
+            }
+        }
 
         //timer++;
 
@@ -890,16 +905,21 @@ public class PlayerControl : MonoBehaviour
         if (mutekiFlag) return;
         float damage2 = 1;
         HP -= (int)damage2;
+        audioSource.volume = optionscript.GetSEVolume() ;
         playerHpGauge.Damage(damage2);
         LaserCnt++;
         if (LaserCnt == damagelimit)
         {
             LaserCnt = 0;
             MutekiFlagActive();
+           
         }
+
         //音
-        audioSource.volume = optionscript.GetSEVolume();
+        audioSource.volume = optionscript.GetSEVolume() * 0.2f;
         audioSource.PlayOneShot(dameageSE);
+        audioSource.volume = optionscript.GetSEVolume();
+
     }
     public void AttackDamage()
     {
@@ -908,14 +928,24 @@ public class PlayerControl : MonoBehaviour
         HP -= (int)damage2;
         playerHpGauge.Damage(damage2);
         //音
-        audioSource.volume = 0.4f;
+        audioSource.volume = optionscript.GetSEVolume();
         audioSource.PlayOneShot(dameageSE);
         nockBackFlag = true;
-        Debug.Log("うせやろ");
+        //Debug.Log("うせやろ");
     }
 
     public void SetClearFlag(bool fl)
     {
         clearFlag = fl;
+    }
+
+    public void SetBossBarrierFlag(bool fl)
+    {
+        bossBarrierFlag = fl;
+    }
+
+    public bool GetBossBarrierFlag()
+    {
+        return bossBarrierFlag;
     }
 }

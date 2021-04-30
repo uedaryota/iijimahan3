@@ -128,7 +128,7 @@ MonoBehaviour:
   dameageSE: {fileID: 8300000, guid: a9ac292acf8035c44913dfa53a4a005d, type: 3}
   playerGaugeShootHantenSE: {fileID: 8300000, guid: 52f1a0bc42fa8874fb32b189d7cfcbca,
     type: 3}
-  playerGaugeShootKyoukaSE: {fileID: 8300000, guid: 52f1a0bc42fa8874fb32b189d7cfcbca,
+  playerGaugeShootKyoukaSE: {fileID: 8300000, guid: d3f270a70d207e840ae46f5a861fd876,
     type: 3}
   playerEnergyUpSE: {fileID: 8300000, guid: 52f1a0bc42fa8874fb32b189d7cfcbca, type: 3}
   rd: {fileID: 8656814828069786456}
