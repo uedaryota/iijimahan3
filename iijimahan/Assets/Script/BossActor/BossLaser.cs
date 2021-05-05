@@ -105,8 +105,8 @@ public class BossLaser : MonoBehaviour
             Destroy(gameObject);
         }
         line.startWidth = Hutosa;                   // 開始点の太さを0.1にする
-        line.endWidth = Hutosa;                     // 終了点の太さを0.1にする
-  
+        line.endWidth = Hutosa;
+        // 終了点の太さを0.1にする
             line.SetPositions(positions);
         if (this.tag == "EnemyBullet")
         {

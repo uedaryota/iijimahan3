@@ -120,7 +120,6 @@ public class BossMove : MonoBehaviour
                 }
             case MoveAction.AttackMove:
                 {
-                    //妙な期待はするな
                     if (Lesson == 1)
                     {
                         Vector3 dir = movpoi1 - transform.position;
@@ -133,7 +132,6 @@ public class BossMove : MonoBehaviour
                             Lesson = 2;
                         }
                     }
-                    //筋肉に悟られるな
                     if (Lesson == 2)
                     {
                         Vector3 dir = movpoi2 - transform.position;
@@ -146,7 +144,6 @@ public class BossMove : MonoBehaviour
                             Lesson = 3;
                         }
                     }
-                    //回転を信じろ
                     if (Lesson == 3)
                     {
                         Vector3 dir = movpoi3 - transform.position;
@@ -159,7 +156,6 @@ public class BossMove : MonoBehaviour
                             Lesson = 4;
                         }
                     }
-                    //敬意を払え
                     if (Lesson == 4)
                     {
                         Vector3 dir = movpoi4 - transform.position;
@@ -172,7 +168,6 @@ public class BossMove : MonoBehaviour
                             Lesson = 5;
                         }
                     }
-                    //遠回りこそが最短の近道だった
                     if (Lesson == 5)
                     {
                         Vector3 dir = movpoi5 - transform.position;
@@ -198,7 +193,6 @@ public class BossMove : MonoBehaviour
                             Lesson = 1;
                         }
                     }
-                   // Debug.Log("x:" + x + "y:" + y + "Lesson" + Lesson);
                     break;
                 }
         }

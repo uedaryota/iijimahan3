@@ -57,7 +57,6 @@ public class LaserBoss : MonoBehaviour
     {
         if (SECharge == true)
         {
-            Debug.Log("Charge終了");
             audioSource.Stop();
             SECharge = false;
         }
@@ -66,7 +65,6 @@ public class LaserBoss : MonoBehaviour
     {
         if (SECharge == false)
         {
-            Debug.Log("チャージ中");
             audioSource.PlayOneShot(LaserSE);
             SECharge = true;
         }

@@ -35,9 +35,9 @@ public class Enemy : MonoBehaviour
     void Update()
     {
         CheckTarget();
-        
-      //  ChangeRotate();
- 
+
+        ObjectRotate();
+        ChangeRotate();
         Move();
     }
     void Move()
@@ -51,8 +51,7 @@ public class Enemy : MonoBehaviour
             transform.position += velocity * Time.deltaTime;
         }
 
-        ObjectRotate();
-        ChangeRotate();
+       
     }
     void CheckTarget()
     {
