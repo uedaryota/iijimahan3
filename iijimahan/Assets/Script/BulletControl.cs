@@ -97,7 +97,8 @@ public class BulletControl : MonoBehaviour
         //if (other.gameObject.tag == "EnemyBullet")
         //{
         //    Destroy(this.gameObject);
-        //    Debug.Log("エネミーの弾と当たった");
+        //    
+        //("エネミーの弾と当たった");
         //}
 
     }

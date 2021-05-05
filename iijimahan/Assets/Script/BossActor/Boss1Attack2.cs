@@ -37,7 +37,6 @@ public class Boss1Attack2 : MonoBehaviour
                         GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet2(transform.position, 0);
                     }
                     Cnt = 0;
-                   // GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet5(transform.position, 3);
                     if (GetComponent<BossHp>().status == BossHp.Status.Damege)
                     {
                         for (int x = 0; x < 3; x++)

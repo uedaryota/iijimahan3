@@ -24,10 +24,8 @@ public class BossHpGauge : MonoBehaviour
     }
     public void Damage(float x)
     {
-        Debug.Log("damage:" + x);
         float damage = x;
         currentHp = currentHp - damage;
         slider.value = (float)currentHp / (float)maxHp;
-        Debug.Log("slider.value : " + slider.value);
     }
 }
