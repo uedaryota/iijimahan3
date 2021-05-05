@@ -21,7 +21,6 @@ public class BossHpGauge : MonoBehaviour
         slider.value = 1;
         maxHp = gameObject.GetComponent<BossHp>().MaxHp;
         currentHp = maxHp;
-        Debug.Log("Start currentHp : " + currentHp);
     }
     public void Damage(float x)
     {
