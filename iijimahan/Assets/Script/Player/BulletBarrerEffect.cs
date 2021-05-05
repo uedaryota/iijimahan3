@@ -72,7 +72,7 @@ public class BulletBarrerEffect : MonoBehaviour
             Instantiate(RockEffect1, transform.position + effectpos, Quaternion.identity);
             Instantiate(BurstEffect, transform.position + rockeffectpos, Quaternion.identity);
             Instantiate(RockEffect2, transform.position + rockeffectpos, Quaternion.identity);
-            Destroy(this.gameObject);
+            Destroy(bullet);
             //UnityEditor.EditorApplication.isPaused = true;
         }
 

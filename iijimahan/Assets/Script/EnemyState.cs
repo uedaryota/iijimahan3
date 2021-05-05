@@ -18,9 +18,17 @@ public class EnemyState : MonoBehaviour
     bool waveMove;
     GameObject[] team;
     BuffEffectScript effect;
+    public float MaxrotateTime = 0.5f;
+    float rotateTime = 0;
+    float rotateX, rotateY;
+    float currentrotateZ, rotateZ;
     // Start is called before the first frame update
     void Start()
     {
+        rotateX = 0;
+        rotateY = 0;
+        currentrotateZ = 180;
+        rotateZ = 0;
         hp = StartHp;
         power = StartPower;
         deadFlag = false;
@@ -35,7 +43,36 @@ public class EnemyState : MonoBehaviour
     {
         CheckDead();
         CheckWave();
+        ChangeRotate();
         WaveMove();
+    }
+
+    void ChangeRotate()
+    {
+        //  this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
+
+        if (this.gameObject.tag == "Enemy")
+        {
+            if (rotateTime > MaxrotateTime)
+            {
+                rotateTime -= Time.deltaTime;
+                rotateX = 180 / MaxrotateTime * rotateTime;
+            }
+            //  this.transform.Rotate(0, 0, 180/ MaxrotateTime * rotateTime);
+        }
+
+        if (this.gameObject.tag == "Friend")
+        {
+            if (rotateTime < MaxrotateTime)
+            {
+                rotateTime += Time.deltaTime;
+                rotateX = -180 / MaxrotateTime * rotateTime;
+            }
+            // this.transform.Rotate(0, 0, 180 / MaxrotateTime * rotateTime);
+        }
+
+
+
     }
     void CheckDead()
     {
@@ -167,7 +204,15 @@ public class EnemyState : MonoBehaviour
     }
     public void Damage(float damage)
     {
-        hp -= damage;
+        if (rotateTime > 0 && rotateTime < MaxrotateTime)
+        {
+            Debug.Log("Nodamage");
+        }
+        else
+        {
+            hp -= damage;
+        }
+
         if(hp > StartHp + StartHp * 0.3f * BuffLevel)
         {
             hp = StartHp + StartHp * 0.3f * BuffLevel;
