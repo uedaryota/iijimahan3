@@ -83,6 +83,8 @@ public class BulletControl : MonoBehaviour
 
         //}
 
+      
+
         //if (other.gameObject.tag == "Rock" )
         //{
 
