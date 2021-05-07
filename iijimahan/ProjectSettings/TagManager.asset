@@ -25,6 +25,7 @@ TagManager:
   - PlayerBulletEffect
   - GaugeTarget2
   - PlayerBulletEffect2
+  - Shield
   layers:
   - Default
   - TransparentFX

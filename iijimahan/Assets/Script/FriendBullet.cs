@@ -43,18 +43,29 @@ public class FriendBullet : MonoBehaviour
     {
         if (other.gameObject.tag == "Enemy")
         {
-            GameObject burst = Instantiate(Resources.Load<GameObject>("Burst"));
+            GameObject burst = Instantiate(Resources.Load<GameObject>("Explosion"));
             burst.transform.position = transform.position;
             burst.GetComponent<EffectScript>().HitSE();
             deadFlag = true;
         }
         if (other.gameObject.tag == "Boss")
         {
-            GameObject burst = Instantiate(Resources.Load<GameObject>("Burst"));
+            GameObject burst = Instantiate(Resources.Load<GameObject>("Explosion"));
             burst.transform.position = transform.position;
             burst.GetComponent<EffectScript>().HitSE();
             deadFlag = true;
         }
+        if (other.gameObject.tag == "Shield")
+        {
+            if (other.transform.parent.tag == "Enemy")
+            {
+                GameObject burst = Instantiate(Resources.Load<GameObject>("Burst"));
+                burst.transform.position = transform.position;
+                burst.GetComponent<EffectScript>().HitSE();
+                deadFlag = true;
+            }
+        }
+
     }
 
     void Move()

@@ -13,11 +13,15 @@ public class LaserBoss2 : MonoBehaviour
     [SerializeField, Header("ボス攻撃SE")] public AudioClip LaserSE;
     bool SECharge = false;
     private AudioSource audioSource;
+    private GameObject option;
+    private Option optionscript;
     // Start is called before the first frame update
     void Start()
     {
         act = Acter.Start;
         audioSource = GetComponent<AudioSource>();
+        option = GameObject.Find("Option");
+        optionscript = option.GetComponent<Option>();
         Cnt2 = 0;
         SECharge = false;
     }
@@ -96,6 +100,7 @@ public class LaserBoss2 : MonoBehaviour
     {
         if (SECharge == false)
         {
+            audioSource.volume = optionscript.GetSEVolume();
             audioSource.PlayOneShot(LaserSE);
             SECharge = true;
         }

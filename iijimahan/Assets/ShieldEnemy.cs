@@ -1,10 +1,8 @@
-﻿
-using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShootEnemy : MonoBehaviour
+public class ShieldEnemy : MonoBehaviour
 {
     EnemyState state;
     private GameObject target;
@@ -40,8 +38,7 @@ public class ShootEnemy : MonoBehaviour
     {
         if (target != null)
         {
-
-            float speed = 5;
+            float speed = 3;
             if (Vector3.Distance(target.transform.position, transform.position) <= targetDistance &&
                 Vector3.Distance(target.transform.position, transform.position) >= targetDistance / 2)
             {
@@ -57,9 +54,6 @@ public class ShootEnemy : MonoBehaviour
                 velocity += Vector3.Normalize(target.transform.position - transform.position);
                 velocity = Vector3.Normalize(velocity) * speed;
             }
-
-
-
             Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
             if (screenPos.x > Screen.width || screenPos.x < 0)
             {
@@ -129,7 +123,7 @@ public class ShootEnemy : MonoBehaviour
         {
             Move();
 
-            Attack();
+        //   Attack();
         }
 
     }
@@ -379,11 +373,11 @@ public class ShootEnemy : MonoBehaviour
             {
                 if (rotateZ - currentrotateZ < 0)
                 {
-                    currentrotateZ -= Time.deltaTime * 150;
+                    currentrotateZ -= Time.deltaTime * 50;
                 }
                 else
                 {
-                    currentrotateZ += Time.deltaTime * 150;
+                    currentrotateZ += Time.deltaTime * 50;
                 }
             }
 
