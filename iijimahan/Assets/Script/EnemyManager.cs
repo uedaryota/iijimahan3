@@ -341,6 +341,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField, Header("enemyの生成用の座標")] Vector2 pos = new Vector2(20, 20);
     [SerializeField, Header("bossの生成用の座標")] Vector2 bosspos = new Vector2(20, 0);
 
+    [SerializeField, Header("ボーナスウェーブ")]
+
     //手動用
     private float timer_Manual;
     private int interval_count;
@@ -373,6 +375,10 @@ public class EnemyManager : MonoBehaviour
     private GameObject option;
     private Option optionscript;
 
+    public static bool bonuswave;
+    private int wait_enemycount;
+    private int bonuswave_switch;
+
     #endregion
 
     void Start()
@@ -386,10 +392,77 @@ public class EnemyManager : MonoBehaviour
         interval_count = 0;
         wave_timer = 0;
         audioSource = GetComponent<AudioSource>();
+        bonuswave = false;
+        bonuswave_switch = 0;
     }
 
     void Update()
     {
+
+        //if (bonuswave == true)
+        //{
+        //    switch (bonuswave_switch)
+        //    {
+        //        case 0:
+        //            wait_enemycount = enemycount;
+        //            enemycount = 0;
+        //            interval_count = 0;
+        //            wave_timer = 0;
+        //            bonuswave_switch++;
+        //            return;
+
+        //        case 1:
+        //            //現在のwaveで生成するエネミーの数に足りているか
+        //            if (bonus_enemycountlimit > enemycount || enemycountlimit[wave / 2 - 1] > 100)
+        //            {
+        //                //一定時間毎に
+        //                if (timer >= interval[wave / 2 - 1])
+        //                {
+        //                    timer = 0;
+        //                    enemycount++;
+        //                    old_old_pos_chack = old_pos_chack;
+        //                    old_pos_chack = pos.y;
+        //                    enemyrnd = Random.Range(0, enemyboxes.Length);
+        //                    switch (respawn)
+        //                    {
+        //                        case 1:
+        //                            if (old_pos_chack == pos.y)
+        //                            {
+        //                                pos.y *= -1;
+        //                            }
+        //                            //座標の割り当て
+        //                            transform.position = new Vector3(pos.x, pos.y, 0);
+        //                            //エネミーの生成
+        //                            Instantiate(enemyboxes[enemyrnd], transform.position, Quaternion.identity);
+        //                            return;
+
+        //                        case 2:
+        //                            if (old_old_pos_chack == pos.y)
+        //                            {
+        //                                pos.y *= -1;
+        //                            }
+        //                            //座標の割り当て
+        //                            transform.position = new Vector3(pos.x, pos.y, 0);
+        //                            //エネミーの生成
+        //                            Instantiate(enemyboxes[enemyrnd], transform.position, Quaternion.identity);
+        //                            return;
+
+        //                        default:
+        //                            //座標の割り当て
+        //                            transform.position = new Vector3(pos.x, pos.y, 0);
+        //                            //エネミーの生成
+        //                            Instantiate(enemyboxes[enemyrnd], transform.position, Quaternion.identity);
+        //                            return;
+        //                    }
+        //                }
+        //            }
+        //            else
+        //            {
+        //                EnemyCheck("Enemy");
+        //            }
+        //            return;
+        //    }
+        //}
         waveGameOver = wave;
         if(old_wave != wave)
         {
@@ -434,7 +507,6 @@ public class EnemyManager : MonoBehaviour
     void EnemyRespawn(int respawn)
     {
         timer += Time.deltaTime;
-        
         //現在のwaveで生成するエネミーの数に足りているか
         if (enemycountlimit[wave / 2 - 1] > enemycount || enemycountlimit[wave / 2 - 1]  > 100)
         {
@@ -594,5 +666,15 @@ public class EnemyManager : MonoBehaviour
     public static int GetWaveGameOver()
     {
         return waveGameOver;
+    }
+
+    public static bool GetBonusWave()
+    {
+        return bonuswave;
+    }
+
+    public static bool SetBonusWave(bool flag)
+    {
+        return bonuswave = flag;
     }
 }

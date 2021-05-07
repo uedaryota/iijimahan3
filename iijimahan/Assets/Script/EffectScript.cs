@@ -29,6 +29,8 @@ public class EffectScript : MonoBehaviour
     public void HitSE()
     {
         soundplayer = gameObject.GetComponent<AudioSource>();
+        option = GameObject.Find("Option");
+        optionscript = option.GetComponent<Option>();
         if (sound != null)
         {
             soundplayer.volume = optionscript.GetSEVolume();
