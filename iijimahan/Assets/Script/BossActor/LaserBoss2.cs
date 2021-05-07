@@ -44,7 +44,7 @@ public class LaserBoss2 : MonoBehaviour
                 {
                     if (GetComponent<BossHp>().GetHp() > GetComponent<BossHp>().GetMaxHp() / 5)
                     {
-                        for (int x = 0; x < 8; x++)
+                        for (int x = 0; x < 6; x++)
                         {
                             audioSource.PlayOneShot(BulletSE);
                             GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);
