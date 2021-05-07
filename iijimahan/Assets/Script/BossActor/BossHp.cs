@@ -26,6 +26,8 @@ public class BossHp : MonoBehaviour
     Color _color;
     private BossHpGauge hpGauge;
     private AudioSource audioSource;
+    private GameObject option;
+    private Option optionscript;
     float Cnt = 0;
 
     // Start is called before the first frame update
@@ -39,6 +41,8 @@ public class BossHp : MonoBehaviour
         SetRev = false;
         hpGauge = GameObject.FindObjectOfType<BossHpGauge>();
         audioSource = GetComponent<AudioSource>();
+        option = GameObject.Find("Option");
+        optionscript = option.GetComponent<Option>();
     }
 
     // Update is called once per frame
@@ -89,6 +93,7 @@ public class BossHp : MonoBehaviour
             }
             hpGauge.Damage(100);
             //音
+            audioSource.volume = optionscript.GetSEVolume();
             audioSource.PlayOneShot(dameageSE);
         }
     }
