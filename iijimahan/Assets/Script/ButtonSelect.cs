@@ -24,7 +24,7 @@ public class ButtonSelect : MonoBehaviour
         timer = 5.0f;
         button[0].Select();
         audioSource = GetComponent<AudioSource>();
-        if (gameObject.name != "TitleCanvas")
+        if (gameObject.name == "pause")
         {
             gameObject.SetActive(false);
         }

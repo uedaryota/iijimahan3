@@ -13,11 +13,15 @@ public class LaserBoss2 : MonoBehaviour
     [SerializeField, Header("ボス攻撃SE")] public AudioClip LaserSE;
     bool SECharge = false;
     private AudioSource audioSource;
+    private GameObject option;
+    private Option optionscript;
     // Start is called before the first frame update
     void Start()
     {
         act = Acter.Start;
         audioSource = GetComponent<AudioSource>();
+        option = GameObject.Find("Option");
+        optionscript = option.GetComponent<Option>();
         Cnt2 = 0;
         SECharge = false;
     }
@@ -40,7 +44,7 @@ public class LaserBoss2 : MonoBehaviour
                 {
                     if (GetComponent<BossHp>().GetHp() > GetComponent<BossHp>().GetMaxHp() / 5)
                     {
-                        for (int x = 0; x < 8; x++)
+                        for (int x = 0; x < 6; x++)
                         {
                             audioSource.PlayOneShot(BulletSE);
                             GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);
@@ -96,6 +100,7 @@ public class LaserBoss2 : MonoBehaviour
     {
         if (SECharge == false)
         {
+            audioSource.volume = optionscript.GetSEVolume();
             audioSource.PlayOneShot(LaserSE);
             SECharge = true;
         }
