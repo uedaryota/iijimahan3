@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.008360441, g: 0.010712622, b: 0.015131907, a: 1}
+  m_IndirectSpecularColor: {r: 0.005850716, g: 0.0074641183, b: 0.01051643, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3434,12 +3434,6 @@ PrefabInstance:
       propertyPath: damagelimit
       value: 40
       objectReference: {fileID: 0}
-    - target: {fileID: 4443109365030374599, guid: 3eb9d23ad59d5e748bcfed4f86d0ccc1,
-        type: 3}
-      propertyPath: playerBurst
-      value: 
-      objectReference: {fileID: 2362282752616036353, guid: a2fcf5592f5f0804d81edad3c398354a,
-        type: 3}
     - target: {fileID: 4443109365030374599, guid: 3eb9d23ad59d5e748bcfed4f86d0ccc1,
         type: 3}
       propertyPath: insekiHitFlag

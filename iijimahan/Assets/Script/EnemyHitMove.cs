@@ -21,7 +21,7 @@ public class EnemyHitMove : MonoBehaviour
         if ( other.transform.tag == "Rock")
         {
             Vector3 vel = other.transform.position - transform.position;
-            vel = vel.normalized / 30;
+            vel = vel.normalized / 3;
             transform.position -= vel;
         }
     }
