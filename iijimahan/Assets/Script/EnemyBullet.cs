@@ -51,9 +51,19 @@ public class EnemyBullet : MonoBehaviour
             burst.GetComponent<EffectScript>().HitSE();
             deadFlag = true;
         }
-       
+        if (other.gameObject.tag == "Shield")
+        {
+            if (other.transform.parent.tag == "Friend")
+            {
+                GameObject burst = Instantiate(Resources.Load<GameObject>("Burst"));
+                burst.transform.position = transform.position;
+                burst.GetComponent<EffectScript>().HitSE();
+                deadFlag = true;
+            }
+        }
+
     }
-    
+
     void Move()
     {
         transform.position += speed * velocity * Time.deltaTime;

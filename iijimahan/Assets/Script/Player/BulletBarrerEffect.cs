@@ -43,7 +43,7 @@ public class BulletBarrerEffect : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-       
+
 
         //if (other.gameObject.tag == "Boss")
         //{
@@ -64,7 +64,13 @@ public class BulletBarrerEffect : MonoBehaviour
         //    Destroy(bullet);
 
         //}
-
+        if (other.gameObject.tag == "Shield")
+        {
+            if (other.transform.parent.tag == "Enemy")
+            {
+                Destroy(bullet);
+            }
+        }
         if (other.gameObject.tag == "Rock")
         {
 
