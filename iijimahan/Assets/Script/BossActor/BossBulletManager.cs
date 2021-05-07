@@ -94,7 +94,7 @@ public class BossBulletManager : MonoBehaviour
         {
             GameObject newParent = new GameObject("Empty");
             Bullet = Instantiate(newParent, pos, Quaternion.identity);
-            Bullet.tag = "Charge";
+           // Bullet.tag = "Charge";
             SpriteRenderer sr = Bullet.AddComponent<SpriteRenderer>();
             sr.sprite = BulletSprite[color];
             sr.sortingLayerName = "BossBullet";
