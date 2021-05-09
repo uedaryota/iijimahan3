@@ -115,6 +115,9 @@ public class PlayerControl : MonoBehaviour
     private Option optionscript;
 
 
+    public GameObject hanabiEffect;
+
+
     //デバッグ用***コメントアウトする
 
     //デバッグ用
@@ -178,13 +181,13 @@ public class PlayerControl : MonoBehaviour
         //gauge = 100;
 
         //回復
-        //if (Input.GetKey(KeyCode.H))
-        //{
-        //    float heal = 0.05f;
-        //    HP += heal;
-        //    playerHpGauge.Heal(heal / 100);
-        //    if (HP >= 100) HP = 100;
-        //}
+        if (Input.GetKey(KeyCode.H))
+        {
+            float heal = 1f;
+            HP += heal;
+            playerHpGauge.Heal(heal / 100);
+            if (HP >= 100) HP = 100;
+        }
 
         //if (Input.GetKeyDown(KeyCode.O))
         //{
@@ -196,6 +199,18 @@ public class PlayerControl : MonoBehaviour
         //{
         //    playerState = PlayerState.ClearMove;
         //}
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            //Instantiate(hanabiEffect);
+
+            GameObject hanabis = Instantiate(hanabiEffect) as GameObject;
+
+            hanabis.GetComponent<EffectLifeHanabi>().SetPosition(transform.position);
+
+           
+           
+        }
 
         //デバッグ用*******************************
 
@@ -742,7 +757,7 @@ public class PlayerControl : MonoBehaviour
         }
 
         if (mutekiFlag) return;//無敵なら以下処理しない
-
+        
         if (other.gameObject.tag == "Enemy")
         {
             HP -= (int)damage;
@@ -897,9 +912,19 @@ public class PlayerControl : MonoBehaviour
         }
        
     }
+
+    public void HanabiEffectSet()
+    {
+        GameObject hanabis = Instantiate(hanabiEffect) as GameObject;
+
+        hanabis.GetComponent<EffectLifeHanabi>().SetPosition(transform.position);
+    }
     public void LaserDamage()
     {
         if (mutekiFlag) return;
+
+        HanabiEffectSet();
+
         float damage2 = 1;
         HP -= (int)damage2;
         audioSource.volume = optionscript.GetSEVolume() ;
