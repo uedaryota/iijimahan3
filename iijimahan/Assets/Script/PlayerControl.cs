@@ -625,10 +625,22 @@ public class PlayerControl : MonoBehaviour
             }
             else
             {
+
+                //Pad動き参考
+                //// スティックが倒れていれば、倒れている方向を向く
+                //if (h2 != 0 || v2 != 0)
+                //{
+                //    var direction = new Vector3(h2, 0, v2);
+                //    transform.localRotation = Quaternion.LookRotation(direction);
+                //}
+
                 //プレイヤーの向きを決める
                 poolvelocity = padRvelocity;
                 var h = Input.GetAxis("R_Horizontal");
                 var v = Input.GetAxis("R_Vertical");
+
+                Debug.Log(new Vector2(h,v));
+
                 float radian = Mathf.Atan2(v, -h) * Mathf.Rad2Deg;
                 if (radian < 0)
                 {
