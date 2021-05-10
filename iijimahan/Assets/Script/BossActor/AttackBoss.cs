@@ -4,11 +4,18 @@ using UnityEngine;
 
 enum Patern
 {First,Second,Therd,Force,Five}
+enum LaserUpDown
+{
+    Up,Normal,Down,
+}
 
 public class AttackBoss : MonoBehaviour
 {
     [SerializeField, Header("ボス攻撃SE")] public AudioClip BulletSE;
+    [SerializeField, Header("反転の弾")]
+    public GameObject gaugebullet;
     Patern patern;
+    LaserUpDown updown;
     private AudioSource audioSource;
     int Cnt = 0;
     int Cnt2 = 0;
@@ -19,6 +26,7 @@ public class AttackBoss : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         patern = Patern.First;
+        updown = LaserUpDown.Up;
     }
 
     // Update is called once per frame
@@ -58,9 +66,13 @@ public class AttackBoss : MonoBehaviour
                     GetComponent<BossMove>().action = BossMove.MoveAction.Action1;
                 }
                 if (Cnt2 > 10)
-                {
+                {        
+                    GameObject gmobj = Instantiate(gaugebullet) as GameObject;
+                    gmobj.GetComponent<ReverseBullet>().SetPosition(this.transform.position);
+                    gmobj.GetComponent<ReverseBullet>().SetGaugeFlag(true);
                     Cnt2 = 0;
                     GetComponent<BossMove>().action = BossMove.MoveAction.AttackMove;
+                    Debug.Log("Reverse");
                 }
 
                 if (GetComponent<BossHp>().GetHp() < GetComponent<BossHp>().GetMaxHp() * 0.8 && patern == Patern.First)
@@ -71,7 +83,7 @@ public class AttackBoss : MonoBehaviour
                 }
                 case Patern.Second://レーザー主体
                 {
-                        if (Cnt * Time.deltaTime > 1)
+                        if (Cnt * Time.deltaTime > 2)
                         {
                             audioSource.PlayOneShot(BulletSE);
                             //GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet4(transform.position, 3);
@@ -79,13 +91,27 @@ public class AttackBoss : MonoBehaviour
                             for (int i = 0; i < 1; i++)
                             {
                                 GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet5(transform.position, 3);
-                                GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 2);
+                                switch(updown)
+                                {
+                                    case LaserUpDown.Up:
+                                        GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet7Up(transform.position, 2);
+                                        updown = LaserUpDown.Normal;
+                                        break;
+                                    case LaserUpDown.Normal:
+                                        GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet7(transform.position, 2);
+                                        updown = LaserUpDown.Down;
+                                        break;
+                                    case LaserUpDown.Down:
+                                        GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet7Down(transform.position, 2);
+                                        updown = LaserUpDown.Up;
+                                        break;
+                                }     
                             }
                             Cnt = 0;
                             Cnt2++;
                             GetComponent<BossMove>().action = BossMove.MoveAction.Action1;
                         }
-                        if (Cnt2 > 10)
+                        if (Cnt2 > 5)
                         {
                             Cnt2 = 0;
                             GetComponent<BossMove>().action = BossMove.MoveAction.AttackMove;
@@ -140,7 +166,21 @@ public class AttackBoss : MonoBehaviour
                             }
                             GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet5(transform.position, 3);
                             GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet4(transform.position, 1);
-                            GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);
+                            switch (updown)
+                            {
+                                case LaserUpDown.Up:
+                                    GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet7Up(transform.position, 2);
+                                    updown = LaserUpDown.Normal;
+                                    break;
+                                case LaserUpDown.Normal:
+                                    GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet7(transform.position, 2);
+                                    updown = LaserUpDown.Down;
+                                    break;
+                                case LaserUpDown.Down:
+                                    GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet7Down(transform.position, 2);
+                                    updown = LaserUpDown.Up;
+                                    break;
+                            }
                             GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet(transform.position, 1);
                             Cnt = 0;
                             Cnt2++;
@@ -171,7 +211,21 @@ public class AttackBoss : MonoBehaviour
                             }
                             GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet5(transform.position, 3);
                             GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet4(transform.position, 1);
-                            GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);
+                            switch (updown)
+                            {
+                                case LaserUpDown.Up:
+                                    GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet7Up(transform.position, 2);
+                                    updown = LaserUpDown.Normal;
+                                    break;
+                                case LaserUpDown.Normal:
+                                    GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet7(transform.position, 2);
+                                    updown = LaserUpDown.Down;
+                                    break;
+                                case LaserUpDown.Down:
+                                    GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet7Down(transform.position, 2);
+                                    updown = LaserUpDown.Up;
+                                    break;
+                            }
                             GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet(transform.position, 1);
                             Cnt = 0;
                             Cnt2++;
