@@ -133,6 +133,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletSE: {fileID: 0}
+  gaugebullet: {fileID: 5787120845234752141, guid: 3db000272b6735a4592ad498268a67e4,
+    type: 3}
 --- !u!114 &7307823455088642669
 MonoBehaviour:
   m_ObjectHideFlags: 0
