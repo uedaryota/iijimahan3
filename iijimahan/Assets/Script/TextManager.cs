@@ -20,9 +20,15 @@ public class TextManager : MonoBehaviour
     {
         old_wave = wave;
         wave = script.GetWave();
-        if (old_wave == wave) return;
         Text text = text_obj.GetComponent<Text>();
-        text.text = "Wave " + wave;
+        if(script.GetBonusWave() == true)
+        {
+            text.text = "BonusWave!";
+        }
+        else
+        {
+            text.text = "Wave " + wave;
+        }
 
     }
 }
