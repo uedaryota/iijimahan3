@@ -5,11 +5,19 @@ using UnityEngine;
 public class pause : MonoBehaviour
 {
     [SerializeField]private GameObject pauzeUI;
+    private GameObject FadeUI;
+    private FadeImage script;
     private bool OnOff = false;
     
+    void Start()
+    {
+        FadeUI = GameObject.Find("FadeCanvas");
+        script = FadeUI.GetComponent<FadeImage>();
+    }
+
     void Update()
     {
-        
+        if (script.fadeflag == true) return;
         if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown("joystick button 7"))
         {
             if(OnOff == false)

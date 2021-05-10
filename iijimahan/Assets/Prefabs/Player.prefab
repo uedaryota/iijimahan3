@@ -138,6 +138,8 @@ MonoBehaviour:
   gaugeEffect: {fileID: 1307245580990346835, guid: 06f303088e18049439665a01afa06f83,
     type: 3}
   mRenderer: {fileID: 0}
+  hanabiEffect: {fileID: 3200818083074388360, guid: ac560c9390ebee14aab469c752a5bcb0,
+    type: 3}
 --- !u!135 &7335741766070554710
 SphereCollider:
   m_ObjectHideFlags: 0
