@@ -396,6 +396,34 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
+        #region デバッグコマンド
+
+        if (Input.GetKey(KeyCode.Keypad1))
+        {
+            wave = 1;
+        }
+        if (Input.GetKey(KeyCode.Keypad2))
+        {
+            wave = 2;
+        }
+        if (Input.GetKey(KeyCode.Keypad3))
+        {
+            wave = 3;
+        }
+        if (Input.GetKey(KeyCode.Keypad4))
+        {
+            wave = 4;
+        }
+        if (Input.GetKey(KeyCode.Keypad5))
+        {
+            wave = 5;
+        }
+        if (Input.GetKey(KeyCode.Keypad6))
+        {
+            wave = 6;
+        }
+
+        #endregion
 
         if (bonuswave == true)
         {
