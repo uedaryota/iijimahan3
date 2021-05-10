@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class PlayerControl : MonoBehaviour
 {
@@ -113,8 +114,9 @@ public class PlayerControl : MonoBehaviour
     private GameObject option;
     private Option optionscript;
 
-    //private Color cr;
-    //private float cl;
+
+    public GameObject hanabiEffect;
+
 
     //デバッグ用***コメントアウトする
 
@@ -154,11 +156,10 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
         //ポーズの時に止める
         if (Time.timeScale <= 0) return;
 
-
+        //ボスのバリア表示関係
         if(bossBarrierFlag)
         {
             bossBarrierCounter += 60 * Time.deltaTime;
@@ -180,13 +181,13 @@ public class PlayerControl : MonoBehaviour
         //gauge = 100;
 
         //回復
-        //if (Input.GetKey(KeyCode.H))
-        //{
-        //    float heal = 0.05f;
-        //    HP += heal;
-        //    playerHpGauge.Heal(heal / 100);
-        //    if (HP >= 100) HP = 100;
-        //}
+        if (Input.GetKey(KeyCode.H))
+        {
+            float heal = 1f;
+            HP += heal;
+            playerHpGauge.Heal(heal / 100);
+            if (HP >= 100) HP = 100;
+        }
 
         //if (Input.GetKeyDown(KeyCode.O))
         //{
@@ -198,6 +199,18 @@ public class PlayerControl : MonoBehaviour
         //{
         //    playerState = PlayerState.ClearMove;
         //}
+
+        if (Input.GetKey(KeyCode.Space))
+        {
+            //Instantiate(hanabiEffect);
+
+            GameObject hanabis = Instantiate(hanabiEffect) as GameObject;
+
+            hanabis.GetComponent<EffectLifeHanabi>().SetPosition(transform.position);
+
+           
+           
+        }
 
         //デバッグ用*******************************
 
@@ -344,8 +357,7 @@ public class PlayerControl : MonoBehaviour
                     new Vector3(transform.rotation.x,transform.rotation.y,angle-180));
                 //bullets.transform.parent = bulletbox.transform;
                 //音
-                audioSource.volume = optionscript.GetSEVolume();
-                audioSource.PlayOneShot(playerBulletSE);
+                PlayerBulletSE();
 
             }
             //マウス長押しで弾発射
@@ -363,41 +375,18 @@ public class PlayerControl : MonoBehaviour
                     //bullets.transform.parent = bulletbox.transform;
                     //音
                     bulletcounter = 0;
-                    audioSource.volume = optionscript.GetSEVolume();
-                    audioSource.PlayOneShot(playerBulletSE);
-                   
+                    PlayerBulletSE();
                 }
                
             }
             //ゲージ技
             if (Input.GetKeyDown(KeyCode.E) && gauge >= 40)
             {
-                Debug.Log("敵をひっくり返す技");
-                gauge = gauge - 40;
-
-                GameObject gmobj = Instantiate(gaugebullet) as GameObject;
-                gmobj.GetComponent<PlayerGaugeBulletControl>().SetPosition(this.transform.position);
-                gmobj.GetComponent<PlayerGaugeBulletControl>().SetGaugeFlag(true);
-                playerEnergyGauge.SetGauge(40f);
-                gaugeCount++;
-                //音
-                audioSource.volume = optionscript.GetSEVolume();
-                audioSource.PlayOneShot(playerGaugeShootHantenSE);
+                GaugeBullet();
             }
             if (Input.GetKeyDown(KeyCode.Q) && gauge >= 40)
             {
-                Debug.Log("味方を強化する技");
-                gauge = gauge - 40;
-
-                GameObject gmobj = Instantiate(kyoukabullet) as GameObject;
-                gmobj.GetComponent<PlayerGaugeBulletControl>().SetPosition(this.transform.position);
-                gmobj.GetComponent<PlayerGaugeBulletControl>().SetGaugeFlag(true);
-                playerEnergyGauge.SetGauge(40f);
-                gaugeCount++;
-
-                //音
-                audioSource.volume = optionscript.GetSEVolume();
-                audioSource.PlayOneShot(playerGaugeShootKyoukaSE);
+                GaugeKyoukaBullet();
             }
         }
         else//パッド操作
@@ -414,9 +403,8 @@ public class PlayerControl : MonoBehaviour
                 bullets.GetComponent<BulletControl>().SetTransform(poolvelocity, this.transform.position);
                 bullets.GetComponent<BulletControl>().SetRotation(
                   new Vector3(transform.rotation.x, transform.rotation.y, bulletangle ));
-                //音
-                audioSource.volume = optionscript.GetSEVolume();
-                audioSource.PlayOneShot(playerBulletSE);
+               
+                PlayerBulletSE();
             }
             //長押しで弾を撃つ
             if (Input.GetKey("joystick button 5"))
@@ -431,40 +419,18 @@ public class PlayerControl : MonoBehaviour
                     bullets.GetComponent<BulletControl>().SetRotation(
                       new Vector3(transform.rotation.x, transform.rotation.y, bulletangle));
                     bulletcounter = 0;
-                    //音
-                    audioSource.volume = optionscript.GetSEVolume();
-                    audioSource.PlayOneShot(playerBulletSE);
-                    
-                }
-               
+                    PlayerBulletSE();
+                }            
             }
             //ゲージ技
             if (Input.GetKeyDown("joystick button 1") && gauge >= 40)
             {
-                Debug.Log("敵をひっくり返す技");
-                gauge = gauge - 40;
-                GameObject gmobj = Instantiate(gaugebullet) as GameObject;
-                gmobj.GetComponent<PlayerGaugeBulletControl>().SetPosition(this.transform.position);
-                gmobj.GetComponent<PlayerGaugeBulletControl>().SetGaugeFlag(true);
-                playerEnergyGauge.SetGauge(40f);
-                gaugeCount++;
-                //音
-                audioSource.volume = optionscript.GetSEVolume();
-                audioSource.PlayOneShot(playerGaugeShootHantenSE);
+                GaugeBullet();
             }
             if (Input.GetKeyDown("joystick button 0") && gauge >= 40)
             {
-                Debug.Log("味方を強化する技");
-                gauge = gauge - 40;
-
-                GameObject gmobj = Instantiate(kyoukabullet) as GameObject;
-                gmobj.GetComponent<PlayerGaugeBulletControl>().SetPosition(this.transform.position);
-                gmobj.GetComponent<PlayerGaugeBulletControl>().SetGaugeFlag(true);
-                playerEnergyGauge.SetGauge(40f);
-                gaugeCount++;
-                //音
-                audioSource.volume = optionscript.GetSEVolume();
-                audioSource.PlayOneShot(playerGaugeShootKyoukaSE);
+               
+                GaugeKyoukaBullet();
             }
 
             padRvelocity2 = padRvelocity;//velocityを保存
@@ -477,6 +443,40 @@ public class PlayerControl : MonoBehaviour
             startOneFlag = true;
         }
 
+    }
+
+    public void PlayerBulletSE()
+    {
+        audioSource.volume = optionscript.GetSEVolume();
+        audioSource.PlayOneShot(playerBulletSE);
+    }
+
+    public void GaugeBullet()
+    {
+        Debug.Log("敵をひっくり返す技");
+        gauge = gauge - 40;
+        GameObject gmobj = Instantiate(gaugebullet) as GameObject;
+        gmobj.GetComponent<PlayerGaugeBulletControl>().SetPosition(this.transform.position);
+        gmobj.GetComponent<PlayerGaugeBulletControl>().SetGaugeFlag(true);
+        playerEnergyGauge.SetGauge(40f);
+        gaugeCount++;
+        //音
+        audioSource.volume = optionscript.GetSEVolume();
+        audioSource.PlayOneShot(playerGaugeShootHantenSE);
+    }
+    public void GaugeKyoukaBullet()
+    {
+        Debug.Log("味方を強化する技");
+        gauge = gauge - 40;
+
+        GameObject gmobj = Instantiate(kyoukabullet) as GameObject;
+        gmobj.GetComponent<PlayerGaugeBulletControl>().SetPosition(this.transform.position);
+        gmobj.GetComponent<PlayerGaugeBulletControl>().SetGaugeFlag(true);
+        playerEnergyGauge.SetGauge(40f);
+        gaugeCount++;
+        //音
+        audioSource.volume = optionscript.GetSEVolume();
+        audioSource.PlayOneShot(playerGaugeShootKyoukaSE);
     }
 
     //隕石ノックバック処理
@@ -594,10 +594,11 @@ public class PlayerControl : MonoBehaviour
         }
     }
 
-    //キーボード操作
+    //キーボード操作(移動)
     public void KeyBoardMove()
     {
         if (nockBackFlag) return;
+
         Vector3 screen_playerPos2 = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
 
         if (Input.GetKey(KeyCode.W) && screen_playerPos2.y < Screen.height -50)
@@ -620,7 +621,7 @@ public class PlayerControl : MonoBehaviour
         velocity *= speed;
     }
 
-    //パッド操作
+    //パッド操作(移動＆画面外処理)
     public void PadMove()
     {
         if (nockBackFlag) return;
@@ -639,10 +640,22 @@ public class PlayerControl : MonoBehaviour
             }
             else
             {
+
+                //Pad動き参考
+                //// スティックが倒れていれば、倒れている方向を向く
+                //if (h2 != 0 || v2 != 0)
+                //{
+                //    var direction = new Vector3(h2, 0, v2);
+                //    transform.localRotation = Quaternion.LookRotation(direction);
+                //}
+
                 //プレイヤーの向きを決める
                 poolvelocity = padRvelocity;
                 var h = Input.GetAxis("R_Horizontal");
                 var v = Input.GetAxis("R_Vertical");
+
+                Debug.Log(new Vector2(h,v));
+
                 float radian = Mathf.Atan2(v, -h) * Mathf.Rad2Deg;
                 if (radian < 0)
                 {
@@ -744,15 +757,13 @@ public class PlayerControl : MonoBehaviour
         }
 
         if (mutekiFlag) return;//無敵なら以下処理しない
-
+        
         if (other.gameObject.tag == "Enemy")
         {
             HP -= (int)damage;
             playerHpGauge.Damage(damage);
             MutekiFlagActive();
-            //音
-            audioSource.volume = optionscript.GetSEVolume();
-            audioSource.PlayOneShot(dameageSE);
+            DamageSE();
         }
         if (other.gameObject.tag == "EnemyBullet")
         {
@@ -760,8 +771,7 @@ public class PlayerControl : MonoBehaviour
             playerHpGauge.Damage(damage);
             MutekiFlagActive();
             //音
-            audioSource.volume = optionscript.GetSEVolume();
-            audioSource.PlayOneShot(dameageSE);
+            DamageSE();
         }
         if (other.gameObject.tag == "Boss")
         {
@@ -769,8 +779,7 @@ public class PlayerControl : MonoBehaviour
             playerHpGauge.Damage(damage);
             MutekiFlagActive();
             //音
-            audioSource.volume = optionscript.GetSEVolume();
-            audioSource.PlayOneShot(dameageSE);
+            DamageSE();
         }
         
         
@@ -816,47 +825,50 @@ public class PlayerControl : MonoBehaviour
 
     IEnumerator DeadEffectStart()
     {
+
+        Vector3 effectScale = new Vector3(0.5f, 0.5f, 0.5f);
+        Vector3 effectScale2 = new Vector3(1.2f,1.2f,1.2f);
+
       
         GameObject burst2 = Instantiate(playerBurst);
         burst2.transform.position = transform.position + new Vector3(0.5f,0.7f,-0.6f);
-        burst2.transform.localScale = new Vector3(1.5f, 1.5f, 0.5f);
-        //音
-        audioSource.volume = optionscript.GetSEVolume();
-        audioSource.PlayOneShot(dameageSE);
-
+        burst2.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        DamageSE();
         yield return new WaitForSeconds(0.6f);
 
         GameObject burst3 = Instantiate(playerBurst);
         burst3.transform.position = transform.position + new Vector3(-0.7f, -0.7f, -0.6f);
-        burst3.transform.localScale = new Vector3(1.5f, 1.5f, 0.5f);
-        //音
-        audioSource.volume = optionscript.GetSEVolume();
-        audioSource.PlayOneShot(dameageSE);
+        burst3.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        DamageSE();
 
         yield return new WaitForSeconds(0.6f);
 
         GameObject burst = Instantiate(playerBurst);
         burst.transform.position = transform.position + new Vector3(0.3f, -0.3f, -0.6f);
-        burst.transform.localScale = new Vector3(1.5f, 1.5f, 0.5f);
-        //音
-        audioSource.volume = optionscript.GetSEVolume();
-        audioSource.PlayOneShot(dameageSE);
+        burst.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+      
+
+        DamageSE();
 
         yield return new WaitForSeconds(0.6f);
 
         GameObject burst4 = Instantiate(playerBurst);
         burst4.transform.position = transform.position;
-        burst4.transform.localScale = new Vector3(3, 3, 3);
+        burst4.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
 
-        //音
-        audioSource.volume = optionscript.GetSEVolume();
-        audioSource.PlayOneShot(dameageSE);
+        DamageSE();
 
         model.SetActive(false);
 
         yield return new WaitForSeconds(0.9f);
         model.SetActive(false);
         deadMoveFlag = true;
+    }
+
+    public void DamageSE()
+    {
+        audioSource.volume = optionscript.GetSEVolume();
+        audioSource.PlayOneShot(dameageSE);
     }
 
     IEnumerator WaitSpriteAlpha()
@@ -900,9 +912,19 @@ public class PlayerControl : MonoBehaviour
         }
        
     }
+
+    public void HanabiEffectSet()
+    {
+        GameObject hanabis = Instantiate(hanabiEffect) as GameObject;
+
+        hanabis.GetComponent<EffectLifeHanabi>().SetPosition(transform.position);
+    }
     public void LaserDamage()
     {
         if (mutekiFlag) return;
+
+        HanabiEffectSet();
+
         float damage2 = 1;
         HP -= (int)damage2;
         audioSource.volume = optionscript.GetSEVolume() ;
@@ -947,5 +969,38 @@ public class PlayerControl : MonoBehaviour
     public bool GetBossBarrierFlag()
     {
         return bossBarrierFlag;
+    }
+
+    public void Test()
+    {
+        if(true)
+        {
+            //Debug.Log("味方を強化する技");
+            //gauge = gauge - 40;
+
+            //GameObject gmobj = Instantiate(kyoukabullet) as GameObject;
+            //gmobj.GetComponent<PlayerGaugeBulletControl>().SetPosition(this.transform.position);
+            //gmobj.GetComponent<PlayerGaugeBulletControl>().SetGaugeFlag(true);
+            //playerEnergyGauge.SetGauge(40f);
+            //gaugeCount++;
+            ////音
+            //audioSource.volume = optionscript.GetSEVolume();
+            //audioSource.PlayOneShot(playerGaugeShootKyoukaSE);
+        }
+
+        if(true)
+        {
+            //Debug.Log("敵をひっくり返す技");
+            //gauge = gauge - 40;
+
+            //GameObject gmobj = Instantiate(gaugebullet) as GameObject;
+            //gmobj.GetComponent<PlayerGaugeBulletControl>().SetPosition(this.transform.position);
+            //gmobj.GetComponent<PlayerGaugeBulletControl>().SetGaugeFlag(true);
+            //playerEnergyGauge.SetGauge(40f);
+            //gaugeCount++;
+            ////音
+            //audioSource.volume = optionscript.GetSEVolume();
+            //audioSource.PlayOneShot(playerGaugeShootHantenSE);
+        }
     }
 }

@@ -1,7 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
-using UnityEngine;
+﻿using UnityEngine;
 using Object = UnityEngine.Object;
 using Random = UnityEngine.Random;
 
@@ -32,7 +29,7 @@ public class EnemyManager : MonoBehaviour
         Wave19の敵,
         Wave20の敵,
     }
-    
+
     private enum wave_enemy2
     {
         Wave2の敵,
@@ -60,7 +57,7 @@ public class EnemyManager : MonoBehaviour
         Wave18のボス,
         Wave20のボス,
     }
-    
+
     private enum enemy_box
     {
         敵1体目,
@@ -341,7 +338,8 @@ public class EnemyManager : MonoBehaviour
     [SerializeField, Header("enemyの生成用の座標")] Vector2 pos = new Vector2(20, 20);
     [SerializeField, Header("bossの生成用の座標")] Vector2 bosspos = new Vector2(20, 0);
 
-    [SerializeField, Header("ボーナスウェーブ")]
+    [SerializeField, Header("ボーナスウェーブのエネミー")]
+    public WaveEnemy bonus_enemy;
 
     //手動用
     private float timer_Manual;
@@ -398,71 +396,71 @@ public class EnemyManager : MonoBehaviour
 
     void Update()
     {
+        #region デバッグコマンド
 
-        //if (bonuswave == true)
-        //{
-        //    switch (bonuswave_switch)
-        //    {
-        //        case 0:
-        //            wait_enemycount = enemycount;
-        //            enemycount = 0;
-        //            interval_count = 0;
-        //            wave_timer = 0;
-        //            bonuswave_switch++;
-        //            return;
+        if (Input.GetKey(KeyCode.Keypad1))
+        {
+            wave = 1;
+        }
+        if (Input.GetKey(KeyCode.Keypad2))
+        {
+            wave = 2;
+        }
+        if (Input.GetKey(KeyCode.Keypad3))
+        {
+            wave = 3;
+        }
+        if (Input.GetKey(KeyCode.Keypad4))
+        {
+            wave = 4;
+        }
+        if (Input.GetKey(KeyCode.Keypad5))
+        {
+            wave = 5;
+        }
+        if (Input.GetKey(KeyCode.Keypad6))
+        {
+            wave = 6;
+        }
 
-        //        case 1:
-        //            //現在のwaveで生成するエネミーの数に足りているか
-        //            if (bonus_enemycountlimit > enemycount || enemycountlimit[wave / 2 - 1] > 100)
-        //            {
-        //                //一定時間毎に
-        //                if (timer >= interval[wave / 2 - 1])
-        //                {
-        //                    timer = 0;
-        //                    enemycount++;
-        //                    old_old_pos_chack = old_pos_chack;
-        //                    old_pos_chack = pos.y;
-        //                    enemyrnd = Random.Range(0, enemyboxes.Length);
-        //                    switch (respawn)
-        //                    {
-        //                        case 1:
-        //                            if (old_pos_chack == pos.y)
-        //                            {
-        //                                pos.y *= -1;
-        //                            }
-        //                            //座標の割り当て
-        //                            transform.position = new Vector3(pos.x, pos.y, 0);
-        //                            //エネミーの生成
-        //                            Instantiate(enemyboxes[enemyrnd], transform.position, Quaternion.identity);
-        //                            return;
+        #endregion
 
-        //                        case 2:
-        //                            if (old_old_pos_chack == pos.y)
-        //                            {
-        //                                pos.y *= -1;
-        //                            }
-        //                            //座標の割り当て
-        //                            transform.position = new Vector3(pos.x, pos.y, 0);
-        //                            //エネミーの生成
-        //                            Instantiate(enemyboxes[enemyrnd], transform.position, Quaternion.identity);
-        //                            return;
+        if (bonuswave == true)
+        {
+            switch (bonuswave_switch)
+            {
+                case 0:
+                    wait_enemycount = enemycount;
+                    enemycount = 0;
+                    interval_count = 0;
+                    wave_timer = 0;
+                    bonuswave_switch++;
+                    return;
 
-        //                        default:
-        //                            //座標の割り当て
-        //                            transform.position = new Vector3(pos.x, pos.y, 0);
-        //                            //エネミーの生成
-        //                            Instantiate(enemyboxes[enemyrnd], transform.position, Quaternion.identity);
-        //                            return;
-        //                    }
-        //                }
-        //            }
-        //            else
-        //            {
-        //                EnemyCheck("Enemy");
-        //            }
-        //            return;
-        //    }
-        //}
+                case 1:
+                    //現在のwaveで生成するエネミーの数に足りているか
+                    if (bonus_enemy.enemycountlimit_Manual > enemycount)
+                    {
+                        //一定時間毎に
+                        if (timer_Manual >= bonus_enemy.interval_Manual[interval_count])
+                        {
+                            //座標の割り当て
+                            transform.position = bonus_enemy.pos_Manual[enemycount];
+                            //エネミーの生成
+                            Instantiate(bonus_enemy.enemyboxes_Manual[enemycount], transform.position, Quaternion.identity);
+                            //ループ処理用の変数達
+                            timer_Manual = 0;
+                            interval_count++;
+                            enemycount++;
+                        }
+                    }
+                    else
+                    {
+                        BonusEnemyCheck("Enemy");
+                    }
+                    return;
+            }
+        }
         waveGameOver = wave;
         if(old_wave != wave)
         {
@@ -482,24 +480,27 @@ public class EnemyManager : MonoBehaviour
             }
         }
         old_wave = wave;
-        
-        //新しいwaveならWaveTimerでカウント
-        if(wave_wave_interval[wave - 1] >= wave_timer)
+
+        if (bonuswave == false)
         {
-            wave_timer += Time.deltaTime;
-        }
-        //インターバルを迎えたら通常の生成に移行
-        else
-        {
-            if (wave % 2 == 1)
+            //新しいwaveならWaveTimerでカウント
+            if (wave_wave_interval[wave - 1] >= wave_timer)
             {
-                EnemyRespawn_Manual();
+                wave_timer += Time.deltaTime;
             }
-            else if (wave % 2 == 0)
+            //インターバルを迎えたら通常の生成に移行
+            else
             {
-                BossRespawn();
-                EnemyRespawn_Manual();
-                EnemyRespawn(waverespawn[wave / 2 - 1]);
+                if (wave % 2 == 1)
+                {
+                    EnemyRespawn_Manual();
+                }
+                else if (wave % 2 == 0)
+                {
+                    BossRespawn();
+                    EnemyRespawn_Manual();
+                    EnemyRespawn(waverespawn[wave / 2 - 1]);
+                }
             }
         }
     }
@@ -652,6 +653,27 @@ public class EnemyManager : MonoBehaviour
             }
         }
     }
+
+    void BonusEnemyCheck(string tagname)
+    {
+        timer2 += Time.deltaTime;
+        //一定時間毎に
+        if (timer2 > EnemyChackInterval)
+        {
+            timer2 = 0;
+            //エネミーが何体居るかの確認
+            tagcheckenemy = GameObject.FindGameObjectsWithTag(tagname);
+            //エネミーが存在しなくなったとき
+            if (tagcheckenemy.Length == 0)
+            {
+                //ボーナスウェーブ終了
+                bonuswave_switch = 0;
+                bonuswave = false;
+                enemycount = wait_enemycount;
+
+            }
+        }
+    }
     
     public bool GetGameClear()
     {
@@ -668,12 +690,12 @@ public class EnemyManager : MonoBehaviour
         return waveGameOver;
     }
 
-    public static bool GetBonusWave()
+    public bool GetBonusWave()
     {
         return bonuswave;
     }
 
-    public static bool SetBonusWave(bool flag)
+    public bool SetBonusWave(bool flag)
     {
         return bonuswave = flag;
     }

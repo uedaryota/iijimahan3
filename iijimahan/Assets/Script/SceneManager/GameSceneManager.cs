@@ -28,7 +28,7 @@ public class GameSceneManager : MonoBehaviour
     private int wave = 0;
     private int old_wave = 0;
     private bool pitchchange;
-
+    
     void Start()
     {
         option = GameObject.Find("Option");
@@ -54,6 +54,10 @@ public class GameSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKey(KeyCode.K))
+        {
+            script.SetBonusWave(true);
+        }
         audioSource.volume = optionscript.GetBGMVolume();
         if (!oneFlagFade)
         {
