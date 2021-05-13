@@ -32,6 +32,20 @@ public class FadeImage : UnityEngine.UI.Graphic , IFade
 	[SerializeField, Range (0, 1)]
 	public float cutoutRange;
 
+    public bool fadeflag;
+    
+    void Update()
+    {
+        if(cutoutRange > 0)
+        {
+            fadeflag = true;
+        }
+        else
+        {
+            fadeflag = false;
+        }
+    }
+
 	public float Range {
 		get {
 			return cutoutRange;
