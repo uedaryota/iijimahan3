@@ -12,15 +12,34 @@ public class TitleButton : MonoBehaviour
     public GameObject fade;
     public GameObject OptionCanvas;
     public GameObject Canvas;
+    private float time;
+    private bool flag;
 
     void Start()
     {
         option = GameObject.Find("Option");
         script = option.GetComponent<Option>();
         audioSource = GetComponent<AudioSource>();
-       // fade.GetComponent<FadeStart>().FadeInA();
+        time = 0;
+        flag = false;
+        // fade.GetComponent<FadeStart>().FadeInA();
         //Application.targetFrameRate = 60;
     }
+
+    void Update()
+    {
+        if (flag == true)
+        {
+            time += Time.unscaledDeltaTime;
+        }
+        if (time >= 0.5f)
+        {
+            OptionButton();
+            time = 0.0f;
+            flag = false;
+        }
+    }
+
     public void OnClick()
     {
         if (transform.name == "StartButton")
@@ -35,7 +54,7 @@ public class TitleButton : MonoBehaviour
         {
             audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(SelectSE);
-            Invoke("OptionButton", 0.5f);
+            flag = true;
             //Canvas.SetActive(false);
             //OptionCanvas.SetActive(true);
         }

@@ -337,7 +337,7 @@ public class ShootEnemy : MonoBehaviour
 
         if (this.gameObject.tag == "Enemy")
         {
-            if (rotateTime > MaxrotateTime)
+            if (rotateTime > 0)
             {
                 rotateTime -= Time.deltaTime;
                 rotateX = 180 / MaxrotateTime * rotateTime;

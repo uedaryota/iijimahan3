@@ -67,8 +67,11 @@ public class BossHp : MonoBehaviour
             Cnt = 0;
             status = Status.Damege;
         }
-        if(GetComponent<BossMove>().action == BossMove.MoveAction.AttackMove)
-        { status = Status.Damege; }
+        status = Status.Normal;
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    Damage(100);
+        //}
     }
 
     void Dead()
@@ -92,7 +95,7 @@ public class BossHp : MonoBehaviour
             {
                 Damage(100);
             }
-            hpGauge.Damage(100);
+            //hpGauge.Damage(100);
             //音
             audioSource.volume = optionscript.GetSEVolume();
             audioSource.PlayOneShot(dameageSE);
@@ -130,6 +133,7 @@ public class BossHp : MonoBehaviour
     void Damage(float damage)
     {
         this.Hp -= damage;
+        GetComponent<BossHpGauge>().Damage(damage);
     }
     public float GetMaxHp()
     {

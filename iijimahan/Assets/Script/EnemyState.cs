@@ -217,11 +217,11 @@ public class EnemyState : MonoBehaviour
             {
                 if (screenPos.x > PointX)
                 {
-                    transform.position += new Vector3(-Time.deltaTime * 5, 0, 0);
+                    transform.position += new Vector3(-Time.deltaTime * 7, 0, 0);
                 }
                 else if (screenPos.y < PointY)
                 {
-                    transform.position += new Vector3(Time.deltaTime * 5, 0, 0);
+                    transform.position += new Vector3(Time.deltaTime * 7, 0, 0);
                 }
                 f = true;
             }
@@ -229,11 +229,11 @@ public class EnemyState : MonoBehaviour
             {
                 if (screenPos.y > PointY)
                 {
-                    transform.position += new Vector3(0, -Time.deltaTime * 5, 0);
+                    transform.position += new Vector3(0, -Time.deltaTime * 7, 0);
                 }
                 else if (screenPos.y < PointY)
                 {
-                   transform.position += new Vector3(0, Time.deltaTime *5, 0);
+                   transform.position += new Vector3(0, Time.deltaTime *7, 0);
                 }
                 f = true;
             }
