@@ -320,10 +320,10 @@ public class ShieldEnemy : MonoBehaviour
     void ChangeRotate()
     {
         //  this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
-
+       // if(Input.)
         if (this.gameObject.tag == "Enemy")
         {
-            if (rotateTime > MaxrotateTime)
+            if (rotateTime > 0)
             {
                 rotateTime -= Time.deltaTime;
                 rotateX = 180 / MaxrotateTime * rotateTime;

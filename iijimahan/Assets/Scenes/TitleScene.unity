@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0083464105, g: 0.010678423, b: 0.015063939, a: 1}
+  m_IndirectSpecularColor: {r: 0.0047864933, g: 0.0060956045, b: 0.00852468, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6519,9 +6519,11 @@ MonoBehaviour:
   - {fileID: 4584335}
   - {fileID: 1399982719}
   sort: 1
-  interval: 30
-  pauseSE: {fileID: 8300000, guid: 52f1a0bc42fa8874fb32b189d7cfcbca, type: 3}
-  selectSE: {fileID: 8300000, guid: 52f1a0bc42fa8874fb32b189d7cfcbca, type: 3}
+  interval: 0.5
+  pauseSE: {fileID: 8300000, guid: dfe455932c5e6e147984bb9575a4a0de, type: 3}
+  selectSE: {fileID: 8300000, guid: dfe455932c5e6e147984bb9575a4a0de, type: 3}
+  indexnum: 0
+  timer: 0
 --- !u!82 &2093770963
 AudioSource:
   m_ObjectHideFlags: 0
@@ -6798,7 +6800,7 @@ PrefabInstance:
     - target: {fileID: 1766009287100543925, guid: c1bf216da9e23fb459aba1ba1a310a4a,
         type: 3}
       propertyPath: interval
-      value: 0.5
+      value: 0.1
       objectReference: {fileID: 0}
     - target: {fileID: 1766009287100543925, guid: c1bf216da9e23fb459aba1ba1a310a4a,
         type: 3}

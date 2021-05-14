@@ -67,6 +67,20 @@ public class OptionSelect : MonoBehaviour
             audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(selectSE);
         }
+        if (Input.GetKeyDown(KeyCode.UpArrow) && indexnum != 0 && timer >= interval)
+        {
+            timer = 0.0f;
+            indexnum--;
+            audioSource.volume = script.GetSEVolume();
+            audioSource.PlayOneShot(selectSE);
+        }
+        if (Input.GetKeyDown(KeyCode.DownArrow) && indexnum != 2 && timer >= interval)
+        {
+            timer = 0.0f;
+            indexnum++;
+            audioSource.volume = script.GetSEVolume();
+            audioSource.PlayOneShot(selectSE);
+        }
         if (PadControlUp() && indexnum != 0 && timer >= interval)
         {
             timer = 0.0f;
@@ -143,7 +157,19 @@ public class OptionSelect : MonoBehaviour
                 {
                     timer = 0;
                     BGMVolume -= 1.0f;
-                    if(BGMVolume  < 0)
+                    if (BGMVolume < 0)
+                    {
+                        BGMVolume = 0;
+                    }
+                    script.SetBGMVolume(BGMVolume / 10);
+                    audioSource.volume = script.GetSEVolume();
+                    audioSource.PlayOneShot(selectSE);
+                }
+                if (Input.GetKeyDown(KeyCode.LeftArrow) && BGMVolume > 0 && timer >= interval)
+                {
+                    timer = 0;
+                    BGMVolume -= 1.0f;
+                    if (BGMVolume < 0)
                     {
                         BGMVolume = 0;
                     }
@@ -164,6 +190,18 @@ public class OptionSelect : MonoBehaviour
                     audioSource.PlayOneShot(selectSE);
                 }
                 if (Input.GetKeyDown(KeyCode.D) && BGMVolume < 10 && timer >= interval)
+                {
+                    timer = 0;
+                    BGMVolume += 1.0f;
+                    if (BGMVolume > 10)
+                    {
+                        BGMVolume = 10;
+                    }
+                    script.SetBGMVolume(BGMVolume / 10);
+                    audioSource.volume = script.GetSEVolume();
+                    audioSource.PlayOneShot(selectSE);
+                }
+                if (Input.GetKeyDown(KeyCode.RightArrow) && BGMVolume < 10 && timer >= interval)
                 {
                     timer = 0;
                     BGMVolume += 1.0f;
@@ -206,6 +244,18 @@ public class OptionSelect : MonoBehaviour
                     audioSource.volume = script.GetSEVolume();
                     audioSource.PlayOneShot(selectSE);
                 }
+                if (Input.GetKeyDown(KeyCode.LeftArrow) && SEVolume > 0 && timer >= interval)
+                {
+                    timer = 0;
+                    SEVolume -= 1.0f;
+                    if (SEVolume < 0)
+                    {
+                        SEVolume = 0;
+                    }
+                    script.SetSEVolume(SEVolume / 10);
+                    audioSource.volume = script.GetSEVolume();
+                    audioSource.PlayOneShot(selectSE);
+                }
                 if (PadControlLeft() && SEVolume > 0 && timer >= interval)
                 {
                     timer = 0;
@@ -219,6 +269,18 @@ public class OptionSelect : MonoBehaviour
                     audioSource.PlayOneShot(selectSE);
                 }
                 if (Input.GetKeyDown(KeyCode.D) && SEVolume < 10 && timer >= interval)
+                {
+                    timer = 0;
+                    SEVolume += 1.0f;
+                    if (SEVolume > 10)
+                    {
+                        SEVolume = 10;
+                    }
+                    script.SetSEVolume(SEVolume / 10);
+                    audioSource.volume = script.GetSEVolume();
+                    audioSource.PlayOneShot(selectSE);
+                }
+                if (Input.GetKeyDown(KeyCode.RightArrow) && SEVolume < 10 && timer >= interval)
                 {
                     timer = 0;
                     SEVolume += 1.0f;

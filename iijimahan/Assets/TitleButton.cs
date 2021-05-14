@@ -23,20 +23,24 @@ public class TitleButton : MonoBehaviour
     }
     public void OnClickStartButton()
     {
-        audioSource.volume = script.GetSEVolume();
-        audioSource.PlayOneShot(SelectSE);
         if (transform.name == "StartButton")
         {
+            audioSource.volume = script.GetSEVolume();
+            audioSource.PlayOneShot(SelectSE);
             fade.GetComponent<FadeStart>().FadeOutNextScene("GameScene");
             //SceneManager.LoadScene("GameScene");
         }
         if(transform.name == "OptionButton")
         {
+            audioSource.volume = script.GetSEVolume();
+            audioSource.PlayOneShot(SelectSE);
             Canvas.SetActive(false);
             OptionCanvas.SetActive(true);
         }
         if (transform.name == "GameEndButton")
         {
+            audioSource.volume = script.GetSEVolume();
+            audioSource.PlayOneShot(SelectSE);
             Quit();
         }
     }
