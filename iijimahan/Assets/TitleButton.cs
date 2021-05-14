@@ -21,27 +21,29 @@ public class TitleButton : MonoBehaviour
        // fade.GetComponent<FadeStart>().FadeInA();
         //Application.targetFrameRate = 60;
     }
-    public void OnClickStartButton()
+    public void OnClick()
     {
         if (transform.name == "StartButton")
         {
             audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(SelectSE);
-            fade.GetComponent<FadeStart>().FadeOutNextScene("GameScene");
+            Invoke("StartButton", 0.5f);
+            //fade.GetComponent<FadeStart>().FadeOutNextScene("GameScene");
             //SceneManager.LoadScene("GameScene");
         }
         if(transform.name == "OptionButton")
         {
             audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(SelectSE);
-            Canvas.SetActive(false);
-            OptionCanvas.SetActive(true);
+            Invoke("OptionButton", 0.5f);
+            //Canvas.SetActive(false);
+            //OptionCanvas.SetActive(true);
         }
         if (transform.name == "GameEndButton")
         {
             audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(SelectSE);
-            Quit();
+            Invoke("Quit", 0.5f);
         }
     }
     void Quit()
@@ -51,5 +53,16 @@ public class TitleButton : MonoBehaviour
 #elif UNITY_STANDALONE
       UnityEngine.Application.Quit();
 #endif
+    }
+
+    private void StartButton()
+    {
+        fade.GetComponent<FadeStart>().FadeOutNextScene("GameScene");
+    }
+
+    private void OptionButton()
+    {
+        Canvas.SetActive(false);
+        OptionCanvas.SetActive(true);
     }
 }
