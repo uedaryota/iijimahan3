@@ -5,6 +5,7 @@ using UnityEngine;
 public class pause : MonoBehaviour
 {
     [SerializeField]private GameObject pauzeUI;
+    [SerializeField]public GameObject optionUI;
     private GameObject FadeUI;
     private FadeImage script;
     private bool OnOff = false;
@@ -30,6 +31,7 @@ public class pause : MonoBehaviour
             {
                 OnOff = false;
                 pauzeUI.SetActive(false);
+                optionUI.SetActive(false);
                 Time.timeScale = 1f;
             }
         }

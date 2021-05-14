@@ -116,7 +116,8 @@ public class PlayerControl : MonoBehaviour
 
 
     public GameObject hanabiEffect;
-
+    private float movetime = 0.0f;
+    private bool moveFlag = false;
 
     //デバッグ用***コメントアウトする
 
@@ -637,34 +638,60 @@ public class PlayerControl : MonoBehaviour
         {
             if (padRvelocity.x == 0 && padRvelocity.y == 0)
             {
+                bulletangle = 180;
+                poolvelocity = new Vector2(1,0);
+                transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, 180);
             }
             else
             {
+               
 
-                //Pad動き参考
-                //// スティックが倒れていれば、倒れている方向を向く
-                //if (h2 != 0 || v2 != 0)
-                //{
-                //    var direction = new Vector3(h2, 0, v2);
-                //    transform.localRotation = Quaternion.LookRotation(direction);
-                //}
+
+               
 
                 //プレイヤーの向きを決める
                 poolvelocity = padRvelocity;
                 var h = Input.GetAxis("R_Horizontal");
                 var v = Input.GetAxis("R_Vertical");
 
-                Debug.Log(new Vector2(h,v));
-
-                float radian = Mathf.Atan2(v, -h) * Mathf.Rad2Deg;
-                if (radian < 0)
+                //Pad動き参考
+                //// スティックが倒れていれば、倒れている方向を向く
+                if (h != 0 || v != 0)
                 {
-                    radian += 360;
+                    //    var direction = new Vector3(h, 0, v);
+                    //    transform.localRotation = Quaternion.LookRotation(direction);
+
+                    float radian = Mathf.Atan2(v, -h) * Mathf.Rad2Deg;
+                    if (radian < 0)
+                    {
+                        radian += 360;
+                    }
+                    bulletangle = radian;
+                    transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, radian);
+
+                    moveFlag = true;
                 }
-                bulletangle = radian;
-                transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, radian);
+
+
+
+                if (moveFlag)
+                {
+                    movetime += Time.deltaTime * 60;
+
+                    if(movetime > 30)
+                    {
+                        moveFlag = false;
+                    }
+                }
+
+
+
+                //Debug.Log(new Vector2(h,v));
+
+                
             }
         }
+        
 
         //画面外処理
         if (screen_playerPos2.y > Screen.height - 50 && Input.GetAxis("L_Vertical") * -1 > 0)
