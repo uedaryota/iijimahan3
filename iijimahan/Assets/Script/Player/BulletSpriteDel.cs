@@ -56,10 +56,11 @@ public class BulletSpriteDel : MonoBehaviour
 
                 if(wave == 6)
                 {
+                    float scale = 15.5f;
                     GameObject barriers = Instantiate(barrier) as GameObject;
                     barriers.GetComponent<BarrierControl>().SetRotation(new Vector3(rote.x, rote.y, rote.z - 180));
                     barriers.GetComponent<BarrierControl>().SetPosition(new Vector3(-500, -500, -500));
-                    barriers.transform.localScale = new Vector3(13,13,13);
+                    barriers.transform.localScale = new Vector3(scale, scale, scale);
                     player.GetComponent<PlayerControl>().SetBossBarrierFlag(true);
                 }
                 else
