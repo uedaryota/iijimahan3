@@ -69,6 +69,10 @@ public class BossHp : MonoBehaviour
         }
         if(GetComponent<BossMove>().action == BossMove.MoveAction.AttackMove)
         { status = Status.Damege; }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            Damage(100);
+        }
     }
 
     void Dead()
@@ -92,7 +96,7 @@ public class BossHp : MonoBehaviour
             {
                 Damage(100);
             }
-            hpGauge.Damage(100);
+            //hpGauge.Damage(100);
             //音
             audioSource.volume = optionscript.GetSEVolume();
             audioSource.PlayOneShot(dameageSE);
