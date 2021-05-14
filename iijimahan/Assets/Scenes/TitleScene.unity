@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0045493036, g: 0.0057871887, b: 0.00808838, a: 1}
+  m_IndirectSpecularColor: {r: 0.013906621, g: 0.017745739, b: 0.024889302, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -207,7 +207,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 4584338}
-        m_MethodName: OnClickStartButton
+        m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6165f6776a2dc34a9186bee3885076d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectSE: {fileID: 8300000, guid: 52f1a0bc42fa8874fb32b189d7cfcbca, type: 3}
+  SelectSE: {fileID: 8300000, guid: dfe455932c5e6e147984bb9575a4a0de, type: 3}
   fade: {fileID: 0}
   OptionCanvas: {fileID: 853626390}
   Canvas: {fileID: 2093770957}
@@ -562,7 +562,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 412036189}
-        m_MethodName: OnClickStartButton
+        m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -621,7 +621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6165f6776a2dc34a9186bee3885076d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectSE: {fileID: 8300000, guid: 52f1a0bc42fa8874fb32b189d7cfcbca, type: 3}
+  SelectSE: {fileID: 8300000, guid: dfe455932c5e6e147984bb9575a4a0de, type: 3}
   fade: {fileID: 958213511}
   OptionCanvas: {fileID: 853626390}
   Canvas: {fileID: 2093770957}
@@ -6201,7 +6201,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1399982722}
-        m_MethodName: OnClickStartButton
+        m_MethodName: OnClick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6260,7 +6260,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6165f6776a2dc34a9186bee3885076d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectSE: {fileID: 8300000, guid: 52f1a0bc42fa8874fb32b189d7cfcbca, type: 3}
+  SelectSE: {fileID: 8300000, guid: dfe455932c5e6e147984bb9575a4a0de, type: 3}
   fade: {fileID: 0}
   OptionCanvas: {fileID: 853626390}
   Canvas: {fileID: 2093770957}
