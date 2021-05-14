@@ -67,8 +67,7 @@ public class BossHp : MonoBehaviour
             Cnt = 0;
             status = Status.Damege;
         }
-        if(GetComponent<BossMove>().action == BossMove.MoveAction.AttackMove)
-        { status = Status.Damege; }
+        status = Status.Normal;
         if (Input.GetKeyDown(KeyCode.P))
         {
             Damage(100);

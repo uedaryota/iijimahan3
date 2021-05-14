@@ -10,6 +10,7 @@ enum Acter
 public class BossAttack : MonoBehaviour
 {
     int Cnt = 0;
+    int Cnt2 = 0;
     Acter act;
     [SerializeField, Header("ボス攻撃SE")] public AudioClip BulletSE;
     private AudioSource audioSource;
@@ -42,17 +43,18 @@ public class BossAttack : MonoBehaviour
                         GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet2(transform.position, 0);
                     }
                     Cnt = 0;
-                    if(GetComponent<BossHp>().status==BossHp.Status.Damege)
+                    Cnt2++;
+                }
+                if (Cnt2>5)
+                {
+                    for (int x = 0; x < 3; x++)
                     {
-                        for (int x = 0; x < 3; x++)
-                        {
-                            audioSource.PlayOneShot(BulletSE);
-                            GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet4(transform.position, 1);
-                        }
                         audioSource.PlayOneShot(BulletSE);
-                        GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet(transform.position, 1);
-                       
+                        GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet4(transform.position, 1);
                     }
+                    audioSource.PlayOneShot(BulletSE);
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet(transform.position, 1);
+                    Cnt2 = 0;
                 }
                 Cnt++;
                 break;
