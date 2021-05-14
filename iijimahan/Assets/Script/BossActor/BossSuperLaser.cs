@@ -79,6 +79,7 @@ public class BossSuperLaser : MonoBehaviour
         line.material.color = Color.yellow;
         line.startColor = Color.yellow;
         line.endColor = Color.red;
+        line.sortingOrder = -1;
         if (Cnt / 30.0f < 8.0f)
         {
             goalpos = GameObject.FindGameObjectWithTag("Player").transform.position;
