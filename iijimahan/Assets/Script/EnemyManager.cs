@@ -288,7 +288,7 @@ public class EnemyManager : MonoBehaviour
 
     #region 変数一覧
     [SerializeField, Header("ボスWave突入SE")] private AudioClip caution;
-
+    
     [System.Serializable]
     public struct WaveEnemy
     {
@@ -398,6 +398,7 @@ public class EnemyManager : MonoBehaviour
     {
         #region デバッグコマンド
 
+        /*
         if (Input.GetKey(KeyCode.Keypad1))
         {
             wave = 1;
@@ -423,6 +424,7 @@ public class EnemyManager : MonoBehaviour
             wave = 6;
         }
 
+        */
         #endregion
 
         if (bonuswave == true)
