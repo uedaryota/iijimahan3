@@ -25,17 +25,11 @@ public class ResultButton : MonoBehaviour
         audioSource.PlayOneShot(SelectSE);
         if (transform.name == "TitleButton")
         {
-            //SceneManager.LoadScene("TitleScene");
-            if(sceneChangeFlag)
-            {
-                fade.GetComponent<FadeStart>().FadeOutNextScene("TitleScene");
-                sceneChangeFlag = false;
-            }
-            
+            Invoke("Title", 0.5f);
         }
         if (transform.name == "GameEndButton")
         {
-            Quit();
+            Invoke("Quit", 0.5f);
         }
     }
     void Quit()
@@ -45,5 +39,15 @@ public class ResultButton : MonoBehaviour
 #elif UNITY_STANDALONE
       UnityEngine.Application.Quit();
 #endif
+    }
+
+    private void Title()
+    {
+        //SceneManager.LoadScene("TitleScene");
+        if (sceneChangeFlag)
+        {
+            fade.GetComponent<FadeStart>().FadeOutNextScene("TitleScene");
+            sceneChangeFlag = false;
+        }
     }
 }

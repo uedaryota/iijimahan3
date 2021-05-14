@@ -11,6 +11,8 @@ public class OptionSoundButton : MonoBehaviour
     [SerializeField]private GameObject OptionCanvas;
     private OptionSelect script2;
     public GameObject Canvas;
+    private float time;
+    private bool flag;
 
     void Start()
     {
@@ -19,6 +21,22 @@ public class OptionSoundButton : MonoBehaviour
         OptionCanvas = GameObject.Find("OptionCanvas");
         script2 = OptionCanvas.GetComponent<OptionSelect>();
         audioSource = GetComponent<AudioSource>();
+        time = 0;
+        flag = false;
+    }
+
+    void Update()
+    {
+        if (flag == true)
+        {
+            time += Time.unscaledDeltaTime;
+        }
+        if (time >= 0.5f)
+        {
+            QuitButton();
+            time = 0.0f;
+            flag = false;
+        }
     }
 
     public void OnClickStartButton()
@@ -41,8 +59,13 @@ public class OptionSoundButton : MonoBehaviour
         }
         if(transform.name == "QuitButton")
         {
-            Canvas.SetActive(true);
-            OptionCanvas.SetActive(false);
+            flag = true;
         }
+    }
+
+    private void QuitButton()
+    {
+        Canvas.SetActive(true);
+        OptionCanvas.SetActive(false);
     }
 }
