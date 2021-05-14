@@ -1408,19 +1408,19 @@ PrefabInstance:
         type: 3}
       propertyPath: bossboxes.Array.data[0]
       value: 
-      objectReference: {fileID: 8566351118426462332, guid: 9236328a7872d6940ae3f04924dc7845,
+      objectReference: {fileID: 891316403518387600, guid: aa595588e48175046923818ef6bbfe16,
         type: 3}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
       propertyPath: bossboxes.Array.data[1]
       value: 
-      objectReference: {fileID: 4799150726551526902, guid: ebdc4f91b807af846bcd68173ff5dfa9,
+      objectReference: {fileID: 3626864526235431021, guid: 9228ea5dc23165e449d8966ae59e188c,
         type: 3}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
       propertyPath: bossboxes.Array.data[2]
       value: 
-      objectReference: {fileID: 7307823455088642660, guid: 8fb85c060c5ae824b97449f61fd95eb1,
+      objectReference: {fileID: 5898550561299137546, guid: ef9a87d01e8d66a4a9fcfc0efb036db2,
         type: 3}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
@@ -2884,7 +2884,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemy_Manual.Array.data[0].enemyboxes_Manual.Array.data[5]
       value: 
-      objectReference: {fileID: 2924209551728552548, guid: bb2a132d24422f742a8f7f6571cc9b0f,
+      objectReference: {fileID: 6571390485883839605, guid: 866212ad91f05a449941d9b1a3e576d5,
         type: 3}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
@@ -3082,7 +3082,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemy_Manual.Array.data[0].enemyboxes_Manual.Array.data[22]
       value: 
-      objectReference: {fileID: 2924209551728552548, guid: bb2a132d24422f742a8f7f6571cc9b0f,
+      objectReference: {fileID: 6571390485883839605, guid: 866212ad91f05a449941d9b1a3e576d5,
         type: 3}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
@@ -3142,7 +3142,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemy_Manual.Array.data[0].enemyboxes_Manual.Array.data[32]
       value: 
-      objectReference: {fileID: 2924209551728552548, guid: bb2a132d24422f742a8f7f6571cc9b0f,
+      objectReference: {fileID: 6571390485883839605, guid: 866212ad91f05a449941d9b1a3e576d5,
         type: 3}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
