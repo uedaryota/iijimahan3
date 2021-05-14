@@ -108,7 +108,7 @@ public class EnemyState : MonoBehaviour
             if (rotateTime > MaxrotateTime)
             {
                 rotateTime -= Time.deltaTime;
-                muteki = 2;
+                muteki = 0.5f;
                 rotateX = 180 / MaxrotateTime * rotateTime;
             }
             //  this.transform.Rotate(0, 0, 180/ MaxrotateTime * rotateTime);
@@ -119,7 +119,7 @@ public class EnemyState : MonoBehaviour
             if (rotateTime < MaxrotateTime)
             {
                 rotateTime += Time.deltaTime;
-                muteki = 2;
+                muteki = 0.5f;
                 rotateX = -180 / MaxrotateTime * rotateTime;
             }
             // this.transform.Rotate(0, 0, 180 / MaxrotateTime * rotateTime);
