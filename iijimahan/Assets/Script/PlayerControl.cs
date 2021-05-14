@@ -182,13 +182,13 @@ public class PlayerControl : MonoBehaviour
         //gauge = 100;
 
         //回復
-        if (Input.GetKey(KeyCode.H))
-        {
-            float heal = 1f;
-            HP += heal;
-            playerHpGauge.Heal(heal / 100);
-            if (HP >= 100) HP = 100;
-        }
+        //if (Input.GetKey(KeyCode.H))
+        //{
+        //    float heal = 1f;
+        //    HP += heal;
+        //    playerHpGauge.Heal(heal / 100);
+        //    if (HP >= 100) HP = 100;
+        //}
 
         //if (Input.GetKeyDown(KeyCode.O))
         //{
@@ -201,17 +201,17 @@ public class PlayerControl : MonoBehaviour
         //    playerState = PlayerState.ClearMove;
         //}
 
-        if (Input.GetKey(KeyCode.Space))
-        {
-            //Instantiate(hanabiEffect);
+        //if (Input.GetKey(KeyCode.Space))
+        //{
+        //    //Instantiate(hanabiEffect);
 
-            GameObject hanabis = Instantiate(hanabiEffect) as GameObject;
+        //    GameObject hanabis = Instantiate(hanabiEffect) as GameObject;
 
-            hanabis.GetComponent<EffectLifeHanabi>().SetPosition(transform.position);
+        //    hanabis.GetComponent<EffectLifeHanabi>().SetPosition(transform.position);
 
-           
-           
-        }
+
+
+        //}
 
         //デバッグ用*******************************
 
@@ -638,21 +638,16 @@ public class PlayerControl : MonoBehaviour
         {
             if (padRvelocity.x == 0 && padRvelocity.y == 0)
             {
-                bulletangle = 180;
-                poolvelocity = new Vector2(1,0);
-                transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, 180);
+                //bulletangle = 180;
+                //poolvelocity = new Vector2(1, 0);
+                //transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, 180);
             }
             else
             {
-               
-
-
-               
-
                 //プレイヤーの向きを決める
                 poolvelocity = padRvelocity;
-                var h = Input.GetAxis("R_Horizontal");
-                var v = Input.GetAxis("R_Vertical");
+                float h = Input.GetAxis("R_Horizontal");
+                float v = Input.GetAxis("R_Vertical");
 
                 //Pad動き参考
                 //// スティックが倒れていれば、倒れている方向を向く
@@ -669,7 +664,7 @@ public class PlayerControl : MonoBehaviour
                     bulletangle = radian;
                     transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, radian);
 
-                    moveFlag = true;
+                    //moveFlag = true;
                 }
 
 
@@ -783,23 +778,45 @@ public class PlayerControl : MonoBehaviour
             nockBackFlag = true;      
         }
 
-        if (mutekiFlag) return;//無敵なら以下処理しない
-        
         if (other.gameObject.tag == "Enemy")
         {
-            HP -= (int)damage;
-            playerHpGauge.Damage(damage);
-            MutekiFlagActive();
+            GameObject burst2 = Instantiate(playerBurst);
+            burst2.transform.position = transform.position + new Vector3(0.5f, 0.7f, -0.6f);
+            burst2.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             DamageSE();
+            if (!mutekiFlag)
+            {
+                HP -= (int)damage;
+                playerHpGauge.Damage(damage);
+                MutekiFlagActive();
+                
+            }
+           
         }
+
         if (other.gameObject.tag == "EnemyBullet")
         {
-            HP -= (int)damage;
-            playerHpGauge.Damage(damage);
-            MutekiFlagActive();
-            //音
-            DamageSE();
+
+            if (playerState == PlayerState.DeadMove) return;
+            GameObject burst = Instantiate(Resources.Load<GameObject>("Explosion"));
+            burst.transform.position = transform.position;
+            burst.GetComponent<EffectScript>().HitSE();
+
+            if(!mutekiFlag)
+            {
+                HP -= (int)damage;
+                playerHpGauge.Damage(damage);
+                MutekiFlagActive();
+                //音
+                DamageSE();
+            }
+           
         }
+
+        if (mutekiFlag) return;//無敵なら以下処理しない
+        
+       
+       
         if (other.gameObject.tag == "Boss")
         {
             HP -= (int)damage;
@@ -856,36 +873,44 @@ public class PlayerControl : MonoBehaviour
         Vector3 effectScale = new Vector3(0.5f, 0.5f, 0.5f);
         Vector3 effectScale2 = new Vector3(1.2f,1.2f,1.2f);
 
-      
+        GameObject burst33 = Instantiate(playerBurst);
+        burst33.transform.position = transform.position;//+ new Vector3(0.5f, 0.7f, -0.6f);
+        burst33.transform.localScale = new Vector3(3f, 3f, 3f);
+        DamageSE();
+
+        yield return new WaitForSeconds(0.7f);
+
         GameObject burst2 = Instantiate(playerBurst);
         burst2.transform.position = transform.position + new Vector3(0.5f,0.7f,-0.6f);
-        burst2.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        burst2.transform.localScale = new Vector3(1f, 1f, 1f);
         DamageSE();
         yield return new WaitForSeconds(0.6f);
 
         GameObject burst3 = Instantiate(playerBurst);
         burst3.transform.position = transform.position + new Vector3(-0.7f, -0.7f, -0.6f);
-        burst3.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        burst3.transform.localScale = new Vector3(1f, 1f, 1f);
         DamageSE();
 
         yield return new WaitForSeconds(0.6f);
 
         GameObject burst = Instantiate(playerBurst);
         burst.transform.position = transform.position + new Vector3(0.3f, -0.3f, -0.6f);
-        burst.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
+        burst.transform.localScale = new Vector3(1f, 1f, 1f);
       
 
         DamageSE();
 
         yield return new WaitForSeconds(0.6f);
 
+        model.SetActive(false);
+
         GameObject burst4 = Instantiate(playerBurst);
         burst4.transform.position = transform.position;
-        burst4.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
+        burst4.transform.localScale = new Vector3(2f, 2f, 2f);
 
         DamageSE();
 
-        model.SetActive(false);
+        
 
         yield return new WaitForSeconds(0.9f);
         model.SetActive(false);
@@ -914,6 +939,10 @@ public class PlayerControl : MonoBehaviour
 
             model.SetActive(true);
             yield return new WaitForSeconds(0.15f);
+            if(playerState == PlayerState.DeadMove)
+            {
+                yield break;
+            }
         }
 
         yield return new WaitForSeconds(0.15f);

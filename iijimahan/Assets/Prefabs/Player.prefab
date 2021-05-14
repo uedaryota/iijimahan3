@@ -133,7 +133,7 @@ MonoBehaviour:
   playerEnergyUpSE: {fileID: 8300000, guid: 52f1a0bc42fa8874fb32b189d7cfcbca, type: 3}
   rd: {fileID: 8656814828069786456}
   insekiHitFlag: 0
-  playerBurst: {fileID: 2575148239714593601, guid: a8304800d555332459947603175caa4c,
+  playerBurst: {fileID: 409518624579700024, guid: a1397342b01a67c43a0af573036c3ca5,
     type: 3}
   gaugeEffect: {fileID: 1307245580990346835, guid: 06f303088e18049439665a01afa06f83,
     type: 3}
