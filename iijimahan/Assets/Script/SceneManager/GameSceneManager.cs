@@ -54,10 +54,10 @@ public class GameSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKey(KeyCode.K))
-        {
-            script.SetBonusWave(true);
-        }
+        //if(Input.GetKey(KeyCode.K))
+        //{
+        //    script.SetBonusWave(true);
+        //}
         audioSource.volume = optionscript.GetBGMVolume();
         if (!oneFlagFade)
         {
