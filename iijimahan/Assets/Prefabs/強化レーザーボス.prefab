@@ -537,6 +537,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletSE: {fileID: 0}
   LaserSE: {fileID: 8300000, guid: a242eaa5108a10945b8446a17551ae23, type: 3}
+--- !u!114 &4955192002164234775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8339431209884886957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b801c2c30e6f741b7c448cd78bdbbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Explosion: {fileID: 8390974264482634144, guid: 45832cfad33a4e94992010907f52d659,
+    type: 3}
 --- !u!114 &5304557755477962505
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,6 +609,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   x: 5
+  Stop: 0
 --- !u!1001 &4799150727555804445
 PrefabInstance:
   m_ObjectHideFlags: 0

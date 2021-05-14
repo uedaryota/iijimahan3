@@ -19,11 +19,13 @@ public class AttackBoss : MonoBehaviour
     private AudioSource audioSource;
     int Cnt = 0;
     int Cnt2 = 0;
+    private BossHp hp;
     // Start is called before the first frame update
    
    
     void Start()
     {
+        hp = gameObject.GetComponent<BossHp>();
         audioSource = GetComponent<AudioSource>();
         patern = Patern.First;
         updown = LaserUpDown.Up;
@@ -34,6 +36,7 @@ public class AttackBoss : MonoBehaviour
     {
         
         if (Time.timeScale <= 0) return;
+        if (hp.Hp <= 0) return;
         if (GameObject.FindGameObjectWithTag("Boss") == null) Destroy(gameObject);
 
         if (GetComponent<BossMove>().nowact() == BossMove.MoveAction.Normal)
