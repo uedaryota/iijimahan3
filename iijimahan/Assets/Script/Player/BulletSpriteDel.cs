@@ -22,10 +22,14 @@ public class BulletSpriteDel : MonoBehaviour
 
     public GameObject barrierPosOBJ;
 
+    public GameObject enemane;
+
 
     void Start()
     {
         player = GameObject.Find("Player");
+        enemane = GameObject.Find("EnemyManager");
+        
     }
 
     // Update is called once per frame
@@ -47,10 +51,27 @@ public class BulletSpriteDel : MonoBehaviour
             if (!player.GetComponent<PlayerControl>().GetBossBarrierFlag())
             {
                 //UnityEditor.EditorApplication.isPaused = true;
-                GameObject barriers = Instantiate(barrier) as GameObject;
-                barriers.GetComponent<BarrierControl>().SetRotation(new Vector3(rote.x, rote.y, rote.z - 180));
-                barriers.GetComponent<BarrierControl>().SetPosition(new Vector3(-500, -500, -500));
-                player.GetComponent<PlayerControl>().SetBossBarrierFlag(true);
+
+                int wave = enemane.GetComponent<EnemyManager>().GetWave();
+
+                if(wave == 6)
+                {
+                    float scale = 15.5f;
+                    GameObject barriers = Instantiate(barrier) as GameObject;
+                    barriers.GetComponent<BarrierControl>().SetRotation(new Vector3(rote.x, rote.y, rote.z - 180));
+                    barriers.GetComponent<BarrierControl>().SetPosition(new Vector3(-500, -500, -500));
+                    barriers.transform.localScale = new Vector3(scale, scale, scale);
+                    player.GetComponent<PlayerControl>().SetBossBarrierFlag(true);
+                }
+                else
+                {
+                    GameObject barriers = Instantiate(barrier) as GameObject;
+                    barriers.GetComponent<BarrierControl>().SetRotation(new Vector3(rote.x, rote.y, rote.z - 180));
+                    barriers.GetComponent<BarrierControl>().SetPosition(new Vector3(-500, -500, -500));
+                    player.GetComponent<PlayerControl>().SetBossBarrierFlag(true);
+                }
+
+                
             }
 
             GameObject paticles = Instantiate(effect) as GameObject;

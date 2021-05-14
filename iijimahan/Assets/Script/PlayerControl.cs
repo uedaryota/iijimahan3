@@ -119,6 +119,8 @@ public class PlayerControl : MonoBehaviour
     private float movetime = 0.0f;
     private bool moveFlag = false;
 
+    private bool tito = false;
+
     //デバッグ用***コメントアウトする
 
     //デバッグ用
@@ -175,6 +177,11 @@ public class PlayerControl : MonoBehaviour
         //timer++;
 
         //デバッグ用*******************************
+
+        //if(  Input.GetKey(KeyCode.B) && Input.GetKeyDown(KeyCode.UpArrow))
+        //{
+        //    tito = !tito;
+        //}
 
         //Debug.Log(Screen.width);
         //Debug.Log(Screen.height);
@@ -365,7 +372,13 @@ public class PlayerControl : MonoBehaviour
             if (Input.GetMouseButton(0))
             {
                 bulletcounter += Time.deltaTime * 1;
-                if (bulletcounter > 0.22f)
+                float sec = 0.22f;
+
+                if(tito)
+                {
+                    sec = 0.001f;
+                }
+                if (bulletcounter > sec)
                 {
                     GameObject bullets = Instantiate(bullet) as GameObject;
                     Vector3 vel = screen_point - screen_playerPos;
