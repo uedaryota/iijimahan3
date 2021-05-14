@@ -22,6 +22,8 @@ public class EnemyState : MonoBehaviour
     float rotateTime = 0;
     float rotateX, rotateY;
     float currentrotateZ, rotateZ;
+    float muteki = 3;
+    float blinkTime;
     // Start is called before the first frame update
     void Start()
     {
@@ -29,7 +31,9 @@ public class EnemyState : MonoBehaviour
         rotateY = 0;
         currentrotateZ = 180;
         rotateZ = 0;
+        muteki = 0;
         hp = StartHp;
+        blinkTime = 0;
         power = StartPower;
         deadFlag = false;
         manager = GameObject.FindGameObjectWithTag("Manager").GetComponent<EnemyManager>();
@@ -41,12 +45,60 @@ public class EnemyState : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Blinking();
         CheckDead();
         CheckWave();
         ChangeRotate();
         WaveMove();
     }
+    void Blinking()
+    {
+        muteki -= Time.deltaTime;
+        MeshRenderer[] ren = GetComponentsInChildren<MeshRenderer>();
+        int count = ren.Length;
+      
+        if (muteki > 0)
+        {
+            blinkTime -= Time.deltaTime;
 
+            if (blinkTime < 0)
+            {
+                if (ren[0] != null && ren[0].enabled == false) 
+                {
+                    blinkTime = 0.15f;
+                    for (int a = 0; a < count; a++)
+                    {
+                        ren[a].enabled = true;
+                    }
+                }
+                else if(ren[0] != null && ren[0].enabled == true)
+                {
+                    blinkTime = 0.15f;
+                    for (int a = 0; a < count; a++)
+                    {
+                        ren[a].enabled = false;
+                    }
+                }
+            }
+              
+        }
+        else
+        {
+            blinkTime -= Time.deltaTime;
+            
+            if (blinkTime < 0)
+            {
+                
+                if (ren[0] != null && ren[0].enabled == false)
+                {
+                    for (int a = 0; a < count; a++)
+                    {
+                        ren[a].enabled = true;
+                    }
+                }    
+            }
+        }
+    }
     void ChangeRotate()
     {
         //  this.transform.LookAt(target.transform, new Vector3(0, 0, 1));
@@ -56,6 +108,7 @@ public class EnemyState : MonoBehaviour
             if (rotateTime > MaxrotateTime)
             {
                 rotateTime -= Time.deltaTime;
+                muteki = 2;
                 rotateX = 180 / MaxrotateTime * rotateTime;
             }
             //  this.transform.Rotate(0, 0, 180/ MaxrotateTime * rotateTime);
@@ -66,6 +119,7 @@ public class EnemyState : MonoBehaviour
             if (rotateTime < MaxrotateTime)
             {
                 rotateTime += Time.deltaTime;
+                muteki = 2;
                 rotateX = -180 / MaxrotateTime * rotateTime;
             }
             // this.transform.Rotate(0, 0, 180 / MaxrotateTime * rotateTime);
@@ -204,7 +258,7 @@ public class EnemyState : MonoBehaviour
     }
     public void Damage(float damage)
     {
-        if (rotateTime > 0 && rotateTime < MaxrotateTime)
+        if (muteki > 0) 
         {
             Debug.Log("Nodamage");
         }
