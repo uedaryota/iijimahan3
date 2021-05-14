@@ -29,6 +29,7 @@ public class BossHp : MonoBehaviour
     private GameObject option;
     private Option optionscript;
     float Cnt = 0;
+    private float ExplosionTime = 3.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -52,7 +53,7 @@ public class BossHp : MonoBehaviour
         if (Time.timeScale <= 0) return;
         if (Hp<0)
         {
-            Dead();
+            Explosion();
         }
         if(status==Status.Damege)
         {
@@ -116,6 +117,12 @@ public class BossHp : MonoBehaviour
             yield return new WaitForSeconds(interval);
         }
     }
+
+    private void Explosion()
+    {
+        Invoke("Dead", ExplosionTime);
+    }
+
     public float GetPower()
     {
         return ATK;

@@ -23,6 +23,7 @@ public class BossMove : MonoBehaviour
     public float Angle;
     float x, y;
     int Lesson=1;
+    private BossHp hp;
     // Start is called before the first frame update
     void Start()
     {
@@ -42,6 +43,7 @@ public class BossMove : MonoBehaviour
         movpoi5 = new Vector2(20, -5);
         movpoi6 = new Vector2(13, 0);
         Lesson = 1;
+        hp = gameObject.GetComponent<BossHp>();
     }
 
     // Update is called once per frame
@@ -49,6 +51,7 @@ public class BossMove : MonoBehaviour
     {
         //ポーズの時に止める
         if (Time.timeScale <= 0) return;
+        if (hp.Hp <= 0) return;
         Transform transform = this.gameObject.GetComponent<Transform>();
         Vector2 pos = transform.position;
         switch (action)

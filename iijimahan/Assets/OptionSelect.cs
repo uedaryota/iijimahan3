@@ -7,7 +7,6 @@ public class OptionSelect : MonoBehaviour
 {
     [SerializeField, Header("インターバル")] private float interval = 0.5f;
     [SerializeField, Header("項目を移動する時の音")] public AudioClip selectSE;
-    [SerializeField]private Slider[] Slider = new Slider[2];
     [SerializeField, Header("text")]private GameObject[] obj2 = new GameObject[3];
     [SerializeField, Header("Back")]private GameObject[] obj3 = new GameObject[2];
     private Text text1;
@@ -47,8 +46,6 @@ public class OptionSelect : MonoBehaviour
         text3 = obj2[2].GetComponent<Text>();
         text4 = obj3[0].GetComponent<Text>();
         text5 = obj3[1].GetComponent<Text>();
-        Slider[0].maxValue = maxValue;
-        Slider[1].maxValue = maxValue;
     }
     
     void Update()
@@ -56,8 +53,6 @@ public class OptionSelect : MonoBehaviour
         timer += Time.unscaledDeltaTime;
         BGMVolume = script.GetBGMVolume() * 10;
         SEVolume = script.GetSEVolume() * 10;
-        Slider[0].value = BGMVolume * 100;
-        Slider[1].value = SEVolume * 100;
         if (Input.GetKeyDown(KeyCode.W) && indexnum != 0 && timer >= interval)
         {
             timer = 0.0f;
