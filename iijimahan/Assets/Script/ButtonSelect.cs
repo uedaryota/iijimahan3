@@ -9,12 +9,12 @@ public class ButtonSelect : MonoBehaviour
     private Option script;
     [SerializeField] private Button[] button;
     [SerializeField, Header("縦並び:1 横並び:2")] private int sort = 1;
-    [SerializeField, Header("インターバル")] private float interval = 30f;
+    [SerializeField, Header("インターバル")] private float interval = 0.5f;
     [SerializeField, Header("ポーズ画面を開いた時の音(ポーズ画面じゃなければ入れなくていい)")]public AudioClip pauseSE;
     [SerializeField, Header("項目を移動する時の音")] public AudioClip selectSE;
     AudioSource audioSource;
-    int indexnum;
-    float timer;
+    [SerializeField]int indexnum;
+    [SerializeField]float timer;
 
     void Start()
     {
@@ -41,7 +41,7 @@ public class ButtonSelect : MonoBehaviour
 
     void Update()
     {
-        timer++;
+        timer += Time.unscaledDeltaTime;
         if (sort == 1)
         {
             if (Input.GetKeyDown(KeyCode.W) && indexnum != 0 && timer >= interval)
@@ -52,6 +52,20 @@ public class ButtonSelect : MonoBehaviour
                 audioSource.PlayOneShot(selectSE);
             }
             if (Input.GetKeyDown(KeyCode.S) && indexnum != button.Length - 1 && timer >= interval)
+            {
+                timer = 0.0f;
+                indexnum++;
+                audioSource.volume = script.GetSEVolume();
+                audioSource.PlayOneShot(selectSE);
+            }
+            if (Input.GetKeyDown(KeyCode.UpArrow) && indexnum != 0 && timer >= interval)
+            {
+                timer = 0.0f;
+                indexnum--;
+                audioSource.volume = script.GetSEVolume();
+                audioSource.PlayOneShot(selectSE);
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow) && indexnum != button.Length - 1 && timer >= interval)
             {
                 timer = 0.0f;
                 indexnum++;
@@ -83,6 +97,20 @@ public class ButtonSelect : MonoBehaviour
                 audioSource.PlayOneShot(selectSE);
             }
             if (Input.GetKeyDown(KeyCode.D) && indexnum != button.Length - 1 && timer >= interval)
+            {
+                timer = 0.0f;
+                indexnum++;
+                audioSource.volume = script.GetSEVolume();
+                audioSource.PlayOneShot(selectSE);
+            }
+            if (Input.GetKeyDown(KeyCode.LeftArrow) && indexnum != 0 && timer >= interval)
+            {
+                timer = 0.0f;
+                indexnum--;
+                audioSource.volume = script.GetSEVolume();
+                audioSource.PlayOneShot(selectSE);
+            }
+            if (Input.GetKeyDown(KeyCode.RightArrow) && indexnum != button.Length - 1 && timer >= interval)
             {
                 timer = 0.0f;
                 indexnum++;

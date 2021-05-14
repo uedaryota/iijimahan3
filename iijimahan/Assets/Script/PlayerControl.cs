@@ -178,10 +178,10 @@ public class PlayerControl : MonoBehaviour
 
         //デバッグ用*******************************
 
-        if(  Input.GetKey(KeyCode.B) && Input.GetKeyDown(KeyCode.UpArrow))
-        {
-            tito = !tito;
-        }
+        //if(  Input.GetKey(KeyCode.B) && Input.GetKeyDown(KeyCode.UpArrow))
+        //{
+        //    tito = !tito;
+        //}
 
         //Debug.Log(Screen.width);
         //Debug.Log(Screen.height);
