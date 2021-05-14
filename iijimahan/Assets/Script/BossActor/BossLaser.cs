@@ -61,8 +61,7 @@ public class BossLaser : MonoBehaviour
         line.generateLightingData = true;
         line.material = new Material(Resources.Load<Material>("Unlit_DashLine"));//new Material(Shader.Find("Resources/Materials/Unlit_DashLine"));//Sprites/Default"));
         line.material.color = Color.blue;
-        line.startColor = Color.blue;
-        line.endColor = Color.cyan;
+        line.sortingOrder = -1;
         if (Cnt / 30.0f < Speed)
         {
             if(Chage0)
@@ -95,7 +94,7 @@ public class BossLaser : MonoBehaviour
                 }
                 Chage = false;
             }
-            line.material.color = Color.cyan;
+            line.material.color = new Color(0,1,1,0.3f);
             goalpos = goalpos2;
             Hutosa = 2.0f;
             this.tag = "EnemyBullet";
@@ -112,7 +111,6 @@ public class BossLaser : MonoBehaviour
         {
             Ray();
         }
-
     }
     void Ray()
     {

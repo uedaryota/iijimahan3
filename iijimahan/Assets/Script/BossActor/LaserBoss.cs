@@ -35,12 +35,31 @@ public class LaserBoss : MonoBehaviour
             case Acter.Attack:
                 if (Cnt == 480)
                 {
-                    for (int x = 0; x < 6; x++)
+                    if (GetComponent<BossHp>().GetHp() >= GetComponent<BossHp>().GetMaxHp() / 6)
                     {
-                        audioSource.PlayOneShot(BulletSE);
-                        GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);
+                        for (int x = 0; x < 2; x++)
+                        {
+                            audioSource.PlayOneShot(BulletSE);
+                            GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);
+                        }
                     }
-                    for(int x=0;x<3;x++)
+                    if (GetComponent<BossHp>().GetHp() < GetComponent<BossHp>().GetMaxHp() / 6 && GetComponent<BossHp>().GetHp() >= GetComponent<BossHp>().GetMaxHp() / 3)
+                    {
+                        for (int x = 0; x < 4; x++)
+                        {
+                            audioSource.PlayOneShot(BulletSE);
+                            GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);
+                        }
+                    }
+                    if (GetComponent<BossHp>().GetHp() < GetComponent<BossHp>().GetMaxHp() / 3)
+                    {
+                        for (int x = 0; x < 6; x++)
+                        {
+                            audioSource.PlayOneShot(BulletSE);
+                            GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);
+                        }
+                    }
+                    for (int x=0;x<3;x++)
                     {
                         audioSource.PlayOneShot(BulletSE);
                         GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet4(transform.position, 1);

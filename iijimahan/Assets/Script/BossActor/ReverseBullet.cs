@@ -5,7 +5,7 @@ using UnityEngine;
 public class ReverseBullet : MonoBehaviour
 {
     private Vector3 velocity;
-    public float speed = 10.0f;
+    public float speed = 5.0f;
     private float timer = 0;
     private bool scaleFlag = false;
 

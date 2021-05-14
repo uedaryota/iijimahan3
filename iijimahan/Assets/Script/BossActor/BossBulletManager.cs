@@ -101,6 +101,8 @@ public class BossBulletManager : MonoBehaviour
             Bullet.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
             Bullet.AddComponent<BossLaser>();
             Bullet.AddComponent<BossPower>();
+            Bullet.layer = 8;
+
             Rigidbody rg = Bullet.AddComponent<Rigidbody>();
             rg.useGravity = false;
             BoxCollider bc = Bullet.AddComponent<BoxCollider>();//.size = new Vector2(SizeX, SizeY);
@@ -175,6 +177,7 @@ public class BossBulletManager : MonoBehaviour
             SpriteRenderer sr = Bullet.AddComponent<SpriteRenderer>();
             sr.sprite = BulletSprite[color];
             sr.sortingLayerName = "BossBullet";
+            Bullet.layer = 8;
             Bullet.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
             Bullet.AddComponent<BossSuperLaser>();
             Bullet.AddComponent<BossPower>();
@@ -199,6 +202,7 @@ public class BossBulletManager : MonoBehaviour
             Bullet.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
             Bullet.AddComponent<BossLaser2>();
             Bullet.AddComponent<BossPower>();
+            Bullet.layer = 8;
             Rigidbody rg = Bullet.AddComponent<Rigidbody>();
             rg.useGravity = false;
             BoxCollider bc = Bullet.AddComponent<BoxCollider>();//.size = new Vector2(SizeX, SizeY);
@@ -220,6 +224,7 @@ public class BossBulletManager : MonoBehaviour
             Bullet.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
             Bullet.AddComponent<BossLaser2Up>();
             Bullet.AddComponent<BossPower>();
+            Bullet.layer = 8;
             Rigidbody rg = Bullet.AddComponent<Rigidbody>();
             rg.useGravity = false;
             BoxCollider bc = Bullet.AddComponent<BoxCollider>();//.size = new Vector2(SizeX, SizeY);
@@ -241,6 +246,7 @@ public class BossBulletManager : MonoBehaviour
             Bullet.transform.localScale = new Vector3(0.7f, 0.7f, 0.7f);
             Bullet.AddComponent<BossLaser2Down>();
             Bullet.AddComponent<BossPower>();
+            Bullet.layer = 8;
             Rigidbody rg = Bullet.AddComponent<Rigidbody>();
             rg.useGravity = false;
             BoxCollider bc = Bullet.AddComponent<BoxCollider>();//.size = new Vector2(SizeX, SizeY);
