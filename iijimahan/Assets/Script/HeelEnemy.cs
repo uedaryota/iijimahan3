@@ -342,7 +342,7 @@ public class HeelEnemy : MonoBehaviour
 
         if (this.gameObject.tag == "Enemy")
         {
-            if (rotateTime > MaxrotateTime)
+            if (rotateTime > 0)
             {
                 rotateTime -= Time.deltaTime;
 
