@@ -781,7 +781,7 @@ public class PlayerControl : MonoBehaviour
         if (other.gameObject.tag == "Enemy")
         {
             GameObject burst2 = Instantiate(playerBurst);
-            burst2.transform.position = transform.position + new Vector3(0.5f, 0.7f, -0.6f);
+            burst2.transform.position = other.transform.position;
             burst2.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             DamageSE();
             if (!mutekiFlag)
