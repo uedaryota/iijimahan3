@@ -68,10 +68,10 @@ public class BossHp : MonoBehaviour
             status = Status.Damege;
         }
         status = Status.Normal;
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Damage(100);
-        }
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    Damage(100);
+        //}
     }
 
     void Dead()
