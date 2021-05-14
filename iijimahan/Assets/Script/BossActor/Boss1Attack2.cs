@@ -8,9 +8,11 @@ public class Boss1Attack2 : MonoBehaviour
     Acter act;
     [SerializeField, Header("ボス攻撃SE")] public AudioClip BulletSE;
     private AudioSource audioSource;
+    private BossHp hp;
     // Start is called before the first frame update
     void Start()
     {
+        hp = gameObject.GetComponent<BossHp>();
         act = Acter.Start;
         audioSource = GetComponent<AudioSource>();
     }
@@ -20,6 +22,7 @@ public class Boss1Attack2 : MonoBehaviour
     {
         //ポーズの時に止める
         if (Time.timeScale <= 0) return;
+        if (hp.Hp <= 0) return;
         switch (act)
         {
             case Acter.Start:

@@ -15,9 +15,11 @@ public class LaserBoss2 : MonoBehaviour
     private AudioSource audioSource;
     private GameObject option;
     private Option optionscript;
+    private BossHp hp;
     // Start is called before the first frame update
     void Start()
     {
+        hp = gameObject.GetComponent<BossHp>();
         act = Acter.Start;
         audioSource = GetComponent<AudioSource>();
         option = GameObject.Find("Option");
@@ -31,6 +33,7 @@ public class LaserBoss2 : MonoBehaviour
     {
         //ポーズの時に止める
         if (Time.timeScale <= 0) return;
+        if (hp.Hp <= 0) return;
         switch (act)
         {
             case Acter.Start:
