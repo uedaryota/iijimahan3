@@ -157,7 +157,7 @@ public class AttackBoss : MonoBehaviour
                 }
                 case Patern.Force://弾幕三種守り＋レーザーも追加
                 {
-                        if (Cnt * Time.deltaTime > 1)
+                        if (Cnt * Time.deltaTime > 2)
                         {
                             audioSource.PlayOneShot(BulletSE);
                             //GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet4(transform.position, 3);
@@ -169,6 +169,14 @@ public class AttackBoss : MonoBehaviour
                             }
                             GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet5(transform.position, 3);
                             GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet4(transform.position, 1);
+                            
+                            GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet(transform.position, 1);
+                            Cnt = 0;
+                            Cnt2++;
+                            GetComponent<BossMove>().action = BossMove.MoveAction.Action1;
+                        }
+                        if (Cnt2 > 10)
+                        {
                             switch (updown)
                             {
                                 case LaserUpDown.Up:
@@ -184,13 +192,6 @@ public class AttackBoss : MonoBehaviour
                                     updown = LaserUpDown.Up;
                                     break;
                             }
-                            GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet(transform.position, 1);
-                            Cnt = 0;
-                            Cnt2++;
-                            GetComponent<BossMove>().action = BossMove.MoveAction.Action1;
-                        }
-                        if (Cnt2 > 10)
-                        {
                             Cnt2 = 0;
                             GetComponent<BossMove>().action = BossMove.MoveAction.AttackMove;
                         }
@@ -214,6 +215,14 @@ public class AttackBoss : MonoBehaviour
                             }
                             GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet5(transform.position, 3);
                             GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet4(transform.position, 1);
+                            
+                            GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet(transform.position, 1);
+                            Cnt = 0;
+                            Cnt2++;
+                            GetComponent<BossMove>().action = BossMove.MoveAction.Action1;
+                        }
+                        if (Cnt2 > 10)
+                        {
                             switch (updown)
                             {
                                 case LaserUpDown.Up:
@@ -229,13 +238,6 @@ public class AttackBoss : MonoBehaviour
                                     updown = LaserUpDown.Up;
                                     break;
                             }
-                            GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet(transform.position, 1);
-                            Cnt = 0;
-                            Cnt2++;
-                            GetComponent<BossMove>().action = BossMove.MoveAction.Action1;
-                        }
-                        if (Cnt2 > 10)
-                        {
                             Cnt2 = 0;
                             GetComponent<BossMove>().action = BossMove.MoveAction.AttackMove;
                         }
