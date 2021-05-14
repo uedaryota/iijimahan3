@@ -67,12 +67,11 @@ public class BossHp : MonoBehaviour
             Cnt = 0;
             status = Status.Damege;
         }
-        if(GetComponent<BossMove>().action == BossMove.MoveAction.AttackMove)
-        { status = Status.Damege; }
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            Damage(100);
-        }
+        status = Status.Normal;
+        //if (Input.GetKeyDown(KeyCode.P))
+        //{
+        //    Damage(100);
+        //}
     }
 
     void Dead()
