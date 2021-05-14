@@ -130,6 +130,7 @@ public class BossHp : MonoBehaviour
     void Damage(float damage)
     {
         this.Hp -= damage;
+        GetComponent<BossHpGauge>().Damage(damage);
     }
     public float GetMaxHp()
     {
