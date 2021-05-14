@@ -126,7 +126,7 @@ MonoBehaviour:
   testAudio: {fileID: 8300000, guid: 77e7fae62c37b754e8c7751b5858d55b, type: 3}
   playerBulletSE: {fileID: 8300000, guid: 97aa8ca42431c6b448193474539197b8, type: 3}
   dameageSE: {fileID: 8300000, guid: a9ac292acf8035c44913dfa53a4a005d, type: 3}
-  playerGaugeShootHantenSE: {fileID: 8300000, guid: 52f1a0bc42fa8874fb32b189d7cfcbca,
+  playerGaugeShootHantenSE: {fileID: 8300000, guid: be067a14e4c9c4e4caf773cc7cdd2de9,
     type: 3}
   playerGaugeShootKyoukaSE: {fileID: 8300000, guid: d3f270a70d207e840ae46f5a861fd876,
     type: 3}
