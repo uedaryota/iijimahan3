@@ -39,9 +39,9 @@ public class EnemyBullet : MonoBehaviour
     {
         if (other.gameObject.tag == "Player")
         {
-            GameObject burst = Instantiate(Resources.Load<GameObject>("Explosion"));
-            burst.transform.position = transform.position;
-            burst.GetComponent<EffectScript>().HitSE();
+            //GameObject burst = Instantiate(Resources.Load<GameObject>("Explosion"));
+            //burst.transform.position = transform.position;
+            //burst.GetComponent<EffectScript>().HitSE();
             deadFlag = true;
         }
         if (other.gameObject.tag == "Friend")
