@@ -36,7 +36,7 @@ public class BossBulletFrind2 : MonoBehaviour
         {
             if (GameObject.FindGameObjectWithTag("Friend") == null) 
             {
-                pos = GameObject.FindGameObjectWithTag("Player").transform.position;
+                Destroy(this.gameObject);
             }
             else
             {
