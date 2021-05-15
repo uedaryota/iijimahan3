@@ -50,7 +50,6 @@ public class ResultButton : MonoBehaviour
         //SceneManager.LoadScene("TitleScene");
         if (sceneChangeFlag)
         {
-            Clickflag = false;
             fade.GetComponent<FadeStart>().FadeOutNextScene("TitleScene");
             sceneChangeFlag = false;
         }
