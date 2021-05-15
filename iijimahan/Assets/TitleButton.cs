@@ -81,7 +81,6 @@ public class TitleButton : MonoBehaviour
 
     private void StartButton()
     {
-        Clickflag = false;
         fade.GetComponent<FadeStart>().FadeOutNextScene("GameScene");
     }
 
