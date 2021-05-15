@@ -287,6 +287,8 @@ public class EnemyManager : MonoBehaviour
     #endregion
 
     #region 変数一覧
+
+    public int wave = 1;
     [SerializeField, Header("ボスWave突入SE")] private AudioClip caution;
     
     [System.Serializable]
@@ -347,7 +349,6 @@ public class EnemyManager : MonoBehaviour
 
     //自動用
 
-    public int wave = 1;
 
     private bool gameclear;
     private Object[] tagcheckenemy;

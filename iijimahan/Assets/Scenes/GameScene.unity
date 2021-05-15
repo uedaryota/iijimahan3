@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0071495585, g: 0.009100295, b: 0.012743935, a: 1}
+  m_IndirectSpecularColor: {r: 0.007346884, g: 0.00935895, b: 0.013113761, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1208,6 +1208,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: PlayerHPUI
+      objectReference: {fileID: 0}
+    - target: {fileID: 2289881948638634488, guid: 1512255dcc9b45040a147ac1cdaf26fe,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2289881948638634492, guid: 1512255dcc9b45040a147ac1cdaf26fe,
         type: 3}
@@ -3507,6 +3512,16 @@ PrefabInstance:
       propertyPath: OptionCanvas
       value: 
       objectReference: {fileID: 379072078}
+    - target: {fileID: 513832824649599212, guid: e87229452c2b8d844bea57b4c37b5be0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick
+      objectReference: {fileID: 0}
+    - target: {fileID: 1017314820999974639, guid: e87229452c2b8d844bea57b4c37b5be0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick
+      objectReference: {fileID: 0}
     - target: {fileID: 3322819427310573534, guid: e87229452c2b8d844bea57b4c37b5be0,
         type: 3}
       propertyPath: SelectSE
@@ -3517,6 +3532,11 @@ PrefabInstance:
       propertyPath: OptionCanvas
       value: 
       objectReference: {fileID: 379072078}
+    - target: {fileID: 3425292691807732098, guid: e87229452c2b8d844bea57b4c37b5be0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick
+      objectReference: {fileID: 0}
     - target: {fileID: 3579738097795354584, guid: e87229452c2b8d844bea57b4c37b5be0,
         type: 3}
       propertyPath: SelectSE
@@ -3671,6 +3691,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9031924328483532132, guid: e87229452c2b8d844bea57b4c37b5be0,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e87229452c2b8d844bea57b4c37b5be0, type: 3}

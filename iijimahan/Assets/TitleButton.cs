@@ -14,6 +14,7 @@ public class TitleButton : MonoBehaviour
     public GameObject Canvas;
     private float time;
     private bool flag;
+    private bool Clickflag;
 
     void Start()
     {
@@ -22,6 +23,7 @@ public class TitleButton : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         time = 0;
         flag = false;
+        Clickflag = false;
         // fade.GetComponent<FadeStart>().FadeInA();
         //Application.targetFrameRate = 60;
     }
@@ -42,24 +44,27 @@ public class TitleButton : MonoBehaviour
 
     public void OnClick()
     {
-        if (transform.name == "StartButton")
+        if (transform.name == "StartButton" && Clickflag == false)
         {
+            Clickflag = true;
             audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(SelectSE);
             Invoke("StartButton", 0.5f);
             //fade.GetComponent<FadeStart>().FadeOutNextScene("GameScene");
             //SceneManager.LoadScene("GameScene");
         }
-        if(transform.name == "OptionButton")
+        if(transform.name == "OptionButton" && Clickflag == false)
         {
+            Clickflag = true;
             audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(SelectSE);
             flag = true;
             //Canvas.SetActive(false);
             //OptionCanvas.SetActive(true);
         }
-        if (transform.name == "GameEndButton")
+        if (transform.name == "GameEndButton" && Clickflag == false)
         {
+            Clickflag = true;
             audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(SelectSE);
             Invoke("Quit", 0.5f);
@@ -76,11 +81,13 @@ public class TitleButton : MonoBehaviour
 
     private void StartButton()
     {
+        Clickflag = false;
         fade.GetComponent<FadeStart>().FadeOutNextScene("GameScene");
     }
 
     private void OptionButton()
     {
+        Clickflag = false;
         Canvas.SetActive(false);
         OptionCanvas.SetActive(true);
     }
