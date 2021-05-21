@@ -27,7 +27,6 @@ public class ShieldScript : MonoBehaviour
         }
         if (other.gameObject.tag == "EnemyBullet")
         {
-            Debug.Log(5);
             EnemyState state = other.GetComponent<EnemyBullet>().GetParent().GetComponent<EnemyState>();
             Hp -= state.GetPower();
         }

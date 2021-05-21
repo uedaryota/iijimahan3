@@ -97,8 +97,8 @@ public class BossHp : MonoBehaviour
             }
             //hpGauge.Damage(100);
             //音
-            audioSource.volume = optionscript.GetSEVolume();
-            audioSource.PlayOneShot(dameageSE);
+            //audioSource.volume = optionscript.GetSEVolume();
+            //audioSource.PlayOneShot(dameageSE);
         }
     }
     public void ArmorOff()
