@@ -7,7 +7,7 @@ public class Option : MonoBehaviour
     private static float BGMVolume = 0.5f;
     private static float SEVolume = 0.5f;
 
-    private static bool clearFlag = true;
+    private static bool clearFlag = false;
 
     void Awake()
     {
