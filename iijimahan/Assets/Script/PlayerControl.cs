@@ -736,7 +736,7 @@ public class PlayerControl : MonoBehaviour
     //HP回復
     public void PlayerHeal()
     {
-        float heal = 0.05f;
+        float heal = 0.017f;
         HP += heal;
         playerHpGauge.Heal(heal / 100);
         if (HP >= 100) HP = 100;
@@ -746,7 +746,10 @@ public class PlayerControl : MonoBehaviour
     {
         if (other.gameObject.tag == "FriendHeal")
         {
+            if (playerState != PlayerState.Alive) return;
+
             PlayerHeal();
+
         }
     }
 

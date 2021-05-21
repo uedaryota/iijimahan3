@@ -30,21 +30,24 @@ public class Rock : MonoBehaviour
         {
             Destroy(this.gameObject);
 
-            if(gameObject.transform.localScale == new Vector3(2,2,2))
+            if(HP <= 0)
             {
-                for (int i = 0; i < 2; i++)
+                if (gameObject.transform.localScale == new Vector3(2, 2, 2))
                 {
-                    GameObject energys = Instantiate(energy) as GameObject;
-                    energys.GetComponent<GaugeEnergyControl>().SetPosition(this.transform.position + new Vector3(i * 0.5f, i * 0.5f, 0));
+                    for (int i = 0; i < 2; i++)
+                    {
+                        GameObject energys = Instantiate(energy) as GameObject;
+                        energys.GetComponent<GaugeEnergyControl>().SetPosition(this.transform.position + new Vector3(i * 0.5f, i * 0.5f, 0));
+                    }
                 }
-            }
 
-            if (gameObject.transform.localScale == new Vector3(5, 5, 5))
-            {
-                for (int i = 0; i < 4; i++)
+                if (gameObject.transform.localScale == new Vector3(5, 5, 5))
                 {
-                    GameObject energys = Instantiate(energy) as GameObject;
-                    energys.GetComponent<GaugeEnergyControl>().SetPosition(this.transform.position + new Vector3(i * 0.5f, i * 0.5f, 0));
+                    for (int i = 0; i < 4; i++)
+                    {
+                        GameObject energys = Instantiate(energy) as GameObject;
+                        energys.GetComponent<GaugeEnergyControl>().SetPosition(this.transform.position + new Vector3(i * 0.5f, i * 0.5f, 0));
+                    }
                 }
             }
 

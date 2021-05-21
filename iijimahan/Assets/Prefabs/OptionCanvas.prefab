@@ -127,9 +127,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   interval: 0.1
   selectSE: {fileID: 8300000, guid: 52f1a0bc42fa8874fb32b189d7cfcbca, type: 3}
-  Slider:
-  - {fileID: 1766009287563659441}
-  - {fileID: 1766009287439878817}
   obj2:
   - {fileID: 1766009287498864995}
   - {fileID: 1766009287689049742}

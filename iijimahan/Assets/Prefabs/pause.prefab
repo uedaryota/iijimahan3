@@ -1482,9 +1482,11 @@ MonoBehaviour:
   - {fileID: 513832824649599212}
   - {fileID: 9031924328483532132}
   sort: 1
-  interval: 15
-  pauseSE: {fileID: 8300000, guid: 52f1a0bc42fa8874fb32b189d7cfcbca, type: 3}
-  selectSE: {fileID: 8300000, guid: 52f1a0bc42fa8874fb32b189d7cfcbca, type: 3}
+  interval: 0.5
+  pauseSE: {fileID: 8300000, guid: 77e7fae62c37b754e8c7751b5858d55b, type: 3}
+  selectSE: {fileID: 8300000, guid: dfe455932c5e6e147984bb9575a4a0de, type: 3}
+  indexnum: 0
+  timer: 0
 --- !u!82 &252286682061238238
 AudioSource:
   m_ObjectHideFlags: 0
