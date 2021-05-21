@@ -93,13 +93,11 @@ public class PauseButton : MonoBehaviour
 
     private void Title()
     {
-        Clickflag = false;
         SceneManager.LoadScene("TitleScene");
     }
 
     private void Reset()
     {
-        Clickflag = false;
         SceneManager.LoadScene("GameScene");
     }
 }
