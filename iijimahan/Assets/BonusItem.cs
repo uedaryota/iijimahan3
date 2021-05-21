@@ -11,7 +11,8 @@ public class BonusItem : MonoBehaviour
     private GameObject Option;
     private Option script2;
     private AudioSource audiosource;
-    private float DeleteTime = 10.0f;
+    private float DeleteTime = 20.0f;
+    private float DelayTime = 3.0f;
 
     void Start()
     {
@@ -47,6 +48,13 @@ public class BonusItem : MonoBehaviour
 
     private void isDead()
     {
-        Destroy(gameObject);
+        GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<BoxCollider>().enabled = false;
+
+        DelayTime += Time.deltaTime;
+        if (DelayTime <= 0)
+        {
+            Destroy(gameObject);
+        }
     }
 }
