@@ -53,7 +53,16 @@ public class TitleButton : MonoBehaviour
             //fade.GetComponent<FadeStart>().FadeOutNextScene("GameScene");
             //SceneManager.LoadScene("GameScene");
         }
-        if(transform.name == "OptionButton" && Clickflag == false)
+        if (transform.name == "HardModeButton" && Clickflag == false)
+        {
+            Clickflag = true;
+            audioSource.volume = script.GetSEVolume();
+            audioSource.PlayOneShot(SelectSE);
+            Invoke("HardModeButton", 0.5f);
+            //fade.GetComponent<FadeStart>().FadeOutNextScene("GameScene");
+            //SceneManager.LoadScene("GameScene");
+        }
+        if (transform.name == "OptionButton" && Clickflag == false)
         {
             Clickflag = true;
             audioSource.volume = script.GetSEVolume();
@@ -82,6 +91,11 @@ public class TitleButton : MonoBehaviour
     private void StartButton()
     {
         fade.GetComponent<FadeStart>().FadeOutNextScene("GameScene");
+    }
+
+    private void HardModeButton()
+    {
+        fade.GetComponent<FadeStart>().FadeOutNextScene("HardModeScene");
     }
 
     private void OptionButton()
