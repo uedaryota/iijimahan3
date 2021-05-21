@@ -27,6 +27,7 @@ public class HeelEnemy : MonoBehaviour
         rotateY = 0;
         currentrotateZ = 180;
         rotateZ = 0;
+        speed = 1;
         state = GetComponent<EnemyState>();
         deadFlag = false;
         target = GameObject.FindGameObjectWithTag("Player");
@@ -57,11 +58,13 @@ public class HeelEnemy : MonoBehaviour
         Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
         if (screenPos.x > Screen.width || screenPos.x < 0)
         {
+            Debug.Log("dash");
             velocity = Vector3.Normalize(new Vector3(Screen.width / 2, Screen.height / 2, 0) - screenPos) * speed * 3;
         }
 
         if (screenPos.y > Screen.height || screenPos.y < 0)
         {
+            Debug.Log("dash");
             velocity = Vector3.Normalize(new Vector3(Screen.width / 2, Screen.height / 2, 0) - screenPos) * speed * 3;
         }
 
