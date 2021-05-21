@@ -140,7 +140,7 @@ public class ShieldEnemy : MonoBehaviour
         }
         if (screenPos.x < Screen.width && screenPos.x > 0)
         {
-            if (screenPos.y < Screen.height & screenPos.y > 0)
+            if (screenPos.y < Screen.height && screenPos.y > 0)
             {
                 if (this.gameObject.tag == "Enemy")
                 {
