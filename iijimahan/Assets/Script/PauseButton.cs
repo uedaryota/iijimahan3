@@ -13,6 +13,7 @@ public class PauseButton : MonoBehaviour
     public GameObject Canvas;
     private float time;
     private bool flag;
+    private bool Clickflag;
 
     void Start()
     {
@@ -21,6 +22,7 @@ public class PauseButton : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         time = 0;
         flag = false;
+        Clickflag = false;
     }
 
     void Update()
@@ -37,32 +39,36 @@ public class PauseButton : MonoBehaviour
         }
     }
 
-    public void OnClickStartButton()
+    public void OnClick()
     {
-        if(transform.name == "Option")
+        if(transform.name == "Option" && Clickflag == false)
         {
+            Clickflag = true;
             audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(SelectSE);
             flag = true;
         }
-        if (transform.name == "TitleButton")
+        if (transform.name == "TitleButton" && Clickflag == false)
         {
+            Clickflag = true;
             audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(SelectSE);
             Time.timeScale = 1f;
             Invoke("Title", 0.5f);
             //SceneManager.LoadScene("TitleScene");
         }
-        if (transform.name == "ResetButton")
+        if (transform.name == "ResetButton" && Clickflag == false)
         {
+            Clickflag = true;
             audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(SelectSE);
             Time.timeScale = 1f;
             Invoke("Reset", 0.5f);
             //SceneManager.LoadScene("GameScene");
         }
-        if(transform.name == "GameEndButton")
+        if(transform.name == "GameEndButton" && Clickflag == false)
         {
+            Clickflag = true;
             audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(SelectSE);
             Time.timeScale = 1f;
@@ -80,6 +86,7 @@ public class PauseButton : MonoBehaviour
 
     private void Option()
     {
+        Clickflag = false;
         Canvas.SetActive(false);
         OptionCanvas.SetActive(true);
     }
