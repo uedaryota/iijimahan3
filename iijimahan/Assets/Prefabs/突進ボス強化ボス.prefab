@@ -514,7 +514,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd530f8171773b4cacce6acf19fd3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHp: 40000
+  MaxHp: 65000
   Superarmor: 0
   interval: 0.1
   bossmodel: {fileID: 0}
