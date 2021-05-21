@@ -7,6 +7,8 @@ public class Option : MonoBehaviour
     private static float BGMVolume = 0.5f;
     private static float SEVolume = 0.5f;
 
+    private static bool clearFlag = true;
+
     void Awake()
     {
         DontDestroyOnLoad(gameObject);
@@ -30,5 +32,15 @@ public class Option : MonoBehaviour
     public void SetSEVolume(float volume)
     {
         SEVolume = volume;
+    }
+
+    public void SetClearFlag(bool fl)
+    {
+        clearFlag = fl;
+    }
+
+    public bool GetClearFlag()
+    {
+        return clearFlag;
     }
 }
