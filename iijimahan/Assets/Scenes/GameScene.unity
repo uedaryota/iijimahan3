@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.00844326, g: 0.010808908, b: 0.015244107, a: 1}
+  m_IndirectSpecularColor: {r: 0.004675688, g: 0.0059591876, b: 0.008348294, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1325,7 +1325,7 @@ PrefabInstance:
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
       propertyPath: wave
-      value: 5
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
@@ -1409,19 +1409,19 @@ PrefabInstance:
         type: 3}
       propertyPath: bossboxes.Array.data[0]
       value: 
-      objectReference: {fileID: 8566351118426462332, guid: 9236328a7872d6940ae3f04924dc7845,
+      objectReference: {fileID: 891316403518387600, guid: aa595588e48175046923818ef6bbfe16,
         type: 3}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
       propertyPath: bossboxes.Array.data[1]
       value: 
-      objectReference: {fileID: 4799150726551526902, guid: ebdc4f91b807af846bcd68173ff5dfa9,
+      objectReference: {fileID: 3626864526235431021, guid: 9228ea5dc23165e449d8966ae59e188c,
         type: 3}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
       propertyPath: bossboxes.Array.data[2]
       value: 
-      objectReference: {fileID: 5263079908622487977, guid: d6012fb5f977f5b4cad8b0e5436f70af,
+      objectReference: {fileID: 5898550561299137546, guid: ef9a87d01e8d66a4a9fcfc0efb036db2,
         type: 3}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
@@ -1564,6 +1564,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
+      propertyPath: bonus_enemy.pos_Manual.Array.data[5].x
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
+        type: 3}
+      propertyPath: bonus_enemy.pos_Manual.Array.data[5].y
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
+        type: 3}
       propertyPath: bonus_enemy.enemyboxes_Manual.Array.size
       value: 5
       objectReference: {fileID: 0}
@@ -1571,7 +1581,7 @@ PrefabInstance:
         type: 3}
       propertyPath: bonus_enemy.enemyboxes_Manual.Array.data[0]
       value: 
-      objectReference: {fileID: 8670145571796672101, guid: 590429abf11bc1c409e9d8a800dd9aa3,
+      objectReference: {fileID: 4526803709225472805, guid: 0e7ac667f89db384292f126877bbf66a,
         type: 3}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
@@ -1595,7 +1605,13 @@ PrefabInstance:
         type: 3}
       propertyPath: bonus_enemy.enemyboxes_Manual.Array.data[4]
       value: 
-      objectReference: {fileID: 8670145571796672101, guid: 590429abf11bc1c409e9d8a800dd9aa3,
+      objectReference: {fileID: 4526803709225472805, guid: 0e7ac667f89db384292f126877bbf66a,
+        type: 3}
+    - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
+        type: 3}
+      propertyPath: bonus_enemy.enemyboxes_Manual.Array.data[5]
+      value: 
+      objectReference: {fileID: 4526803709225472805, guid: 0e7ac667f89db384292f126877bbf66a,
         type: 3}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
@@ -3335,7 +3351,7 @@ PrefabInstance:
         type: 3}
       propertyPath: enemy_Manual.Array.data[4].enemyboxes_Manual.Array.data[8]
       value: 
-      objectReference: {fileID: 8227044835302925718, guid: e6482dc23efee5c47bfb05127fb60720,
+      objectReference: {fileID: 4526803709225472805, guid: 0e7ac667f89db384292f126877bbf66a,
         type: 3}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
