@@ -6925,6 +6925,7 @@ MonoBehaviour:
   selectSE: {fileID: 8300000, guid: dfe455932c5e6e147984bb9575a4a0de, type: 3}
   indexnum: 0
   timer: 0
+  hardText: {fileID: 1911749478}
 --- !u!82 &2093770963
 AudioSource:
   m_ObjectHideFlags: 0
