@@ -53,21 +53,19 @@ public class HeelEnemy : MonoBehaviour
             {
                 velocity = Vector3.zero;
             }
-            transform.position += velocity * Time.deltaTime;
+           // transform.position += velocity * Time.deltaTime;
         }
         Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
         if (screenPos.x > Screen.width || screenPos.x < 0)
         {
-            Debug.Log("dash");
             velocity = Vector3.Normalize(new Vector3(Screen.width / 2, Screen.height / 2, 0) - screenPos) * speed * 3;
         }
 
         if (screenPos.y > Screen.height || screenPos.y < 0)
         {
-            Debug.Log("dash");
             velocity = Vector3.Normalize(new Vector3(Screen.width / 2, Screen.height / 2, 0) - screenPos) * speed * 3;
         }
-
+        transform.position += velocity * Time.deltaTime;
     }
     void CheckTarget()
     {
@@ -275,7 +273,6 @@ public class HeelEnemy : MonoBehaviour
                 {
                     if (other.gameObject.tag == "GaugeBullet")
                     {
-                        Debug.Log("rev");
                         this.gameObject.tag = "Friend";
                         GameObject effect = Instantiate(Resources.Load<GameObject>("Mebius"));
                         effect.transform.position = transform.position;
@@ -287,8 +284,6 @@ public class HeelEnemy : MonoBehaviour
 
                     if (other.gameObject.tag == "PlayerBullet")
                     {
-                        //  Buff();
-                        Debug.Log("rev");
                         this.gameObject.tag = "Friend";
                         GameObject effect = Instantiate(Resources.Load<GameObject>("Mebius"));
                         Destroy(other.gameObject);
@@ -457,7 +452,7 @@ public class HeelEnemy : MonoBehaviour
         //弾の親のオブジェクトがターゲット
         if (other.tag == "FriendBullet")
         {
-            if (target != null)
+          //  if (target == null)
             {
                 if (other.GetComponent<FriendBullet>() != null)
                 {
@@ -471,7 +466,7 @@ public class HeelEnemy : MonoBehaviour
         }
         if (other.tag == "EnemyBullet")
         {
-            if (target != null)
+           // if (target != null)
             {
                 if (other.GetComponent<EnemyBullet>() != null)
                 {
