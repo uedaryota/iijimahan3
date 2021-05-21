@@ -8,9 +8,9 @@ public class HeelEnemy : MonoBehaviour
     private GameObject target;
     public float targetDistance = 3;
     private Vector3 velocity;
-    public float speed = 5;
+    public float speed = 1;
     private bool deadFlag = false;
-    public GameObject energy;
+  //  public GameObject energy;
     float MaxrotateTime = 0.5f;
     float rotateTime = 0;
     Vector3 lastPosition;
@@ -38,13 +38,8 @@ public class HeelEnemy : MonoBehaviour
         CheckTarget();
         ObjectRotate();
         ChangeRotate();
-        if (target != null)
-        {
-            Move();
-
+        Move();
             
-        }
-       
     }
     
     void Move()
@@ -59,8 +54,17 @@ public class HeelEnemy : MonoBehaviour
             }
             transform.position += velocity * Time.deltaTime;
         }
+        Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
+        if (screenPos.x > Screen.width || screenPos.x < 0)
+        {
+            velocity = Vector3.Normalize(new Vector3(Screen.width / 2, Screen.height / 2, 0) - screenPos) * speed * 3;
+        }
 
-       
+        if (screenPos.y > Screen.height || screenPos.y < 0)
+        {
+            velocity = Vector3.Normalize(new Vector3(Screen.width / 2, Screen.height / 2, 0) - screenPos) * speed * 3;
+        }
+
     }
     void CheckTarget()
     {
@@ -68,7 +72,7 @@ public class HeelEnemy : MonoBehaviour
         {
             if (target == null)
             {
-
+              //  Debug.Log(0);
                 target = GameObject.FindGameObjectWithTag("Boss");
                 if (target != null)
                 {
@@ -81,7 +85,7 @@ public class HeelEnemy : MonoBehaviour
                 {
                     if (near == null)
                     {
-                       if( objects[a]!=gameObject)
+                        if (objects[a] != gameObject) 
                         {
                             near = objects[a];
                         }
@@ -109,7 +113,7 @@ public class HeelEnemy : MonoBehaviour
                 }
                 target = near;
             }
-            else if (target.tag != "Boss" || target.tag != "Enemy")
+            else if (target.tag != "Boss" && target.tag != "Enemy")
             {
                 target = GameObject.FindGameObjectWithTag("Boss");
                 if (target != null)
@@ -126,7 +130,7 @@ public class HeelEnemy : MonoBehaviour
                     {
                         if (objects[a] != gameObject)
                         {
-                                near = objects[a];     
+                            near = objects[a];  
                         }
                     }
                     if (near != null)
@@ -238,20 +242,16 @@ public class HeelEnemy : MonoBehaviour
             Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, target.transform.position);
             if (screenPos.x < 0 || screenPos.x > Screen.width)
             {
-                target = null;
+             //   target = null;
             }
             if (screenPos.y < 0 || screenPos.y > Screen.height)
             {
-                target = null;
+           //     target = null;
             }
 
         }
     }
-    public void GaugeEnergyDrop()
-    {
-        GameObject energys = Instantiate(energy) as GameObject;
-        energys.GetComponent<GaugeEnergyControl>().SetPosition(this.transform.position);
-    }
+   
     private void OnTriggerEnter(Collider other)
     {
         Vector3 screenPos = RectTransformUtility.WorldToScreenPoint(Camera.main, this.transform.position);
@@ -265,13 +265,14 @@ public class HeelEnemy : MonoBehaviour
         }
         if (screenPos.x < Screen.width && screenPos.x > 0)
         {
-            if (screenPos.y < Screen.height & screenPos.y > 0)
+            if (screenPos.y < Screen.height && screenPos.y > 0)
             {
                 //画面内なら
                 if (this.gameObject.tag == "Enemy")
                 {
                     if (other.gameObject.tag == "GaugeBullet")
                     {
+                        Debug.Log("rev");
                         this.gameObject.tag = "Friend";
                         GameObject effect = Instantiate(Resources.Load<GameObject>("Mebius"));
                         effect.transform.position = transform.position;
@@ -284,6 +285,7 @@ public class HeelEnemy : MonoBehaviour
                     if (other.gameObject.tag == "PlayerBullet")
                     {
                         //  Buff();
+                        Debug.Log("rev");
                         this.gameObject.tag = "Friend";
                         GameObject effect = Instantiate(Resources.Load<GameObject>("Mebius"));
                         Destroy(other.gameObject);
@@ -327,10 +329,7 @@ public class HeelEnemy : MonoBehaviour
         }
 
     }
-    private void OnTriggerStay(Collider other)
-    {
-        
-    }
+
   
     public void testmove()
     {
