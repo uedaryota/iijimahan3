@@ -278,15 +278,24 @@ public class AttackBoss : MonoBehaviour
         {
             if (other.gameObject.tag == "Player")
             {
-                other.GetComponent<PlayerControl>().AttackDamage();
+                if (other.GetComponent<PlayerControl>() != null)
+                {
+                    other.GetComponent<PlayerControl>().AttackDamage();
+                }
             }
             if (other.gameObject.tag == "Friend")
             {
-                other.GetComponent<Enemy>().DeadEnd();
+                if (other.GetComponent<Enemy>() != null)
+                {
+                    other.GetComponent<Enemy>().DeadEnd();
+                }
             }
             if (other.gameObject.tag == "FriendBullet")
             {
-                other.GetComponent<Rock>().AttackBoss();
+                if (other.GetComponent<Rock>() != null)
+                {
+                    //other.GetComponent<Rock>().AttackBoss();
+                }
             }
         }
     }
