@@ -40,6 +40,11 @@ public class TitleButton : MonoBehaviour
             time = 0.0f;
             flag = false;
         }
+
+        if(Input.GetKeyDown(KeyCode.U))
+        {
+            script.SetClearFlag(true);
+        }
     }
 
     public void OnClick()
@@ -53,7 +58,7 @@ public class TitleButton : MonoBehaviour
             //fade.GetComponent<FadeStart>().FadeOutNextScene("GameScene");
             //SceneManager.LoadScene("GameScene");
         }
-        if (transform.name == "HardModeButton" && Clickflag == false)
+        if (transform.name == "HardModeButton" && Clickflag == false && script.GetClearFlag() == true)
         {
             Clickflag = true;
             audioSource.volume = script.GetSEVolume();
