@@ -43,11 +43,14 @@ public class ButtonSelect : MonoBehaviour
 
     void Update()
     {
-
-        if (script.GetClearFlag() == true && hardText.color.a == 1)
+        if(hardText != null)
         {
-            hardText.color = new Color(1, 1, 1, 1);
+            if (script.GetClearFlag() == true && hardText.color.a == 1)
+            {
+                hardText.color = new Color(1, 1, 1, 1);
+            }
         }
+        
 
         timer += Time.unscaledDeltaTime;
         if (sort == 1)
