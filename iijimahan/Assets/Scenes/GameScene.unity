@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.013155619, g: 0.016776675, b: 0.023630047, a: 1}
+  m_IndirectSpecularColor: {r: 0.013771665, g: 0.017563922, b: 0.024684934, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1506,19 +1506,19 @@ PrefabInstance:
         type: 3}
       propertyPath: bossboxes.Array.data[0]
       value: 
-      objectReference: {fileID: 891316403518387600, guid: aa595588e48175046923818ef6bbfe16,
+      objectReference: {fileID: 8566351118426462332, guid: 9236328a7872d6940ae3f04924dc7845,
         type: 3}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
       propertyPath: bossboxes.Array.data[1]
       value: 
-      objectReference: {fileID: 3626864526235431021, guid: 9228ea5dc23165e449d8966ae59e188c,
+      objectReference: {fileID: 4799150726551526902, guid: ebdc4f91b807af846bcd68173ff5dfa9,
         type: 3}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
       propertyPath: bossboxes.Array.data[2]
       value: 
-      objectReference: {fileID: 5898550561299137546, guid: ef9a87d01e8d66a4a9fcfc0efb036db2,
+      objectReference: {fileID: 5263079908622487977, guid: d6012fb5f977f5b4cad8b0e5436f70af,
         type: 3}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
