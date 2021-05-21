@@ -16,6 +16,8 @@ public class ButtonSelect : MonoBehaviour
     [SerializeField]int indexnum;
     [SerializeField]float timer;
 
+    public Text hardText;
+
     void Start()
     {
         option = GameObject.Find("Option");
@@ -41,6 +43,12 @@ public class ButtonSelect : MonoBehaviour
 
     void Update()
     {
+
+        if (script.GetClearFlag() == true && hardText.color.a == 1)
+        {
+            hardText.color = new Color(1, 1, 1, 1);
+        }
+
         timer += Time.unscaledDeltaTime;
         if (sort == 1)
         {
