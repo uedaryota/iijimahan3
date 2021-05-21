@@ -308,7 +308,7 @@ public class HeelEnemy : MonoBehaviour
                 {
                     if (other.gameObject.tag == "Enemy")
                     {
-                        Damage(other.GetComponent<EnemyState>().GetPower());
+                        state.Damage(other.GetComponent<EnemyState>().GetPower());
                     }
 
                     if (other.gameObject.tag == "EnemyBullet")
