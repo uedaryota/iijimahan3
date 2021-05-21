@@ -2,14 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-enum Patern
-{First,Second,Therd,Force,Five}
-enum LaserUpDown
-{
-    Up,Normal,Down,
-}
-
-public class AttackBoss : MonoBehaviour
+public class KyoukaTossinBoss : MonoBehaviour
 {
     [SerializeField, Header("ボス攻撃SE")] public AudioClip BulletSE;
     [SerializeField, Header("反転の弾")]
@@ -22,8 +15,8 @@ public class AttackBoss : MonoBehaviour
     int Cnt3 = 0;
     private BossHp hp;
     // Start is called before the first frame update
-   
-   
+
+
     void Start()
     {
         hp = gameObject.GetComponent<BossHp>();
@@ -35,7 +28,7 @@ public class AttackBoss : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
         if (Time.timeScale <= 0) return;
         if (hp.Hp <= 0) return;
         if (GameObject.FindGameObjectWithTag("Boss") == null) Destroy(gameObject);
@@ -54,38 +47,38 @@ public class AttackBoss : MonoBehaviour
             switch (patern)
             {
                 case Patern.First:
-                { 
-                if (Cnt * Time.deltaTime > 1)
-                {
-                    audioSource.PlayOneShot(BulletSE);
+                    {
+                        if (Cnt * Time.deltaTime > 1)
+                        {
+                            audioSource.PlayOneShot(BulletSE);
                             //GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet4(transform.position, 3);
                             // GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet(transform.position, 2);
                             GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet5(transform.position, 3);
-                    for (int i = 0; i < 3; i++)
-                    {   
-                        GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet2(transform.position, 2);
-                    }
-                    Cnt = 0;
-                    Cnt2++;
-                    GetComponent<BossMove>().action = BossMove.MoveAction.Action1;
-                }
-                if (Cnt2 > 10)
-                {        
-                    GameObject gmobj = Instantiate(gaugebullet) as GameObject;
-                    gmobj.GetComponent<ReverseBullet>().SetPosition(this.transform.position);
-                    gmobj.GetComponent<ReverseBullet>().SetGaugeFlag(true);
-                    Cnt2 = 0;
-                    GetComponent<BossMove>().action = BossMove.MoveAction.AttackMove;
-                }
+                            for (int i = 0; i < 3; i++)
+                            {
+                                GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet2(transform.position, 2);
+                            }
+                            Cnt = 0;
+                            Cnt2++;
+                            GetComponent<BossMove>().action = BossMove.MoveAction.Action1;
+                        }
+                        if (Cnt2 > 5)
+                        {
+                            GameObject gmobj = Instantiate(gaugebullet) as GameObject;
+                            gmobj.GetComponent<ReverseBullet>().SetPosition(this.transform.position);
+                            gmobj.GetComponent<ReverseBullet>().SetGaugeFlag(true);
+                            Cnt2 = 0;
+                            GetComponent<BossMove>().action = BossMove.MoveAction.AttackMove;
+                        }
 
-                if (GetComponent<BossHp>().GetHp() < GetComponent<BossHp>().GetMaxHp() * 0.8 && patern == Patern.First)
-                {
-                     patern = Patern.Second;
-                }
+                        if (GetComponent<BossHp>().GetHp() < GetComponent<BossHp>().GetMaxHp() * 0.8 && patern == Patern.First)
+                        {
+                            patern = Patern.Second;
+                        }
                         break;
-                }
+                    }
                 case Patern.Second://レーザー主体
-                {
+                    {
                         if (Cnt * Time.deltaTime > 2)
                         {
                             audioSource.PlayOneShot(BulletSE);
@@ -94,7 +87,7 @@ public class AttackBoss : MonoBehaviour
                             for (int i = 0; i < 1; i++)
                             {
                                 GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet5(transform.position, 3);
-                                switch(updown)
+                                switch (updown)
                                 {
                                     case LaserUpDown.Up:
                                         GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet7Up(transform.position, 2);
@@ -108,14 +101,14 @@ public class AttackBoss : MonoBehaviour
                                         GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet7Down(transform.position, 2);
                                         updown = LaserUpDown.Up;
                                         break;
-                                }     
+                                }
                             }
                             Cnt = 0;
                             Cnt2++;
                             Cnt3++;
                             GetComponent<BossMove>().action = BossMove.MoveAction.Action1;
                         }
-                        if(Cnt3>2.5f)
+                        if (Cnt3 > 2.5f)
                         {
                             Cnt3 = 0;
                         }
@@ -132,9 +125,9 @@ public class AttackBoss : MonoBehaviour
                             patern = Patern.Therd;
                         }
                         break;
-                }
+                    }
                 case Patern.Therd://弾幕三種守り
-                {
+                    {
                         if (Cnt * Time.deltaTime > 1)
                         {
                             audioSource.PlayOneShot(BulletSE);
@@ -152,7 +145,7 @@ public class AttackBoss : MonoBehaviour
                             Cnt2++;
                             GetComponent<BossMove>().action = BossMove.MoveAction.Action1;
                         }
-                        if (Cnt2 > 10)
+                        if (Cnt2 > 5)
                         {
                             GameObject gmobj = Instantiate(gaugebullet) as GameObject;
                             gmobj.GetComponent<ReverseBullet>().SetPosition(this.transform.position);
@@ -165,9 +158,9 @@ public class AttackBoss : MonoBehaviour
                             patern = Patern.Force;
                         }
                         break;
-                }
+                    }
                 case Patern.Force://弾幕三種守り＋レーザーも追加
-                {
+                    {
                         if (Cnt * Time.deltaTime > 2)
                         {
                             audioSource.PlayOneShot(BulletSE);
@@ -176,11 +169,11 @@ public class AttackBoss : MonoBehaviour
                             for (int i = 0; i < 3; i++)
                             {
                                 GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet2(transform.position, 2);
-                               
+
                             }
                             GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet5(transform.position, 3);
                             GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet4(transform.position, 1);
-                            
+
                             GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet(transform.position, 1);
                             Cnt = 0;
                             Cnt2++;
@@ -205,7 +198,7 @@ public class AttackBoss : MonoBehaviour
                             }
                             Cnt3 = 0;
                         }
-                        if (Cnt2 > 10)
+                        if (Cnt2 > 5)
                         {
                             GameObject gmobj = Instantiate(gaugebullet) as GameObject;
                             gmobj.GetComponent<ReverseBullet>().SetPosition(this.transform.position);
@@ -218,9 +211,9 @@ public class AttackBoss : MonoBehaviour
                             patern = Patern.Five;
                         }
                         break;
-                }
+                    }
                 case Patern.Five://弾幕三種守り＋レーザーも追加、ついでにシンプルに通常弾幕を増やす
-                {
+                    {
                         if (Cnt * Time.deltaTime > 1)
                         {
                             audioSource.PlayOneShot(BulletSE);
@@ -233,14 +226,14 @@ public class AttackBoss : MonoBehaviour
                             }
                             GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet5(transform.position, 3);
                             GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet4(transform.position, 1);
-                            
+
                             GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet(transform.position, 1);
                             Cnt = 0;
                             Cnt2++;
                             Cnt3++;
                             GetComponent<BossMove>().action = BossMove.MoveAction.Action1;
                         }
-                        if(Cnt3>5)
+                        if (Cnt3 > 5)
                         {
                             switch (updown)
                             {
@@ -259,7 +252,7 @@ public class AttackBoss : MonoBehaviour
                             }
                             Cnt3 = 0;
                         }
-                        if (Cnt2 > 10)
+                        if (Cnt2 > 5)
                         {
                             GameObject gmobj = Instantiate(gaugebullet) as GameObject;
                             gmobj.GetComponent<ReverseBullet>().SetPosition(this.transform.position);
@@ -268,7 +261,7 @@ public class AttackBoss : MonoBehaviour
                             GetComponent<BossMove>().action = BossMove.MoveAction.AttackMove;
                         }
                         break;
-                }
+                    }
             }
         }
     }

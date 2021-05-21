@@ -209,7 +209,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dd530f8171773b4cacce6acf19fd3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxHp: 10000
+  MaxHp: 40000
   Superarmor: 2
   interval: 0.1
   bossmodel: {fileID: 2100000, guid: b2d1911af1fb0fa49ad4c8dc04c505f9, type: 2}

@@ -13,6 +13,7 @@ public class OptionSoundButton : MonoBehaviour
     public GameObject Canvas;
     private float time;
     private bool flag;
+    private bool Clickflag;
 
     void Start()
     {
@@ -23,6 +24,7 @@ public class OptionSoundButton : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         time = 0;
         flag = false;
+        Clickflag = false;
     }
 
     void Update()
@@ -57,14 +59,16 @@ public class OptionSoundButton : MonoBehaviour
         {
             script2.SetSEUpClick(true);
         }
-        if(transform.name == "QuitButton")
+        if(transform.name == "QuitButton" && Clickflag == false)
         {
+            Clickflag = true;
             flag = true;
         }
     }
 
     private void QuitButton()
     {
+        Clickflag = false;
         Canvas.SetActive(true);
         OptionCanvas.SetActive(false);
     }

@@ -11,24 +11,28 @@ public class ResultButton : MonoBehaviour
     AudioSource audioSource;
     public GameObject fade;
     private bool sceneChangeFlag = true;
+    private bool Clickflag;
 
     void Start()
     {
         option = GameObject.Find("Option");
         script = option.GetComponent<Option>();
         audioSource = GetComponent<AudioSource>();
+        Clickflag = false;
         //fade.GetComponent<FadeStart>().FadeInA();
     }
     public void OnClickStartButton()
     {
         audioSource.volume = script.GetSEVolume();
         audioSource.PlayOneShot(SelectSE);
-        if (transform.name == "TitleButton")
+        if (transform.name == "TitleButton" && Clickflag == false)
         {
+            Clickflag = true;
             Invoke("Title", 0.5f);
         }
         if (transform.name == "GameEndButton")
         {
+            Clickflag = true;
             Invoke("Quit", 0.5f);
         }
     }
