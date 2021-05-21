@@ -141,6 +141,7 @@ public class EnemyState : MonoBehaviour
         }
         if (manager != null && manager.GetGameClear()) 
         {
+            GameObject effect = Instantiate(Resources.Load<GameObject>("Explosion"));
             Destroy(this.gameObject);
         }
     }
