@@ -177,7 +177,7 @@ public class BossSuperLaser : MonoBehaviour
                 obj.collider.GetComponent<PlayerControl>().LaserDamage();
             }
         }
-        Ray ray2 = new Ray(startpos, new Vector3(goalpos.x, goalpos.y+10, goalpos.z));
+        Ray ray2 = new Ray(startpos, new Vector3(goalpos.x, goalpos.y+5, goalpos.z));
         RaycastHit[] hits2 = Physics.RaycastAll(ray2, Mathf.Infinity);
         foreach (var obj in hits2)
         {
@@ -191,7 +191,7 @@ public class BossSuperLaser : MonoBehaviour
                 obj.collider.GetComponent<PlayerControl>().LaserDamage();
             }
         }
-        Ray ray3 = new Ray(startpos, new Vector3(goalpos.x, goalpos.y - 10, goalpos.z));
+        Ray ray3 = new Ray(startpos, new Vector3(goalpos.x, goalpos.y - 5, goalpos.z));
         RaycastHit[] hits3 = Physics.RaycastAll(ray3, Mathf.Infinity);
         foreach (var obj in hits)
         {
