@@ -136,12 +136,15 @@ public class EnemyState : MonoBehaviour
         }
         if (deadFlag)
         {
+            GameObject effect = Instantiate(Resources.Load<GameObject>("Explosion"));
+            effect.transform.position = transform.position;
             GaugeEnergyDrop();
             Destroy(this.gameObject);
         }
         if (manager != null && manager.GetGameClear()) 
         {
             GameObject effect = Instantiate(Resources.Load<GameObject>("Explosion"));
+            effect.transform.position = transform.position;
             Destroy(this.gameObject);
         }
     }

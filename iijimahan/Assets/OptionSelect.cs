@@ -53,28 +53,28 @@ public class OptionSelect : MonoBehaviour
         timer += Time.unscaledDeltaTime;
         BGMVolume = script.GetBGMVolume() * 10;
         SEVolume = script.GetSEVolume() * 10;
-        if (Input.GetKeyDown(KeyCode.W) && indexnum != 0 && timer >= interval)
+        if (Input.GetKeyDown(KeyCode.W) && indexnum != 0)
         {
             timer = 0.0f;
             indexnum--;
             audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(selectSE);
         }
-        if (Input.GetKeyDown(KeyCode.S) && indexnum != 2 && timer >= interval)
+        if (Input.GetKeyDown(KeyCode.S) && indexnum != 2)
         {
             timer = 0.0f;
             indexnum++;
             audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(selectSE);
         }
-        if (Input.GetKeyDown(KeyCode.UpArrow) && indexnum != 0 && timer >= interval)
+        if (Input.GetKeyDown(KeyCode.UpArrow) && indexnum != 0)
         {
             timer = 0.0f;
             indexnum--;
             audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(selectSE);
         }
-        if (Input.GetKeyDown(KeyCode.DownArrow) && indexnum != 2 && timer >= interval)
+        if (Input.GetKeyDown(KeyCode.DownArrow) && indexnum != 2)
         {
             timer = 0.0f;
             indexnum++;
@@ -153,7 +153,7 @@ public class OptionSelect : MonoBehaviour
                 text1.color = color;
                 text2.color = color2;
                 text3.color = color2;
-                if (Input.GetKeyDown(KeyCode.A) && BGMVolume > 0 && timer >= interval)
+                if (Input.GetKeyDown(KeyCode.A) && BGMVolume > 0)
                 {
                     timer = 0;
                     BGMVolume -= 1.0f;
@@ -165,7 +165,7 @@ public class OptionSelect : MonoBehaviour
                     audioSource.volume = script.GetSEVolume();
                     audioSource.PlayOneShot(selectSE);
                 }
-                if (Input.GetKeyDown(KeyCode.LeftArrow) && BGMVolume > 0 && timer >= interval)
+                if (Input.GetKeyDown(KeyCode.LeftArrow) && BGMVolume > 0)
                 {
                     timer = 0;
                     BGMVolume -= 1.0f;
@@ -189,7 +189,7 @@ public class OptionSelect : MonoBehaviour
                     audioSource.volume = script.GetSEVolume();
                     audioSource.PlayOneShot(selectSE);
                 }
-                if (Input.GetKeyDown(KeyCode.D) && BGMVolume < 10 && timer >= interval)
+                if (Input.GetKeyDown(KeyCode.D) && BGMVolume < 10)
                 {
                     timer = 0;
                     BGMVolume += 1.0f;
@@ -201,7 +201,7 @@ public class OptionSelect : MonoBehaviour
                     audioSource.volume = script.GetSEVolume();
                     audioSource.PlayOneShot(selectSE);
                 }
-                if (Input.GetKeyDown(KeyCode.RightArrow) && BGMVolume < 10 && timer >= interval)
+                if (Input.GetKeyDown(KeyCode.RightArrow) && BGMVolume < 10)
                 {
                     timer = 0;
                     BGMVolume += 1.0f;
@@ -232,7 +232,7 @@ public class OptionSelect : MonoBehaviour
                 text1.color = color2;
                 text2.color = color;
                 text3.color = color2;
-                if (Input.GetKeyDown(KeyCode.A) && SEVolume > 0 && timer >= interval)
+                if (Input.GetKeyDown(KeyCode.A) && SEVolume > 0)
                 {
                     timer = 0;
                     SEVolume -= 1.0f;
@@ -244,7 +244,7 @@ public class OptionSelect : MonoBehaviour
                     audioSource.volume = script.GetSEVolume();
                     audioSource.PlayOneShot(selectSE);
                 }
-                if (Input.GetKeyDown(KeyCode.LeftArrow) && SEVolume > 0 && timer >= interval)
+                if (Input.GetKeyDown(KeyCode.LeftArrow) && SEVolume > 0)
                 {
                     timer = 0;
                     SEVolume -= 1.0f;
@@ -268,7 +268,7 @@ public class OptionSelect : MonoBehaviour
                     audioSource.volume = script.GetSEVolume();
                     audioSource.PlayOneShot(selectSE);
                 }
-                if (Input.GetKeyDown(KeyCode.D) && SEVolume < 10 && timer >= interval)
+                if (Input.GetKeyDown(KeyCode.D) && SEVolume < 10)
                 {
                     timer = 0;
                     SEVolume += 1.0f;
@@ -280,7 +280,7 @@ public class OptionSelect : MonoBehaviour
                     audioSource.volume = script.GetSEVolume();
                     audioSource.PlayOneShot(selectSE);
                 }
-                if (Input.GetKeyDown(KeyCode.RightArrow) && SEVolume < 10 && timer >= interval)
+                if (Input.GetKeyDown(KeyCode.RightArrow) && SEVolume < 10)
                 {
                     timer = 0;
                     SEVolume += 1.0f;
