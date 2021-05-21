@@ -140,7 +140,7 @@ public class ShieldEnemy : MonoBehaviour
         }
         if (screenPos.x < Screen.width && screenPos.x > 0)
         {
-            if (screenPos.y < Screen.height & screenPos.y > 0)
+            if (screenPos.y < Screen.height && screenPos.y > 0)
             {
                 if (this.gameObject.tag == "Enemy")
                 {
@@ -183,7 +183,7 @@ public class ShieldEnemy : MonoBehaviour
                 {
                     if (other.gameObject.tag == "Enemy")
                     {
-                        deadFlag = true;
+                        Damage(other.GetComponent<EnemyState>().GetPower());
                     }
 
                     if (other.gameObject.tag == "EnemyBullet")
@@ -196,6 +196,14 @@ public class ShieldEnemy : MonoBehaviour
                         {
                             BulletDamage(other.gameObject);
                         }
+                    }
+                    if (other.gameObject.tag == "ReverseBullet")
+                    {
+                        //  Buff();
+                        this.gameObject.tag = "Enemy";
+                        GameObject effect = Instantiate(Resources.Load<GameObject>("Mebius"));
+                        Destroy(other.gameObject);
+                        effect.transform.position = transform.position;
                     }
                     return;
                 }

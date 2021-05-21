@@ -18,35 +18,42 @@ public class HeelOnTrigger : MonoBehaviour
     
     private void OnTriggerStay(Collider other)
     {
+        bool healStart = false;
         if (other.tag == "EnemyHeal" && gameObject.tag == "Enemy")
         {
+            target = other.gameObject;
+            healStart = true;
             heelEffect.PlayParticle();
             EnemyState state = GetComponent<EnemyState>();
             float healValue = Time.deltaTime * state.GetPower();
             state.Damage(-healValue);
-            Debug.Log(healValue);
         }
 
         else if (other.tag == "FriendHeal" && gameObject.tag == "Friend")
         {
+            target = other.gameObject;
+            healStart = true;
             heelEffect.PlayParticle();
             EnemyState state = GetComponent<EnemyState>();
             float healValue = Time.deltaTime * state.GetPower();
             state.Damage(-healValue);
-            Debug.Log(healValue);
         }
         else if (other.tag == "FriendHeal" && gameObject.tag == "Player")
         {
-            heelEffect.PlayParticle();
-           
-            
+            target = other.gameObject;
+            healStart = true;
+            heelEffect.PlayParticle(); 
         }
 
-        else
+       else if (other.tag == "EnemyHeal" && gameObject.tag == "Player")
         {
             heelEffect.StopParticle();
-        }  
-       
+        }
+
+        else if (other.tag == "FriendHeal" && gameObject.tag == "Enemy")
+        {
+            heelEffect.StopParticle();
+        }
     }
     private void OnTriggerExit(Collider other)
     {
@@ -54,7 +61,11 @@ public class HeelOnTrigger : MonoBehaviour
         {
             heelEffect.StopParticle();
         }
-        if (other.tag == "FriendHeal") 
+        if (other.tag == "FriendHeal")
+        {
+            heelEffect.StopParticle();
+        }
+        if (other == null)
         {
             heelEffect.StopParticle();
         }
@@ -62,10 +73,16 @@ public class HeelOnTrigger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-    
+        CheckTarget();
       //  isPlay = false;
     }
-
+    void CheckTarget()
+    {
+        if (target == null)
+        {
+            heelEffect.StopParticle();
+        }
+    }
     public void SetTarget(GameObject _target)
     {
         target = _target;

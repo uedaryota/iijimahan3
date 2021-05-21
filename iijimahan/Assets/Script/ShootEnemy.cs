@@ -189,7 +189,7 @@ public class ShootEnemy : MonoBehaviour
                 {
                     if (other.gameObject.tag == "Enemy")
                     {
-                        deadFlag = true;
+                        Damage(other.GetComponent<EnemyState>().GetPower());
                     }
 
                     if (other.gameObject.tag == "EnemyBullet")
