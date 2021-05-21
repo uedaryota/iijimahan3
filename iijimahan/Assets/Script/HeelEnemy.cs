@@ -308,17 +308,27 @@ public class HeelEnemy : MonoBehaviour
                 {
                     if (other.gameObject.tag == "Enemy")
                     {
-                        deadFlag = true;
-                    }
-
-                    if (other.gameObject.tag == "Boss")
-                    {
-                        deadFlag = true;
+                        state.Damage(other.GetComponent<EnemyState>().GetPower());
                     }
 
                     if (other.gameObject.tag == "EnemyBullet")
                     {
-                        BulletDamage(other.gameObject);
+                        if (other.GetComponent<BossPower>() != null)
+                        {
+                            state.Damage(other.GetComponent<BossPower>().GetPower());
+                        }
+                        else
+                        {
+                            BulletDamage(other.gameObject);
+                        }
+                    }
+                    if (other.gameObject.tag == "ReverseBullet")
+                    {
+                        //  Buff();
+                        this.gameObject.tag = "Enemy";
+                        GameObject effect = Instantiate(Resources.Load<GameObject>("Mebius"));
+                        Destroy(other.gameObject);
+                        effect.transform.position = transform.position;
                     }
                     return;
                 }

@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/GameScene.unity
     guid: 194597733b916264eb520f5303d8bc88
   - enabled: 1
+    path: Assets/Scenes/HardModeScene.unity
+    guid: d42030fe5ff287e4ea948206596bba6e
+  - enabled: 1
     path: Assets/Scenes/GameClearScene.unity
     guid: d745fff18343b0545afbd89fe2133d93
   - enabled: 1

@@ -4,15 +4,21 @@ using UnityEngine;
 
 public class BonusItem : MonoBehaviour
 {
+    [SerializeField, Header("速度")]private Vector3 velocity = new Vector3(-0.5f, -1.0f, 0.0f);
+    [SerializeField, Header("ボーナスWave突入SE")] private AudioClip SE;
     private GameObject EnemyManager;
     private EnemyManager script;
+    private GameObject Option;
+    private Option script2;
+    private AudioSource audiosource;
     private float DeleteTime = 10.0f;
-    [SerializeField, Header("速度")]private Vector3 velocity = new Vector3(-0.5f, -1.0f, 0.0f);
 
     void Start()
     {
         EnemyManager = GameObject.Find("EnemyManager");
         script = EnemyManager.GetComponent<EnemyManager>();
+        Option = GameObject.Find("Option");
+        script2 = Option.GetComponent<Option>();
     }
 
     void Update()
@@ -29,8 +35,18 @@ public class BonusItem : MonoBehaviour
     {
         if(other.gameObject.tag == "Player")
         {
+            if (SE != null)
+            {
+                audiosource.volume = script2.GetSEVolume();
+                audiosource.PlayOneShot(SE);
+            }
             script.SetBonusWave(true);
-            Destroy(gameObject);
+            isDead();
         }
+    }
+
+    private void isDead()
+    {
+        Destroy(gameObject);
     }
 }
