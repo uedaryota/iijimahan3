@@ -53,6 +53,7 @@ public class ButtonSelect : MonoBehaviour
                 var suzuSE = Resources.Load<AudioClip>("Sound/鈴");
                 audioSource.PlayOneShot(suzuSE);
                 oneSEFlag = true;
+                hardText.GetComponent<Outline>().effectColor = new Color(0.764f, 0, 0.325f, 1f);
             }
         }
         
