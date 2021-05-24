@@ -13,6 +13,7 @@ public class Rock : MonoBehaviour
     private float timer;
 
     public GameObject energy;
+    public GameObject effect;
 
     void Start()
     {
@@ -39,6 +40,10 @@ public class Rock : MonoBehaviour
                         GameObject energys = Instantiate(energy) as GameObject;
                         energys.GetComponent<GaugeEnergyControl>().SetPosition(this.transform.position + new Vector3(i * 0.5f, i * 0.5f, 0));
                     }
+
+                    GameObject burst = Instantiate(effect);
+                    burst.transform.position = transform.position;
+                    burst.transform.localScale = new Vector3(1f, 1f, 1f);
                 }
 
                 if (gameObject.transform.localScale == new Vector3(5, 5, 5))
@@ -48,6 +53,10 @@ public class Rock : MonoBehaviour
                         GameObject energys = Instantiate(energy) as GameObject;
                         energys.GetComponent<GaugeEnergyControl>().SetPosition(this.transform.position + new Vector3(i * 0.5f, i * 0.5f, 0));
                     }
+
+                    GameObject burst = Instantiate(effect);
+                    burst.transform.position = transform.position;
+                    burst.transform.localScale = new Vector3(2f, 2f,2f);
                 }
             }
 
