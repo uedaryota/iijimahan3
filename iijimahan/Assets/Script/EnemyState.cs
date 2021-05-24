@@ -264,7 +264,7 @@ public class EnemyState : MonoBehaviour
     {
         if (muteki > 0) 
         {
-            Debug.Log("Nodamage");
+            //Debug.Log("Nodamage");
         }
         else
         {
