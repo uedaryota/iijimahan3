@@ -111,6 +111,7 @@ MonoBehaviour:
   deletetime: 20
   HP: 5
   energy: {fileID: 956122239005918985, guid: 290abd1f2d9b09b40baa65fbdb4e09a3, type: 3}
+  effect: {fileID: 409518624579700024, guid: a1397342b01a67c43a0af573036c3ca5, type: 3}
 --- !u!1001 &2565839349497307657
 PrefabInstance:
   m_ObjectHideFlags: 0
