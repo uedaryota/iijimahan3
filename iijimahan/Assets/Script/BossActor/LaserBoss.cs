@@ -12,6 +12,8 @@ public class LaserBoss : MonoBehaviour
     bool SECharge = false;
     private AudioSource audioSource;
     private BossHp hp;
+    private GameObject Option;
+    private Option script;
     // Start is called before the first frame update
     void Start()
     {
@@ -19,6 +21,8 @@ public class LaserBoss : MonoBehaviour
         act = Acter.Start;
         audioSource = GetComponent<AudioSource>();
         SECharge = false;
+        Option = GameObject.Find("Option");
+        script = Option.GetComponent<Option>();
     }
 
     // Update is called once per frame
@@ -87,6 +91,7 @@ public class LaserBoss : MonoBehaviour
     {
         if (SECharge == false)
         {
+            audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(LaserSE);
             SECharge = true;
         }
