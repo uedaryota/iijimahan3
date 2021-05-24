@@ -537,6 +537,28 @@ MonoBehaviour:
   BulletSE: {fileID: 0}
   gaugebullet: {fileID: 5787120845234752141, guid: 3db000272b6735a4592ad498268a67e4,
     type: 3}
+--- !u!114 &9087278762747231875
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5486516082594158203}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 35b801c2c30e6f741b7c448cd78bdbbd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Explosion: {fileID: 8390974264482634144, guid: 45832cfad33a4e94992010907f52d659,
+    type: 3}
+  effectpos:
+  - {x: 1.2, y: 1.6, z: -3}
+  - {x: -1.2, y: -1.6, z: -3}
+  - {x: 0.6, y: 1.2, z: -3}
+  - {x: 0, y: 0, z: -3}
+  effectScaleSmall: {x: 2.5, y: 2.5, z: 2.5}
+  effectScaleBig: {x: 5, y: 5, z: 5}
+  speed: {x: -0.2, y: -0.2, z: 0}
 --- !u!1 &6696251125468642062
 GameObject:
   m_ObjectHideFlags: 0
