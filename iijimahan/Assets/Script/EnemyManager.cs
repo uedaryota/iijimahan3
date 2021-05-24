@@ -430,6 +430,7 @@ public class EnemyManager : MonoBehaviour
 
         if (bonuswave == true)
         {
+            timer_Manual += Time.deltaTime;
             switch (bonuswave_switch)
             {
                 case 0:

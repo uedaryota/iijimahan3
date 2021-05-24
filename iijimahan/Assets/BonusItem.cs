@@ -6,6 +6,7 @@ public class BonusItem : MonoBehaviour
 {
     [SerializeField, Header("速度")]private Vector3 velocity = new Vector3(-0.5f, -1.0f, 0.0f);
     [SerializeField, Header("ボーナスWave突入SE")] private AudioClip SE;
+    [SerializeField]private GameObject obj;
     private GameObject EnemyManager;
     private EnemyManager script;
     private GameObject Option;
@@ -13,6 +14,7 @@ public class BonusItem : MonoBehaviour
     private AudioSource audiosource;
     private float DeleteTime = 20.0f;
     private float DelayTime = 3.0f;
+    private bool DeadFlag;
 
     void Start()
     {
@@ -20,6 +22,8 @@ public class BonusItem : MonoBehaviour
         script = EnemyManager.GetComponent<EnemyManager>();
         Option = GameObject.Find("Option");
         script2 = Option.GetComponent<Option>();
+        audiosource = gameObject.GetComponent<AudioSource>();
+        DeadFlag = false;
     }
 
     void Update()
@@ -29,6 +33,18 @@ public class BonusItem : MonoBehaviour
         if (DeleteTime <= 0)
         {
             Destroy(gameObject);
+        }
+        if(DeadFlag == true)
+        {
+            Destroy(obj);
+            GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<BoxCollider>().enabled = false;
+
+            DelayTime += Time.deltaTime;
+            if (DelayTime <= 0)
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -48,13 +64,6 @@ public class BonusItem : MonoBehaviour
 
     private void isDead()
     {
-        GetComponent<MeshRenderer>().enabled = false;
-        GetComponent<BoxCollider>().enabled = false;
-
-        DelayTime += Time.deltaTime;
-        if (DelayTime <= 0)
-        {
-            Destroy(gameObject);
-        }
+        DeadFlag = true;
     }
 }
