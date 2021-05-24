@@ -18,6 +18,8 @@ public class ButtonSelect : MonoBehaviour
 
     public Text hardText;
 
+    private bool oneSEFlag = false;
+
     void Start()
     {
         option = GameObject.Find("Option");
@@ -45,9 +47,12 @@ public class ButtonSelect : MonoBehaviour
     {
         if(hardText != null)
         {
-            if (script.GetClearFlag() == true && hardText.color.a == 1)
+            if (script.GetClearFlag() == true && hardText.color.a == 1 && !oneSEFlag)
             {
                 hardText.color = new Color(1, 1, 1, 1);
+                var suzuSE = Resources.Load<AudioClip>("Sound/鈴");
+                audioSource.PlayOneShot(suzuSE);
+                oneSEFlag = true;
             }
         }
         

@@ -18,10 +18,12 @@ public class ResultSceneManager : MonoBehaviour
     public GameObject fade;
     private bool oneFadeFlag = false;
 
+
     void Start()
     {
         option = GameObject.Find("Option");
         optionscript = option.GetComponent<Option>();
+        optionscript.SetClearFlag(true);
         gauge = PlayerControl.GetGaugeCount();
         time = GameSceneManager.GetClearTime();
         wave = EnemyManager.GetWaveGameOver();
