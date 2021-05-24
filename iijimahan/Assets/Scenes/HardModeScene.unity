@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0046706283, g: 0.005955698, b: 0.008343986, a: 1}
+  m_IndirectSpecularColor: {r: 0.0045222016, g: 0.005746848, b: 0.008023721, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2154,6 +2154,11 @@ PrefabInstance:
         type: 3}
       propertyPath: bonus_enemy.enemyboxes_Manual.Array.size
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
+        type: 3}
+      propertyPath: bonus_enemy.interval_Manual.Array.data[0]
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 7373758588227234052, guid: 1d09ad2f07be99f409808c0b3233c8cf,
         type: 3}
