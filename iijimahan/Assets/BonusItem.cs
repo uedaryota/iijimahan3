@@ -46,7 +46,7 @@ public class BonusItem : MonoBehaviour
         }
         if(DeadFlag == true)
         {
-            DelayTime += Time.deltaTime;
+            DelayTime -= Time.deltaTime;
             if (DelayTime <= 0)
             {
                 Destroy(gameObject);
