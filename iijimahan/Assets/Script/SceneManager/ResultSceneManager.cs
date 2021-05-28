@@ -18,6 +18,11 @@ public class ResultSceneManager : MonoBehaviour
     public GameObject fade;
     private bool oneFadeFlag = false;
 
+    float audioTimer = 0;
+    bool bgmFlag = false;
+
+    float vol = 0;
+
 
     void Start()
     {
@@ -35,7 +40,29 @@ public class ResultSceneManager : MonoBehaviour
     }
     void Update()
     {
-        audioSource.volume = optionscript.GetBGMVolume();
+        audioTimer += Time.deltaTime;
+
+        if(audioTimer<0.5f)
+        {
+            audioSource.volume = 0;
+        }
+        else
+        {
+            vol += Time.deltaTime * 0.1f;
+            if(vol< optionscript.GetBGMVolume())
+            {
+                audioSource.volume = vol;
+            }
+            else
+            {
+                audioSource.volume = optionscript.GetBGMVolume();
+            }
+        }
+
+
+
+
+        
         if (!oneFadeFlag)
         {
             fade.GetComponent<FadeStart>().FadeInA();
