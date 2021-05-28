@@ -59,7 +59,7 @@ public class TitleButton : MonoBehaviour
             //fade.GetComponent<FadeStart>().FadeOutNextScene("GameScene");
             //SceneManager.LoadScene("GameScene");
         }
-        if (transform.name == "HardModeButton" && Clickflag == false && script.GetClearFlag() == true)///
+        if (transform.name == "HardModeButton" && Clickflag == false)///
         {
             if(script.GetClearFlag() == true)
             {

@@ -349,7 +349,8 @@ public class EnemyManager : MonoBehaviour
 
     //自動用
 
-
+    [SerializeField, Header("ボスエフェクト用のインターバル")] private float BossEffectInterval = 1.0f;
+    [SerializeField]private float BossEffectTimer;
     private bool gameclear;
     private Object[] tagcheckenemy;
     private float timer;
@@ -377,6 +378,8 @@ public class EnemyManager : MonoBehaviour
     public static bool bonuswave;
     private int wait_enemycount;
     private int bonuswave_switch;
+    private bool BossDeadFlag;
+
 
     #endregion
 
@@ -393,6 +396,8 @@ public class EnemyManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         bonuswave = false;
         bonuswave_switch = 0;
+        BossEffectTimer = 0;
+        BossDeadFlag = false;
     }
 
     void Update()
@@ -427,6 +432,11 @@ public class EnemyManager : MonoBehaviour
 
         */
         #endregion
+
+        if(BossDeadFlag == true)
+        {
+            BossEffectTimer += Time.deltaTime;
+        }
 
         if (bonuswave == true)
         {
@@ -471,6 +481,7 @@ public class EnemyManager : MonoBehaviour
             enemycount = 0;
             interval_count = 0;
             wave_timer = 0;
+            BossDeadFlag = false;
 
             if(wave % 2 == 0)
             {
@@ -511,6 +522,8 @@ public class EnemyManager : MonoBehaviour
 
     void EnemyRespawn(int respawn)
     {
+
+        if (BossDeadFlag == true) return;
         timer += Time.deltaTime;
         //現在のwaveで生成するエネミーの数に足りているか
         if (enemycountlimit[wave / 2 - 1] > enemycount || enemycountlimit[wave / 2 - 1]  > 100)
@@ -564,6 +577,7 @@ public class EnemyManager : MonoBehaviour
 
     void EnemyRespawn_Manual()
     {
+        if (BossDeadFlag == true) return;
         if (enemy_Manual[wave - 1].enemycountlimit_Manual <= 0) return;
         timer_Manual += Time.deltaTime;
         if (Repeat[wave - 1] == true)
@@ -645,14 +659,35 @@ public class EnemyManager : MonoBehaviour
             //エネミーが存在しなくなったとき
             if (tagcheckenemy.Length == 0)
             {
-                if (wave == maxwave)
+                if (tagname == "Boss")
                 {
-                    gameclear = true;
+                    BossDeadFlag = true;
+                    if (BossEffectInterval <= BossEffectTimer)
+                    {
+                        if (wave == maxwave)
+                        {
+                            BossEffectTimer = 0;
+                            gameclear = true;
+                        }
+                        else
+                        {
+                            BossEffectTimer = 0;
+                            //waveが進む
+                            wave++;
+                        }
+                    }
                 }
-                else
+                if(tagname == "Enemy")
                 {
-                    //waveが進む
-                    wave++;
+                    if (wave == maxwave)
+                    {
+                        gameclear = true;
+                    }
+                    else
+                    {
+                        //waveが進む
+                        wave++;
+                    }
                 }
             }
         }
@@ -702,5 +737,10 @@ public class EnemyManager : MonoBehaviour
     public bool SetBonusWave(bool flag)
     {
         return bonuswave = flag;
+    }
+
+    public bool GetBossDead()
+    {
+        return BossDeadFlag;
     }
 }
