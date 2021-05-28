@@ -10,7 +10,7 @@ public class BossMove : MonoBehaviour
     [Header("移動スピード")] public float Speed;
     public enum MoveAction
     {
-        Normal,Action1,End,AttackMove,
+        Normal,Action1,End,AttackMove,Dead,
     }
     #endregion
 
@@ -198,6 +198,8 @@ public class BossMove : MonoBehaviour
                     }
                     break;
                 }
+            case MoveAction.Dead:
+                break;
         }
     }
     public MoveAction nowact()

@@ -29,7 +29,7 @@ public class BossHp : MonoBehaviour
     private GameObject option;
     private Option optionscript;
     float Cnt = 0;
-    private float ExplosionTime = 3.0f;
+    private float ExplosionTime = 10.0f;
 
     // Start is called before the first frame update
     void Start()
