@@ -74,6 +74,10 @@ public class BossLaser : MonoBehaviour
                 {
                     GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>().ChargeStart();
                 }
+                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss1Attack2>() != null)
+                {
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss1Attack2>().ChargeStart();
+                }
                 Chage0 = false;
             }
             Angle = Mathf.Atan2(startpos.y - goalpos.y, startpos.x - goalpos.x);
@@ -87,10 +91,17 @@ public class BossLaser : MonoBehaviour
                 if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>() != null)
                 {
                     GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>().ChargeFinish();
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>().EnStart();
                 }
                 if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>() != null)
                 {
                     GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>().ChargeFinish();
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>().EnStart();
+                }
+                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss1Attack2>() != null)
+                {
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss1Attack2>().ChargeFinish();
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss1Attack2>().EnStart();
                 }
                 Chage = false;
             }
@@ -101,6 +112,18 @@ public class BossLaser : MonoBehaviour
         } 
         if(Cnt/30.0f>Speed+5.0f)
         {
+            if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>() != null)
+            {
+                GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>().ChargeFinish();
+            }
+            if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>() != null)
+            {
+                GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>().ChargeFinish();
+            }
+            if (GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss1Attack2>() != null)
+            {
+                GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss1Attack2>().ChargeFinish();
+            }
             Destroy(gameObject);
         }
         line.startWidth = Hutosa;                   // 開始点の太さを0.1にする

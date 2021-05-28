@@ -14,6 +14,9 @@ public class AttackBoss : MonoBehaviour
     [SerializeField, Header("ボス攻撃SE")] public AudioClip BulletSE;
     [SerializeField, Header("反転の弾")]
     public GameObject gaugebullet;
+
+    [SerializeField, Header("ボス攻撃SE")] public AudioClip LaserSE;
+    [SerializeField, Header("ボス攻撃SE")] public AudioClip EnSE;
     Patern patern;
     LaserUpDown updown;
     private AudioSource audioSource;
@@ -22,14 +25,20 @@ public class AttackBoss : MonoBehaviour
     int Cnt3 = 0;
     private BossHp hp;
     // Start is called before the first frame update
-   
-   
+    private GameObject option;
+    private Option optionscript;
+    bool SECharge = false;
+
+
     void Start()
     {
         hp = gameObject.GetComponent<BossHp>();
         audioSource = GetComponent<AudioSource>();
         patern = Patern.First;
         updown = LaserUpDown.Up;
+        option = GameObject.Find("Option");
+        optionscript = option.GetComponent<Option>();
+        SECharge = false;
     }
 
     // Update is called once per frame
@@ -297,6 +306,32 @@ public class AttackBoss : MonoBehaviour
                     //other.GetComponent<Rock>().AttackBoss();
                 }
             }
+        }
+    }
+    public void ChargeFinish()
+    {
+        if (SECharge == true)
+        {
+            audioSource.Stop();
+            SECharge = false;
+        }
+    }
+    public void ChargeStart()
+    {
+        if (SECharge == false)
+        {
+            audioSource.volume = optionscript.GetSEVolume();
+            audioSource.PlayOneShot(LaserSE);
+            SECharge = true;
+        }
+    }
+    public void EnStart()
+    {
+        if (SECharge == false)
+        {
+            audioSource.volume = optionscript.GetSEVolume();
+            audioSource.PlayOneShot(EnSE);
+            SECharge = true;
         }
     }
 }

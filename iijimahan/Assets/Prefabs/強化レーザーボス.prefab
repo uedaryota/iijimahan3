@@ -537,6 +537,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BulletSE: {fileID: 0}
   LaserSE: {fileID: 8300000, guid: a242eaa5108a10945b8446a17551ae23, type: 3}
+  EnSE: {fileID: 8300000, guid: 48a913e3def54bd459191fe56d606b6d, type: 3}
 --- !u!114 &4955192002164234775
 MonoBehaviour:
   m_ObjectHideFlags: 0

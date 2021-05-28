@@ -311,6 +311,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletSE: {fileID: 0}
+  LaserSE: {fileID: 8300000, guid: a242eaa5108a10945b8446a17551ae23, type: 3}
+  EnSE: {fileID: 8300000, guid: 48a913e3def54bd459191fe56d606b6d, type: 3}
 --- !u!1 &8566351118426462332
 GameObject:
   m_ObjectHideFlags: 0

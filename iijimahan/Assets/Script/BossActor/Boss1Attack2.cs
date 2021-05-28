@@ -8,14 +8,22 @@ public class Boss1Attack2 : MonoBehaviour
     int Cnt2 = 0;
     Acter act;
     [SerializeField, Header("ボス攻撃SE")] public AudioClip BulletSE;
+    [SerializeField, Header("ボス攻撃SE")] public AudioClip LaserSE;
+    [SerializeField, Header("ボス攻撃SE")] public AudioClip EnSE;
     private AudioSource audioSource;
+    private GameObject option;
+    private Option optionscript;
     private BossHp hp;
+    bool SECharge = false;
     // Start is called before the first frame update
     void Start()
     {
+        SECharge = false;
         hp = gameObject.GetComponent<BossHp>();
         act = Acter.Start;
+        option = GameObject.Find("Option");
         audioSource = GetComponent<AudioSource>();
+        optionscript = option.GetComponent<Option>();
     }
 
     // Update is called once per frame
@@ -60,6 +68,33 @@ public class Boss1Attack2 : MonoBehaviour
                 }
                 Cnt++;
                 break;
+        }
+    }
+
+    public void ChargeFinish()
+    {
+        if (SECharge == true)
+        {
+            audioSource.Stop();
+            SECharge = false;
+        }
+    }
+    public void ChargeStart()
+    {
+        if (SECharge == false)
+        {
+            audioSource.volume = optionscript.GetSEVolume();
+            audioSource.PlayOneShot(LaserSE);
+            SECharge = true;
+        }
+    }
+    public void EnStart()
+    {
+        if (SECharge == false)
+        {
+            audioSource.volume = optionscript.GetSEVolume();
+            audioSource.PlayOneShot(EnSE);
+            SECharge = true;
         }
     }
 }

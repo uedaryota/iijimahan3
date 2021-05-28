@@ -16,6 +16,13 @@ public class KyoukaTossinBoss : MonoBehaviour
     private BossHp hp;
     // Start is called before the first frame update
 
+    [SerializeField, Header("ボス攻撃SE")] public AudioClip LaserSE;
+    [SerializeField, Header("ボス攻撃SE")] public AudioClip EnSE;
+    private GameObject option;
+    private Option optionscript;
+    bool SECharge = false;
+
+
 
     void Start()
     {
@@ -23,6 +30,9 @@ public class KyoukaTossinBoss : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         patern = Patern.First;
         updown = LaserUpDown.Up;
+        option = GameObject.Find("Option");
+        optionscript = option.GetComponent<Option>();
+        SECharge = false;
     }
 
     // Update is called once per frame
@@ -281,6 +291,32 @@ public class KyoukaTossinBoss : MonoBehaviour
             {
                 other.GetComponent<Rock>().AttackBoss();
             }
+        }
+    }
+    public void ChargeFinish()
+    {
+        if (SECharge == true)
+        {
+            audioSource.Stop();
+            SECharge = false;
+        }
+    }
+    public void ChargeStart()
+    {
+        if (SECharge == false)
+        {
+            audioSource.volume = optionscript.GetSEVolume();
+            audioSource.PlayOneShot(LaserSE);
+            SECharge = true;
+        }
+    }
+    public void EnStart()
+    {
+        if (SECharge == false)
+        {
+            audioSource.volume = optionscript.GetSEVolume();
+            audioSource.PlayOneShot(EnSE);
+            SECharge = true;
         }
     }
 }
