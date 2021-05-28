@@ -9,6 +9,7 @@ public class OptionSelect : MonoBehaviour
     [SerializeField, Header("項目を移動する時の音")] public AudioClip selectSE;
     [SerializeField, Header("text")]private GameObject[] obj2 = new GameObject[3];
     [SerializeField, Header("Back")]private GameObject[] obj3 = new GameObject[2];
+    [SerializeField] private Button QuitButton;
     private Text text1;
     private Text text2;
     private Text text3;
@@ -30,10 +31,14 @@ public class OptionSelect : MonoBehaviour
     private bool BGMup;
     private bool SEdown;
     private bool SEup;
+    private bool quitbutton;
+    private float quittime;
 
     void Start()
     {
         gameObject.SetActive(false);
+        quitbutton = false;
+        quittime = 1.0f;
     }
 
     void OnEnable()
@@ -50,6 +55,16 @@ public class OptionSelect : MonoBehaviour
     
     void Update()
     {
+        //if(quitbutton == true)
+        //{
+        //    quittime -= Time.unscaledDeltaTime;
+        //    if (quittime <= 0)
+        //    {
+        //        quittime 
+        //        Canvas.SetActive(true);
+        //        OptionCanvas.SetActive(false);
+        //    }
+        //}
         timer += Time.unscaledDeltaTime;
         BGMVolume = script.GetBGMVolume() * 10;
         SEVolume = script.GetSEVolume() * 10;
@@ -311,11 +326,11 @@ public class OptionSelect : MonoBehaviour
                 text1.color = color2;
                 text2.color = color2;
                 text3.color = color;
-                if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button0))
-                {
-                    Canvas.SetActive(true);
-                    OptionCanvas.SetActive(false);
-                }
+                QuitButton.Select();
+                //if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button0))
+                //{
+                //    quitbutton = true;
+                //}
                     return;
 
             default:

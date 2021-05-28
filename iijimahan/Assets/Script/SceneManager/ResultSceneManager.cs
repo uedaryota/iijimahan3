@@ -28,7 +28,14 @@ public class ResultSceneManager : MonoBehaviour
     {
         option = GameObject.Find("Option");
         optionscript = option.GetComponent<Option>();
-        optionscript.SetClearFlag(true);
+
+        if(SceneManager.GetActiveScene().name == "GameClearScene")
+        {
+            optionscript.SetClearFlag(true);
+        }
+
+
+
         gauge = PlayerControl.GetGaugeCount();
         time = GameSceneManager.GetClearTime();
         wave = EnemyManager.GetWaveGameOver();
@@ -68,5 +75,7 @@ public class ResultSceneManager : MonoBehaviour
             fade.GetComponent<FadeStart>().FadeInA();
             oneFadeFlag = true;
         }
+
+
     }
 }
