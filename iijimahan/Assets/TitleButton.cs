@@ -8,6 +8,7 @@ public class TitleButton : MonoBehaviour
     private GameObject option;
     private Option script;
     [SerializeField, Header("次のシーンを選択した時の音")] public AudioClip SelectSE;
+    [SerializeField, Header("ハードモード入れない時の音")] public AudioClip HardSE;
     AudioSource audioSource;
     public GameObject fade;
     public GameObject OptionCanvas;
@@ -58,14 +59,22 @@ public class TitleButton : MonoBehaviour
             //fade.GetComponent<FadeStart>().FadeOutNextScene("GameScene");
             //SceneManager.LoadScene("GameScene");
         }
-        if (transform.name == "HardModeButton" && Clickflag == false && script.GetClearFlag() == true)///
+        if (transform.name == "HardModeButton" && Clickflag == false)///
         {
-            Clickflag = true;
-            audioSource.volume = script.GetSEVolume();
-            audioSource.PlayOneShot(SelectSE);
-            Invoke("HardModeButton", 0.5f);
-            //fade.GetComponent<FadeStart>().FadeOutNextScene("GameScene");
-            //SceneManager.LoadScene("GameScene");
+            if(script.GetClearFlag() == true)
+            {
+                Clickflag = true;
+                audioSource.volume = script.GetSEVolume();
+                audioSource.PlayOneShot(SelectSE);
+                Invoke("HardModeButton", 0.5f);
+                //fade.GetComponent<FadeStart>().FadeOutNextScene("GameScene");
+                //SceneManager.LoadScene("GameScene");
+            }
+            else
+            {
+                audioSource.volume = script.GetSEVolume();
+                audioSource.PlayOneShot(HardSE);
+            }
         }
         if (transform.name == "OptionButton" && Clickflag == false)
         {

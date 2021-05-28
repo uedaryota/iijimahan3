@@ -185,7 +185,8 @@ MonoBehaviour:
   - {x: 0, y: 0, z: -2}
   effectScaleSmall: {x: 1, y: 1, z: 1}
   effectScaleBig: {x: 2.5, y: 2.5, z: 2.5}
-  speed: {x: -0.1, y: -0.1, z: 0}
+  speed: {x: -0.1, y: -1, z: 0}
+  time: 6
 --- !u!114 &3632031629315959596
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -283,6 +284,7 @@ MonoBehaviour:
   effectScaleSmall: {x: 1, y: 1, z: 1}
   effectScaleBig: {x: 2.5, y: 2.5, z: 2.5}
   speed: {x: -0.1, y: -0.1, z: 0}
+  time: 3
 --- !u!114 &8844890994113055255
 MonoBehaviour:
   m_ObjectHideFlags: 0

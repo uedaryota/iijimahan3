@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.008799675, g: 0.011267651, b: 0.015955629, a: 1}
+  m_IndirectSpecularColor: {r: 0.005399489, g: 0.0069069825, b: 0.009761778, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -268,6 +268,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectSE: {fileID: 8300000, guid: 77e7fae62c37b754e8c7751b5858d55b, type: 3}
+  HardSE: {fileID: 0}
   fade: {fileID: 0}
   OptionCanvas: {fileID: 853626390}
   Canvas: {fileID: 2093770957}
@@ -392,8 +393,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   num: 3
-  Canvas: {fileID: 0}
   select: {fileID: 2093770962}
+  optionselect: {fileID: 0}
 --- !u!1 &383938225
 GameObject:
   m_ObjectHideFlags: 0
@@ -640,6 +641,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectSE: {fileID: 8300000, guid: 77e7fae62c37b754e8c7751b5858d55b, type: 3}
+  HardSE: {fileID: 0}
   fade: {fileID: 958213511}
   OptionCanvas: {fileID: 853626390}
   Canvas: {fileID: 2093770957}
@@ -764,8 +766,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   num: 1
-  Canvas: {fileID: 0}
   select: {fileID: 2093770962}
+  optionselect: {fileID: 0}
 --- !u!1 &544517099
 GameObject:
   m_ObjectHideFlags: 0
@@ -836,7 +838,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: NormalMode
+  m_Text: Normal Mode
 --- !u!222 &544517102
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6344,6 +6346,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectSE: {fileID: 8300000, guid: 77e7fae62c37b754e8c7751b5858d55b, type: 3}
+  HardSE: {fileID: 8300000, guid: 748c6cf0a7eb0b54d9732a414b3ef6c4, type: 3}
   fade: {fileID: 958213511}
   OptionCanvas: {fileID: 853626390}
   Canvas: {fileID: 2093770957}
@@ -6451,8 +6454,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   num: 2
-  Canvas: {fileID: 0}
   select: {fileID: 2093770962}
+  optionselect: {fileID: 0}
 --- !u!1 &1399982717
 GameObject:
   m_ObjectHideFlags: 0
@@ -6600,6 +6603,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   SelectSE: {fileID: 8300000, guid: dfe455932c5e6e147984bb9575a4a0de, type: 3}
+  HardSE: {fileID: 0}
   fade: {fileID: 0}
   OptionCanvas: {fileID: 853626390}
   Canvas: {fileID: 2093770957}
@@ -6724,8 +6728,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   num: 4
-  Canvas: {fileID: 0}
   select: {fileID: 2093770962}
+  optionselect: {fileID: 0}
 --- !u!1 &1570817975
 GameObject:
   m_ObjectHideFlags: 0
@@ -6796,7 +6800,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: GameEnd
+  m_Text: Game End
 --- !u!222 &1570817978
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6890,7 +6894,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: HardMode
+  m_Text: Hard Mode
 --- !u!222 &1911749479
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -7393,6 +7397,11 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 60
       objectReference: {fileID: 0}
+    - target: {fileID: 3828518404094618463, guid: c1bf216da9e23fb459aba1ba1a310a4a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick
+      objectReference: {fileID: 0}
     - target: {fileID: 6544072561172296092, guid: c1bf216da9e23fb459aba1ba1a310a4a,
         type: 3}
       propertyPath: m_Type
@@ -7404,6 +7413,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: d97d6d43cbd84b946a5605ee0b4f1ac8,
         type: 3}
+    - target: {fileID: 6703734958669564117, guid: c1bf216da9e23fb459aba1ba1a310a4a,
+        type: 3}
+      propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnClick
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c1bf216da9e23fb459aba1ba1a310a4a, type: 3}
 --- !u!1 &1766009287865957809 stripped
