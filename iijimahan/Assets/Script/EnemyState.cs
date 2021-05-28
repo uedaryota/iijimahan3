@@ -158,7 +158,6 @@ public class EnemyState : MonoBehaviour
         }
         if (manager.GetBossDead())
         {
-            Debug.Log("ボス死亡");
             waveMove = true;
             team = GameObject.FindGameObjectsWithTag("Friend");
         }
@@ -175,7 +174,6 @@ public class EnemyState : MonoBehaviour
         }
         if (manager.GetBossDead() && gameObject.tag == "Enemy")
         {
-            Debug.Log("ボス死亡");
             GameObject burst = Instantiate(Resources.Load<GameObject>("Burst"));
             burst.transform.position = transform.position;
             burst.GetComponent<EffectScript>().HitSE();

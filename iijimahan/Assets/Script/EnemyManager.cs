@@ -638,7 +638,6 @@ public class EnemyManager : MonoBehaviour
             transform.position = new Vector3(bosspos.x, bosspos.y, 0);
             //ボスの生成
             Instantiate(bossboxes[wave / 2 - 1], transform.position, Quaternion.identity);
-            Debug.Log("ボス召喚");
             bosschack = false;
         }
         else
