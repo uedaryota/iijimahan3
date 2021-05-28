@@ -39,8 +39,8 @@ public class ResultSceneManager : MonoBehaviour
         gauge = PlayerControl.GetGaugeCount();
         time = GameSceneManager.GetClearTime();
         wave = EnemyManager.GetWaveGameOver();
-        Text text = text_obj.GetComponent<Text>();
-        text.text = "ゲージ使用回数 : " + gauge + "   タイム : " + time + "   最終Wave : " + wave;
+        //Text text = text_obj.GetComponent<Text>();
+        //text.text = "ゲージ使用回数 : " + gauge + "   タイム : " + time + "   最終Wave : " + wave;
         audioSource = GetComponent<AudioSource>();
         audioSource.clip = BGM;
         audioSource.Play();

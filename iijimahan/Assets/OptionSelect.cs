@@ -397,5 +397,8 @@ public class OptionSelect : MonoBehaviour
         return SEup = flag;
     }
 
-
+    public void SetIndexNum(int num)
+    {
+        indexnum = num;
+    }
 }

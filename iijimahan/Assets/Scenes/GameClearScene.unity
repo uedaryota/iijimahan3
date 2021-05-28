@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.0045488644, g: 0.0057839807, b: 0.008079543, a: 1}
+  m_IndirectSpecularColor: {r: 0.004533124, g: 0.005765712, b: 0.008055026, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -334,7 +334,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30B2\u30FC\u30B8\u4F7F\u7528\u56DE\u6570"
+  m_Text: 
 --- !u!222 &172888298
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -376,6 +376,7 @@ GameObject:
   - component: {fileID: 587809319}
   - component: {fileID: 587809322}
   - component: {fileID: 587809323}
+  - component: {fileID: 587809324}
   m_Layer: 5
   m_Name: GameEndButton
   m_TagString: Untagged
@@ -604,6 +605,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &587809324
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 587809317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be6c937b37b1484796d003eeb6a103a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  num: 2
+  select: {fileID: 1357867444}
+  optionselect: {fileID: 0}
 --- !u!1 &695694988
 GameObject:
   m_ObjectHideFlags: 0
@@ -999,6 +1015,7 @@ GameObject:
   - component: {fileID: 1248852544}
   - component: {fileID: 1248852547}
   - component: {fileID: 1248852548}
+  - component: {fileID: 1248852549}
   m_Layer: 5
   m_Name: TitleButton
   m_TagString: Untagged
@@ -1227,6 +1244,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1248852549
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1248852542}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be6c937b37b1484796d003eeb6a103a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  num: 1
+  select: {fileID: 1357867444}
+  optionselect: {fileID: 0}
 --- !u!1 &1357867439
 GameObject:
   m_ObjectHideFlags: 0

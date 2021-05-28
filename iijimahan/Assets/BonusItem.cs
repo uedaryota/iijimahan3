@@ -13,8 +13,10 @@ public class BonusItem : MonoBehaviour
     private Option script2;
     private AudioSource audiosource;
     private float DeleteTime = 20.0f;
-    private float DelayTime = 3.0f;
+    private float DelayTime = 1.0f;
     private bool DeadFlag;
+    private int wave;
+    private int old_wave;
 
     void Start()
     {
@@ -24,27 +26,35 @@ public class BonusItem : MonoBehaviour
         script2 = Option.GetComponent<Option>();
         audiosource = gameObject.GetComponent<AudioSource>();
         DeadFlag = false;
+        wave = script.GetWave();
+        old_wave = script.GetWave();
     }
 
     void Update()
     {
         DeleteTime -= Time.deltaTime;
         transform.position += velocity * Time.deltaTime;
+        old_wave = wave;
+        wave = script.GetWave();
+        if(wave != old_wave)
+        {
+            DeadFlag = true;
+        }
         if (DeleteTime <= 0)
         {
             Destroy(gameObject);
         }
         if(DeadFlag == true)
         {
-            Destroy(obj);
-            GetComponent<MeshRenderer>().enabled = false;
-            GetComponent<BoxCollider>().enabled = false;
-
-            DelayTime += Time.deltaTime;
+            DelayTime -= Time.deltaTime;
             if (DelayTime <= 0)
             {
                 Destroy(gameObject);
             }
+            GetComponent<MeshRenderer>().enabled = false;
+            GetComponent<BoxCollider>().enabled = false;
+            Destroy(obj);
+
         }
     }
 
@@ -58,12 +68,7 @@ public class BonusItem : MonoBehaviour
                 audiosource.PlayOneShot(SE);
             }
             script.SetBonusWave(true);
-            isDead();
+            DeadFlag = true;
         }
-    }
-
-    private void isDead()
-    {
-        DeadFlag = true;
     }
 }
