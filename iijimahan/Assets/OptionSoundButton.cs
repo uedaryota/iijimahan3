@@ -35,13 +35,14 @@ public class OptionSoundButton : MonoBehaviour
         }
         if (time >= 0.5f)
         {
-            QuitButton();
-            time = 0.0f;
             flag = false;
+            Clickflag = false;
+            time = 0.0f;
+            QuitButton();
         }
     }
 
-    public void OnClickStartButton()
+    public void OnClick()
     {
         if (transform.name == "BGMDown")
         {
@@ -61,6 +62,8 @@ public class OptionSoundButton : MonoBehaviour
         }
         if(transform.name == "QuitButton" && Clickflag == false)
         {
+            audioSource.volume = script.GetSEVolume();
+            audioSource.PlayOneShot(SelectSE);
             Clickflag = true;
             flag = true;
         }
@@ -68,7 +71,6 @@ public class OptionSoundButton : MonoBehaviour
 
     private void QuitButton()
     {
-        Clickflag = false;
         Canvas.SetActive(true);
         OptionCanvas.SetActive(false);
     }
