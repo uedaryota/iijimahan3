@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4678145504957040325}
   - component: {fileID: 8508666745357913431}
   - component: {fileID: 6166746243559732048}
+  - component: {fileID: 1783249908234937288}
   m_Layer: 5
   m_Name: BGMButton
   m_TagString: Untagged
@@ -119,6 +120,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1783249908234937288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1755111444779843315}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be6c937b37b1484796d003eeb6a103a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  num: 1
+  select: {fileID: 0}
+  optionselect: {fileID: 1766009287100543925}
 --- !u!1 &1766009287100543928
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,6 +1714,7 @@ GameObject:
   - component: {fileID: 1601292382880282572}
   - component: {fileID: 1151153630324303792}
   - component: {fileID: 3789254786282144499}
+  - component: {fileID: 5782634270280352160}
   m_Layer: 5
   m_Name: QuitButton
   m_TagString: Untagged
@@ -1927,6 +1944,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &5782634270280352160
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1954109631110252775}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be6c937b37b1484796d003eeb6a103a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  num: 3
+  select: {fileID: 0}
+  optionselect: {fileID: 1766009287100543925}
 --- !u!1 &3685425754900527999
 GameObject:
   m_ObjectHideFlags: 0
@@ -2275,6 +2307,7 @@ GameObject:
   - component: {fileID: 5002181071004298027}
   - component: {fileID: 4251635601408868543}
   - component: {fileID: 4007243506944380631}
+  - component: {fileID: 3885030372961223737}
   m_Layer: 5
   m_Name: SEButton
   m_TagString: Untagged
@@ -2382,6 +2415,21 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &3885030372961223737
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4027273244927881023}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be6c937b37b1484796d003eeb6a103a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  num: 2
+  select: {fileID: 0}
+  optionselect: {fileID: 1766009287100543925}
 --- !u!1 &4113796798497486256
 GameObject:
   m_ObjectHideFlags: 0

@@ -92,6 +92,7 @@ GameObject:
   - component: {fileID: 9031924328483532132}
   - component: {fileID: 3322819427310573534}
   - component: {fileID: 8197263575427011033}
+  - component: {fileID: 8958737376179832638}
   m_Layer: 5
   m_Name: GameEndButton
   m_TagString: Untagged
@@ -321,6 +322,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &8958737376179832638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 648443867437901129}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be6c937b37b1484796d003eeb6a103a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  num: 4
+  select: {fileID: 4051907700273353312}
+  optionselect: {fileID: 0}
 --- !u!1 &1245203132113200764
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,6 +426,7 @@ GameObject:
   - component: {fileID: 513832824649599212}
   - component: {fileID: 8148025589373697044}
   - component: {fileID: 8727255716613329402}
+  - component: {fileID: 2398908404807993303}
   m_Layer: 5
   m_Name: ResetButton
   m_TagString: Untagged
@@ -639,6 +656,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2398908404807993303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2269937064915429271}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be6c937b37b1484796d003eeb6a103a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  num: 3
+  select: {fileID: 4051907700273353312}
+  optionselect: {fileID: 0}
 --- !u!1 &2717856725387775558
 GameObject:
   m_ObjectHideFlags: 0
@@ -653,6 +685,7 @@ GameObject:
   - component: {fileID: 3425292691807732098}
   - component: {fileID: 3579738097795354584}
   - component: {fileID: 4036565184428022978}
+  - component: {fileID: 4447014641982363720}
   m_Layer: 5
   m_Name: TitleButton
   m_TagString: Untagged
@@ -882,6 +915,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &4447014641982363720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2717856725387775558}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be6c937b37b1484796d003eeb6a103a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  num: 2
+  select: {fileID: 4051907700273353312}
+  optionselect: {fileID: 0}
 --- !u!1 &3396225604155927083
 GameObject:
   m_ObjectHideFlags: 0
@@ -1052,6 +1100,7 @@ GameObject:
   - component: {fileID: 1017314820999974639}
   - component: {fileID: 155565154435187818}
   - component: {fileID: 8519599457688570959}
+  - component: {fileID: 560871474792534608}
   m_Layer: 5
   m_Name: Option
   m_TagString: Untagged
@@ -1281,6 +1330,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &560871474792534608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4519667390120762281}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3be6c937b37b1484796d003eeb6a103a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  num: 1
+  select: {fileID: 4051907700273353312}
+  optionselect: {fileID: 0}
 --- !u!1 &6945802321199018069
 GameObject:
   m_ObjectHideFlags: 0
