@@ -156,11 +156,23 @@ public class EnemyState : MonoBehaviour
             waveMove = true;
             team = GameObject.FindGameObjectsWithTag("Friend");
         }
+        if (manager.GetBossDead()) 
+        {
+            waveMove = true;
+            team = GameObject.FindGameObjectsWithTag("Friend");
+        }
         lastwave = wave;
     }
     void WaveMove()
     {
         if (waveMove && gameObject.tag == "Enemy")
+        {
+            GameObject burst = Instantiate(Resources.Load<GameObject>("Burst"));
+            burst.transform.position = transform.position;
+            burst.GetComponent<EffectScript>().HitSE();
+            deadFlag = true;
+        }
+        if (manager.GetBossDead() && gameObject.tag == "Enemy")
         {
             GameObject burst = Instantiate(Resources.Load<GameObject>("Burst"));
             burst.transform.position = transform.position;
