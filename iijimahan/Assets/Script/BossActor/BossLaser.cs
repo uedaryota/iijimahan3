@@ -81,7 +81,7 @@ public class BossLaser : MonoBehaviour
         }
         if (Cnt/30.0f>Speed)
         {
-            line.material= new Material(Resources.Load<Material>("Def"));
+            line.material= new Material(Resources.Load<Material>("Raser"));
             if(Chage)
             {
                 if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>() != null)
