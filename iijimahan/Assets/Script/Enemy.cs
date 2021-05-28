@@ -72,7 +72,7 @@ public class Enemy : MonoBehaviour
         }
         if (this.gameObject.tag == "Friend")
         {
-            if (target == null || target.tag == "Player" || target.tag == "Friend")
+            if (target == null || target.tag == "Player" || target.tag == "Friend" || target.tag == "Untagged")
             {
                 target = GameObject.FindGameObjectWithTag("Boss");
                 if (target == null || target.tag == "Player")
