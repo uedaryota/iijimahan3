@@ -17,6 +17,11 @@ public class CursorCheck : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         flag = false;
     }
 
+    void OnEnable()
+    {
+        flag = false;
+    }
+
     void Update()
     {
         if(flag == true && select != null)
