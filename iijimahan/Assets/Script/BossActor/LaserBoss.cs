@@ -9,6 +9,7 @@ public class LaserBoss : MonoBehaviour
     Acter act;
     [SerializeField, Header("ボス攻撃SE")] public AudioClip BulletSE;
     [SerializeField, Header("ボス攻撃SE")] public AudioClip LaserSE;
+    [SerializeField, Header("ボス攻撃SE")] public AudioClip EnSE;
     bool SECharge = false;
     private AudioSource audioSource;
     private BossHp hp;
@@ -93,6 +94,15 @@ public class LaserBoss : MonoBehaviour
         {
             audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(LaserSE);
+            SECharge = true;
+        }
+    }
+    public void EnStart()
+    {
+        if (SECharge == false)
+        {
+            audioSource.volume = script.GetSEVolume();
+            audioSource.PlayOneShot(EnSE);
             SECharge = true;
         }
     }

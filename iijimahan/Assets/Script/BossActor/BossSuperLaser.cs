@@ -133,10 +133,12 @@ public class BossSuperLaser : MonoBehaviour
                 if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>() != null)
                 {
                     GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>().ChargeFinish();
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>().EnStart();
                 }
                 if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>() != null)
                 {
                     GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>().ChargeFinish();
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>().EnStart();
                 }
                 Chage = false;
             }
@@ -149,6 +151,14 @@ public class BossSuperLaser : MonoBehaviour
         }
         if (Cnt / 30.0f > Speed + 5.0f)
         {
+            if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>() != null)
+            {
+                GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>().ChargeFinish();
+            }
+            if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>() != null)
+            {
+                GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>().ChargeFinish();
+            }
             Destroy(gameObject);
         }
         line.startWidth = Hutosa;                   // 開始点の太さを0.1にする

@@ -67,13 +67,13 @@ public class BossLaser2Up : MonoBehaviour
         {
             if (Chage0)
             {
-                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>() != null)
+                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<KyoukaTossinBoss>() != null)
                 {
-                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>().ChargeStart();
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<KyoukaTossinBoss>().ChargeStart();
                 }
-                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>() != null)
+                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>() != null)
                 {
-                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>().ChargeStart();
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>().ChargeStart();
                 }
                 Chage0 = false;
             }
@@ -85,13 +85,15 @@ public class BossLaser2Up : MonoBehaviour
             line.material = new Material(Resources.Load<Material>("Raser"));
             if (Chage)
             {
-                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>() != null)
+                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<KyoukaTossinBoss>() != null)
                 {
-                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>().ChargeFinish();
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<KyoukaTossinBoss>().ChargeFinish();
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<KyoukaTossinBoss>().EnStart();
                 }
-                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>() != null)
+                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>() != null)
                 {
-                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>().ChargeFinish();
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>().ChargeFinish();
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>().EnStart();
                 }
                 Chage = false;
             }
@@ -102,6 +104,14 @@ public class BossLaser2Up : MonoBehaviour
         }
         if (Cnt / 30.0f > Speed + 5.0f)
         {
+            if (GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>() != null)
+            {
+                GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>().ChargeFinish();
+            }
+            if (GameObject.FindGameObjectWithTag("Boss").GetComponent<KyoukaTossinBoss>() != null)
+            {
+                GameObject.FindGameObjectWithTag("Boss").GetComponent<KyoukaTossinBoss>().ChargeFinish();
+            }
             Destroy(gameObject);
         }
         line.startWidth = Hutosa;                   // 開始点の太さを0.1にする

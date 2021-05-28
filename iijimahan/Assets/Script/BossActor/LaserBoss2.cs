@@ -11,6 +11,7 @@ public class LaserBoss2 : MonoBehaviour
   
     [SerializeField, Header("ボス攻撃SE")] public AudioClip BulletSE;
     [SerializeField, Header("ボス攻撃SE")] public AudioClip LaserSE;
+    [SerializeField, Header("ボス攻撃SE")] public AudioClip EnSE;
     bool SECharge = false;
     private AudioSource audioSource;
     private GameObject option;
@@ -45,6 +46,7 @@ public class LaserBoss2 : MonoBehaviour
             case Acter.Attack:
                 if (Cnt > 400)
                 {
+
                     if (GetComponent<BossHp>().GetHp() > GetComponent<BossHp>().GetMaxHp() / 5)
                     {
                         for (int x = 0; x < 4; x++)
@@ -65,6 +67,7 @@ public class LaserBoss2 : MonoBehaviour
                 }
                 if(Cnt>100&& GetComponent<BossHp>().GetHp() < GetComponent<BossHp>().GetMaxHp() / 5)
                 {
+
                     if (GetComponent<BossHp>().GetHp() < GetComponent<BossHp>().GetMaxHp() / 5)
                     {
                         Cnt2++;
@@ -108,6 +111,16 @@ public class LaserBoss2 : MonoBehaviour
             SECharge = true;
         }
     }
+    public void EnStart()
+    {
+        if (SECharge == false)
+        {
+            audioSource.volume = optionscript.GetSEVolume();
+            audioSource.PlayOneShot(EnSE);
+            SECharge = true;
+        }
+    }
+
 
     public AudioClip ChageMosic()
     {

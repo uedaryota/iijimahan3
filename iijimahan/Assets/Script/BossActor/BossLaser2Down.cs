@@ -75,6 +75,10 @@ public class BossLaser2Down : MonoBehaviour
                 {
                     GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>().ChargeStart();
                 }
+                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>() != null)
+                {
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>().ChargeStart();
+                }
                 Chage0 = false;
             }
             Angle = Mathf.Atan2(startpos.y - goalpos.y, startpos.x - goalpos.x);
@@ -93,6 +97,11 @@ public class BossLaser2Down : MonoBehaviour
                 {
                     GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>().ChargeFinish();
                 }
+                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>() != null)
+                {
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>().ChargeFinish();
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>().EnStart();
+                }
                 Chage = false;
             }
             line.material.color = Color.cyan;
@@ -102,6 +111,10 @@ public class BossLaser2Down : MonoBehaviour
         }
         if (Cnt / 30.0f > Speed + 5.0f)
         {
+            if (GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>() != null)
+            {
+                GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>().ChargeFinish();
+            }
             Destroy(gameObject);
         }
         line.startWidth = Hutosa;                   // 開始点の太さを0.1にする
