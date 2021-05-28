@@ -361,6 +361,7 @@ MonoBehaviour:
   effectScaleBig: {x: 5, y: 5, z: 5}
   speed: {x: -0.2, y: -1, z: 0}
   time: 5
+  ExplosionSE: {fileID: 0}
 --- !u!114 &1646755520095463181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -430,7 +431,7 @@ MonoBehaviour:
   Superarmor: 0
   interval: 0.1
   bossmodel: {fileID: 0}
-  dameageSE: {fileID: 0}
+  dameageSE: {fileID: 8300000, guid: a9ac292acf8035c44913dfa53a4a005d, type: 3}
   ATK: 300
   status: 0
   Hp: 0
