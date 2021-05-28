@@ -8,6 +8,7 @@ public class OptionSelect : MonoBehaviour
     [SerializeField, Header("インターバル")] private float interval = 0.5f;
     [SerializeField, Header("項目を移動する時の音")] public AudioClip selectSE;
     [SerializeField, Header("text")]private GameObject[] obj2 = new GameObject[3];
+    [SerializeField, Header("各種ボタン")] private Button[] button = new Button[3];
     [SerializeField, Header("Back")]private GameObject[] obj3 = new GameObject[2];
     [SerializeField] private Button QuitButton;
     private Text text1;
@@ -240,6 +241,7 @@ public class OptionSelect : MonoBehaviour
                     audioSource.volume = script.GetSEVolume();
                     audioSource.PlayOneShot(selectSE);
                 }
+                button[0].Select();
                 return;
 
             case 1:
@@ -319,14 +321,16 @@ public class OptionSelect : MonoBehaviour
                     audioSource.volume = script.GetSEVolume();
                     audioSource.PlayOneShot(selectSE);
                 }
+                button[1].Select();
                 return;
 
             case 2:
                 timer += Time.unscaledDeltaTime;
-                text1.color = color2;
-                text2.color = color2;
-                text3.color = color;
-                QuitButton.Select();
+                //text1.color = color2;
+                //text2.color = color2;
+                //text3.color = color;
+                button[2].Select();
+                //QuitButton.Select();
                 //if (Input.GetKeyDown(KeyCode.Return) || Input.GetKeyDown(KeyCode.Space) || Input.GetKeyDown(KeyCode.Joystick1Button0))
                 //{
                 //    quitbutton = true;

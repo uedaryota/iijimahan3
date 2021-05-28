@@ -187,4 +187,9 @@ public class ButtonSelect : MonoBehaviour
         }
         return false;
     }
+
+    public void SetIndexNum(int num)
+    {
+        indexnum = num;
+    }
 }

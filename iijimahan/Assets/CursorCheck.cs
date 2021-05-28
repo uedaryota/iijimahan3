@@ -17,6 +17,21 @@ public class CursorCheck : MonoBehaviour, IPointerEnterHandler
     {
         if(gameObject.name == "StartButton")
         {
+            
+        }
+
+        if(gameObject.name == "HardModeButton")
+        {
+            
+        }
+
+        if(gameObject.name == "OptionButton")
+        {
+
+        }
+
+        if(gameObject.name == "GameEndButton")
+        {
 
         }
     }
