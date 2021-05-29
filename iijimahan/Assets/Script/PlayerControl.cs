@@ -189,14 +189,7 @@ public class PlayerControl : MonoBehaviour
 
         //デバッグ用*******************************
 
-        //if (enemyManager.GetWave() % 2 == 0 && enemyManager.GetBossTag() == "BossDead")
-        //{
-        //    mutekiWaveFlag = true;
-        //}
-        //else
-        //{
-        //    mutekiWaveFlag = false;
-        //}
+        
 
         if (Input.GetKey(KeyCode.B) && Input.GetKeyDown(KeyCode.UpArrow))
         {
@@ -309,6 +302,15 @@ public class PlayerControl : MonoBehaviour
             //}
 
             return;
+        }
+
+        if (enemyManager.GetWave() % 2 == 0 && enemyManager.GetBossTag() == "BossDead")
+        {
+            mutekiWaveFlag = true;
+        }
+        else
+        {
+            mutekiWaveFlag = false;
         }
 
         //プレイヤーの最初の行動
