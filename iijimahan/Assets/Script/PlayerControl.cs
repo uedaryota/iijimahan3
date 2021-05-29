@@ -121,6 +121,14 @@ public class PlayerControl : MonoBehaviour
 
     private bool tito = false;
 
+    private EnemyManager enemyManager;
+
+    private GameObject eneManager;
+
+    private GameObject boss;
+
+    private bool mutekiWaveFlag = false;
+
     //デバッグ用***コメントアウトする
 
     //デバッグ用
@@ -141,6 +149,9 @@ public class PlayerControl : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
+        eneManager = GameObject.Find("EnemyManager");
+        enemyManager = eneManager.GetComponent<EnemyManager>();
         option = GameObject.Find("Option");
         optionscript = option.GetComponent<Option>();
         Application.targetFrameRate = 60;
@@ -177,6 +188,15 @@ public class PlayerControl : MonoBehaviour
         //timer++;
 
         //デバッグ用*******************************
+
+        //if(enemyManager.GetWave() % 2 == 0 && enemyManager.GetBossTag() != "Boss")
+        //{
+        //    mutekiWaveFlag = true;
+        //}
+        //else
+        //{
+        //    mutekiWaveFlag = false;
+        //}
 
         //if(  Input.GetKey(KeyCode.B) && Input.GetKeyDown(KeyCode.UpArrow))
         //{
@@ -726,7 +746,7 @@ public class PlayerControl : MonoBehaviour
     //隕石ダメージ
     public void RockDamage(float dame)
     {
-        if (mutekiFlag) return;
+        if (mutekiFlag || mutekiWaveFlag) return;
 
         HP -= (int)dame;
         playerHpGauge.Damage(dame);
@@ -778,6 +798,8 @@ public class PlayerControl : MonoBehaviour
         //    audioSource.PlayOneShot(playerEnergyUpSE);
         //}
 
+        if (mutekiWaveFlag) return;
+
         if (other.gameObject.tag == "Rock")
         {
             if (insekiHitFlag) return;
@@ -800,7 +822,7 @@ public class PlayerControl : MonoBehaviour
             burst2.transform.position = other.transform.position;
             burst2.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             DamageSE();
-            if (!mutekiFlag)
+            if (!mutekiFlag && !mutekiWaveFlag)
             {
                 HP -= (int)damage;
                 playerHpGauge.Damage(damage);
@@ -818,7 +840,7 @@ public class PlayerControl : MonoBehaviour
             burst.transform.position = transform.position;
             burst.GetComponent<EffectScript>().HitSE();
 
-            if(!mutekiFlag)
+            if(!mutekiFlag && !mutekiWaveFlag)
             {
                 HP -= (int)damage;
                 playerHpGauge.Damage(damage);
@@ -830,8 +852,8 @@ public class PlayerControl : MonoBehaviour
         }
 
         if (mutekiFlag) return;//無敵なら以下処理しない
+
         
-       
        
         if (other.gameObject.tag == "Boss")
         {
