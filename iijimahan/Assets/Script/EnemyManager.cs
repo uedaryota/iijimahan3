@@ -355,7 +355,7 @@ public class EnemyManager : MonoBehaviour
     private float x_rnd;
     private float y_rnd;
     private int old_wave;
-    private float EnemyChackInterval = 1;
+    private float EnemyChackInterval = 0.5f;
     private float old_pos_chack;
     private float old_old_pos_chack;
 
