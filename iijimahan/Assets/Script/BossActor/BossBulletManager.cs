@@ -203,6 +203,7 @@ public class BossBulletManager : MonoBehaviour
             Bullet.AddComponent<BossLaser2>();
             Bullet.AddComponent<BossPower>();
             Bullet.layer = 8;
+            Bullet.AddComponent<AudioSource>();
             Rigidbody rg = Bullet.AddComponent<Rigidbody>();
             rg.useGravity = false;
             BoxCollider bc = Bullet.AddComponent<BoxCollider>();//.size = new Vector2(SizeX, SizeY);

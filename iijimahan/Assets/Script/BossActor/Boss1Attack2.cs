@@ -31,6 +31,10 @@ public class Boss1Attack2 : MonoBehaviour
     {
         //ポーズの時に止める
         if (Time.timeScale <= 0) return;
+        if (hp.Hp <= 0)
+        {
+            ChargeFinish();
+        }
         if (hp.Hp <= 0) return;
         switch (act)
         {
