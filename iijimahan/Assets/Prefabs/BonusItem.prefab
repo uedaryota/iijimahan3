@@ -130,6 +130,8 @@ MonoBehaviour:
   velocity: {x: -0.5, y: -1, z: 0}
   SE: {fileID: 8300000, guid: 67b88d6ace3ff44428c243036abfc736, type: 3}
   obj: {fileID: 3414008194465695754}
+  bursteffect: {fileID: 7208866156865108524, guid: 02d6f4303c0d99f4896de86d8da30681,
+    type: 3}
 --- !u!82 &2971487042049096580
 AudioSource:
   m_ObjectHideFlags: 0

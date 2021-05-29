@@ -18,6 +18,9 @@ public class BonusItem : MonoBehaviour
     private int wave;
     private int old_wave;
 
+    //勝手に追記
+    public GameObject bursteffect;//ボーナスはいった時の発動エフェクト
+
     void Start()
     {
         EnemyManager = GameObject.Find("EnemyManager");
@@ -68,6 +71,11 @@ public class BonusItem : MonoBehaviour
                 audiosource.PlayOneShot(SE);
             }
             script.SetBonusWave(true);
+            //勝手
+            GameObject gmobj = Instantiate(bursteffect) as GameObject;
+            gmobj.GetComponent<PlayerGaugeBulletControl>().SetPosition(this.transform.position);
+            gmobj.GetComponent<PlayerGaugeBulletControl>().SetGaugeFlag(true);
+            //勝って
             DeadFlag = true;
         }
     }
