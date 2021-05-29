@@ -189,7 +189,7 @@ public class PlayerControl : MonoBehaviour
 
         //デバッグ用*******************************
 
-        //if(enemyManager.GetWave() % 2 == 0 && enemyManager.GetBossTag() != "Boss")
+        //if (enemyManager.GetWave() % 2 == 0 && enemyManager.GetBossTag() == "BossDead")
         //{
         //    mutekiWaveFlag = true;
         //}
@@ -198,10 +198,10 @@ public class PlayerControl : MonoBehaviour
         //    mutekiWaveFlag = false;
         //}
 
-        //if(  Input.GetKey(KeyCode.B) && Input.GetKeyDown(KeyCode.UpArrow))
-        //{
-        //    tito = !tito;
-        //}
+        if (Input.GetKey(KeyCode.B) && Input.GetKeyDown(KeyCode.UpArrow))
+        {
+            tito = !tito;
+        }
 
         //Debug.Log(Screen.width);
         //Debug.Log(Screen.height);
