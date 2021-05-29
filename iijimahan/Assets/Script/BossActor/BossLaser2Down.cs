@@ -67,18 +67,7 @@ public class BossLaser2Down : MonoBehaviour
         {
             if (Chage0)
             {
-                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>() != null)
-                {
-                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>().ChargeStart();
-                }
-                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>() != null)
-                {
-                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>().ChargeStart();
-                }
-                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>() != null)
-                {
-                    GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>().ChargeStart();
-                }
+
                 Chage0 = false;
             }
             Angle = Mathf.Atan2(startpos.y - goalpos.y, startpos.x - goalpos.x);
@@ -89,19 +78,7 @@ public class BossLaser2Down : MonoBehaviour
             line.material = new Material(Resources.Load<Material>("Raser"));
             if (Chage)
             {
-                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>() != null)
-                {
-                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>().ChargeFinish();
-                }
-                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>() != null)
-                {
-                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>().ChargeFinish();
-                }
-                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>() != null)
-                {
-                    GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>().ChargeFinish();
-                    GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>().EnStart();
-                }
+
                 Chage = false;
             }
             line.material.color = Color.cyan;
@@ -114,6 +91,10 @@ public class BossLaser2Down : MonoBehaviour
             if (GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>() != null)
             {
                 GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>().ChargeFinish();
+            }
+            if (GameObject.FindGameObjectWithTag("Boss").GetComponent<KyoukaTossinBoss>() != null)
+            {
+                GameObject.FindGameObjectWithTag("Boss").GetComponent<KyoukaTossinBoss>().ChargeFinish();
             }
             Destroy(gameObject);
         }

@@ -104,14 +104,7 @@ public class BossLaser2Up : MonoBehaviour
         }
         if (Cnt / 30.0f > Speed + 5.0f)
         {
-            if (GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>() != null)
-            {
-                GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>().ChargeFinish();
-            }
-            if (GameObject.FindGameObjectWithTag("Boss").GetComponent<KyoukaTossinBoss>() != null)
-            {
-                GameObject.FindGameObjectWithTag("Boss").GetComponent<KyoukaTossinBoss>().ChargeFinish();
-            }
+          
             Destroy(gameObject);
         }
         line.startWidth = Hutosa;                   // 開始点の太さを0.1にする

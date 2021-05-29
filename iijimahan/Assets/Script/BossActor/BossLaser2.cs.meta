@@ -3,7 +3,10 @@ guid: aba659fd604e45f4aa8a708bac2cc394
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Line: {instanceID: 0}
+  - LaserSE: {fileID: 8300000, guid: a242eaa5108a10945b8446a17551ae23, type: 3}
+  - EnSE: {fileID: 8300000, guid: 48a913e3def54bd459191fe56d606b6d, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

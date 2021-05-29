@@ -22,6 +22,13 @@ public class BossLaser2 : MonoBehaviour
     Vector3 Mainus;
     public bool Chage = false;
     public bool Chage0 = false;
+
+    private AudioSource audioSource;
+    private GameObject option;
+    private Option optionscript;
+    bool SECharge = false;
+    [SerializeField, Header("ボス攻撃SE")] public AudioClip LaserSE;
+    [SerializeField, Header("ボス攻撃SE")] public AudioClip EnSE;
     #endregion
     // Start is called before the first frame update
     void Start()
@@ -34,8 +41,12 @@ public class BossLaser2 : MonoBehaviour
         Pulus = new Vector3(20, 20, 0);
         Mainus = new Vector3(20, -20, 0);
         line = gameObject.AddComponent<LineRenderer>();
+        LaserSE = Resources.Load<AudioClip>("ChergeEN");
+        EnSE = Resources.Load<AudioClip>("En_Shot");
         startpos = GameObject.FindGameObjectWithTag("Boss").transform.position;
         goalpos = new Vector3(-20,0, 0);
+        option = GameObject.Find("Option");
+        optionscript = option.GetComponent<Option>();
         goalpos2 = goalpos;
         positions = new Vector3[]{
         startpos,               // 開始点
@@ -89,19 +100,7 @@ public class BossLaser2 : MonoBehaviour
             line.material = new Material(Resources.Load<Material>("Raser"));
             if (Chage)
             {
-                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>() != null)
-                {
-                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>().ChargeFinish();
-                }
-                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>() != null)
-                {
-                    GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss>().ChargeFinish();
-                }
-                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>() != null)
-                {
-                    GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>().ChargeFinish();
-                    GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>().EnStart();
-                }
+
                 Chage = false;
             }
             line.material.color = Color.cyan;
@@ -111,10 +110,8 @@ public class BossLaser2 : MonoBehaviour
         }
         if (Cnt / 30.0f > Speed + 5.0f)
         {
-            if (GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>() != null)
-            {
-                GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>().ChargeFinish();
-            }
+
+    
             Destroy(gameObject);
         }
         line.startWidth = Hutosa;                   // 開始点の太さを0.1にする
@@ -157,4 +154,5 @@ public class BossLaser2 : MonoBehaviour
     {
         return Chage;
     }
+
 }
