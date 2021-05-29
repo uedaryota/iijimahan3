@@ -156,7 +156,7 @@ MonoBehaviour:
   - {x: 0, y: 0, z: -2}
   effectScaleSmall: {x: 1, y: 1, z: 1}
   effectScaleBig: {x: 2.5, y: 2.5, z: 2.5}
-  speed: {x: -0.1, y: -1.8, z: 0}
+  speed: {x: -0.1, y: -1.85, z: 0}
   time: 10
   ExplosionSE: {fileID: 8300000, guid: a9ac292acf8035c44913dfa53a4a005d, type: 3}
 --- !u!54 &120756622053991625
