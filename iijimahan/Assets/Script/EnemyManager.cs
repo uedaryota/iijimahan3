@@ -348,9 +348,6 @@ public class EnemyManager : MonoBehaviour
     private int interval_count;
 
     //自動用
-
-    [SerializeField, Header("ボスエフェクト用のインターバル")] private float BossEffectInterval = 1.0f;
-    [SerializeField]private float BossEffectTimer;
     private bool gameclear;
     private Object[] tagcheckenemy;
     private float timer;
@@ -396,7 +393,6 @@ public class EnemyManager : MonoBehaviour
         audioSource = GetComponent<AudioSource>();
         bonuswave = false;
         bonuswave_switch = 0;
-        BossEffectTimer = 0;
         BossDeadFlag = false;
     }
 
@@ -435,7 +431,7 @@ public class EnemyManager : MonoBehaviour
 
         if(BossDeadFlag == true)
         {
-            BossEffectTimer += Time.deltaTime;
+            ObjectCheck("BossDead");
         }
 
         if (bonuswave == true)
@@ -571,7 +567,7 @@ public class EnemyManager : MonoBehaviour
         }
         else
         {
-            EnemyCheck("Enemy");
+            ObjectCheck("Enemy");
         }
     }
 
@@ -624,7 +620,7 @@ public class EnemyManager : MonoBehaviour
             }
             else
             {
-                EnemyCheck("Enemy");
+                ObjectCheck("Enemy");
             }
         }
     }
@@ -642,11 +638,11 @@ public class EnemyManager : MonoBehaviour
         }
         else
         {
-            EnemyCheck("Boss");
+            ObjectCheck("Boss");
         }
     }
 
-    void EnemyCheck(string tagname)
+    void ObjectCheck(string tagname)
     {
         timer2 += Time.deltaTime;
         //一定時間毎に
@@ -661,20 +657,6 @@ public class EnemyManager : MonoBehaviour
                 if (tagname == "Boss")
                 {
                     BossDeadFlag = true;
-                    if (BossEffectInterval <= BossEffectTimer)
-                    {
-                        if (wave == maxwave)
-                        {
-                            BossEffectTimer = 0;
-                            gameclear = true;
-                        }
-                        else
-                        {
-                            BossEffectTimer = 0;
-                            //waveが進む
-                            wave++;
-                        }
-                    }
                 }
                 if(tagname == "Enemy")
                 {
@@ -684,6 +666,19 @@ public class EnemyManager : MonoBehaviour
                     }
                     else
                     {
+                        //waveが進む
+                        wave++;
+                    }
+                }
+                if(tagname == "BossDead")
+                {
+                    if (wave == maxwave)
+                    {
+                        gameclear = true;
+                    }
+                    else
+                    {
+                        BossDeadFlag = false;
                         //waveが進む
                         wave++;
                     }

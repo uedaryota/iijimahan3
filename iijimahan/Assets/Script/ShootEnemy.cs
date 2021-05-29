@@ -236,7 +236,7 @@ public class ShootEnemy : MonoBehaviour
         }
         if (this.gameObject.tag == "Friend")
         {
-            if (target == null || target.tag == "Player" || target.tag == "Friend" || target.tag == "Untagged")
+            if (target == null || target.tag == "Player" || target.tag == "Friend" || target.tag == "BossDead")
             {
                 target = GameObject.FindGameObjectWithTag("Boss");
                 if (target == null || target.tag == "Player")
