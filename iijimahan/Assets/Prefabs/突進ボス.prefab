@@ -361,7 +361,7 @@ MonoBehaviour:
   effectScaleBig: {x: 5, y: 5, z: 5}
   speed: {x: -0.2, y: -1.5, z: 0}
   time: 5
-  ExplosionSE: {fileID: 0}
+  ExplosionSE: {fileID: 8300000, guid: a9ac292acf8035c44913dfa53a4a005d, type: 3}
 --- !u!114 &1646755520095463181
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -464,6 +464,7 @@ MonoBehaviour:
     type: 3}
   LaserSE: {fileID: 8300000, guid: a242eaa5108a10945b8446a17551ae23, type: 3}
   EnSE: {fileID: 8300000, guid: 48a913e3def54bd459191fe56d606b6d, type: 3}
+  EneSound: 0
 --- !u!1 &8031413880352002628
 GameObject:
   m_ObjectHideFlags: 0
