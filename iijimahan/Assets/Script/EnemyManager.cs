@@ -355,7 +355,7 @@ public class EnemyManager : MonoBehaviour
     private float x_rnd;
     private float y_rnd;
     private int old_wave;
-    private float EnemyChackInterval = 0.5f;
+    [SerializeField]private float EnemyChackInterval = 0.5f;
     private float old_pos_chack;
     private float old_old_pos_chack;
 
@@ -640,7 +640,10 @@ public class EnemyManager : MonoBehaviour
         }
         else
         {
-            ObjectCheck("Boss");
+            if (BossDeadFlag == false)
+            {
+                ObjectCheck("Boss");
+            }
         }
     }
 
