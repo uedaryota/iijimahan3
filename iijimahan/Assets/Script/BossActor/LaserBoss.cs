@@ -10,11 +10,13 @@ public class LaserBoss : MonoBehaviour
     [SerializeField, Header("ボス攻撃SE")] public AudioClip BulletSE;
     [SerializeField, Header("ボス攻撃SE")] public AudioClip LaserSE;
     [SerializeField, Header("ボス攻撃SE")] public AudioClip EnSE;
+    private GameObject enemymanager;
     bool SECharge = false;
     private AudioSource audioSource;
     private BossHp hp;
     private GameObject Option;
     private Option script;
+    private EnemyManager script2;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,6 +26,8 @@ public class LaserBoss : MonoBehaviour
         SECharge = false;
         Option = GameObject.Find("Option");
         script = Option.GetComponent<Option>();
+        enemymanager = GameObject.Find("EnemyManager");
+        script2 = enemymanager.GetComponent<EnemyManager>();
     }
 
     // Update is called once per frame
@@ -31,6 +35,7 @@ public class LaserBoss : MonoBehaviour
     {
         //ポーズの時に止める
         if (Time.timeScale <= 0) return;
+        if (script2.GetBossDead() == true) return;
         if(hp.Hp <=0 )
         {
             ChargeFinish();
