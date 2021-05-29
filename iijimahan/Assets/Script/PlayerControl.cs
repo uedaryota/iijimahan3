@@ -189,49 +189,10 @@ public class PlayerControl : MonoBehaviour
 
         //デバッグ用*******************************
 
-        
-
         if (Input.GetKey(KeyCode.B) && Input.GetKeyDown(KeyCode.UpArrow))
         {
             tito = !tito;
         }
-
-        //Debug.Log(Screen.width);
-        //Debug.Log(Screen.height);
-        //Debug.Log(HP);
-        //gauge = 100;
-
-        //回復
-        //if (Input.GetKey(KeyCode.H))
-        //{
-        //    float heal = 1f;
-        //    HP += heal;
-        //    playerHpGauge.Heal(heal / 100);
-        //    if (HP >= 100) HP = 100;
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.O))
-        //{
-        //    HP -= 10;
-        //    playerHpGauge.Damage(10);
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.V))
-        //{
-        //    playerState = PlayerState.ClearMove;
-        //}
-
-        //if (Input.GetKey(KeyCode.Space))
-        //{
-        //    //Instantiate(hanabiEffect);
-
-        //    GameObject hanabis = Instantiate(hanabiEffect) as GameObject;
-
-        //    hanabis.GetComponent<EffectLifeHanabi>().SetPosition(transform.position);
-
-
-
-        //}
 
         //デバッグ用*******************************
 
@@ -315,7 +276,7 @@ public class PlayerControl : MonoBehaviour
 
         //プレイヤーの最初の行動
 
-        //float startSpeed = 0.075f;
+       
         float startSpeed = 4.875f;
 
         if(!startFlag)
@@ -699,10 +660,7 @@ public class PlayerControl : MonoBehaviour
                     bulletangle = radian;
                     transform.localEulerAngles = new Vector3(transform.rotation.x, transform.rotation.y, radian);
 
-                    //moveFlag = true;
                 }
-
-
 
                 if (moveFlag)
                 {
@@ -713,12 +671,6 @@ public class PlayerControl : MonoBehaviour
                         moveFlag = false;
                     }
                 }
-
-
-
-                //Debug.Log(new Vector2(h,v));
-
-                
             }
         }
         
