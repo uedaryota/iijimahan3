@@ -114,7 +114,7 @@ public class HeelEnemy : MonoBehaviour
                 }
                 target = near;
             }
-            else if (target.tag != "Boss" && target.tag != "Enemy" || target.tag == "Untagged")
+            else if (target.tag != "Boss" && target.tag != "Enemy" || target.tag == "BossDead")
             {
                 target = GameObject.FindGameObjectWithTag("Boss");
                 if (target != null)
