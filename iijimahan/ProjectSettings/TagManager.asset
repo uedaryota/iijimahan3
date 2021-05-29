@@ -28,6 +28,7 @@ TagManager:
   - Shield
   - ReverseBullet
   - Bonus
+  - BossDead
   layers:
   - Default
   - TransparentFX

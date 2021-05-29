@@ -32,7 +32,7 @@ public class BossExplosion : MonoBehaviour
     {
         if(hp.Hp <= 0 && EffectFlag == false)
         {
-            this.tag = "Untagged";
+            this.tag = "DeadBoss";
             StartCoroutine("ExplosionEffect");
             EffectFlag = true;
         }
