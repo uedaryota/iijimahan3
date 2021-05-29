@@ -355,7 +355,7 @@ public class EnemyManager : MonoBehaviour
     private float x_rnd;
     private float y_rnd;
     private int old_wave;
-    private float EnemyChackInterval = 1;
+    private float EnemyChackInterval = 0.5f;
     private float old_pos_chack;
     private float old_old_pos_chack;
 
@@ -432,6 +432,7 @@ public class EnemyManager : MonoBehaviour
         if(BossDeadFlag == true)
         {
             ObjectCheck("BossDead");
+            playerGetBossTag = "BossDead";
         }
 
         if (bonuswave == true)
@@ -504,10 +505,11 @@ public class EnemyManager : MonoBehaviour
             {
                 if (wave % 2 == 1)
                 {
+                    playerGetBossTag = "None";
                     EnemyRespawn_Manual();
                 }
                 else if (wave % 2 == 0)
-                {
+                {                    
                     BossRespawn();
                     EnemyRespawn_Manual();
                     EnemyRespawn(waverespawn[wave / 2 - 1]);
@@ -672,6 +674,7 @@ public class EnemyManager : MonoBehaviour
                 }
                 if(tagname == "BossDead")
                 {
+                    
                     if (wave == maxwave)
                     {
                         gameclear = true;
@@ -736,5 +739,12 @@ public class EnemyManager : MonoBehaviour
     public bool GetBossDead()
     {
         return BossDeadFlag;
+    }
+
+    private string playerGetBossTag;
+
+    public string GetBossTag()
+    {
+        return playerGetBossTag;
     }
 }
