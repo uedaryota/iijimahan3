@@ -142,7 +142,7 @@ public class BossSuperLaser : MonoBehaviour
                 }
                 Chage = false;
             }
-            line.material = new Material(Resources.Load<Material>("Def"));
+            line.material = new Material(Resources.Load<Material>("RedLaser"));
 
             line.material.color = Color.red;
             goalpos = goalpos2;
