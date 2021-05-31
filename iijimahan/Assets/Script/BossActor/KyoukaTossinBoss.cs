@@ -237,14 +237,15 @@ public class KyoukaTossinBoss : MonoBehaviour
             {
                 other.GetComponent<PlayerControl>().AttackDamage();
             }
-            if (other.gameObject.tag == "Friend")
-            {
-                other.GetComponent<Enemy>().DeadEnd();
-            }
-            if (other.gameObject.tag == "FriendBullet")
-            {
-                other.GetComponent<Rock>().AttackBoss();
-            }
+            //if (other.gameObject.tag == "Friend")
+            //{
+            //    other.GetComponent<Enemy>().DeadEnd();
+            //}            //if (other.gameObject.tag == "FriendBullet")
+            //{
+            //    if(other.GetComponent<Rock>! =null)
+            //    other.GetComponent<Rock>().AttackBoss();
+            //}
+
         }
     }
     public void ChargeFinish()
