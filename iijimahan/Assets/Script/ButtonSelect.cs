@@ -47,13 +47,21 @@ public class ButtonSelect : MonoBehaviour
     {
         if(hardText != null)
         {
-            if (script.GetClearFlag() == true && hardText.color.a == 1 && !oneSEFlag)
+            if (script.GetClearFlag() == true && hardText.color.a == 1 && !oneSEFlag  && !script.GetHardCheck())
             {
                 hardText.color = new Color(1, 1, 1, 1);
                 var suzuSE = Resources.Load<AudioClip>("Sound/鈴");
                 audioSource.PlayOneShot(suzuSE);
                 oneSEFlag = true;
                 hardText.GetComponent<Outline>().effectColor = new Color(0.764f, 0, 0.325f, 1f);
+                script.SetHardCheck(true);
+            }
+
+            if(script.GetHardCheck() && hardText.color.a != 1)
+            {
+                float col = hardText.color.a;
+                hardText.color = new Color(1, 1, 1, col);
+                hardText.GetComponent<Outline>().effectColor = new Color(0.764f, 0, 0.325f, col);
             }
         }
         
