@@ -191,7 +191,7 @@ public class AttackBoss : MonoBehaviour
                             Cnt2++;
                             GetComponent<BossMove>().action = BossMove.MoveAction.Action1;
                         }
-                        if (Cnt3 > 8f)
+                        if (Cnt3 > 4f)
                         {
                             for (int i = 0; i <= 2; i++)
                             {
@@ -234,7 +234,7 @@ public class AttackBoss : MonoBehaviour
                             Cnt3++;
                             GetComponent<BossMove>().action = BossMove.MoveAction.Action1;
                         }
-                        if (Cnt3 > 8f)
+                        if (Cnt3 > 4f)
                         {
                             for (int i = 0; i <= 2; i++)
                             {

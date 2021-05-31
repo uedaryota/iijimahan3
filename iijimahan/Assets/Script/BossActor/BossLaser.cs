@@ -81,6 +81,14 @@ public class BossLaser : MonoBehaviour
                 {
                     GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss1Attack2>().ChargeStart();
                 }
+                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>() != null)
+                {
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>().ChargeStart();
+                }
+                if (GameObject.FindGameObjectWithTag("Boss").GetComponent<KyoukaTossinBoss>() != null)
+                {
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<KyoukaTossinBoss>().ChargeStart();
+                }
                 Chage0 = false;
             }
             Angle = Mathf.Atan2(startpos.y - goalpos.y, startpos.x - goalpos.x);
@@ -106,6 +114,16 @@ public class BossLaser : MonoBehaviour
                     GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss1Attack2>().ChargeFinish();
                     GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss1Attack2>().EnStart();
                 }
+                if(GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>() != null)
+                {
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>().ChargeFinish();
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>().EnStart();
+                }
+                if(GameObject.FindGameObjectWithTag("Boss").GetComponent<KyoukaTossinBoss>() != null)
+                {
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<KyoukaTossinBoss>().ChargeFinish();
+                    GameObject.FindGameObjectWithTag("Boss").GetComponent<KyoukaTossinBoss>().EnStart();
+                }
                 Chage = false;
             }
             line.material.color = new Color(0,1,1,0.3f);
@@ -126,6 +144,14 @@ public class BossLaser : MonoBehaviour
             if (GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss1Attack2>() != null)
             {
                 GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss1Attack2>().ChargeFinish();
+            }
+            if (GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>() != null)
+            {
+                GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>().ChargeFinish();
+            }
+            if (GameObject.FindGameObjectWithTag("Boss").GetComponent<KyoukaTossinBoss>() != null)
+            {
+                GameObject.FindGameObjectWithTag("Boss").GetComponent<KyoukaTossinBoss>().ChargeFinish();
             }
             Destroy(gameObject);
         }
