@@ -42,7 +42,7 @@ public class TitleButton : MonoBehaviour
             flag = false;
         }
 
-        if(Input.GetKeyDown(KeyCode.U))
+        if(Input.GetKey(KeyCode.U) && Input.GetKeyDown(KeyCode.Alpha5))
         {
             script.SetClearFlag(true);
         }
