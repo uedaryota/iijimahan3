@@ -450,7 +450,7 @@ public class PlayerControl : MonoBehaviour
 
     public void GaugeBullet()
     {
-        Debug.Log("敵をひっくり返す技");
+        //Debug.Log("敵をひっくり返す技");
         gauge = gauge - 40;
         GameObject gmobj = Instantiate(gaugebullet) as GameObject;
         gmobj.GetComponent<PlayerGaugeBulletControl>().SetPosition(this.transform.position);
@@ -463,7 +463,7 @@ public class PlayerControl : MonoBehaviour
     }
     public void GaugeKyoukaBullet()
     {
-        Debug.Log("味方を強化する技");
+        //Debug.Log("味方を強化する技");
         gauge = gauge - 40;
 
         GameObject gmobj = Instantiate(kyoukabullet) as GameObject;
