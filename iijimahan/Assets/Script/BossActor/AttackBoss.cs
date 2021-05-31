@@ -193,6 +193,7 @@ public class AttackBoss : MonoBehaviour
                         }
                         if (Cnt3 > 4f)
                         {
+                            ChargeFinish();
                             for (int i = 0; i <= 2; i++)
                             {
                                 GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);
@@ -236,6 +237,7 @@ public class AttackBoss : MonoBehaviour
                         }
                         if (Cnt3 > 4f)
                         {
+                            ChargeFinish();
                             for (int i = 0; i <= 2; i++)
                             {
                                 GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);

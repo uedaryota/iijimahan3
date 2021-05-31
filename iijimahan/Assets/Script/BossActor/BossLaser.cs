@@ -147,11 +147,11 @@ public class BossLaser : MonoBehaviour
             }
             if (GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>() != null)
             {
-                GameObject.FindGameObjectWithTag("Boss").GetComponent<AttackBoss>().ChargeFinish();
+
             }
             if (GameObject.FindGameObjectWithTag("Boss").GetComponent<KyoukaTossinBoss>() != null)
             {
-                GameObject.FindGameObjectWithTag("Boss").GetComponent<KyoukaTossinBoss>().ChargeFinish();
+
             }
             Destroy(gameObject);
         }
