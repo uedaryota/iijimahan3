@@ -102,34 +102,28 @@ public class LaserBoss2 : MonoBehaviour
     }
     public void ChargeFinish()
     {
-        Debug.Log("音止めるよ");
         if (SECharge == true)
         {
             audioSource.Stop();
             SECharge = false;
-            Debug.Log("音止めたよ");
         }
     }
     public void ChargeStart()
     {
-        Debug.Log("Charge音ならすよ");
         if (SECharge == false)
         {
             audioSource.volume = optionscript.GetSEVolume();
             audioSource.PlayOneShot(LaserSE);
             SECharge = true;
-            Debug.Log("Chargeオン鳴らしたよ");
         }
     }
     public void EnStart()
     {
-        Debug.Log("レーザー音鳴らすよ");
         if (SECharge == false)
         {
             audioSource.volume = optionscript.GetSEVolume();
             audioSource.PlayOneShot(EnSE);
             SECharge = true;
-            Debug.Log("レーザー音鳴らしたよ");
         }
     }
 

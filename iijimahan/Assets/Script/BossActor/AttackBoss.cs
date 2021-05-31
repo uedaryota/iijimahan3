@@ -191,7 +191,14 @@ public class AttackBoss : MonoBehaviour
                             Cnt2++;
                             GetComponent<BossMove>().action = BossMove.MoveAction.Action1;
                         }
-
+                        if (Cnt3 > 8f)
+                        {
+                            for (int i = 0; i >= 2; i++)
+                            {
+                                GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);
+                            }
+                            Cnt3 = 0;
+                        }
                         if (Cnt2 > 10)
                         {
                             GameObject gmobj = Instantiate(gaugebullet) as GameObject;
@@ -227,7 +234,14 @@ public class AttackBoss : MonoBehaviour
                             Cnt3++;
                             GetComponent<BossMove>().action = BossMove.MoveAction.Action1;
                         }
-
+                        if (Cnt3 > 8f)
+                        {
+                            for (int i = 0; i >= 2; i++)
+                            {
+                                GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);
+                            }
+                            Cnt3 = 0;
+                        }
                         if (Cnt2 > 10)
                         {
                             GameObject gmobj = Instantiate(gaugebullet) as GameObject;

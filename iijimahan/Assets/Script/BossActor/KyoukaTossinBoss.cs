@@ -110,7 +110,10 @@ public class KyoukaTossinBoss : MonoBehaviour
                         }
                         if (Cnt3 > 3f)
                         {
-                            GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);
+                            for (int i = 0; i >= 2; i++)
+                            {
+                                GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);
+                            }
                             Cnt3 = 0;
                         }
                         if (Cnt2 > 5)
@@ -178,9 +181,17 @@ public class KyoukaTossinBoss : MonoBehaviour
                             GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet(transform.position, 1);
                             Cnt = 0;
                             Cnt2++;
+                            Cnt3++;
                             GetComponent<BossMove>().action = BossMove.MoveAction.Action1;
                         }
-
+                        if (Cnt3 > 3f)
+                        {
+                            for (int i = 0; i >= 2; i++)
+                            {
+                                GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);
+                            }
+                            Cnt3 = 0;
+                        }
                         if (Cnt2 > 5)
                         {
                             GameObject gmobj = Instantiate(gaugebullet) as GameObject;
@@ -216,7 +227,14 @@ public class KyoukaTossinBoss : MonoBehaviour
                             Cnt3++;
                             GetComponent<BossMove>().action = BossMove.MoveAction.Action1;
                         }
-                        
+                        if (Cnt3 > 3f)
+                        {
+                            for (int i = 0; i >= 2; i++)
+                            {
+                                GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);
+                            }
+                            Cnt3 = 0;
+                        }
                         if (Cnt2 > 5)
                         {
                             GameObject gmobj = Instantiate(gaugebullet) as GameObject;
