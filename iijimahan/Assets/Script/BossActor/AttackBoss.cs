@@ -29,6 +29,7 @@ public class AttackBoss : MonoBehaviour
     private Option optionscript;
     bool SECharge = false;
     public bool EneSound = false;
+    public bool SoundTemporaryFlag;
 
 
     void Start()
@@ -41,6 +42,7 @@ public class AttackBoss : MonoBehaviour
         optionscript = option.GetComponent<Option>();
         SECharge = false;
         EneSound = false;
+        SoundTemporaryFlag = false;
     }
 
     // Update is called once per frame
@@ -266,15 +268,21 @@ public class AttackBoss : MonoBehaviour
     }
     public void ChargeFinish()
     {
-        if (SECharge == true)
+        if (SoundTemporaryFlag == false)
         {
             audioSource.Stop();
-            SECharge = false;
+            SoundTemporaryFlag = true;
         }
-        if(EneSound==false)
-        {
-            audioSource.Stop();
-        }
+
+        //if (SECharge == true)
+        //{
+        //    audioSource.Stop();
+        //    SECharge = false;
+        //}
+        //if(EneSound==false)
+        //{
+        //    audioSource.Stop();
+        //}
     }
     public void ChargeStart()
     {
