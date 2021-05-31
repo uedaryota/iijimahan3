@@ -8,6 +8,7 @@ public class Option : MonoBehaviour
     private static float SEVolume = 0.5f;
 
     private static bool clearFlag = false;
+    private static bool hardCheck = false;
 
     void Awake()
     {
@@ -42,5 +43,15 @@ public class Option : MonoBehaviour
     public bool GetClearFlag()
     {
         return clearFlag;
+    }
+
+    public void SetHardCheck(bool fl)
+    {
+        hardCheck = fl;
+    }
+
+    public bool GetHardCheck()
+    {
+        return hardCheck;
     }
 }
