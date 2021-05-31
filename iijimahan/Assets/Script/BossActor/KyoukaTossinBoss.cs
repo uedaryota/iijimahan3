@@ -108,8 +108,9 @@ public class KyoukaTossinBoss : MonoBehaviour
                             Cnt3++;
                             GetComponent<BossMove>().action = BossMove.MoveAction.Action1;
                         }
-                        if (Cnt3 > 2.5f)
+                        if (Cnt3 > 6f)
                         {
+                            GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);
                             Cnt3 = 0;
                         }
                         if (Cnt2 > 5)

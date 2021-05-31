@@ -113,13 +113,15 @@ public class AttackBoss : MonoBehaviour
                                 GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet5(transform.position, 3);
                                 GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet4(transform.position, 3);
                             }
+
                             Cnt = 0;
                             Cnt2++;
                             Cnt3++;
                             GetComponent<BossMove>().action = BossMove.MoveAction.Action1;
                         }
-                        if(Cnt3>2.5f)
+                        if(Cnt3>6f)
                         {
+                            GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);
                             Cnt3 = 0;
                         }
                         if (Cnt2 > 3)
