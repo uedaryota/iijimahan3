@@ -50,6 +50,7 @@ public class ButtonSelect : MonoBehaviour
             if (script.GetClearFlag() == true && hardText.color.a == 1 && !oneSEFlag  && !script.GetHardCheck())
             {
                 hardText.color = new Color(1, 1, 1, 1);
+                audioSource.volume = script.GetSEVolume();
                 var suzuSE = Resources.Load<AudioClip>("Sound/鈴");
                 audioSource.PlayOneShot(suzuSE);
                 oneSEFlag = true;
