@@ -21,6 +21,8 @@ public class KyoukaTossinBoss : MonoBehaviour
     private GameObject option;
     private Option optionscript;
     bool SECharge = false;
+    private GameObject Option;
+    private Option script;
 
 
 
@@ -33,6 +35,8 @@ public class KyoukaTossinBoss : MonoBehaviour
         option = GameObject.Find("Option");
         optionscript = option.GetComponent<Option>();
         SECharge = false;
+        Option = GameObject.Find("Option");
+        script = Option.GetComponent<Option>();
     }
 
     // Update is called once per frame
@@ -283,7 +287,7 @@ public class KyoukaTossinBoss : MonoBehaviour
     {
         if (SECharge == false)
         {
-            audioSource.volume = optionscript.GetSEVolume();
+            audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(LaserSE);
             SECharge = true;
         }
@@ -292,7 +296,7 @@ public class KyoukaTossinBoss : MonoBehaviour
     {
         if (SECharge == false)
         {
-            audioSource.volume = optionscript.GetSEVolume();
+            audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(EnSE);
             SECharge = true;
         }
