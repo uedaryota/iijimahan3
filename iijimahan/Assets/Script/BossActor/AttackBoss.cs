@@ -30,7 +30,8 @@ public class AttackBoss : MonoBehaviour
     bool SECharge = false;
     public bool EneSound = false;
     public bool SoundTemporaryFlag;
-
+    private GameObject Option;
+    private Option script;
 
     void Start()
     {
@@ -42,6 +43,8 @@ public class AttackBoss : MonoBehaviour
         optionscript = option.GetComponent<Option>();
         SECharge = false;
         EneSound = false;
+        Option = GameObject.Find("Option");
+        script = Option.GetComponent<Option>();
         SoundTemporaryFlag = false;
     }
 
@@ -286,38 +289,28 @@ public class AttackBoss : MonoBehaviour
     }
     public void ChargeFinish()
     {
-        if (SoundTemporaryFlag == false)
+        if (SECharge == true)
         {
             audioSource.Stop();
-            SoundTemporaryFlag = true;
+            SECharge = false;
         }
-
-        //if (SECharge == true)
-        //{
-        //    audioSource.Stop();
-        //    SECharge = false;
-        //}
-        //if(EneSound==false)
-        //{
-        //    audioSource.Stop();
-        //}
     }
     public void ChargeStart()
     {
         if (SECharge == false)
         {
-            audioSource.volume = optionscript.GetSEVolume();
+            audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(LaserSE);
             SECharge = true;
         }
     }
     public void EnStart()
     {
-        if (EneSound == false)
+        if (SECharge == false)
         {
-            audioSource.volume = optionscript.GetSEVolume();
+            audioSource.volume = script.GetSEVolume();
             audioSource.PlayOneShot(EnSE);
-            EneSound = true;
+            SECharge = true;
         }
     }
 }
