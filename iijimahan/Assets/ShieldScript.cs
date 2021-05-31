@@ -30,10 +30,13 @@ public class ShieldScript : MonoBehaviour
         }
         if (other.gameObject.tag == "EnemyBullet")
         {
-            if (other.GetComponent<EnemyBullet>().GetParent() != null) 
+            if (other.GetComponent<EnemyBullet>() != null)
             {
-                EnemyState state = other.GetComponent<EnemyBullet>().GetParent().GetComponent<EnemyState>();
-                Hp -= state.GetPower();
+                if (other.GetComponent<EnemyBullet>().GetParent() != null)
+                {
+                    EnemyState state = other.GetComponent<EnemyBullet>().GetParent().GetComponent<EnemyState>();
+                    Hp -= state.GetPower();
+                }
             }
         }
     }

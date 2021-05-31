@@ -313,7 +313,6 @@ public class ShootEnemy : MonoBehaviour
             {
                 if (other.GetComponent<EnemyBullet>() != null)
                 {
-
                     if (other.GetComponent<EnemyBullet>().GetParent() != null)
                     {
                         target = other.GetComponent<EnemyBullet>().GetParent();
