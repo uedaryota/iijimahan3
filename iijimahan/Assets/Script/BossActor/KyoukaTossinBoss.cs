@@ -110,7 +110,7 @@ public class KyoukaTossinBoss : MonoBehaviour
                         }
                         if (Cnt3 > 3f)
                         {
-                            for (int i = 0; i >= 2; i++)
+                            for (int i = 0; i <= 2; i++)
                             {
                                 GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);
                             }
@@ -186,7 +186,7 @@ public class KyoukaTossinBoss : MonoBehaviour
                         }
                         if (Cnt3 > 3f)
                         {
-                            for (int i = 0; i >= 2; i++)
+                            for (int i = 0; i <= 2; i++)
                             {
                                 GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);
                             }
@@ -229,7 +229,7 @@ public class KyoukaTossinBoss : MonoBehaviour
                         }
                         if (Cnt3 > 3f)
                         {
-                            for (int i = 0; i >= 2; i++)
+                            for (int i = 0; i <= 2; i++)
                             {
                                 GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet3(transform.position, 1);
                             }
