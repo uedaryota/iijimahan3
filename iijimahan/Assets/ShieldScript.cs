@@ -22,15 +22,20 @@ public class ShieldScript : MonoBehaviour
     {
         if (other.gameObject.tag == "FriendBullet")
         {
-            EnemyState state = other.GetComponent<FriendBullet>().GetParent().GetComponent<EnemyState>();
-            Hp -= state.GetPower();
+            if (other.GetComponent<FriendBullet>().GetParent() != null) 
+            {
+                EnemyState state = other.GetComponent<FriendBullet>().GetParent().GetComponent<EnemyState>();
+                Hp -= state.GetPower();
+            }  
         }
         if (other.gameObject.tag == "EnemyBullet")
         {
-            EnemyState state = other.GetComponent<EnemyBullet>().GetParent().GetComponent<EnemyState>();
-            Hp -= state.GetPower();
+            if (other.GetComponent<EnemyBullet>().GetParent() != null) 
+            {
+                EnemyState state = other.GetComponent<EnemyBullet>().GetParent().GetComponent<EnemyState>();
+                Hp -= state.GetPower();
+            }
         }
-
     }
     void CheakDead()
     {
