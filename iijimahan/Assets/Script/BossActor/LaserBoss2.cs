@@ -34,10 +34,10 @@ public class LaserBoss2 : MonoBehaviour
     {
         //ポーズの時に止める
         if (Time.timeScale <= 0) return;
-        if (hp.Hp <= 0)
-        {
-            ChargeFinish();
-        }
+        //if (hp.Hp <= 0)
+        //{
+        //    ChargeFinish();
+        //}
         if (hp.Hp <= 0) return;
         switch (act)
         {
@@ -53,6 +53,7 @@ public class LaserBoss2 : MonoBehaviour
 
                     if (GetComponent<BossHp>().GetHp() > GetComponent<BossHp>().GetMaxHp() / 5)
                     {
+                        ChargeFinish();
                         for (int x = 0; x < 4; x++)
                         {
                             audioSource.PlayOneShot(BulletSE);
@@ -86,6 +87,7 @@ public class LaserBoss2 : MonoBehaviour
                         }
 
                     }
+                    ChargeFinish();
                     GameObject.FindGameObjectWithTag("Boss").GetComponent<BossBulletManager>().FBulletFactory[0].CreateBullet6(transform.position, 1);
                     Cnt = 0;
                 }
@@ -100,28 +102,34 @@ public class LaserBoss2 : MonoBehaviour
     }
     public void ChargeFinish()
     {
+        Debug.Log("音止めるよ");
         if (SECharge == true)
         {
             audioSource.Stop();
             SECharge = false;
+            Debug.Log("音止めたよ");
         }
     }
     public void ChargeStart()
     {
+        Debug.Log("Charge音ならすよ");
         if (SECharge == false)
         {
             audioSource.volume = optionscript.GetSEVolume();
             audioSource.PlayOneShot(LaserSE);
             SECharge = true;
+            Debug.Log("Chargeオン鳴らしたよ");
         }
     }
     public void EnStart()
     {
+        Debug.Log("レーザー音鳴らすよ");
         if (SECharge == false)
         {
             audioSource.volume = optionscript.GetSEVolume();
             audioSource.PlayOneShot(EnSE);
             SECharge = true;
+            Debug.Log("レーザー音鳴らしたよ");
         }
     }
 

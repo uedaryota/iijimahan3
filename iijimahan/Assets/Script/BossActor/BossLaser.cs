@@ -56,7 +56,10 @@ public class BossLaser : MonoBehaviour
         startpos,               // 開始点
         goalpos,               // 終了点
     };
-        startpos = GameObject.FindGameObjectWithTag("Boss").transform.position;
+        if (GameObject.FindGameObjectWithTag("Boss") != null)
+        {
+            startpos = GameObject.FindGameObjectWithTag("Boss").transform.position;
+        }
         line.textureMode = LineTextureMode.Tile;
         line.generateLightingData = true;
         line.material = new Material(Resources.Load<Material>("Unlit_DashLine"));//new Material(Shader.Find("Resources/Materials/Unlit_DashLine"));//Sprites/Default"));
@@ -118,7 +121,7 @@ public class BossLaser : MonoBehaviour
             }
             if (GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>() != null)
             {
-                GameObject.FindGameObjectWithTag("Boss").GetComponent<LaserBoss2>().ChargeFinish();
+
             }
             if (GameObject.FindGameObjectWithTag("Boss").GetComponent<Boss1Attack2>() != null)
             {

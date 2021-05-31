@@ -430,7 +430,7 @@ MonoBehaviour:
   MaxHp: 30000
   Superarmor: 0
   interval: 0.1
-  bossmodel: {fileID: 0}
+  bossmodel: {fileID: 2100000, guid: b2d1911af1fb0fa49ad4c8dc04c505f9, type: 2}
   dameageSE: {fileID: 8300000, guid: a9ac292acf8035c44913dfa53a4a005d, type: 3}
   ATK: 300
   status: 0
